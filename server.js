@@ -15,9 +15,10 @@ app.use('/', express.static('public_static'));
 
 app.get('/getAccounts', (req, res) => {
   console.log("**** GET /getAccounts ****");
-  truffle_connect.start(function (answer) {
-    res.send(answer);
-  })
+  res.send("");
+  // truffle_connect.start(function (answer) {
+  //   res.send(answer);
+  // })
 });
 
 app.post('/getBalance', (req, res) => {
