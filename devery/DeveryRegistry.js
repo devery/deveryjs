@@ -20,7 +20,7 @@ export default class DeveryRegistry{
     }
 
     /**********************APP RELATED METHOD**************************************/
-    
+
 
 
     /**
@@ -126,6 +126,15 @@ export default class DeveryRegistry{
         return result.toNumber()
 
     }
+
+    setAppAddedEventListener(callback){
+        this.__deveryRegistryContract.onappadded = callback
+    }
+
+    setAppUpdatedEventListener(callback){
+        this.__deveryRegistryContract.onappupdated = callback
+    }
+
 
     /**********************Brand RELATED METHOD**************************************/
 
@@ -247,6 +256,15 @@ export default class DeveryRegistry{
         return result.valueOf();
     }
 
+    setBrandAddedEventListener(callback){
+        this.__deveryRegistryContract.onbrandadded = callback
+    }
+
+    setBrandUpdatedEventListener(callback){
+        this.__deveryRegistryContract.onbrandupdated = callback
+    }
+
+
     /**********************PRODUCTS RELATED METHODS**************************************/
 
 
@@ -339,6 +357,15 @@ export default class DeveryRegistry{
 
     }
 
+    setProductAddedEventListener(callback){
+        this.__deveryRegistryContract.onproductadded = callback
+    }
+
+    setProductUpdatedEventListener(callback){
+        this.__deveryRegistryContract.onproductupdated = callback
+    }
+
+
 
     /**********************MARKER RELATED METHODS**************************************/
 
@@ -366,7 +393,7 @@ export default class DeveryRegistry{
      * of the current token
      */
     //addressHash(address item) public pure returns (bytes32 hash)
-    async permissionMarker(marker,permission){
+    async addressHash(marker,permission){
 
         let result = await this.__deveryRegistryContract.addressHash(item);
         return result.valueOf();
