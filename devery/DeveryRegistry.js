@@ -393,7 +393,7 @@ export default class DeveryRegistry{
      * of the current token
      */
     //addressHash(address item) public pure returns (bytes32 hash)
-    async addressHash(marker,permission){
+    async addressHash(item,permission){
 
         let result = await this.__deveryRegistryContract.addressHash(item);
         return result.valueOf();
