@@ -4,18 +4,33 @@ const deveryRegistryArtifact = require('../build/contracts/DeveryRegistry.json')
 const contract = require('truffle-contract')
 const DeveryRegistryContract = contract(deveryRegistryArtifact);
 
-const network = { name: 'htpp://127.0.0.1:7545', chainId: 5777 }
+const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
 export default class DeveryRegistry{
+
     constructor(web3Param = web3){
+        //TODO: if no web provider is available create a read only one pointing to etherscan API
         if(!web3Param){
             throw new Error("It was not possible to fallbacl the the default web3 object, web3 provider must be provided");
         }
         this.web3 = web3Param;
         this.asyncWeb3 = simpleWeb3Promisifier(web3Param)
-        this._ethersProvider = new ethers.providers.Web3Provider(web3.currentProvider,network );
-        this.__deveryContractRegistry = new ethers.Contract(deveryRegistryArtifact.networks[network.chainId].address, deveryRegistryArtifact.abi,
+        this._ethersProvider = new ethers.providers.Web3Provider(web3Param.currentProvider,network );
+        this.__deveryRegistryContract = new ethers.Contract(deveryRegistryArtifact.networks[network.chainId].address, deveryRegistryArtifact.abi,
             this._ethersProvider);
+
+        this.__deveryRegistryContract.onappadded = function(oldValue, newValue) {
+            console.log('oldValue: ' + oldValue);
+            console.log('newValue: ' + newValue);
+            console.log(arguments)
+        };
+
+        this.__deveryRegistryContract.onappupdated = function(oldValue, newValue) {
+            console.log('oldValue: ' + oldValue);
+            console.log('newValue: ' + newValue);
+            console.log(arguments)
+        };
+
 
         DeveryRegistryContract.setProvider(this.web3.currentProvider)
 
@@ -23,22 +38,7 @@ export default class DeveryRegistry{
 
     /**********************APP RELATED METHOD**************************************/
 
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async totalSupply(){
-        let coinbase = await this.asyncWeb3.eth.getCoinbase();
-        let deveryRegistryInstace = await DeveryRegistryContract.deployed();
-        return deveryRegistryInstace;
-        // return deveryRegistryInstace
-        // let result = await eveTokenInstance.totalSupply({from:coinbase});
-        // return result.valueOf();
 
-    }
 
     /**
      *
@@ -66,7 +66,7 @@ export default class DeveryRegistry{
      * of the current token
      */
     //updateApp(string appName, address _feeAccount, uint _fee, bool active)
-    async updateApp(appName,feeAccount,fee,active){
+    async updateApp(appAccountAddress,feeAccount,fee,active){
         let coinbase = await this.asyncWeb3.eth.getCoinbase();
         let deveryRegistryInstace = await DeveryRegistryContract.deployed();
         let result = await deveryRegistryInstace.updateApp(appName,feeAccount,fee,active ,{from:coinbase});
@@ -84,9 +84,18 @@ export default class DeveryRegistry{
      */
     //getApp(address appAccount) public constant returns (App app)
     async getApp(appAccount){
+
         //TODO: wrap the result in a more redable object
-        let result = await this.__deveryContractRegistry.getApp(appAccount);
-        return result
+        // let result = await this.__deveryRegistryContract.apps(appAccount);
+        // return result
+
+        let coinbase = await this.asyncWeb3.eth.getCoinbase();
+        if(!appAccount){
+            appAccount = coinbase;
+        }
+        let deveryRegistryInstace = await DeveryRegistryContract.deployed();
+        let result = await deveryRegistryInstace.apps(appAccount,{from:coinbase});
+        return result.valueOf();
 
     }
 
@@ -102,6 +111,9 @@ export default class DeveryRegistry{
     //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
     async getAppData(appAccount){
         let coinbase = await this.asyncWeb3.eth.getCoinbase();
+        if(!appAccount){
+            appAccount = coinbase;
+        }
         let deveryRegistryInstace = await DeveryRegistryContract.deployed();
         let result = await deveryRegistryInstace.getAppData(appAccount,{from:coinbase});
         return result.valueOf();
@@ -118,10 +130,12 @@ export default class DeveryRegistry{
      */
     //appAccountsLength()
     async appAccountsLength(){
-        let coinbase = await this.asyncWeb3.eth.getCoinbase();
-        let deveryRegistryInstace = await DeveryRegistryContract.deployed();
-        let result = await deveryRegistryInstace.appAccountsLength({from:coinbase});
-        return result.valueOf();
+        // let coinbase = await this.asyncWeb3.eth.getCoinbase();
+        // let deveryRegistryInstace = await DeveryRegistryContract.deployed();
+        // let result = await deveryRegistryInstace.appAccountsLength({from:coinbase});
+        // return result.valueOf();
+        let result = await this.__deveryRegistryContract.appAccountsLength();
+        return result.toNumber()
 
     }
 
@@ -153,15 +167,31 @@ export default class DeveryRegistry{
      * of the current token
      */
     //updateBrand(address brandAccount, string brandName, bool active) public
-    async updateBrand(brandAccount,brandName){
+    async updateBrand(brandAccount,brandName,active){
         let coinbase = await this.asyncWeb3.eth.getCoinbase();
         let deveryRegistryInstace = await DeveryRegistryContract.deployed();
-        let result = await deveryRegistryInstace.updateBrand(brandAccount,brandName,{from:coinbase});
+        let result = await deveryRegistryInstace.updateBrand(brandAccount,brandName,active,{from:coinbase});
         return result.valueOf();
 
     }
 
+    //updateBrand(address brandAccount, string brandName, bool active) public
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //updateBrand(address brandAccount, string brandName, bool active) public
+    async getBrandAddresses(){
+        // let coinbase = await this.asyncWeb3.eth.getCoinbase();
+        // let deveryRegistryInstace = await DeveryRegistryContract.deployed();
+        // let result = await deveryRegistryInstace.brandAccounts({from:coinbase});
+        let result = await this.__deveryRegistryContract.brandAccounts()
+        return result;
 
+    }
 
 
     /**
@@ -173,10 +203,37 @@ export default class DeveryRegistry{
      */
     //getBrand(address brandAccount) public constant returns (Brand brand)
     async getBrand(brandAccount){
-        //TODO: wrap the result in a more redable object
-        let result = await this.__deveryContractRegistry.getBrand(brandAccount);
-        return result
+
+        let coinbase = await this.asyncWeb3.eth.getCoinbase();
+        if(brandAccount==null){
+            brandAccount = coinbase;
+        }
+        let deveryRegistryInstace = await DeveryRegistryContract.deployed();
+        let result = await deveryRegistryInstace.brands(brandAccount,{from:coinbase});
+        return result.valueOf();
+
     }
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getBrand(address brandAccount) public constant returns (Brand brand)
+    async getBrandData(brandAccount){
+
+        let coinbase = await this.asyncWeb3.eth.getCoinbase();
+        if(brandAccount==null){
+            brandAccount = coinbase;
+        }
+        let deveryRegistryInstace = await DeveryRegistryContract.deployed();
+        let result = await deveryRegistryInstace.getBrandData(brandAccount,{from:coinbase});
+        return result.valueOf();
+
+    }
+
 
     /**
      *
@@ -226,9 +283,10 @@ export default class DeveryRegistry{
     //getProduct(address productAccount) public constant returns (Product product)
     async getProduct(productAccount){
 
-        //TODO: wrap the result in a more redable object
-        let result = await this.__deveryContractRegistry.getProduct(productAccount);
-        return result
+        let coinbase = await this.asyncWeb3.eth.getCoinbase();
+        let deveryRegistryInstace = await DeveryRegistryContract.deployed();
+        let result = await deveryRegistryInstace.products(productAccount,{from:coinbase});
+        return result.valueOf();
 
     }
 

@@ -3,6 +3,7 @@ const webpack = require('webpack')
 
 module.exports ={
     mode:'development',
+    devtool: 'eval-source-map',
     output: {
         path: path.resolve(__dirname,'public_static'),
         filename: 'devery.js'
