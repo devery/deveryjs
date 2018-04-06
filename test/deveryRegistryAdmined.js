@@ -1,31 +1,87 @@
+var DeveryRegistryContract = artifacts.require("./DeveryRegistry.sol");
+import DeveryAdmined from './../devery/DeveryAdmined'
+
+
+const overrideOptions = {
+    gasLimit: 250000,
+    gasPrice: 9000000000,
+};
+
+
 
 //if we change the DeveryRegistry constructor
 //we can change only one point
-const createDeveryRegistry = (web3, provider, account, contractAddress) => {
-    return new DeveryRegistry(web3, provider, account, contractAddress)
+const createDeveryAdmined = (web3, provider, account, contractAddress) => {
+    return new DeveryAdmined(web3, provider, account, contractAddress)
 }
 
 contract('DeveryRegistry - Admined - basic tests', async function (accounts) {
 
+    let contractAddress;
+    const contractOwner = accounts[0];
+    const adminToBeAddedAndRemoved = accounts[1];
+    const accountFromNonAdmin = accounts[5]
 
-    it('should be possible check if someone is admin', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+    before(async function () {
+        let contract = await DeveryRegistryContract.deployed();
+        contractAddress = contract.address
     })
 
-    it('should be possible only to owners add admins', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+    it('should be possible check if someone is admin', async function () {
+
+        let deveryAdmined = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
+        let isAdmin = await deveryAdmined.isAdmin(contractOwner)
+        assert.isTrue(isAdmin,'someshow the contract owner is not admin')
+        isAdmin = await deveryAdmined.isAdmin(accountFromNonAdmin)
+        assert.isNotTrue(isAdmin,'this account should not be admin')
+    })
+
+    it('should be possible to owners add admins',async function () {
+        let deveryAdmined = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
+        let isAdmin = await deveryAdmined.isAdmin(adminToBeAddedAndRemoved)
+        assert.isNotTrue(isAdmin,'this account should not be admin')
+        await deveryAdmined.addAdmin(adminToBeAddedAndRemoved)
+        isAdmin = await deveryAdmined.isAdmin(adminToBeAddedAndRemoved)
+        assert.isTrue(isAdmin,'this account should be admin now')
+
     });
 
-    it('should be possible only to owners remove admins', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+    it('should be possible to owners remove admins', async function () {
+        let deveryAdmined = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
+        let isAdmin = await deveryAdmined.isAdmin(adminToBeAddedAndRemoved)
+        assert.isTrue(isAdmin,'this account should be admin now')
+        await deveryAdmined.removeAdmin(adminToBeAddedAndRemoved)
+        isAdmin = await deveryAdmined.isAdmin(adminToBeAddedAndRemoved)
+        assert.isNotTrue(isAdmin,'this account should not be admin')
+
     });
 
-    it('should not be possible add admins if you are not owner', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+    it('should not be possible add admins if you are not owner', function (done) {
+        (async function(){
+            let deveryAdmined = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
+            try{
+                await deveryAdmined.addAdmin(accounts[6])
+                done('Fail no exception raised')
+            }
+            catch(e){
+                assert.equal(e.message,'VM Exception while processing transaction: revert','wrong exception')
+                done();
+            }
+        })()
     });
 
     it('should not be possible remove admins if you are not owner', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+        (async function(){
+            let deveryAdmined = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
+            try{
+                await deveryAdmined.addAdmin(accounts[6])
+                done('Fail no exception raised')
+            }
+            catch(e){
+                assert.equal(e.message,'VM Exception while processing transaction: revert','wrong exception')
+                done();
+            }
+        })()
     });
 
     it('should receive callback when an admin is added',async function(){

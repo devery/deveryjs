@@ -1,41 +1,10 @@
-const ethers = require('ethers');
-const deveryRegistryArtifact = require('../build/contracts/DeveryRegistry.json');
+import AbstractDeverySmartContract from './AbstractDeverySmartContract'
 
-const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
-
-export default class DeveryRegistry{
+export default class DeveryRegistry extends AbstractDeverySmartContract{
 
 
     constructor(signer = web3, provider,acc,address){
-        //TODO: if no web provider is available create a read only one pointing to etherscan API
-        // if(!signer){
-        //     throw new Error("It was not possible to fallbacl the the default web3 object, web3 provider must be provided");
-        // }
-        if(!provider){
-            this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider,network );
-        }
-        else{
-            this._ethersProvider = provider
-        }
-
-
-
-        let signerOrProvider = this._ethersProvider.getSigner?this._ethersProvider.getSigner():this._ethersProvider;
-
-        if(acc){
-            signerOrProvider =
-                this._ethersProvider.getSigner(acc)
-        }
-
-
-        if(!address){
-            address = deveryRegistryArtifact.networks[network.chainId].address
-        }
-
-        this.__deveryRegistryContract = new ethers.Contract(address, deveryRegistryArtifact.abi,
-            signerOrProvider);
-
-
+        super(...arguments)
     }
 
     /**********************APP RELATED METHOD**************************************/
