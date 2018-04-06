@@ -13,7 +13,7 @@ export default class DeveryOwned extends AbstractDeverySmartContract {
     }
 
     async transferOwnership(newOwnerAddres){
-        let result = await this.__deveryRegistryContract.addAdmin(newOwnerAddres);
+        let result = await this.__deveryRegistryContract.transferOwnership(newOwnerAddres);
         return result.valueOf();
     }
 

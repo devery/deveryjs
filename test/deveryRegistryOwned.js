@@ -1,4 +1,20 @@
-import DeveryRegistry from './../devery/DeveryRegistry'
+var DeveryRegistryContract = artifacts.require("./DeveryRegistry.sol");
+import DeveryOwned from './../devery/DeveryOwned'
+
+
+const overrideOptions = {
+    gasLimit: 250000,
+    gasPrice: 9000000000,
+};
+
+
+
+//if we change the DeveryRegistry constructor
+//we can change only one point
+const createDeveryOwned = (web3, provider, account, contractAddress) => {
+    return new DeveryOwned(web3, provider, account, contractAddress)
+}
+
 
 //if we change the DeveryRegistry constructor
 //we can change only one point
@@ -8,21 +24,31 @@ const createDeveryRegistry = (web3, provider, account, contractAddress) => {
 
 contract('DeveryRegistry - Owned - basic tests', async function (accounts) {
 
+    let contractAddress;
+    const ownerAccount = accounts[0]
+    const newOwnerAccount = accounts[1]
 
-    it('should not be possible to call owner methods as non owner',async function(){
-        assert.fail("actual", "expected", "test not implemented");
+    before(async function () {
+        let contract = await DeveryRegistryContract.deployed();
+        contractAddress = contract.address
     })
 
-    it('should  be possible to call owner methods as owner',async function(){
-        assert.fail("actual", "expected", "test not implemented");
-    })
 
-    it('should read accounts apps from other accounts',async function(){
-        assert.fail("actual", "expected", "test not implemented");
+    it('should get owner address',async function(){
+        let devery = createDeveryOwned(web3,undefined,ownerAccount,contractAddress)
+        let owner = await devery.getOwner()
+        assert.equal(owner.toLowerCase(),ownerAccount.toLowerCase(),'Wrong owner account')
     })
 
     it('should be possible to initiate the ownership transfer',async function(){
-        assert.fail("actual", "expected", "test not implemented");
+        let devery = createDeveryOwned(web3,undefined,ownerAccount,contractAddress)
+        await devery.transferOwnership(newOwnerAccount)
+    })
+
+    it('should get new owner address',async function(){
+        let devery = createDeveryOwned(web3,undefined,ownerAccount,contractAddress)
+        let newOwner = await devery.getNewOwner()
+        assert.equal(newOwner.toLowerCase(),newOwnerAccount.toLowerCase(),'Wrong owner account')
     })
 
     it('accept the ownerships',async function(){
