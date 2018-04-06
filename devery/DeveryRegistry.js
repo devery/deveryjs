@@ -6,15 +6,34 @@ const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 export default class DeveryRegistry{
 
 
-    constructor(signer = web3){
+    constructor(signer = web3, provider,acc,address){
         //TODO: if no web provider is available create a read only one pointing to etherscan API
-        if(!signer){
-            throw new Error("It was not possible to fallbacl the the default web3 object, web3 provider must be provided");
+        // if(!signer){
+        //     throw new Error("It was not possible to fallbacl the the default web3 object, web3 provider must be provided");
+        // }
+        if(!provider){
+            this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider,network );
+        }
+        else{
+            this._ethersProvider = provider
         }
 
-        this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider,network );
-        this.__deveryRegistryContract = new ethers.Contract(deveryRegistryArtifact.networks[network.chainId].address, deveryRegistryArtifact.abi,
-            this._ethersProvider.getSigner());
+
+
+        let signerOrProvider = this._ethersProvider.getSigner?this._ethersProvider.getSigner():this._ethersProvider;
+
+        if(acc){
+            signerOrProvider =
+                this._ethersProvider.getSigner(acc)
+        }
+
+
+        if(!address){
+            address = deveryRegistryArtifact.networks[network.chainId].address
+        }
+
+        this.__deveryRegistryContract = new ethers.Contract(address, deveryRegistryArtifact.abi,
+            signerOrProvider);
 
 
     }
@@ -31,8 +50,8 @@ export default class DeveryRegistry{
      * of the current token
      */
     //addApp(string appName, address _feeAccount, uint _fee)
-    async addApp(appName,feeAccount,fee,active){
-        let result = await this.__deveryRegistryContract.addApp(appName,feeAccount,fee,active);
+    async addApp(appName,feeAccount,fee,overrideOptions = {}){
+        let result = await this.__deveryRegistryContract.addApp(appName,feeAccount,fee,overrideOptions);
         return result.valueOf();
     }
 
