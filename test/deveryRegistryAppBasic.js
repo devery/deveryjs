@@ -103,9 +103,9 @@ contract('DeveryRegistry - App - basic tests', async function (accounts) {
     })
 
 
-    it('should receive callback when another app is created',function(){
+    it('should receive callback when another app is created',function(done){
         const appName = "My newly created app"
-        const senderAccount = accounts[1];
+        const senderAccount = accounts[7];
         const listenerAccount = accounts[2];
         const feeAccount = accounts[3];
         const fee = 5;
@@ -113,14 +113,13 @@ contract('DeveryRegistry - App - basic tests', async function (accounts) {
 
         let deveryTrigger = createDeveryRegistry(web3, undefined, senderAccount, contractAddress);
         let deveryListener = createDeveryRegistry(web3, undefined, listenerAccount, contractAddress);
-        deveryListener.setAppUpdatedEventListener((callbackAppAcc,callbackAppName,callbackFeeAccount,callbackFee
+        deveryListener.setAppAddedEventListener((callbackAppAcc,callbackAppName,callbackFeeAccount,callbackFee
             )=>{
 
             assert.equal(callbackAppAcc.toLowerCase(),senderAccount.toLowerCase(),'appAcount is not same');
             assert.equal(callbackAppName,appName,'appName is not same');
             assert.equal(callbackFeeAccount.toLowerCase(),feeAccount.toLowerCase(),'feeAccount is not same');
             assert.equal(callbackFee,fee,'app fee is not same');
-
             done();
 
         });
