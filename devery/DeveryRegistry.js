@@ -65,8 +65,8 @@ export default class DeveryRegistry{
      * of the current token
      */
     //updateApp(string appName, address _feeAccount, uint _fee, bool active)
-    async updateApp(appName,feeAccount,fee,active){
-        let result = await this.__deveryRegistryContract.updateApp(appName,feeAccount,fee,active);
+    async updateApp(appName,feeAccount,fee,active,overrideOptions = {}){
+        let result = await this.__deveryRegistryContract.updateApp(appName,feeAccount,fee,active,overrideOptions);
         return result;
     }
 
