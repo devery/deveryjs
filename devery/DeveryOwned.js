@@ -18,7 +18,7 @@ export default class DeveryOwned extends AbstractDeverySmartContract {
     }
 
     setOwnershipTransferredListener(callback){
-        this.__deveryRegistryContract.onwwnershiptransferred = callback
+        this.__deveryRegistryContract.onownershiptransferred = callback
     }
 
     async getOwner(){

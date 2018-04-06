@@ -52,11 +52,26 @@ contract('DeveryRegistry - Owned - basic tests', async function (accounts) {
     })
 
     it('accept the ownerships',async function(){
-        assert.fail("actual", "expected", "test not implemented");
+        let devery = createDeveryOwned(web3,undefined,newOwnerAccount,contractAddress)
+        await devery.acceptOwnership()
+        let owner = await devery.getOwner()
+        assert.equal(owner.toLowerCase(),newOwnerAccount.toLowerCase(),'Wrong owner account')
     })
 
     it('should receive callback when ownership is changed',async function(){
-        assert.fail("actual", "expected", "test not implemented");
+        this.timeout(5000)
+        return new Promise(async function(resolve,reject){
+            let devery = createDeveryOwned(web3,undefined,newOwnerAccount,contractAddress)
+            devery.setOwnershipTransferredListener((fromAcc,toAcc) =>{
+                assert.equal(fromAcc.toLowerCase(),newOwnerAccount.toLowerCase())
+                assert.equal(toAcc.toLowerCase(),ownerAccount.toLowerCase())
+                resolve()
+            })
+            await devery.transferOwnership(ownerAccount)
+            devery = createDeveryOwned(web3,undefined,ownerAccount,contractAddress)
+            await devery.acceptOwnership()
+
+        })
     })
 
 
