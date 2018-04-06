@@ -84,11 +84,26 @@ contract('DeveryRegistry - Admined - basic tests', async function (accounts) {
         })()
     });
 
-    it('should receive callback when an admin is added',async function(){
-        assert.fail("actual", "expected", "test not implemented");
-    })
+    it('should receive callback when an admin is added', function(done){
+        let deveryAdminedNonAdmin = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
+        let deveryAdminedAdmin = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
+        this.timeout(5000);
+        deveryAdminedNonAdmin.setAdminAddedEventListener((address)=>{
+            assert.equal(adminToBeAddedAndRemoved.toLowerCase(),address.toLowerCase())
+            done()
+        })
+        deveryAdminedAdmin.addAdmin(adminToBeAddedAndRemoved)
 
-    it('should receive callback when an admin is removed',async function(){
-        assert.fail("actual", "expected", "test not implemented");
+    });
+
+    it('should receive callback when an admin is removed',function(done){
+        let deveryAdminedNonAdmin = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
+        let deveryAdminedAdmin = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
+        this.timeout(5000);
+        deveryAdminedNonAdmin.setAdminRemovedEventListener((address)=>{
+            assert.equal(adminToBeAddedAndRemoved.toLowerCase(),address.toLowerCase())
+            done()
+        })
+        deveryAdminedAdmin.removeAdmin(adminToBeAddedAndRemoved)
     })
 });
