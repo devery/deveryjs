@@ -6,4 +6,28 @@ export default class DeveryOwned extends AbstractDeverySmartContract {
         super(...arguments)
     }
 
+
+    async acceptOwnership(){
+        let result = await this.__deveryRegistryContract.acceptOwnership();
+        return result.valueOf();
+    }
+
+    async transferOwnership(newOwnerAddres){
+        let result = await this.__deveryRegistryContract.addAdmin(newOwnerAddres);
+        return result.valueOf();
+    }
+
+    setOwnershipTransferredListener(callback){
+        this.__deveryRegistryContract.onwwnershiptransferred = callback
+    }
+
+    async getOwner(){
+        let result = await this.__deveryRegistryContract.owner();
+        return result.valueOf();
+    }
+
+    async getNewOwner(){
+        let result = await this.__deveryRegistryContract.newOwner();
+        return result.valueOf();
+    }
 }
