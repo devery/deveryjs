@@ -6,7 +6,7 @@ const createDeveryRegistry = (web3, provider, account, contractAddress) => {
     return new DeveryRegistry(web3, provider, account, contractAddress)
 }
 
-contract('DeveryRegistry - Mark - basic tests', async function (accounts) {
+contract('DeveryRegistry - Mark - basic tests', function (accounts) {
 
 
     it('should be possible to brand accounts add permission marker accounts',async function(){

@@ -13,7 +13,7 @@ const createDeveryRegistry = (web3, provider, account, contractAddress) => {
     return new DeveryRegistry(web3, provider, account, contractAddress)
 }
 
-contract('DeveryRegistry - Brand - basic tests', async function (accounts) {
+contract('DeveryRegistry - Brand - basic tests', function (accounts) {
 
     let contractAddress;
     const data = generateData(accounts);
@@ -111,12 +111,17 @@ contract('DeveryRegistry - Brand - basic tests', async function (accounts) {
             const brand = accData.brands[0]
             let devery = createDeveryRegistry(web3, undefined, accData.appAccount, contractAddress);
             devery.setBrandAddedEventListener((brandAccount,appAccount,brandName,active)=>{
+                try{
+                    assert.equal(brandAccount.toLowerCase(),brand.brandAccount.toLowerCase())
+                    assert.equal(appAccount.toLowerCase(),brand.appAccount.toLowerCase())
+                    assert.equal(brandName,brand.brandName)
+                    assert.equal(active,brand.active)
+                    resolve();
+                }
+                catch (e){
+                    //as might receive multiple callbacks we will look only for the right one
+                }
 
-                assert.equal(brandAccount.toLowerCase(),brand.brandAccount.toLowerCase())
-                assert.equal(appAccount.toLowerCase(),brand.appAccount.toLowerCase())
-                assert.equal(brandName,brand.brandName)
-                assert.equal(active,brand.active)
-                resolve();
             })
             devery.addBrand(brand.brandAccount,brand.brandName,overrideOptions)
         })
@@ -133,10 +138,16 @@ contract('DeveryRegistry - Brand - basic tests', async function (accounts) {
             const active = false;
             let devery = createDeveryRegistry(web3, undefined, accData.appAccount, contractAddress);
             devery.setBrandUpdatedEventListener((brandAccount,appAccount,brandName,active)=>{assert.equal(brandAccount.toLowerCase(),brand.brandAccount.toLowerCase())
-                assert.equal(appAccount.toLowerCase(),brand.appAccount.toLowerCase())
-                assert.equal(brandName,updatedName)
-                assert.equal(active,active)
-                resolve();
+                try{
+                    assert.equal(appAccount.toLowerCase(),brand.appAccount.toLowerCase())
+                    assert.equal(brandName,updatedName)
+                    assert.equal(active,active)
+                    resolve();
+                }
+                catch (e){
+                    //as might receive multiple callbacks we will look only for the right one
+                }
+
             })
             devery.updateBrand(brand.brandAccount,updatedName,active,overrideOptions)
         })

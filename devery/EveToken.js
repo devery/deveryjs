@@ -7,7 +7,7 @@ const ethers = require('ethers')
 const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
 export default class EveToken extends AbstractSmartContract{
-    constructor(web3Param = web3){
+    constructor(signer = web3, provider,acc,address){
         super(...arguments)
 
         if(!address){
@@ -28,7 +28,7 @@ export default class EveToken extends AbstractSmartContract{
      */
     async totalSupply(){
         let result = await this.__eveTokenContract.totalSupply();
-        return result.toNumber();
+        return result;
 
     }
 
@@ -42,7 +42,7 @@ export default class EveToken extends AbstractSmartContract{
      */
     async balanceOf(account){
         let result = await this.__eveTokenContract.balanceOf(account);
-        return result.toNumber();
+        return result;
     }
 
     //TODO: explain document this function return
@@ -84,5 +84,13 @@ export default class EveToken extends AbstractSmartContract{
     async transferFrom(from, to,tokens,overrideOptions = {}){
         let result = await this.__eveTokenContract.transferFrom(from, to,tokens,overrideOptions);
         return result.valueOf();
+    }
+
+    setApprovalListener(callback){
+        this.__eveTokenContract.onapproval = callback
+    }
+
+    setTransferListner(callback){
+        this.__eveTokenContract.ontransfer = callback
     }
 }
