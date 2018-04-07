@@ -1,7 +1,7 @@
 {
-  "name": "Express-Box",
+  "name": "devery.js",
   "version": "0.0.2",
-  "description": "Make API-Endpoints for Ethereum BlockChain",
+  "description": "Make calls to the devery protocol using js",
   "scripts": {
     "start": "nodemon server.js",
     "debug": "nodemon --inspect server.js",
