@@ -2,8 +2,9 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract'
 
 export default class DeveryAdmined extends AbstractDeverySmartContract {
 
-    constructor(signer = web3, provider, acc, address) {
-        super(...arguments)
+    constructor(options = {singer:web3,provider:undefined,acc:undefined,address:undefined}) {
+        super(options)
+
     }
 
     async isAdmin(addr){

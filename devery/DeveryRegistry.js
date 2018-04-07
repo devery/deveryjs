@@ -3,7 +3,7 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract'
 export default class DeveryRegistry extends AbstractDeverySmartContract{
 
 
-    constructor(signer = web3, provider,acc,address){
+    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
         super(...arguments)
     }
 
