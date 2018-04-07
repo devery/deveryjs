@@ -1,5 +1,6 @@
 import EveToken from './../devery/EveToken'
 var EveTokenContract = artifacts.require("./TestEVEToken.sol");
+import {createEveToken} from './helpers/staticData'
 
 
 const overrideOptions = {
@@ -9,9 +10,6 @@ const overrideOptions = {
 
 //if we change the DeveryRegistry constructor
 //we can change only one point
-const createEveToken = (web3, provider, account, contractAddress) => {
-    return new EveToken(web3, provider, account, contractAddress)
-}
 
 contract('EveToken', function (accounts) {
     let contractAddress;

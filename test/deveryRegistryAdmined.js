@@ -1,19 +1,11 @@
 var DeveryRegistryContract = artifacts.require("./DeveryRegistry.sol");
-import DeveryAdmined from './../devery/DeveryAdmined'
-
+import {createDeveryAdmined} from './helpers/staticData'
 
 const overrideOptions = {
     gasLimit: 250000,
     gasPrice: 9000000000,
 };
 
-
-
-//if we change the DeveryRegistry constructor
-//we can change only one point
-const createDeveryAdmined = (web3, provider, account, contractAddress) => {
-    return new DeveryAdmined(web3, provider, account, contractAddress)
-}
 
 contract('DeveryRegistry - Admined - basic tests', function (accounts) {
 

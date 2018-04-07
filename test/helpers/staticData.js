@@ -1,4 +1,9 @@
-export default function getData(accounts) {
+import DeveryAdmined from './../../devery/DeveryAdmined'
+import DeveryRegistry from './../../devery/DeveryRegistry'
+import EveToken from './../../devery/EveToken'
+import DeveryOwned from './../../devery/DeveryOwned'
+
+export function getData(accounts) {
     return [
         {appAccount:accounts[1], appName:"first app",   feeAccount:accounts[1], fee:1,active:true ,brands:[
             {brandAccount: accounts[1],appAccount:accounts[1],brandName:"brand 1",active:true, products:[
@@ -43,3 +48,20 @@ export default function getData(accounts) {
     ]
 }
 
+export function createDeveryAdmined(web3, provider, account, contractAddress){
+    return new DeveryAdmined( {signer:web3,provider:provider,acc:account,address:contractAddress})
+}
+
+
+export function createDeveryRegistry(web3, provider, account, contractAddress){
+    return new DeveryRegistry( {signer:web3,provider:provider,acc:account,address:contractAddress})
+}
+
+export function createDeveryOwned(web3, provider, account, contractAddress){
+    return new DeveryOwned({signer:web3,provider:provider,acc:account,address:contractAddress})
+}
+
+
+export function createEveToken(web3, provider, account, contractAddress) {
+    return new EveToken( {signer:web3,provider:provider,acc:account,address:contractAddress})
+}

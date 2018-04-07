@@ -3,8 +3,10 @@ const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
 
 export default class AbstractSmartContract{
-    constructor(signer = web3, provider,acc,address){
-
+    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
+        let signer = options.signer;
+        let provider = options.provider;
+        let acc = options.acc;
         //TODO: if no web provider is available create a read only one pointing to etherscan API
         // if(!signer){
         //     throw new Error("It was not possible to fallbacl the the default web3 object, web3 provider must be provided");

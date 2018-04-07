@@ -5,8 +5,9 @@ const ethers = require('ethers')
 const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
 export default class EveToken extends AbstractSmartContract{
-    constructor(signer = web3, provider,acc,address){
+    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
         super(...arguments)
+        let address = options.address;
 
         if(!address){
             address = eveTokenArtifact.networks[network.chainId].address
