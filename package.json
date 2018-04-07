@@ -1,6 +1,6 @@
 {
   "name": "devery",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Make calls to the devery protocol using js",
   "scripts": {
     "start": "nodemon server.js",
@@ -46,8 +46,6 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "ethers": "^3.0.8",
-    "express": "^4.16.2",
-    "jquery": "^3.3.1",
     "nodemon": "^1.14.12",
     "webpack": "^4.4.1"
   }
