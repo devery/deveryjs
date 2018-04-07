@@ -366,9 +366,9 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
      * of the current token
      */
     //permissionMarker(address marker, bool permission)
-    async permissionMarker(marker,permission){
+    async permissionMarker(marker,permission,overrideOptions = {}){
 
-        let result = await this.__deveryRegistryContract.permissionMarker(marker,permission);
+        let result = await this.__deveryRegistryContract.permissionMarker(marker,permission,overrideOptions);
         return result.valueOf();
     }
 
@@ -396,9 +396,9 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
      * of the current token
      */
     //mark(address productAccount, bytes32 itemHash)
-    async mark(productAccount, itemHash){
+    async mark(productAccount, itemHash,overrideOptions = {}){
         
-        let result = await this.__deveryRegistryContract.mark(productAccount,itemHash);
+        let result = await this.__deveryRegistryContract.mark(productAccount,itemHash,overrideOptions);
         return result.valueOf();
     }
 

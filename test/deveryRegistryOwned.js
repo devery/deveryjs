@@ -16,11 +16,6 @@ const createDeveryOwned = (web3, provider, account, contractAddress) => {
 }
 
 
-//if we change the DeveryRegistry constructor
-//we can change only one point
-const createDeveryRegistry = (web3, provider, account, contractAddress) => {
-    return new DeveryRegistry(web3, provider, account, contractAddress)
-}
 
 contract('DeveryRegistry - Owned - basic tests', function (accounts) {
 

@@ -1,4 +1,12 @@
 import DeveryRegistry from './../devery/DeveryRegistry'
+var DeveryRegistryContract = artifacts.require("./DeveryRegistry.sol");
+import generateData from './helpers/staticData'
+
+const overrideOptions = {
+    gasLimit: 250000,
+    gasPrice: 9000000000,
+};
+
 
 //if we change the DeveryRegistry constructor
 //we can change only one point
@@ -8,6 +16,53 @@ const createDeveryRegistry = (web3, provider, account, contractAddress) => {
 
 contract('DeveryRegistry - Mark - basic tests', function (accounts) {
 
+    let contractAddress;
+    let totalBrands = 0;
+    let totalProducts = 0
+    const data = generateData(accounts)
+    const brandsArr = [];
+    const productsArr = []
+
+    before(async function () {
+        let contract = await DeveryRegistryContract.deployed();
+        let deveryRegistry;
+        contractAddress = contract.address
+
+        let promisseArray = [];
+        for(let account of data){
+            deveryRegistry = createDeveryRegistry(web3,null,account.appAccount,contractAddress)
+            promisseArray.push(deveryRegistry.addApp(account.appName,account.feeAccount,account.fee,overrideOptions))
+        }
+        await Promise.all(promisseArray)
+        promisseArray = []
+        for(let account of data){
+            deveryRegistry = createDeveryRegistry(web3,null,account.appAccount,contractAddress)
+            for(let brand of account.brands){
+                totalBrands++;
+                brandsArr.push(brand)
+                promisseArray.push(deveryRegistry.addBrand(brand.brandAccount,brand.brandName,overrideOptions))
+            }
+        }
+
+        await Promise.all(promisseArray)
+        promisseArray = []
+
+        for(let account of data){
+            for(let brand of account.brands){
+                deveryRegistry = createDeveryRegistry(web3,null,brand.brandAccount,contractAddress)
+                for (let product of brand.products){
+                    totalProducts++;
+                    productsArr.push(product)
+                    promisseArray.push(deveryRegistry.addProduct(product.productAccount,product.description,product.details,product.year,product.origin, overrideOptions))
+                }
+            }
+        }
+
+        //TODO: setup token address
+
+        await Promise.all(promisseArray)
+
+    })
 
     it('should be possible to brand accounts add permission marker accounts',async function(){
         assert.fail("actual", "expected", "test not implemented");

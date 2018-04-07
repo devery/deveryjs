@@ -1,7 +1,5 @@
 
 const eveTokenArtifact = require('../build/contracts/TestEVEToken.json');
-const contract = require('truffle-contract')
-const EveTokenContract = contract(eveTokenArtifact);
 import AbstractSmartContract from './AbstractSmartContract';
 const ethers = require('ethers')
 const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
