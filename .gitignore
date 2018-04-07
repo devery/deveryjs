@@ -3,6 +3,5 @@ node_modules/
 build/
 coverage.json
 .nyc_output/
-build/
 coverage/
 public_static/devery.js
