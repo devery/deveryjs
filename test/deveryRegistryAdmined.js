@@ -15,7 +15,7 @@ const createDeveryAdmined = (web3, provider, account, contractAddress) => {
     return new DeveryAdmined(web3, provider, account, contractAddress)
 }
 
-contract('DeveryRegistry - Admined - basic tests', async function (accounts) {
+contract('DeveryRegistry - Admined - basic tests', function (accounts) {
 
     let contractAddress;
     const contractOwner = accounts[0];

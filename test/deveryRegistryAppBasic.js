@@ -12,7 +12,7 @@ const createDeveryRegistry = (web3, provider, account, contractAddress) => {
     return new DeveryRegistry(web3, provider, account, contractAddress)
 }
 
-contract('DeveryRegistry - App - basic tests', async function (accounts) {
+contract('DeveryRegistry - App - basic tests', function (accounts) {
     let contractAddress;
 
     before(async function () {
@@ -116,11 +116,17 @@ contract('DeveryRegistry - App - basic tests', async function (accounts) {
         deveryListener.setAppAddedEventListener((callbackAppAcc,callbackAppName,callbackFeeAccount,callbackFee
             )=>{
 
-            assert.equal(callbackAppAcc.toLowerCase(),senderAccount.toLowerCase(),'appAcount is not same');
-            assert.equal(callbackAppName,appName,'appName is not same');
-            assert.equal(callbackFeeAccount.toLowerCase(),feeAccount.toLowerCase(),'feeAccount is not same');
-            assert.equal(callbackFee,fee,'app fee is not same');
-            done();
+            try{
+                assert.equal(callbackAppAcc.toLowerCase(),senderAccount.toLowerCase(),'appAcount is not same');
+                assert.equal(callbackAppName,appName,'appName is not same');
+                assert.equal(callbackFeeAccount.toLowerCase(),feeAccount.toLowerCase(),'feeAccount is not same');
+                assert.equal(callbackFee,fee,'app fee is not same');
+                done();
+            }
+            catch (e){
+                //as might receive multiple callbacks we will look only for the right one
+            }
+
 
         });
 
@@ -141,14 +147,19 @@ contract('DeveryRegistry - App - basic tests', async function (accounts) {
         let deveryListener = createDeveryRegistry(web3, undefined, listenerAccount, contractAddress);
         deveryListener.setAppUpdatedEventListener((callbackAppAcc,callbackAppName,callbackFeeAccount,callbackFee
                                                    ,callbackActive)=>{
+            try {
+                assert.equal(callbackAppAcc.toLowerCase(), senderAccount.toLowerCase(), 'appAcount is not same');
+                assert.equal(callbackAppName, appName, 'appName is not same');
+                assert.equal(callbackFeeAccount.toLowerCase(), feeAccount.toLowerCase(), 'feeAccount is not same');
+                assert.equal(callbackFee, fee, 'app fee is not same');
+                assert.equal(callbackActive, active, 'appStatus is not same');
+                done();
+            }
+            catch (e){
+                //as might receive multiple callbacks we will look only for the right one
+            }
 
-            assert.equal(callbackAppAcc.toLowerCase(),senderAccount.toLowerCase(),'appAcount is not same');
-            assert.equal(callbackAppName,appName,'appName is not same');
-            assert.equal(callbackFeeAccount.toLowerCase(),feeAccount.toLowerCase(),'feeAccount is not same');
-            assert.equal(callbackFee,fee,'app fee is not same');
-            assert.equal(callbackActive,active,'appStatus is not same');
 
-           done();
 
         });
 

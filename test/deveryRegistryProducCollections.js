@@ -14,7 +14,7 @@ const createDeveryRegistry = (web3, provider, account, contractAddress) => {
 }
 
 
-contract('DeveryRegistry - Product - collection tests', async function (accounts) {
+contract('DeveryRegistry - Product - collection tests', function (accounts) {
 
 
     let contractAddress;

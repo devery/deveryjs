@@ -22,7 +22,7 @@ const createDeveryRegistry = (web3, provider, account, contractAddress) => {
     return new DeveryRegistry(web3, provider, account, contractAddress)
 }
 
-contract('DeveryRegistry - Owned - basic tests', async function (accounts) {
+contract('DeveryRegistry - Owned - basic tests', function (accounts) {
 
     let contractAddress;
     const ownerAccount = accounts[0]
