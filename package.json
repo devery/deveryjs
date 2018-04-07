@@ -1,6 +1,6 @@
 {
-  "name": "devery.js",
-  "version": "0.0.2",
+  "name": "devery",
+  "version": "0.0.3",
   "description": "Make calls to the devery protocol using js",
   "scripts": {
     "start": "nodemon server.js",

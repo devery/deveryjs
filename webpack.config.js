@@ -3,10 +3,10 @@ const path = require('path')
 
 module.exports ={
     mode:'development',
-    devtool: 'inline',
+    devtool: 'eval-source-map',
     output: {
-        path: path.resolve(__dirname,'public_static'),
-        filename: 'devery.js'
+        path: path.resolve(__dirname,''),
+        filename: 'index.js'
     },
-    entry: [path.resolve(__dirname, 'index.js')]
+    entry: [path.resolve(__dirname, 'devery/devery.js')]
 }
