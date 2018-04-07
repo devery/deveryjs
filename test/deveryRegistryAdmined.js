@@ -71,7 +71,7 @@ contract('DeveryRegistry - Admined - basic tests', function (accounts) {
         })()
     });
 
-    it('should not be possible remove admins if you are not owner', async function () {
+    it('should not be possible remove admins if you are not owner', function (done) {
         (async function(){
             let deveryAdmined = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
             try{
@@ -85,26 +85,29 @@ contract('DeveryRegistry - Admined - basic tests', function (accounts) {
         })()
     });
 
-    it('should receive callback when an admin is added', function(done){
-        let deveryAdminedNonAdmin = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
-        let deveryAdminedAdmin = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
-        this.timeout(5000);
-        deveryAdminedNonAdmin.setAdminAddedEventListener((address)=>{
-            assert.equal(adminToBeAddedAndRemoved.toLowerCase(),address.toLowerCase())
-            done()
+    it('should receive callback when an admin is added',function(){
+        this.timeout(8000);
+        return new Promise(async function(resolve,reject){
+            let deveryAdminedNonAdmin = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
+            let deveryAdminedAdmin = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
+            deveryAdminedNonAdmin.setAdminAddedEventListener((address)=>{
+                assert.equal(adminToBeAddedAndRemoved.toLowerCase(),address.toLowerCase())
+                resolve();
+            })
+            deveryAdminedAdmin.addAdmin(adminToBeAddedAndRemoved)
         })
-        deveryAdminedAdmin.addAdmin(adminToBeAddedAndRemoved)
-
     });
 
-    it('should receive callback when an admin is removed',function(done){
-        let deveryAdminedNonAdmin = createDeveryAdmined(web3,undefined,accountFromNonAdmin,contractAddress)
-        let deveryAdminedAdmin = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
-        this.timeout(5000);
-        deveryAdminedNonAdmin.setAdminRemovedEventListener((address)=>{
-            assert.equal(adminToBeAddedAndRemoved.toLowerCase(),address.toLowerCase())
-            done()
+    it('should receive callback when an admin is removed', function(){
+        this.timeout(8000);
+        return new Promise(async function(resolve,reject) {
+            let deveryAdminedNonAdmin = createDeveryAdmined(web3, undefined, accountFromNonAdmin, contractAddress)
+            let deveryAdminedAdmin = createDeveryAdmined(web3, undefined, contractOwner, contractAddress)
+            deveryAdminedNonAdmin.setAdminRemovedEventListener((address) => {
+                assert.equal(adminToBeAddedAndRemoved.toLowerCase(), address.toLowerCase())
+                resolve()
+            })
+            deveryAdminedAdmin.removeAdmin(adminToBeAddedAndRemoved)
         })
-        deveryAdminedAdmin.removeAdmin(adminToBeAddedAndRemoved)
     })
 });
