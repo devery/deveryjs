@@ -1,6 +1,7 @@
 const ethers = require('ethers')
 const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
+
 export default class AbstractSmartContract{
     constructor(signer = web3, provider,acc,address){
 

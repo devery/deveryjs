@@ -135,9 +135,9 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
      * of the current token
      */
     //addBrand(address brandAccount, string brandName)
-    async addBrand(brandAccount,brandName){
+    async addBrand(brandAccount,brandName,overrideOptions = {}){
         
-        let result = await this.__deveryRegistryContract.addBrand(brandAccount,brandName);
+        let result = await this.__deveryRegistryContract.addBrand(brandAccount,brandName,overrideOptions);
         return result.valueOf();
 
     }
@@ -151,9 +151,9 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
      * of the current token
      */
     //updateBrand(address brandAccount, string brandName, bool active) public
-    async updateBrand(brandAccount,brandName,active){
+    async updateBrand(brandAccount,brandName,active,overrideOptions = {}){
         
-        let result = await this.__deveryRegistryContract.updateBrand(brandAccount,brandName,active);
+        let result = await this.__deveryRegistryContract.updateBrand(brandAccount,brandName,active,overrideOptions);
         return result.valueOf();
 
     }
@@ -241,7 +241,7 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
     async brandAccountsLength(){
 
         let result = await this.__deveryRegistryContract.brandAccountsLength();
-        return result.valueOf();
+        return result.toNumber();
     }
 
     setBrandAddedEventListener(callback){
@@ -265,9 +265,9 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
      * of the current token
      */
     //addProduct(address productAccount, string description, string details, uint year, string origin)
-    async addProduct(productAccount, description, details, year,origin){
+    async addProduct(productAccount, description, details, year,origin,overrideOptions = {}){
         
-        let result = await this.__deveryRegistryContract.addProduct(productAccount, description, details, year,origin);
+        let result = await this.__deveryRegistryContract.addProduct(productAccount, description, details, year,origin,overrideOptions);
         return result.valueOf();
 
     }
@@ -341,7 +341,7 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
     async productAccountsLength(){
         
         let result = await this.__deveryRegistryContract.productAccountsLength();
-        return result.valueOf();
+        return result.toNumber();
 
     }
 

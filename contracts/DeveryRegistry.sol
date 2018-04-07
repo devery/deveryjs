@@ -214,6 +214,7 @@ contract DeveryRegistry is Admined {
         require(brand.appAccount == msg.sender);
         brand.brandName = brandName;
         brand.active = active;
+
         BrandUpdated(brandAccount, msg.sender, brandName, active);
     }
     function getBrand(address brandAccount) public constant returns (Brand brand) {

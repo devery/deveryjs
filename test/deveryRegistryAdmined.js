@@ -20,7 +20,8 @@ contract('DeveryRegistry - Admined - basic tests', async function (accounts) {
     let contractAddress;
     const contractOwner = accounts[0];
     const adminToBeAddedAndRemoved = accounts[1];
-    const accountFromNonAdmin = accounts[5]
+    const accountFromNonAdmin = accounts[5];
+
 
     before(async function () {
         let contract = await DeveryRegistryContract.deployed();

@@ -1,16 +1,21 @@
-import simpleWeb3Promisifier from  './../utils/simpleWeb3Promisifier'
+
 const eveTokenArtifact = require('../build/contracts/TestEVEToken.json');
 const contract = require('truffle-contract')
 const EveTokenContract = contract(eveTokenArtifact);
+import AbstractSmartContract from './AbstractSmartContract';
+const ethers = require('ethers')
+const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
-export default class EveToken{
+export default class EveToken extends AbstractSmartContract{
     constructor(web3Param = web3){
-        if(!web3Param){
-            throw new Error("It was not possible to fallbacl the the default web3 object, web3 provider must be provided");
+        super(...arguments)
+
+        if(!address){
+            address = eveTokenArtifact.networks[network.chainId].address
         }
-        this.web3 = web3Param;
-        this.asyncWeb3 = simpleWeb3Promisifier(web3Param)
-        EveTokenContract.setProvider(this.web3.currentProvider)
+
+        this.__eveTokenContract = new ethers.Contract(address, eveTokenArtifact.abi,
+            this.__signerOrProvider);
     }
 
 
@@ -22,10 +27,8 @@ export default class EveToken{
      * of the current token
      */
     async totalSupply(){
-        let coinbase = await this.asyncWeb3.eth.getCoinbase();
-        let eveTokenInstance = await EveTokenContract.deployed();
-        let result = await eveTokenInstance.totalSupply({from:coinbase});
-        return result.valueOf();
+        let result = await this.__eveTokenContract.totalSupply();
+        return result.toNumber();
 
     }
 
@@ -38,10 +41,8 @@ export default class EveToken{
      * the inquired account
      */
     async balanceOf(account){
-        let coinbase = await this.asyncWeb3.eth.getCoinbase();
-        let eveTokenInstance = await EveTokenContract.deployed();
-        let result = await eveTokenInstance.balanceOf(account,{from:coinbase});
-        return result.valueOf();
+        let result = await this.__eveTokenContract.balanceOf(account);
+        return result.toNumber();
     }
 
     //TODO: explain document this function return
@@ -54,10 +55,8 @@ export default class EveToken{
      * @param account  account whose balance is being inquired
      * @returns {Promise.<*>}
      */
-    async allowance(tokenOwner, spender){
-        let coinbase = await this.asyncWeb3.eth.getCoinbase();
-        let eveTokenInstance = await EveTokenContract.deployed();
-        let result = await eveTokenInstance.allowance(tokenOwner,spender,{from:coinbase});
+    async allowance(tokenOwner, spender,overrideOptions = {}){
+        let result = await this.__eveTokenContract.allowance(tokenOwner,spender,overrideOptions);
         return result.valueOf();
     }
 
@@ -69,10 +68,8 @@ export default class EveToken{
      * @param total quantity of tokens being sent
      * @returns {Promise.<*>} a promisse that resolves to the transaction receipt
      */
-    async transfer(toAdress, total){
-        let coinbase = await this.asyncWeb3.eth.getCoinbase();
-        let eveTokenInstance = await EveTokenContract.deployed();
-        let result = await eveTokenInstance.transfer(toAdress,total,{from:coinbase});
+    async transfer(toAdress, total,overrideOptions = {}){
+        let result = await this.__eveTokenContract.transfer(toAdress,total,overrideOptions);
         return result.valueOf();
     }
 
@@ -84,10 +81,8 @@ export default class EveToken{
      * @param total quantity of tokens being sent
      * @returns {Promise.<*>} a promisse that resolves to the transaction receipt
      */
-    async transferFrom(from, to,tokens){
-        let coinbase = await this.asyncWeb3.eth.getCoinbase();
-        let eveTokenInstance = await EveTokenContract.deployed();
-        let result = await eveTokenInstance.transferFrom(from, to,tokens,{from:coinbase});
+    async transferFrom(from, to,tokens,overrideOptions = {}){
+        let result = await this.__eveTokenContract.transferFrom(from, to,tokens,overrideOptions);
         return result.valueOf();
     }
 }
