@@ -9,9 +9,12 @@
     "excludePattern": "(node_modules/|docs)"
   },
   "templates": {
-    "referenceTitle": "My SDK Name",
+    "referenceTitle": "Devery.js docs",
     "disableSort": false
   },
+  "plugins": [
+    "plugins/markdown"
+  ],
   "opts": {
     "destination": "./docs/",
     "encoding": "utf8",

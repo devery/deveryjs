@@ -16,7 +16,14 @@ class DeveryAdmined extends AbstractDeverySmartContract {
     /**
      *
      * Creates a new instansce of DeveryAdmined
+     *```
+     * //creates a deveryAdminedClient with the default params
+     * let deveryAdminedClient = new DeveryAdmined();
      *
+     * //creates a deveryAdminedClient pointing to a custom address
+     * let deveryAdminedCustomAddress = new DeveryAdmined({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *
+     * ```
      *
      * @param {ClientOptions} options network connection options
      *
