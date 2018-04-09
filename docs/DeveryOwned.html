@@ -67,7 +67,7 @@
 
   <nav>
     <h3 class="reference-title">
-      My SDK Name
+      Devery.js docs
     </h3>
 
     <h3>Classes</h3><ul><li id="AbstractDeverySmartContract-nav"><a href="AbstractDeverySmartContract.html">AbstractDeverySmartContract</a></li><li id="DeveryAdmined-nav"><a href="DeveryAdmined.html">DeveryAdmined</a><ul class='methods'><li data-type="method" id="DeveryAdmined-addAdmin-nav"><a href="DeveryAdmined.html#addAdmin">addAdmin</a></li><li data-type="method" id="DeveryAdmined-isAdmin-nav"><a href="DeveryAdmined.html#isAdmin">isAdmin</a></li><li data-type="method" id="DeveryAdmined-removeAdmin-nav"><a href="DeveryAdmined.html#removeAdmin">removeAdmin</a></li><li data-type="method" id="DeveryAdmined-setAdminAddedEventListener-nav"><a href="DeveryAdmined.html#setAdminAddedEventListener">setAdminAddedEventListener</a></li><li data-type="method" id="DeveryAdmined-setAdminRemovedEventListener-nav"><a href="DeveryAdmined.html#setAdminRemovedEventListener">setAdminRemovedEventListener</a></li></ul></li><li id="DeveryOwned-nav"><a href="DeveryOwned.html">DeveryOwned</a><ul class='methods'><li data-type="method" id="DeveryOwned-getOwner-nav"><a href="DeveryOwned.html#getOwner">getOwner</a></li><li data-type="method" id="DeveryOwned-setOwnershipTransferredListener-nav"><a href="DeveryOwned.html#setOwnershipTransferredListener">setOwnershipTransferredListener</a></li></ul></li><li id="DeveryRegistry-nav"><a href="DeveryRegistry.html">DeveryRegistry</a><ul class='methods'><li data-type="method" id="DeveryRegistry-addApp-nav"><a href="DeveryRegistry.html#addApp">addApp</a></li><li data-type="method" id="DeveryRegistry-addBrand-nav"><a href="DeveryRegistry.html#addBrand">addBrand</a></li><li data-type="method" id="DeveryRegistry-addProduct-nav"><a href="DeveryRegistry.html#addProduct">addProduct</a></li><li data-type="method" id="DeveryRegistry-addressHash-nav"><a href="DeveryRegistry.html#addressHash">addressHash</a></li><li data-type="method" id="DeveryRegistry-appAccountsLength-nav"><a href="DeveryRegistry.html#appAccountsLength">appAccountsLength</a></li><li data-type="method" id="DeveryRegistry-appAccountsPaginated-nav"><a href="DeveryRegistry.html#appAccountsPaginated">appAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-brandAccountsLength-nav"><a href="DeveryRegistry.html#brandAccountsLength">brandAccountsLength</a></li><li data-type="method" id="DeveryRegistry-brandAccountsPaginated-nav"><a href="DeveryRegistry.html#brandAccountsPaginated">brandAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-check-nav"><a href="DeveryRegistry.html#check">check</a></li><li data-type="method" id="DeveryRegistry-getApp-nav"><a href="DeveryRegistry.html#getApp">getApp</a></li><li data-type="method" id="DeveryRegistry-getAppData-nav"><a href="DeveryRegistry.html#getAppData">getAppData</a></li><li data-type="method" id="DeveryRegistry-getBrand-nav"><a href="DeveryRegistry.html#getBrand">getBrand</a></li><li data-type="method" id="DeveryRegistry-getBrandAddresses-nav"><a href="DeveryRegistry.html#getBrandAddresses">getBrandAddresses</a></li><li data-type="method" id="DeveryRegistry-getBrandData-nav"><a href="DeveryRegistry.html#getBrandData">getBrandData</a></li><li data-type="method" id="DeveryRegistry-getProduct-nav"><a href="DeveryRegistry.html#getProduct">getProduct</a></li><li data-type="method" id="DeveryRegistry-getProductData-nav"><a href="DeveryRegistry.html#getProductData">getProductData</a></li><li data-type="method" id="DeveryRegistry-mark-nav"><a href="DeveryRegistry.html#mark">mark</a></li><li data-type="method" id="DeveryRegistry-permissionMarker-nav"><a href="DeveryRegistry.html#permissionMarker">permissionMarker</a></li><li data-type="method" id="DeveryRegistry-productAccountsLength-nav"><a href="DeveryRegistry.html#productAccountsLength">productAccountsLength</a></li><li data-type="method" id="DeveryRegistry-productAccountsPaginated-nav"><a href="DeveryRegistry.html#productAccountsPaginated">productAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-updateApp-nav"><a href="DeveryRegistry.html#updateApp">updateApp</a></li><li data-type="method" id="DeveryRegistry-updateBrand-nav"><a href="DeveryRegistry.html#updateBrand">updateBrand</a></li></ul></li><li id="EveToken-nav"><a href="EveToken.html">EveToken</a><ul class='methods'><li data-type="method" id="EveToken-allowance-nav"><a href="EveToken.html#allowance">allowance</a></li><li data-type="method" id="EveToken-balanceOf-nav"><a href="EveToken.html#balanceOf">balanceOf</a></li><li data-type="method" id="EveToken-totalSupply-nav"><a href="EveToken.html#totalSupply">totalSupply</a></li><li data-type="method" id="EveToken-transfer-nav"><a href="EveToken.html#transfer">transfer</a></li><li data-type="method" id="EveToken-transferFrom-nav"><a href="EveToken.html#transferFrom">transferFrom</a></li></ul></li></ul><h3 id="global-nav"><a href="global.html">Global</a></h3>
@@ -93,9 +93,9 @@
 
       
         <div class="class-description">
-          Main class to deal with the owned smart contract interface and related operations,
+          <p>Main class to deal with the owned smart contract interface and related operations,
 you can use it to check the current contract owner and list to ownership change related
-events
+events</p>
         </div>
       
     
@@ -127,7 +127,7 @@ events
 
 
   <div class="description">
-    Creates a new instansce of DeveryOwned
+    <p>Creates a new instansce of DeveryOwned</p>
   </div>
 
 
@@ -181,7 +181,7 @@ events
         
 
         <td class="description last">
-          network connection options
+          <p>network connection options</p>
           
         </td>
       </tr>
@@ -389,11 +389,11 @@ events
 
 
   <div class="description">
-    Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes
+    <p>Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes
 (what is a very unlikely event).
 please note that OwnershipTransferredEventListeners do not stack, this means that whenever you set one you are
 removing the last one. If you want to remove a OwnershipTransferredEventListeners, just call this function passing undefined
-as param
+as param</p>
   </div>
 
 
@@ -447,8 +447,8 @@ as param
         
 
         <td class="description last">
-          the callback that will be executed whenever and OwnershipTransferred event is
-triggered
+          <p>the callback that will be executed whenever and OwnershipTransferred event is
+triggered</p>
           
         </td>
       </tr>
