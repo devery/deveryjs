@@ -70,7 +70,7 @@
       My SDK Name
     </h3>
 
-    <h3>Classes</h3><ul><li id="AbstractDeverySmartContract-nav"><a href="AbstractDeverySmartContract.html">AbstractDeverySmartContract</a></li><li id="exports-nav"><a href="module.exports.html">exports</a></li></ul><h3 id="global-nav">Global</h3><ul><li><a href="global.html#addApp">addApp</a></li><li><a href="global.html#addBrand">addBrand</a></li><li><a href="global.html#addProduct">addProduct</a></li><li><a href="global.html#addressHash">addressHash</a></li><li><a href="global.html#allowance">allowance</a></li><li><a href="global.html#appAccountsLength">appAccountsLength</a></li><li><a href="global.html#appAccountsPaginated">appAccountsPaginated</a></li><li><a href="global.html#balanceOf">balanceOf</a></li><li><a href="global.html#brandAccountsLength">brandAccountsLength</a></li><li><a href="global.html#brandAccountsPaginated">brandAccountsPaginated</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#getApp">getApp</a></li><li><a href="global.html#getAppData">getAppData</a></li><li><a href="global.html#getBrand">getBrand</a></li><li><a href="global.html#getBrandAddresses">getBrandAddresses</a></li><li><a href="global.html#getBrandData">getBrandData</a></li><li><a href="global.html#getProduct">getProduct</a></li><li><a href="global.html#getProductData">getProductData</a></li><li><a href="global.html#isAdmin">isAdmin</a></li><li><a href="global.html#mark">mark</a></li><li><a href="global.html#permissionMarker">permissionMarker</a></li><li><a href="global.html#productAccountsLength">productAccountsLength</a></li><li><a href="global.html#productAccountsPaginated">productAccountsPaginated</a></li><li><a href="global.html#totalSupply">totalSupply</a></li><li><a href="global.html#transfer">transfer</a></li><li><a href="global.html#transferFrom">transferFrom</a></li><li><a href="global.html#updateApp">updateApp</a></li><li><a href="global.html#updateBrand">updateBrand</a></li></ul>
+    <h3>Classes</h3><ul><li id="AbstractDeverySmartContract-nav"><a href="AbstractDeverySmartContract.html">AbstractDeverySmartContract</a></li><li id="DeveryAdmined-nav"><a href="DeveryAdmined.html">DeveryAdmined</a><ul class='methods'><li data-type="method" id="DeveryAdmined-addAdmin-nav"><a href="DeveryAdmined.html#addAdmin">addAdmin</a></li><li data-type="method" id="DeveryAdmined-isAdmin-nav"><a href="DeveryAdmined.html#isAdmin">isAdmin</a></li><li data-type="method" id="DeveryAdmined-removeAdmin-nav"><a href="DeveryAdmined.html#removeAdmin">removeAdmin</a></li><li data-type="method" id="DeveryAdmined-setAdminAddedEventListener-nav"><a href="DeveryAdmined.html#setAdminAddedEventListener">setAdminAddedEventListener</a></li><li data-type="method" id="DeveryAdmined-setAdminRemovedEventListener-nav"><a href="DeveryAdmined.html#setAdminRemovedEventListener">setAdminRemovedEventListener</a></li></ul></li><li id="DeveryOwned-nav"><a href="DeveryOwned.html">DeveryOwned</a><ul class='methods'><li data-type="method" id="DeveryOwned-getOwner-nav"><a href="DeveryOwned.html#getOwner">getOwner</a></li><li data-type="method" id="DeveryOwned-setOwnershipTransferredListener-nav"><a href="DeveryOwned.html#setOwnershipTransferredListener">setOwnershipTransferredListener</a></li></ul></li><li id="exports-nav"><a href="module.exports.html">exports</a></li></ul><h3 id="global-nav">Global</h3><ul><li><a href="global.html#addApp">addApp</a></li><li><a href="global.html#addBrand">addBrand</a></li><li><a href="global.html#addProduct">addProduct</a></li><li><a href="global.html#addressHash">addressHash</a></li><li><a href="global.html#allowance">allowance</a></li><li><a href="global.html#appAccountsLength">appAccountsLength</a></li><li><a href="global.html#appAccountsPaginated">appAccountsPaginated</a></li><li><a href="global.html#balanceOf">balanceOf</a></li><li><a href="global.html#brandAccountsLength">brandAccountsLength</a></li><li><a href="global.html#brandAccountsPaginated">brandAccountsPaginated</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#getApp">getApp</a></li><li><a href="global.html#getAppData">getAppData</a></li><li><a href="global.html#getBrand">getBrand</a></li><li><a href="global.html#getBrandAddresses">getBrandAddresses</a></li><li><a href="global.html#getBrandData">getBrandData</a></li><li><a href="global.html#getProduct">getProduct</a></li><li><a href="global.html#getProductData">getProductData</a></li><li><a href="global.html#mark">mark</a></li><li><a href="global.html#permissionMarker">permissionMarker</a></li><li><a href="global.html#productAccountsLength">productAccountsLength</a></li><li><a href="global.html#productAccountsPaginated">productAccountsPaginated</a></li><li><a href="global.html#totalSupply">totalSupply</a></li><li><a href="global.html#transfer">transfer</a></li><li><a href="global.html#transferFrom">transferFrom</a></li><li><a href="global.html#updateApp">updateApp</a></li><li><a href="global.html#updateBrand">updateBrand</a></li></ul>
   </nav>
 
   <div id="main">
@@ -93,7 +93,9 @@
 
       
         <div class="class-description">
-          Foo fooing bars
+          Main class to deal with the owned smart contract interface and related operations,
+you can use it to check the current contract owner and list to ownership change related
+events
         </div>
       
     
@@ -116,7 +118,7 @@
       </svg>
     </a>
     <h4 class="name" id="exports">
-      <span class="type-signature"></span>new exports<span class="signature">()</span><span class="type-signature"></span>
+      <span class="type-signature"></span>new exports<span class="signature">(options)</span><span class="type-signature"></span>
     </h4>
   </span>
 
@@ -124,10 +126,69 @@
 
 
 
+  <div class="description">
+    Creates a new instansce of DeveryOwned
+  </div>
 
 
 
 
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>options</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#ClientOptions">ClientOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          network connection options
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
 
 
 
@@ -164,7 +225,7 @@
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line5">line 5</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line11">line 11</a>
         </li>
       </ul>
     </dd>
@@ -192,6 +253,17 @@
 
       
     </div>
+
+    
+      <h3 class="subsection-title">Extends</h3>
+
+      
+
+
+  <ul>
+    <li><a href="AbstractDeverySmartContract.html">AbstractDeverySmartContract</a></li>
+  </ul>
+
 
     
 

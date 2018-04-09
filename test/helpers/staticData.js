@@ -49,19 +49,19 @@ export function getData(accounts) {
 }
 
 export function createDeveryAdmined(web3, provider, account, contractAddress){
-    return new DeveryAdmined( {signer:web3,provider:provider,acc:account,address:contractAddress})
+    return new DeveryAdmined( {web3Instance:web3,provider:provider,acc:account,address:contractAddress})
 }
 
 
 export function createDeveryRegistry(web3, provider, account, contractAddress){
-    return new DeveryRegistry( {signer:web3,provider:provider,acc:account,address:contractAddress})
+    return new DeveryRegistry( {web3Instance:web3,provider:provider,acc:account,address:contractAddress})
 }
 
 export function createDeveryOwned(web3, provider, account, contractAddress){
-    return new DeveryOwned({signer:web3,provider:provider,acc:account,address:contractAddress})
+    return new DeveryOwned({web3Instance:web3,provider:provider,acc:account,address:contractAddress})
 }
 
 
 export function createEveToken(web3, provider, account, contractAddress) {
-    return new EveToken( {signer:web3,provider:provider,acc:account,address:contractAddress})
+    return new EveToken( {web3Instance:web3,provider:provider,acc:account,address:contractAddress})
 }

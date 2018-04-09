@@ -1,16 +1,23 @@
-
 const eveTokenArtifact = require('../build/contracts/TestEVEToken.json');
 import AbstractSmartContract from './AbstractSmartContract';
 const ethers = require('ethers')
-const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
-export default class EveToken extends AbstractSmartContract{
-    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
+
+/**
+ *
+ * Main class to deal with the owned smart contract interface and related operations,
+ * you can use it to check the current contract owner and list to ownership change related
+ * events
+ *
+ * @extends AbstractDeverySmartContract
+ */
+class EveToken extends AbstractSmartContract{
+    constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
         super(...arguments)
         let address = options.address;
 
         if(!address){
-            address = eveTokenArtifact.networks[network.chainId].address
+            address = eveTokenArtifact.networks[web3.version.network].address
         }
 
         this.__eveTokenContract = new ethers.Contract(address, eveTokenArtifact.abi,
@@ -93,3 +100,5 @@ export default class EveToken extends AbstractSmartContract{
         this.__eveTokenContract.ontransfer = callback
     }
 }
+
+export default EveToken

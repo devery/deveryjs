@@ -1,9 +1,24 @@
 import AbstractDeverySmartContract from './AbstractDeverySmartContract'
 
-export default class DeveryRegistry extends AbstractDeverySmartContract{
+/**
+ *
+ * Main class to deal with the owned smart contract interface and related operations,
+ * you can use it to check the current contract owner and list to ownership change related
+ * events
+ *
+ * @extends AbstractDeverySmartContract
+ */
+class DeveryRegistry extends AbstractDeverySmartContract{
 
 
-    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
+    /**
+     *
+     * Creates a new instansce of DeveryOwned
+     *
+     *
+     * @param {ClientOptions} options network connection options
+     */
+    constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
         super(...arguments)
     }
 
@@ -418,3 +433,5 @@ export default class DeveryRegistry extends AbstractDeverySmartContract{
     }
 
 }
+
+export default DeveryRegistry
