@@ -88,27 +88,21 @@
 <section>
   <article>
     <pre class="prettyprint source linenums"><code>const ethers = require('ethers')
-const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
 /**Abstract class that servers as base to all other smart contract calls
  * this class shall not be directly instantiated as there will be no usage to it
  */
 class AbstractSmartContract{
-    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
-        let signer = options.signer;
-        let provider = options.provider;
+    constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
+        let signer = options.web3Instance;
         let acc = options.acc;
         //TODO: if no web provider is available create a read only one pointing to etherscan API
-        // if(!signer){
+        // if(!web3Instance){
         //     throw new Error("It was not possible to fallbacl the the default web3 object, web3 provider must be provided");
         // }
 
-        if(!provider){
-            this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider,network );
-        }
-        else{
-            this._ethersProvider = provider
-        }
+        this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
+
 
         this.__signerOrProvider = this._ethersProvider.getSigner?this._ethersProvider.getSigner():this._ethersProvider;
 
