@@ -33,21 +33,41 @@ class DeveryAdmined extends AbstractDeverySmartContract {
     }
 
 
+    /**
+     * hello
+     * @param addr
+     * @returns {Promise.<*>}
+     */
     async addAdmin(addr){
         let result = await this.__deveryRegistryContract.addAdmin(addr);
         return result.valueOf();
     }
 
+    /**
+     * hello
+     * @param addr
+     * @returns {Promise.<*>}
+     */
     async removeAdmin(addr){
         let result = await this.__deveryRegistryContract.removeAdmin(addr);
         return result.valueOf();
     }
 
 
+    /**
+     * hello
+     * @param addr
+     * @returns {Promise.<*>}
+     */
     setAdminAddedEventListener(callback){
         this.__deveryRegistryContract.onadminadded = callback
     }
 
+    /**
+     * hello
+     * @param addr
+     * @returns {Promise.<*>}
+     */
     setAdminRemovedEventListener(callback){
         this.__deveryRegistryContract.onadminremoved = callback
     }
