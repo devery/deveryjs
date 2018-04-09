@@ -1,0 +1,530 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      DeveryRegistry.js - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      My SDK Name
+    </h3>
+
+    <h3>Classes</h3><ul><li id="exports-nav"><a href="module.exports.html">exports</a></li></ul><h3 id="global-nav">Global</h3><ul><li><a href="global.html#addApp">addApp</a></li><li><a href="global.html#addBrand">addBrand</a></li><li><a href="global.html#addProduct">addProduct</a></li><li><a href="global.html#addressHash">addressHash</a></li><li><a href="global.html#allowance">allowance</a></li><li><a href="global.html#appAccountsLength">appAccountsLength</a></li><li><a href="global.html#appAccountsPaginated">appAccountsPaginated</a></li><li><a href="global.html#balanceOf">balanceOf</a></li><li><a href="global.html#brandAccountsLength">brandAccountsLength</a></li><li><a href="global.html#brandAccountsPaginated">brandAccountsPaginated</a></li><li><a href="global.html#check">check</a></li><li><a href="global.html#getApp">getApp</a></li><li><a href="global.html#getAppData">getAppData</a></li><li><a href="global.html#getBrand">getBrand</a></li><li><a href="global.html#getBrandAddresses">getBrandAddresses</a></li><li><a href="global.html#getBrandData">getBrandData</a></li><li><a href="global.html#getProduct">getProduct</a></li><li><a href="global.html#getProductData">getProductData</a></li><li><a href="global.html#isAdmin">isAdmin</a></li><li><a href="global.html#mark">mark</a></li><li><a href="global.html#permissionMarker">permissionMarker</a></li><li><a href="global.html#productAccountsLength">productAccountsLength</a></li><li><a href="global.html#productAccountsPaginated">productAccountsPaginated</a></li><li><a href="global.html#totalSupply">totalSupply</a></li><li><a href="global.html#transfer">transfer</a></li><li><a href="global.html#transferFrom">transferFrom</a></li><li><a href="global.html#updateApp">updateApp</a></li><li><a href="global.html#updateBrand">updateBrand</a></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        DeveryRegistry.js
+      </h1>
+    
+
+    
+      
+
+<section>
+  <article>
+    <pre class="prettyprint source linenums"><code>import AbstractDeverySmartContract from './AbstractDeverySmartContract'
+
+export default class DeveryRegistry extends AbstractDeverySmartContract{
+
+
+    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
+        super(...arguments)
+    }
+
+    /**********************APP RELATED METHOD**************************************/
+
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //addApp(string appName, address _feeAccount, uint _fee)
+    async addApp(appName,feeAccount,fee,overrideOptions = {}){
+        let result = await this.__deveryRegistryContract.addApp(appName,feeAccount,fee,overrideOptions);
+        return result.valueOf();
+    }
+
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //updateApp(string appName, address _feeAccount, uint _fee, bool active)
+    async updateApp(appName,feeAccount,fee,active,overrideOptions = {}){
+        let result = await this.__deveryRegistryContract.updateApp(appName,feeAccount,fee,active,overrideOptions);
+        return result;
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getApp(address appAccount) public constant returns (App app)
+    async getApp(appAccount){
+        //TODO: wrap the result in a more redable object
+        // let result = await this.__deveryRegistryContract.apps(appAccount);
+        // return result
+        let result = await this.__deveryRegistryContract.apps(appAccount);
+        return result.valueOf();
+
+    }
+
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
+    async getAppData(appAccount){
+
+        let result = await this.__deveryRegistryContract.getAppData(appAccount);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
+    async appAccountsPaginated(page = 0, pagesize = 10){
+
+        let size = await this.appAccountsLength();
+        let appAdressPromisse = []
+        for(let i = page*pagesize;i&lt;(page+1)*pagesize &amp;&amp; i&lt; size; i++){
+            appAdressPromisse.push(this.appAccountsArray(i))
+        }
+
+        return await Promise.all(appAdressPromisse)
+
+    }
+
+    async appAccountsArray(index){
+        let result = await this.__deveryRegistryContract.appAccounts(index);
+        return result.valueOf();
+    }
+
+    //appAccountsLength()
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //appAccountsLength()
+    async appAccountsLength(){
+
+        let result = await this.__deveryRegistryContract.appAccountsLength();
+        return result.toNumber()
+
+    }
+
+    setAppAddedEventListener(callback){
+        this.__deveryRegistryContract.onappadded = callback
+    }
+
+    setAppUpdatedEventListener(callback){
+        this.__deveryRegistryContract.onappupdated = callback
+    }
+
+
+    /**********************Brand RELATED METHOD**************************************/
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //addBrand(address brandAccount, string brandName)
+    async addBrand(brandAccount,brandName,overrideOptions = {}){
+        
+        let result = await this.__deveryRegistryContract.addBrand(brandAccount,brandName,overrideOptions);
+        return result.valueOf();
+
+    }
+
+    //updateBrand(address brandAccount, string brandName, bool active) public
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //updateBrand(address brandAccount, string brandName, bool active) public
+    async updateBrand(brandAccount,brandName,active,overrideOptions = {}){
+        
+        let result = await this.__deveryRegistryContract.updateBrand(brandAccount,brandName,active,overrideOptions);
+        return result.valueOf();
+
+    }
+
+    //updateBrand(address brandAccount, string brandName, bool active) public
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //updateBrand(address brandAccount, string brandName, bool active) public
+    async getBrandAddresses(){
+
+        let result = await this.__deveryRegistryContract.brandAccounts()
+        return result;
+
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getBrand(address brandAccount) public constant returns (Brand brand)
+    async getBrand(brandAccount){
+
+        let result = await this.__deveryRegistryContract.brands(brandAccount);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getBrand(address brandAccount) public constant returns (Brand brand)
+    async getBrandData(brandAccount){
+        
+        let result = await this.__deveryRegistryContract.getBrandData(brandAccount);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
+    async brandAccountsPaginated(page = 0, pagesize = 10){
+
+        let size = await this.brandAccountsLength();
+        let appAdressPromisse = []
+        for(let i = page*pagesize;i&lt;(page+1)*pagesize &amp;&amp; i&lt; size; i++){
+            appAdressPromisse.push(this.brandAccountsArray(i))
+        }
+
+        return await Promise.all(appAdressPromisse)
+
+    }
+
+    async brandAccountsArray(index){
+        let result = await this.__deveryRegistryContract.brandAccounts(index);
+        return result.valueOf();
+    }
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //brandAccountsLength()
+    async brandAccountsLength(){
+
+        let result = await this.__deveryRegistryContract.brandAccountsLength();
+        return result.toNumber();
+    }
+
+    setBrandAddedEventListener(callback){
+        this.__deveryRegistryContract.onbrandadded = callback
+    }
+
+    setBrandUpdatedEventListener(callback){
+        this.__deveryRegistryContract.onbrandupdated = callback
+    }
+
+
+    /**********************PRODUCTS RELATED METHODS**************************************/
+
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //addProduct(address productAccount, string description, string details, uint year, string origin)
+    async addProduct(productAccount, description, details, year,origin,overrideOptions = {}){
+        
+        let result = await this.__deveryRegistryContract.addProduct(productAccount, description, details, year,origin,overrideOptions);
+        return result.valueOf();
+
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getProduct(address productAccount) public constant returns (Product product)
+    async getProduct(productAccount){
+
+        let result = await this.__deveryRegistryContract.products(productAccount);
+        return result.valueOf();
+
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getProductData(address productAccount) public constant returns (address brandAccount, address appAccount, address appFeeAccount, bool active)
+    async getProductData(productAccount){
+        
+        let result = await this.__deveryRegistryContract.getProductData(productAccount);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
+    async productAccountsPaginated(page = 0, pagesize = 10){
+
+        let size = await this.productAccountsLength();
+        let appAdressPromisse = []
+        for(let i = page*pagesize;i&lt;(page+1)*pagesize &amp;&amp; i&lt; size; i++){
+            appAdressPromisse.push(this.productAccountsArray(i))
+        }
+
+        return await Promise.all(appAdressPromisse)
+
+    }
+
+    async productAccountsArray(index){
+        let result = await this.__deveryRegistryContract.productAccounts(index);
+        return result.valueOf();
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //getProductData(address productAccount) public constant returns (address brandAccount, address appAccount, address appFeeAccount, bool active)
+    async productAccountsLength(){
+        
+        let result = await this.__deveryRegistryContract.productAccountsLength();
+        return result.toNumber();
+
+    }
+
+    setProductAddedEventListener(callback){
+        this.__deveryRegistryContract.onproductadded = callback
+    }
+
+    setProductUpdatedEventListener(callback){
+        this.__deveryRegistryContract.onproductupdated = callback
+    }
+
+
+
+    /**********************MARKER RELATED METHODS**************************************/
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //permissionMarker(address marker, bool permission)
+    async permissionMarker(marker,permission,overrideOptions = {}){
+
+        let result = await this.__deveryRegistryContract.permissionMarker(marker,permission,overrideOptions);
+        return result.valueOf();
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //addressHash(address item) public pure returns (bytes32 hash)
+    async addressHash(item,permission){
+
+        let result = await this.__deveryRegistryContract.addressHash(item);
+        return result.valueOf();
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //mark(address productAccount, bytes32 itemHash)
+    async mark(productAccount, itemHash,overrideOptions = {}){
+        
+        let result = await this.__deveryRegistryContract.mark(productAccount,itemHash,overrideOptions);
+        return result.valueOf();
+    }
+
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    //check(address item) public constant returns (address productAccount, address brandAccount, address appAccount)
+    async check(item){
+
+        let result = await this.__deveryRegistryContract.check(item);
+        return result.valueOf();
+    }
+
+}</code></pre>
+  </article>
+</section>
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+  
+</body>
+</html>

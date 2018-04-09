@@ -1,5 +1,7 @@
 import AbstractDeverySmartContract from './AbstractDeverySmartContract'
-
+/**
+ * Foo fooing bars
+ */
 export default class DeveryAdmined extends AbstractDeverySmartContract {
 
     constructor(options = {singer:web3,provider:undefined,acc:undefined,address:undefined}) {
@@ -7,6 +9,11 @@ export default class DeveryAdmined extends AbstractDeverySmartContract {
 
     }
 
+    /**
+     * hello
+     * @param addr
+     * @returns {Promise.<*>}
+     */
     async isAdmin(addr){
         let result = await this.__deveryRegistryContract.isAdmin(addr);
         return result.valueOf();

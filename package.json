@@ -6,7 +6,8 @@
     "start": "nodemon server.js",
     "debug": "nodemon --inspect server.js",
     "test": "truffle test test/*",
-    "coverage": "cross-env NODE_ENV=test nyc truffle test"
+    "coverage": "cross-env NODE_ENV=test nyc truffle test",
+    "generage-doc": "jsdoc --configure .jsdoc.json --verbose"
   },
   "author": "Victor Eloy ",
   "license": "MIT",
@@ -37,10 +38,14 @@
     "babel-register": "^6.22.0",
     "cross-env": "^5.1.4",
     "css-loader": "^0.26.1",
+    "ink-docstrap": "^1.3.2",
+    "jsdoc": "^3.5.5",
+    "jsdoc-template": "git+https://github.com/braintree/jsdoc-template.git",
     "json-loader": "^0.5.4",
     "nyc": "^11.6.0",
     "style-loader": "^0.13.1",
     "truffle-contract": "^1.1.11",
+    "tui-jsdoc-template": "^1.2.2",
     "web3": "^1.0.0-beta.33"
   },
   "dependencies": {
