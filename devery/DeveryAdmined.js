@@ -1,9 +1,22 @@
 import AbstractDeverySmartContract from './AbstractDeverySmartContract'
-/**
- * Foo fooing bars
- */
-export default class DeveryAdmined extends AbstractDeverySmartContract {
 
+
+/**
+ *
+ * Main class to deal with contract administration related operations,
+ * you can use it to check the current admins and listen to admin related
+ * events
+ *
+ * @extends AbstractDeverySmartContract
+ */
+class DeveryAdmined extends AbstractDeverySmartContract {
+
+    /**
+     *
+     * Creates a new instansce of DeveryAdmined
+     *
+     * @param options
+     */
     constructor(options = {singer:web3,provider:undefined,acc:undefined,address:undefined}) {
         super(options)
 
@@ -41,3 +54,5 @@ export default class DeveryAdmined extends AbstractDeverySmartContract {
 
     
 }
+
+export default DeveryAdmined

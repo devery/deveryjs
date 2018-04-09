@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>
-      EveToken.js - Documentation
+      DeveryAdmined - Documentation
   </title>
 
   <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
@@ -78,114 +76,348 @@
   <div id="main">
     
       <h1 class="page-title">
-        EveToken.js
+        DeveryAdmined
       </h1>
     
 
     
-      
 
 <section>
+  <header>
+    
+      <h2>
+        
+        DeveryAdmined
+        
+      </h2>
+
+      
+        <div class="class-description">
+          Main class to deal with contract administration related operations,
+you can use it to check the current admins and listen to admin related
+events
+        </div>
+      
+    
+  </header>
+
   <article>
-    <pre class="prettyprint source linenums"><code>
-const eveTokenArtifact = require('../build/contracts/TestEVEToken.json');
-import AbstractSmartContract from './AbstractSmartContract';
-const ethers = require('ethers')
-const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
-
-export default class EveToken extends AbstractSmartContract{
-    constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
-        super(...arguments)
-        let address = options.address;
-
-        if(!address){
-            address = eveTokenArtifact.networks[network.chainId].address
-        }
-
-        this.__eveTokenContract = new ethers.Contract(address, eveTokenArtifact.abi,
-            this.__signerOrProvider);
-    }
+    <div class="container-overview">
+      
+        
 
 
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.&lt;*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async totalSupply(){
-        let result = await this.__eveTokenContract.totalSupply();
-        return result;
+  
+    <h2>Constructor</h2>
+  
 
-    }
+  <span class='name-container'>
+    <a class="link-icon" href="#DeveryAdmined">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="DeveryAdmined">
+      <span class="type-signature"></span>new DeveryAdmined<span class="signature">(options)</span><span class="type-signature"></span>
+    </h4>
+  </span>
 
-    /**
-     *
-     * Checks the balance of a given account
-     *
-     * @param account  account whose balance is being inquired
-     * @returns {Promise.&lt;*>} a promisse that resolves to the current balance of
-     * the inquired account
-     */
-    async balanceOf(account){
-        let result = await this.__eveTokenContract.balanceOf(account);
-        return result;
-    }
+  
 
-    //TODO: explain document this function return
-    /**
-     *
-     *  gives the 3rd party the right to facilitate a transaction with the owners token.
-     *  please note that alowance will not transfer tokens to the 3rd party but instead give him
-     *  permission to facilitate transactions on your behalf
-     *
-     * @param account  account whose balance is being inquired
-     * @returns {Promise.&lt;*>}
-     */
-    async allowance(tokenOwner, spender,overrideOptions = {}){
-        let result = await this.__eveTokenContract.allowance(tokenOwner,spender,overrideOptions);
-        return result.valueOf();
-    }
 
-    /**
-     *
-     * Transfer tokens from the current account to any other account
-     *
-     * @param toAdress  address that will receive the tokens
-     * @param total quantity of tokens being sent
-     * @returns {Promise.&lt;*>} a promisse that resolves to the transaction receipt
-     */
-    async transfer(toAdress, total,overrideOptions = {}){
-        let result = await this.__eveTokenContract.transfer(toAdress,total,overrideOptions);
-        return result.valueOf();
-    }
 
-    /**
-     *
-     * Transfer tokens from a specific account to any other account
-     *
-     * @param toAdress  address that will receive the tokens
-     * @param total quantity of tokens being sent
-     * @returns {Promise.&lt;*>} a promisse that resolves to the transaction receipt
-     */
-    async transferFrom(from, to,tokens,overrideOptions = {}){
-        let result = await this.__eveTokenContract.transferFrom(from, to,tokens,overrideOptions);
-        return result.valueOf();
-    }
+  <div class="description">
+    Creates a new instansce of DeveryAdmined
+  </div>
 
-    setApprovalListener(callback){
-        this.__eveTokenContract.onapproval = callback
-    }
 
-    setTransferListner(callback){
-        this.__eveTokenContract.ontransfer = callback
-    }
-}</code></pre>
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>options</code></td>
+        
+
+        <td class="type">
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line12">line 12</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+      <h3 class="subsection-title">Extends</h3>
+
+      
+
+
+  <ul>
+    <li><a href="AbstractDeverySmartContract.html">AbstractDeverySmartContract</a></li>
+  </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+      <h3 class="subsection-title">Methods</h3>
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#isAdmin">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="isAdmin">
+      <span class="type-signature">(async) </span>isAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    hello
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>addr</code></td>
+        
+
+        <td class="type">
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line30">line 30</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+
+    
+
+    
   </article>
 </section>
 
-    
+
 
 
   </div>

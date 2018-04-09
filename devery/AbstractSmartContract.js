@@ -1,8 +1,10 @@
 const ethers = require('ethers')
 const network = { name: 'http://127.0.0.1:8545', chainId: 5777 }
 
-
-export default class AbstractSmartContract{
+/**Abstract class that servers as base to all other smart contract calls
+ * this class shall not be directly instantiated as there will be no usage to it
+ */
+class AbstractSmartContract{
     constructor(options = {signer:web3,provider:undefined,acc:undefined,address:undefined}){
         let signer = options.signer;
         let provider = options.provider;
@@ -28,3 +30,5 @@ export default class AbstractSmartContract{
 
     }
 }
+
+export default AbstractSmartContract
