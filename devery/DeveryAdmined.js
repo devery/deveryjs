@@ -6,7 +6,7 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract'
  *
  * Main class to deal with contract administration related operations,
  * you can use it to check the current admins and listen to admin related
- * events
+ * events.
  *
  * @extends AbstractDeverySmartContract
  */
@@ -21,7 +21,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * let deveryAdminedClient = new DeveryAdmined();
      *
      * //creates a deveryAdminedClient pointing to a custom address
-     * let deveryAdminedCustomAddress = new DeveryAdmined({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     * let deveryAdminedCustomAddress = new DeveryAdmined({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
      *
      * ```
      *
@@ -34,7 +34,34 @@ class DeveryAdmined extends AbstractDeverySmartContract {
 
     /**
      *
-     * checks if a given account is admin of the contract
+     * checks if a given account is admin of the contract.
+     *
+     *
+     * ```
+     * //first you need to get a {@link DeveryAdmined} instance
+     * let deveryAdminedClient = new DeveryAdmined();
+     * //now you can use it
+     * deveryAdminedClient.isAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then( (isAdmin) =>{
+     *          if(isAdmin){
+     *              //continue your code here ...
+     *          }
+     * })
+     *
+     * //if your function is async you can use the await syntax too
+     *
+     *
+     *async function(){
+     *      let deveryAdminedClient = new DeveryAdmined();
+     *      let isAdmin = await deveryAdminedClient.isAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *      if(isAdmin){
+     *          //continue your code here ...
+     *      }
+     *}
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryAdmined|DeveryAdmined instance click here}
+     *
      *
      * @param addr target account address
      * @returns {Promise.<bool,Error>} A promise that resolves to a bool indicating if the requested account
@@ -47,7 +74,36 @@ class DeveryAdmined extends AbstractDeverySmartContract {
 
 
     /**
-     * makes an account admin of the contract by adding it to the admin array
+     * makes an account admin of the contract by adding it to the admin array.
+     *
+     * ***One important point to observe
+     * is that unless you are the owner of the devery contract (what is a very unlikely condition) you will
+     * get an exception and lose you gas if you do a call to this function.***
+     *
+     *
+     * ```
+     * //first you need to get a {@link DeveryAdmined} instance
+     * let deveryAdminedClient = new DeveryAdmined();
+     * //now you can use it
+     * deveryAdminedClient.addAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then( (transaction) =>{
+     *          //continue your code here ...
+     * })
+     *
+     * //if your function is async you can use the await syntax too
+     *
+     *
+     *async function(){
+     *      let deveryAdminedClient = new DeveryAdmined();
+     *      let transaction = await deveryAdminedClient.addAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *      //continue your code here ...
+     *
+     *
+     *
+     *}
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryAdmined|DeveryAdmined instance click here}
      *
      * @param addr target account address
      * @returns {Promise.<Transaction,Error>} A promise that resolves to a transaction or an Error if the promisse is rejected
@@ -58,7 +114,34 @@ class DeveryAdmined extends AbstractDeverySmartContract {
     }
 
     /**
-     * removes admin role from an account
+     * removes admin role from an account.
+     *
+     * ***One important point to observe
+     * is that unless you are the owner of the devery contract (what is a very unlikely condition) you will
+     * get an exception and lose you gas if you do a call to this function.***
+     *
+     * ```
+     * //first you need to get a {@link DeveryAdmined} instance
+     * let deveryAdminedClient = new DeveryAdmined();
+     * //now you can use it
+     * deveryAdminedClient.removeAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then( (transaction) =>{
+     *          //continue your code here ...
+     * })
+     *
+     * //if your function is async you can use the await syntax too
+     *
+     *
+     *async function(){
+     *      let deveryAdminedClient = new DeveryAdmined();
+     *      let transaction = await deveryAdminedClient.removeAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *      //continue your code here ...
+     *
+     *
+     *}
+     *
+     * for more info about how to get a {@link DeveryAdmined|DeveryAdmined instance click here}
+     *
+     * ```
      *
      * @param addr target account address
      * @returns {Promise.<Transaction,Error>} A promise that resolves to a transaction or an Error if the promisse is rejected
@@ -82,7 +165,34 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * Listener to AdminAdded events, this event triggers whenever a new address is added as admin.
      * please note that the AdminAddedEventListeners do not stack, this means that whenever you set one you are
      * removing the last one. If you want to remove a AdminAddedEventListeners, just call this function passing undefined
-     * as param
+     * as param.
+     *
+     *
+     * ```
+     * //first you need to get a {@link DeveryAdmined} instance
+     * let deveryAdminedClient = new DeveryAdmined();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryAdminedClient.setAdminAddedEventListener((newAdminAddress) => {
+     *      //whenever a new admin is added we will log it to the console
+     *      console.log(newAdminAddress);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryAdminedClient.setAdminAddedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     * deveryAdminedClient.setAdminAddedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryAdmined|DeveryAdmined instance click here}
      *
      * @param {adminEventCallback} callback the callback that will be executed whenever and AdminAdded event is
      * triggered
@@ -97,6 +207,32 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * please note that the AdminRemovedEventListeners do not stack, this means that whenever you set one you are
      * removing the last one. If you want to remove a AdminRemovedEventListener, just call this function passing undefined
      * as param
+     *
+     * ```
+     * //first you need to get a {@link DeveryAdmined} instance
+     * let deveryAdminedClient = new DeveryAdmined();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryAdminedClient.setAdminAddedEventListener((newAdminAddress) => {
+     *      //whenever an admin is removed we will log it to the console
+     *      console.log(newAdminAddress);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryAdminedClient.setAdminRemovedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     * deveryAdminedClient.setAdminRemovedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryAdmined|DeveryAdmined instance click here}
      *
      * @param {adminEventCallback} callback the callback that will be executed whenever and AdminRemoved event is
      * triggered
