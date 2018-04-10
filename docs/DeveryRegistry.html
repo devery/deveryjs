@@ -93,9 +93,62 @@
 
       
         <div class="class-description">
-          <p>Main class to deal with the owned smart contract interface and related operations,
-you can use it to check the current contract owner and list to ownership change related
-events</p>
+          <p>DeveryRegistry client interface with it you can interact with the devery protocol</p>
+<p>DeveryRegistry Smart Contract Design</p>
+<pre class="prettyprint source"><code># Devery Protocol Contracts
+
+
+Mainnet Address: <a href="https://etherscan.io/address/0x0364a98148b7031451e79b93449b20090d79702a">0x0364a98148b7031451e79b93449b20090d79702a</a>
+
+## DeveryRegistry Smart Contract Design ##
+mapping(appAccount => App[address appAccount, string appName, address feeAccount, uint fee, bool active]) apps`
+mapping(brandAccount => Brand[address brandAccount, address appAccount, string brandName, bool active]) brands`
+mapping(productAccount => Product[address productAccount, address brandAccount, string description, string details, uint year, string origin, bool active]) products`
+mapping(sha3(itemPublicKey) => productAccount) markings`
+mapping(markerAccount => (brandAccount => permission)) permissions`
+
+
+## Functions
+
+## App Accounts
+
+An account can add itself as an ***App*** account using `addApp(string appName, address feeAccount)`
+An account can update it's ***App*** account data using `updateApp(string appName, address feeAccount, bool active)`
+
+
+
+### Brand Accounts
+
+An ***App*** account can add ***Brand*** accounts using `addBrand(address brandAccount, string brandName)`
+An ***App*** account can update it's ***Brand*** account data using `updateBrand(address brandAccount, string brandName, bool active)`
+
+
+
+### Product Accounts
+
+A ***Brand*** account can add ***Product*** accounts using `addProduct(address productAccount, string description, string details, uint year, string origin)`
+A ***Brand*** account can update it's ***Product*** account data using `updateProduct(address productAccount, string description, string details, uint year, string origin, bool active)`
+
+
+
+### Permissions
+
+A ***Brand*** account can add ***Marker*** accounts using `permissionMarker(address marker, bool permission)`
+
+
+
+### Marking
+
+A ***Marker*** account can add the hash of an ***Item***'s public key using `mark(address productAccount, bytes32 itemHash)`. The `productAccount` is the
+type of ***Product*** the ***Item*** is.
+
+
+
+## Checking
+
+Anyone can check the validity of an ***Item***'s public key using `check(address item)`
+
+</code></pre>
         </div>
       
     
@@ -127,7 +180,13 @@ events</p>
 
 
   <div class="description">
-    <p>Creates a new instansce of DeveryOwned</p>
+    <p>Creates a new instansce of DeveryRegistry</p>
+<pre class="prettyprint source"><code>//creates a deveryRegistryClient with the default params
+let deveryRegistryClient = new DeveryAdmined();
+
+//creates a deveryRegistryClient pointing to a custom address
+let deveryRegistryClient = new DeveryRegistry({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+</code></pre>
   </div>
 
 
@@ -225,7 +284,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line11">line 11</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line69">line 69</a>
         </li>
       </ul>
     </dd>
@@ -345,7 +404,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line37">line 37</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line102">line 102</a>
         </li>
       </ul>
     </dd>
@@ -436,7 +495,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line153">line 153</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line213">line 213</a>
         </li>
       </ul>
     </dd>
@@ -527,7 +586,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line283">line 283</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line334">line 334</a>
         </li>
       </ul>
     </dd>
@@ -618,7 +677,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line399">line 399</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line444">line 444</a>
         </li>
       </ul>
     </dd>
@@ -709,7 +768,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line126">line 126</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line186">line 186</a>
         </li>
       </ul>
     </dd>
@@ -800,7 +859,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line100">line 100</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line161">line 161</a>
         </li>
       </ul>
     </dd>
@@ -891,7 +950,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line256">line 256</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line308">line 308</a>
         </li>
       </ul>
     </dd>
@@ -982,7 +1041,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line231">line 231</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line284">line 284</a>
         </li>
       </ul>
     </dd>
@@ -1073,7 +1132,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line429">line 429</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line472">line 472</a>
         </li>
       </ul>
     </dd>
@@ -1164,7 +1223,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line66">line 66</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line129">line 129</a>
         </li>
       </ul>
     </dd>
@@ -1255,7 +1314,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line85">line 85</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line147">line 147</a>
         </li>
       </ul>
     </dd>
@@ -1346,7 +1405,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line201">line 201</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line256">line 256</a>
         </li>
       </ul>
     </dd>
@@ -1437,7 +1496,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line185">line 185</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line241">line 241</a>
         </li>
       </ul>
     </dd>
@@ -1528,7 +1587,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line216">line 216</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line270">line 270</a>
         </li>
       </ul>
     </dd>
@@ -1619,7 +1678,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line299">line 299</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line349">line 349</a>
         </li>
       </ul>
     </dd>
@@ -1710,7 +1769,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line315">line 315</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line364">line 364</a>
         </li>
       </ul>
     </dd>
@@ -1801,7 +1860,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line414">line 414</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line458">line 458</a>
         </li>
       </ul>
     </dd>
@@ -1892,7 +1951,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line384">line 384</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line430">line 430</a>
         </li>
       </ul>
     </dd>
@@ -1983,7 +2042,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line356">line 356</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line403">line 403</a>
         </li>
       </ul>
     </dd>
@@ -2074,7 +2133,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line330">line 330</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line378">line 378</a>
         </li>
       </ul>
     </dd>
@@ -2165,7 +2224,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line52">line 52</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line116">line 116</a>
         </li>
       </ul>
     </dd>
@@ -2256,7 +2315,7 @@ events</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line169">line 169</a>
+          <a href="DeveryRegistry.js.html">DeveryRegistry.js</a>, <a href="DeveryRegistry.js.html#line227">line 227</a>
         </li>
       </ul>
     </dd>
