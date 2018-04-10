@@ -2,9 +2,67 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract'
 
 /**
  *
- * Main class to deal with the owned smart contract interface and related operations,
- * you can use it to check the current contract owner and list to ownership change related
- * events
+ * DeveryRegistry client interface with it you can interact with the devery protocol
+ *
+ * DeveryRegistry Smart Contract Design
+ *
+ *
+ * ```
+ * # Devery Protocol Contracts
+ *
+ *
+ * Mainnet Address: {@link https://etherscan.io/address/0x0364a98148b7031451e79b93449b20090d79702a|0x0364a98148b7031451e79b93449b20090d79702a}
+ *
+ * ## DeveryRegistry Smart Contract Design ##
+ * mapping(appAccount => App[address appAccount, string appName, address feeAccount, uint fee, bool active]) apps`
+ * mapping(brandAccount => Brand[address brandAccount, address appAccount, string brandName, bool active]) brands`
+ * mapping(productAccount => Product[address productAccount, address brandAccount, string description, string details, uint year, string origin, bool active]) products`
+ * mapping(sha3(itemPublicKey) => productAccount) markings`
+ * mapping(markerAccount => (brandAccount => permission)) permissions`
+ *
+ *
+ * ## Functions
+ *
+ * ## App Accounts
+ *
+ * An account can add itself as an ***App*** account using `addApp(string appName, address feeAccount)`
+ * An account can update it's ***App*** account data using `updateApp(string appName, address feeAccount, bool active)`
+ *
+ *
+ *
+ * ### Brand Accounts
+ *
+ * An ***App*** account can add ***Brand*** accounts using `addBrand(address brandAccount, string brandName)`
+ * An ***App*** account can update it's ***Brand*** account data using `updateBrand(address brandAccount, string brandName, bool active)`
+ *
+ *
+ *
+ * ### Product Accounts
+ *
+ * A ***Brand*** account can add ***Product*** accounts using `addProduct(address productAccount, string description, string details, uint year, string origin)`
+ * A ***Brand*** account can update it's ***Product*** account data using `updateProduct(address productAccount, string description, string details, uint year, string origin, bool active)`
+ *
+ *
+ *
+ * ### Permissions
+ *
+ * A ***Brand*** account can add ***Marker*** accounts using `permissionMarker(address marker, bool permission)`
+ *
+ *
+ *
+ * ### Marking
+ *
+ * A ***Marker*** account can add the hash of an ***Item***'s public key using `mark(address productAccount, bytes32 itemHash)`. The `productAccount` is the
+ *type of ***Product*** the ***Item*** is.
+ *
+ *
+ *
+ * ## Checking
+ *
+ * Anyone can check the validity of an ***Item***'s public key using `check(address item)`
+ *
+ *
+ * ```
  *
  * @extends AbstractDeverySmartContract
  */
@@ -13,13 +71,21 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     /**
      *
-     * Creates a new instansce of DeveryOwned
+     * Creates a new instansce of DeveryRegistry
+     *```
+     * //creates a deveryRegistryClient with the default params
+     * let deveryRegistryClient = new DeveryAdmined();
      *
+     * //creates a deveryRegistryClient pointing to a custom address
+     * let deveryRegistryClient = new DeveryRegistry({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+     *
+     * ```
      *
      * @param {ClientOptions} options network connection options
+     *
      */
     constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
-        super(...arguments)
+        super(options)
     }
 
     /**********************APP RELATED METHOD**************************************/
@@ -33,7 +99,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //addApp(string appName, address _feeAccount, uint _fee)
     async addApp(appName,feeAccount,fee,overrideOptions = {}){
         let result = await this.__deveryRegistryContract.addApp(appName,feeAccount,fee,overrideOptions);
         return result.valueOf();
@@ -48,7 +113,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //updateApp(string appName, address _feeAccount, uint _fee, bool active)
     async updateApp(appName,feeAccount,fee,active,overrideOptions = {}){
         let result = await this.__deveryRegistryContract.updateApp(appName,feeAccount,fee,active,overrideOptions);
         return result;
@@ -62,7 +126,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getApp(address appAccount) public constant returns (App app)
     async getApp(appAccount){
         //TODO: wrap the result in a more redable object
         // let result = await this.__deveryRegistryContract.apps(appAccount);
@@ -81,7 +144,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
     async getAppData(appAccount){
 
         let result = await this.__deveryRegistryContract.getAppData(appAccount);
@@ -96,7 +158,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
     async appAccountsPaginated(page = 0, pagesize = 10){
 
         let size = await this.appAccountsLength();
@@ -114,7 +175,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
         return result.valueOf();
     }
 
-    //appAccountsLength()
+
     /**
      *
      * Checks the total existing supply for the given token
@@ -122,7 +183,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //appAccountsLength()
     async appAccountsLength(){
 
         let result = await this.__deveryRegistryContract.appAccountsLength();
@@ -157,7 +217,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     }
 
-    //updateBrand(address brandAccount, string brandName, bool active) public
     /**
      *
      * Checks the total existing supply for the given token
@@ -165,7 +224,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //updateBrand(address brandAccount, string brandName, bool active) public
     async updateBrand(brandAccount,brandName,active,overrideOptions = {}){
         
         let result = await this.__deveryRegistryContract.updateBrand(brandAccount,brandName,active,overrideOptions);
@@ -173,7 +231,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     }
 
-    //updateBrand(address brandAccount, string brandName, bool active) public
     /**
      *
      * Checks the total existing supply for the given token
@@ -181,7 +238,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //updateBrand(address brandAccount, string brandName, bool active) public
     async getBrandAddresses(){
 
         let result = await this.__deveryRegistryContract.brandAccounts()
@@ -197,7 +253,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getBrand(address brandAccount) public constant returns (Brand brand)
     async getBrand(brandAccount){
 
         let result = await this.__deveryRegistryContract.brands(brandAccount);
@@ -212,7 +267,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getBrand(address brandAccount) public constant returns (Brand brand)
     async getBrandData(brandAccount){
         
         let result = await this.__deveryRegistryContract.getBrandData(brandAccount);
@@ -227,7 +281,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
     async brandAccountsPaginated(page = 0, pagesize = 10){
 
         let size = await this.brandAccountsLength();
@@ -252,7 +305,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //brandAccountsLength()
     async brandAccountsLength(){
 
         let result = await this.__deveryRegistryContract.brandAccountsLength();
@@ -279,7 +331,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //addProduct(address productAccount, string description, string details, uint year, string origin)
     async addProduct(productAccount, description, details, year,origin,overrideOptions = {}){
         
         let result = await this.__deveryRegistryContract.addProduct(productAccount, description, details, year,origin,overrideOptions);
@@ -295,7 +346,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getProduct(address productAccount) public constant returns (Product product)
     async getProduct(productAccount){
 
         let result = await this.__deveryRegistryContract.products(productAccount);
@@ -311,7 +361,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getProductData(address productAccount) public constant returns (address brandAccount, address appAccount, address appFeeAccount, bool active)
     async getProductData(productAccount){
         
         let result = await this.__deveryRegistryContract.getProductData(productAccount);
@@ -326,7 +375,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active)
     async productAccountsPaginated(page = 0, pagesize = 10){
 
         let size = await this.productAccountsLength();
@@ -352,7 +400,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //getProductData(address productAccount) public constant returns (address brandAccount, address appAccount, address appFeeAccount, bool active)
     async productAccountsLength(){
         
         let result = await this.__deveryRegistryContract.productAccountsLength();
@@ -380,7 +427,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //permissionMarker(address marker, bool permission)
     async permissionMarker(marker,permission,overrideOptions = {}){
 
         let result = await this.__deveryRegistryContract.permissionMarker(marker,permission,overrideOptions);
@@ -395,7 +441,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //addressHash(address item) public pure returns (bytes32 hash)
     async addressHash(item,permission){
 
         let result = await this.__deveryRegistryContract.addressHash(item);
@@ -410,7 +455,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //mark(address productAccount, bytes32 itemHash)
     async mark(productAccount, itemHash,overrideOptions = {}){
         
         let result = await this.__deveryRegistryContract.mark(productAccount,itemHash,overrideOptions);
@@ -425,7 +469,6 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
      * of the current token
      */
-    //check(address item) public constant returns (address productAccount, address brandAccount, address appAccount)
     async check(item){
 
         let result = await this.__deveryRegistryContract.check(item);
