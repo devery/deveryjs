@@ -127,7 +127,7 @@ events.</p>
 
 
   <div class="description">
-    <p>Creates a new instansce of DeveryAdmined</p>
+    <p>Creates a new DeveryAdmined instansce.</p>
 <pre class="prettyprint source"><code>//creates a deveryAdminedClient with the default params
 let deveryAdminedClient = new DeveryAdmined();
 
@@ -299,7 +299,7 @@ let deveryAdminedCustomAddress = new DeveryAdmined({address:'0xf17f52151EbEF6C73
       </svg>
     </a>
     <h4 class="name" id="addAdmin">
-      <span class="type-signature">(async) </span>addAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;Transaction, Error>}</span>
+      <span class="type-signature">(async) </span>addAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;Transaction>}</span>
     </h4>
   </span>
 
@@ -308,7 +308,7 @@ let deveryAdminedCustomAddress = new DeveryAdmined({address:'0xf17f52151EbEF6C73
 
 
   <div class="description">
-    <p>makes an account admin of the contract by adding it to the admin array.</p>
+    <p>Makes an account admin of the contract by adding it to the admin array.</p>
 <p><strong><em>One important point to observe
 is that unless you are the owner of the devery contract (what is a very unlikely condition) you will
 get an exception and lose you gas if you do a call to this function.</em></strong></p>
@@ -317,7 +317,7 @@ let deveryAdminedClient = new DeveryAdmined();
 //now you can use it
 deveryAdminedClient.addAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then( (transaction) =>{
          //continue your code here ...
-})
+});
 
 //if your function is async you can use the await syntax too
 
@@ -326,8 +326,6 @@ async function(){
      let deveryAdminedClient = new DeveryAdmined();
      let transaction = await deveryAdminedClient.addAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
      //continue your code here ...
-
-
 
 }
 </code></pre><p>for more info about how to get a <a href="DeveryAdmined.html">DeveryAdmined instance click here</a></p>
@@ -367,6 +365,15 @@ async function(){
         
 
         <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
           
         </td>
 
@@ -419,7 +426,7 @@ async function(){
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line111">line 111</a>
+          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line109">line 109</a>
         </li>
       </ul>
     </dd>
@@ -458,7 +465,7 @@ async function(){
       </svg>
     </a>
     <h4 class="name" id="isAdmin">
-      <span class="type-signature">(async) </span>isAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;bool, Error>}</span>
+      <span class="type-signature">(async) </span>isAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;bool>}</span>
     </h4>
   </span>
 
@@ -467,7 +474,7 @@ async function(){
 
 
   <div class="description">
-    <p>checks if a given account is admin of the contract.</p>
+    <p>Checks if a given account is admin of the contract.</p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryAdmined.html">DeveryAdmined</a> instance
 let deveryAdminedClient = new DeveryAdmined();
 //now you can use it
@@ -615,7 +622,7 @@ async function(){
       </svg>
     </a>
     <h4 class="name" id="removeAdmin">
-      <span class="type-signature">(async) </span>removeAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;Transaction, Error>}</span>
+      <span class="type-signature">(async) </span>removeAdmin<span class="signature">(addr, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Transaction, Error>}</span>
     </h4>
   </span>
 
@@ -624,7 +631,7 @@ async function(){
 
 
   <div class="description">
-    <p>removes admin role from an account.</p>
+    <p>Removes admin role from a given account.</p>
 <p><strong><em>One important point to observe
 is that unless you are the owner of the devery contract (what is a very unlikely condition) you will
 get an exception and lose you gas if you do a call to this function.</em></strong></p>
@@ -669,6 +676,8 @@ for more info about how to get a <a href="DeveryAdmined.html">DeveryAdmined inst
       <th>Type</th>
 
       
+        <th>Attributes</th>
+      
 
       
 
@@ -685,14 +694,70 @@ for more info about how to get a <a href="DeveryAdmined.html">DeveryAdmined inst
 
         <td class="type">
           
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
         </td>
 
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
         
 
         
 
         <td class="description last">
           <p>target account address</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>transaction options like gas price for example</p>
           
         </td>
       </tr>
@@ -736,7 +801,7 @@ for more info about how to get a <a href="DeveryAdmined.html">DeveryAdmined inst
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line149">line 149</a>
+          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line148">line 148</a>
         </li>
       </ul>
     </dd>
@@ -785,26 +850,22 @@ for more info about how to get a <a href="DeveryAdmined.html">DeveryAdmined inst
 
   <div class="description">
     <p>Listener to AdminAdded events, this event triggers whenever a new address is added as admin.
-please note that the AdminAddedEventListeners do not stack, this means that whenever you set one you are
-removing the last one. If you want to remove a AdminAddedEventListeners, just call this function passing undefined
+Please note that the AdminAddedEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove an AdminAddedEventListeners, just call this function passing undefined
 as param.</p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryAdmined.html">DeveryAdmined</a> instance
 let deveryAdminedClient = new DeveryAdmined();
-//now you can use it
 
-
-
+ //now you can use it
 deveryAdminedClient.setAdminAddedEventListener((newAdminAddress) => {
      //whenever a new admin is added we will log it to the console
      console.log(newAdminAddress);
 })
 
 //if you want to remove the listener you can simply pass undefined as parameter
-
 deveryAdminedClient.setAdminAddedEventListener(undefined)
 
 //or that is equivalent to the above call
-
 deveryAdminedClient.setAdminAddedEventListener()
 
 
@@ -907,7 +968,7 @@ triggered</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line200">line 200</a>
+          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line195">line 195</a>
         </li>
       </ul>
     </dd>
@@ -958,24 +1019,20 @@ triggered</p>
     <p>Listener to AdminRemoved events, this event triggers whenever a new address is removed from the admin list.
 please note that the AdminRemovedEventListeners do not stack, this means that whenever you set one you are
 removing the last one. If you want to remove a AdminRemovedEventListener, just call this function passing undefined
-as param</p>
+as param.</p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryAdmined.html">DeveryAdmined</a> instance
 let deveryAdminedClient = new DeveryAdmined();
-//now you can use it
 
-
-
+ //now you can use it
 deveryAdminedClient.setAdminAddedEventListener((newAdminAddress) => {
      //whenever an admin is removed we will log it to the console
      console.log(newAdminAddress);
 })
 
 //if you want to remove the listener you can simply pass undefined as parameter
-
 deveryAdminedClient.setAdminRemovedEventListener(undefined)
 
 //or that is equivalent to the above call
-
 deveryAdminedClient.setAdminRemovedEventListener()
 
 
@@ -1078,7 +1135,7 @@ triggered</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line240">line 240</a>
+          <a href="DeveryAdmined.js.html">DeveryAdmined.js</a>, <a href="DeveryAdmined.js.html#line231">line 231</a>
         </li>
       </ul>
     </dd>
