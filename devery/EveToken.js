@@ -12,6 +12,22 @@ const ethers = require('ethers')
  * @extends AbstractDeverySmartContract
  */
 class EveToken extends AbstractSmartContract{
+
+    /**
+     *
+     * Creates a new instansce of EveToken
+     *```
+     * //creates a eveTokenClient with the default params
+     * let deveryRegistryClient = new EveToken();
+     *
+     * //creates a deveryRegistryClient pointing to a custom address
+     * let deveryRegistryClient = new EveToken({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+     *
+     * ```
+     *
+     * @param {ClientOptions} options network connection options
+     *
+     */
     constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
         super(...arguments)
         let address = options.address;
@@ -92,11 +108,109 @@ class EveToken extends AbstractSmartContract{
         return result.valueOf();
     }
 
+    /**
+     * This is a callback function that will be invoked in response to appEvents
+     *
+     *
+     * @callback AppEventCallback
+     * @param {string} appAccount
+     * @param {string} appName
+     * @param {string} feeAccount
+     * @param {int} fee
+     * @param {bool} active
+     *
+     */
+
+    /**
+     *
+     * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
+     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove a AppAddedEventListener, just call this function passing undefined
+     * as param
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryOwnedClient.setApprovalListener((appAccount,appName,feeAccount,fee,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`new app created ${appAccount} - ${appName} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryOwnedClient.setApprovalListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     * deveryOwnedClient.setApprovalListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {OwnershipEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
+     * triggered
+     */
     setApprovalListener(callback){
         this.__eveTokenContract.onapproval = callback
     }
 
-    setTransferListner(callback){
+    /**
+     * This is a callback function that will be invoked in response to appEvents
+     *
+     *
+     * @callback AppEventCallback
+     * @param {string} appAccount
+     * @param {string} appName
+     * @param {string} feeAccount
+     * @param {int} fee
+     * @param {bool} active
+     *
+     */
+
+    /**
+     *
+     * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
+     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove a AppAddedEventListener, just call this function passing undefined
+     * as param
+     *
+     * ```
+     * //first you need to get a {@link EveToken} instance
+     * let eveTokenClient = new EveToken();
+     * //now you can use it
+     *
+     *
+     *
+     * eveTokenClient.setTransferListener((appAccount,appName,feeAccount,fee,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`new app created ${appAccount} - ${appName} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * eveTokenClient.setTransferListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     * eveTokenClient.setTransferListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {OwnershipEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
+     * triggered
+     */
+    setTransferListener(callback){
         this.__eveTokenContract.ontransfer = callback
     }
 }
