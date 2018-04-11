@@ -161,7 +161,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {string}  appName your app name
      * @param {string} feeAccount the account that will pay the fees for this app transactions
      * @param {int} fee the fee amount paid per app transaction
-     * @param {TransactionOptions} overrideOptions gas options to override the default ones
+     * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
@@ -579,7 +579,464 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * let deveryRegistryClient = new DeveryRegistry();
      *
      *
-     * deveryRegistryClient.addApp("Logistics co. app","0x627306090abaB3A6e1400e9345bC60c78a8BEf57",5).then(transaction => {
+     * deveryRegistryClient.addBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name").then(transaction => {
+     *      console.log('transaction address',transaction.hash);
+     *      //... other stuff
+     * }).catch(err => {
+     *      if(err.message.indexOf('User denied')){
+     *          console.log('The user denied the transaction')
+     *          //...
+     *      }
+     *
+     *      ///handle other exceptions here
+     *
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          let transaction = await deveryRegistryClient.addBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name")
+     *          console.log('transaction address',transaction.hash);
+     *      }
+     *      catch(err){
+     *          if(err.message.indexOf('User denied')){
+     *               console.log('The user denied the transaction')
+     *              //...
+     *          }
+     *
+     *      ///handle other exceptions here
+     *      }
+     *
+     * }
+     *
+     * ```
+     *
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {string}  brandAccount account address
+     * @param {string} brandName the name of the new brand
+     * @param {TransactionOptions} overrideOptions gas options to override the default ones
+     * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
+     * of rejection
+     */
+    async addBrand(brandAccount,brandName,overrideOptions = {}){
+        
+        let result = await this.__deveryRegistryContract.addBrand(brandAccount,brandName,overrideOptions);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * updates a existing brand in the blockchain. This is a write method so you will need to
+     * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
+     * make sure that your user have access to metamask or other web3 object
+     *
+     *```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     *
+     * deveryRegistryClient.updateBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name",true).then(transaction => {
+     *      console.log('transaction address',transaction.hash);
+     *      //... other stuff
+     * }).catch(err => {
+     *      if(err.message.indexOf('User denied')){
+     *          console.log('The user denied the transaction')
+     *          //...
+     *      }
+     *
+     *      ///handle other exceptions here
+     *
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          let transaction = await deveryRegistryClient.updateBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name",true)
+     *          console.log('transaction address',transaction.hash);
+     *      }
+     *      catch(err){
+     *          if(err.message.indexOf('User denied')){
+     *               console.log('The user denied the transaction')
+     *              //...
+     *          }
+     *
+     *      ///handle other exceptions here
+     *      }
+     *
+     * }
+     *
+     * ```
+     *
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {string}  brandAccount account address
+     * @param {string} brandName the name of the new brand
+     * @param {TransactionOptions} overrideOptions gas options to override the default ones
+     * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
+     * of rejection
+     */
+    async updateBrand(brandAccount,brandName,active,overrideOptions = {}){
+        
+        let result = await this.__deveryRegistryContract.updateBrand(brandAccount,brandName,active,overrideOptions);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * Returns the app data for a  the given address. If the requested app account does not exist
+     * then and empty app data is returned.
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.getAppData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(app => {
+     *      if(app.active){
+     *          console.log(app._appAccount);
+     *          //... other stuff
+     *      }
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
+     *      if(app.active){
+     *          console.log(app._appAccount);
+     *          //... other stuff
+     *      }
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+     *
+     * The returned promise if resolved will return a {@link AppData|AppData you can click here to check its fields}
+     *
+     * @Param {string} appAccount address of the request
+     * @returns {Promise.<AppData>} a promisse that returns an {@link AppData} if it resolves or an error in case of rejection
+     */
+    async getBrandAddresses(){
+
+        let result = await this.__deveryRegistryContract.brandAccounts()
+        return result;
+
+    }
+
+
+    /**
+     *
+     * Returns the app with the given address. If the requested app account does not exist
+     * then and empty account is returned.
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(app => {
+     *      if(app.active){
+     *          console.log(app.appName);
+     *          //... other stuff
+     *      }
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
+     *      if(app.active){
+     *          console.log(app.appName);
+     *          //... other stuff
+     *      }
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+     *
+     * The returned promise if resolved will return a {@link App|App you can click here to check its fields}
+     *
+     * @Param {string} appAccount address of the request
+     * @returns {Promise.<App>} a promisse that returns an {@link App} if it resolves or an error in case of rejection
+     */
+    async getBrand(brandAccount){
+
+        let result = await this.__deveryRegistryContract.brands(brandAccount);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * Checks the total existing supply for the given token
+     *
+     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
+     * of the current token
+     */
+    async getBrandData(brandAccount){
+        
+        let result = await this.__deveryRegistryContract.getBrandData(brandAccount);
+        return result.valueOf();
+
+    }
+
+    /**
+     *
+     * returns an array of account addresses from the appAccounts array contained in the smart contract.
+     * If you try to access a page that does not exist you will get a promisse that resolves to an empty array as result
+     * the parameters page and pageSize are optional.
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.appAccountsPaginated(0,20).then(addressArr => {
+     *     for(let address of addressArr){
+     *          console.log(address);
+     *     }
+     * })
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *
+     *      //here we don't pass any param to appAccountsPaginated
+     *      //because its parameters are optional
+     *      let addressArr = await deveryRegistryClient.appAccountsPaginated();
+     *          for(let address of addressArr){
+     *              console.log(address);
+     *          }
+     *
+     *          //... do more stuff
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     *
+     * @param {int} page the requested page, this parameter is optional the default value to it is 0
+     * @param {int} pageSize the requested page size, this parameter is optional the default value to it is 10
+     * @returns {Promise.<string[]>} a promise that returns an array of app address if it resolves or an error in case of rejection
+     */
+    async brandAccountsPaginated(page = 0, pagesize = 10){
+
+        let size = await this.brandAccountsLength();
+        let appAdressPromisse = []
+        for(let i = page*pagesize;i<(page+1)*pagesize && i< size; i++){
+            appAdressPromisse.push(this.brandAccountsArray(i))
+        }
+
+        return await Promise.all(appAdressPromisse)
+
+    }
+
+    /**
+     *
+     * Returns an brand account address from the brandAccounts array. If you try to access an index that is out of the array
+     * bounds the promise will be rejected.
+     *
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.brandAccountsArray(4).then(address => {
+     *     deveryClient.getBrand(address).then(brand => {
+     *          console.log(brand.brandName)
+     *          //... do more stuff
+     *     })
+     * }).catch(err =>{
+     *      console.log('index ot of bounds')
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          let accountAddress = await deveryRegistryClient.brandAccountsArray(4);
+     *          let brand = await deveryRegistryClient.getBrand(accountAddress);
+     *          console.log(brand.brandName)
+     *          //... do more stuff
+     *      }
+     *      catch(err){
+     *          console.log('index ot of bounds');
+     *      }
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {int} index the account index inside the appAccounts array
+     * @returns {Promise.<string>}  a promisse that returns an brand app address if it resolves or an error in case of rejection
+     */
+    async brandAccountsArray(index){
+        let result = await this.__deveryRegistryContract.brandAccounts(index);
+        return result.valueOf();
+    }
+
+    /**
+     *
+     * returns the total count of brand accounts registered on the smart contract. This method is particulaly usefull
+     * to be used in conjunction with {@link brandAccountsArray} because you can verify the array upper bounds
+     *
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.brandAccountsLength().then(totalAccounts => {
+     *     for(let i = 0;i< totalAccounts;i++){
+     *          deveryRegistryClient.brandAccountsArray(i).then(address => {
+     *              deveryClient.getBrand(address).then(brand => {
+     *                  console.log(brand.brandName)
+     *                   //... do more stuff
+     *              })
+     *           })
+     *      }
+     * })
+     *
+     * //optionaly you can use the async syntax if you prefer
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     *
+     * @param {int} page the requested page, this parameter is optional the default value to it is 0
+     * @param {int} pageSize the requested page size, this parameter is optional the default value to it is 10
+     * @returns {Promise.<int>} a promise that returns the total brand accounts registered in the smart contract if it
+     * resolves or an error in case of rejection
+     */
+    async brandAccountsLength(){
+
+        let result = await this.__deveryRegistryContract.brandAccountsLength();
+        return result.toNumber();
+    }
+
+
+    /**
+     * This is a callback function that will be invoked in response to  BrandEvents
+     *
+     *
+     * @callback BrandEventCallback
+     * @param {string} brandAccount
+     * @param {string} appAccount
+     * @param {string} active
+     *
+     */
+
+
+    /**
+     *
+     * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
+     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+     * as param
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryOwnedClient.setBrandAddedEventListener((brandAccount,appAccount,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`new brand has been added ${brandAccount} - ${appAccount} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryOwnedClient.setBrandAddedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     * deveryOwnedClient.setBrandAddedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {BrandEventCallback} callback the callback that will be executed whenever and BrandAdded event is
+     * triggered
+     */
+    setBrandAddedEventListener(callback){
+        this.__deveryRegistryContract.onbrandadded = callback
+    }
+
+    /**
+     *
+     * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
+     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+     * as param
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryOwnedClient.setBrandUpdatedEventListener((brandAccount,appAccount,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryOwnedClient.setBrandUpdatedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     * deveryOwnedClient.setBrandUpdatedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {BrandEventCallback} callback the callback that will be executed whenever and BrandAdded event is
+     * triggered
+     */
+    setBrandUpdatedEventListener(callback){
+        this.__deveryRegistryContract.onbrandupdated = callback
+    }
+
+
+    /**********************PRODUCTS RELATED METHODS**************************************/
+
+
+
+    /**
+     *
+     * creates a new addProduct in the blockchain.  This is a write method so you will need to
+     * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
+     * make sure that your user have access to metamask or other web3 object
+     *
+     *```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     *
+     * deveryRegistryClient.addProduct("Logistics co. app","0x627306090abaB3A6e1400e9345bC60c78a8BEf57",5).then(transaction => {
      *      console.log('transaction address',transaction.hash);
      *      //... other stuff
      * }).catch(err => {
@@ -616,133 +1073,14 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      *
      * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
      *
-     * @param {string}  appName your app name
-     * @param {string} feeAccount the account that will pay the fees for this app transactions
-     * @param {int} fee the fee amount paid per app transaction
-     * @param {TransactionOptions} overrideOptions gas options to override the default ones
+     * @param {string}  productAccount your app name
+     * @param {string} description the account that will pay the fees for this app transactions
+     * @param {string} details the fee amount paid per app transaction
+     * @param {int} year the fee amount paid per app transaction
+     * @param {string} origin the fee amount paid per app transaction
+     * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
-     */
-    async addBrand(brandAccount,brandName,overrideOptions = {}){
-        
-        let result = await this.__deveryRegistryContract.addBrand(brandAccount,brandName,overrideOptions);
-        return result.valueOf();
-
-    }
-
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async updateBrand(brandAccount,brandName,active,overrideOptions = {}){
-        
-        let result = await this.__deveryRegistryContract.updateBrand(brandAccount,brandName,active,overrideOptions);
-        return result.valueOf();
-
-    }
-
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async getBrandAddresses(){
-
-        let result = await this.__deveryRegistryContract.brandAccounts()
-        return result;
-
-    }
-
-
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async getBrand(brandAccount){
-
-        let result = await this.__deveryRegistryContract.brands(brandAccount);
-        return result.valueOf();
-
-    }
-
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async getBrandData(brandAccount){
-        
-        let result = await this.__deveryRegistryContract.getBrandData(brandAccount);
-        return result.valueOf();
-
-    }
-
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async brandAccountsPaginated(page = 0, pagesize = 10){
-
-        let size = await this.brandAccountsLength();
-        let appAdressPromisse = []
-        for(let i = page*pagesize;i<(page+1)*pagesize && i< size; i++){
-            appAdressPromisse.push(this.brandAccountsArray(i))
-        }
-
-        return await Promise.all(appAdressPromisse)
-
-    }
-
-    async brandAccountsArray(index){
-        let result = await this.__deveryRegistryContract.brandAccounts(index);
-        return result.valueOf();
-    }
-
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
-     */
-    async brandAccountsLength(){
-
-        let result = await this.__deveryRegistryContract.brandAccountsLength();
-        return result.toNumber();
-    }
-
-    setBrandAddedEventListener(callback){
-        this.__deveryRegistryContract.onbrandadded = callback
-    }
-
-    setBrandUpdatedEventListener(callback){
-        this.__deveryRegistryContract.onbrandupdated = callback
-    }
-
-
-    /**********************PRODUCTS RELATED METHODS**************************************/
-
-
-
-    /**
-     *
-     * Checks the total existing supply for the given token
-     *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
      */
     async addProduct(productAccount, description, details, year,origin,overrideOptions = {}){
         
@@ -751,6 +1089,71 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     }
 
+
+    /**
+     *
+     * updates a existing brand in the blockchain. This is a write method so you will need to
+     * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
+     * make sure that your user have access to metamask or other web3 object
+     *
+     *```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     *
+     * deveryRegistryClient.updateBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name",true).then(transaction => {
+     *      console.log('transaction address',transaction.hash);
+     *      //... other stuff
+     * }).catch(err => {
+     *      if(err.message.indexOf('User denied')){
+     *          console.log('The user denied the transaction')
+     *          //...
+     *      }
+     *
+     *      ///handle other exceptions here
+     *
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          let transaction = await deveryRegistryClient.updateBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name",true)
+     *          console.log('transaction address',transaction.hash);
+     *      }
+     *      catch(err){
+     *          if(err.message.indexOf('User denied')){
+     *               console.log('The user denied the transaction')
+     *              //...
+     *          }
+     *
+     *      ///handle other exceptions here
+     *      }
+     *
+     * }
+     *
+     * ```
+     *
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {string}  productAccount your app name
+     * @param {string} description the account that will pay the fees for this app transactions
+     * @param {string} details the fee amount paid per app transaction
+     * @param {int} year the fee amount paid per app transaction
+     * @param {string} origin the fee amount paid per app transaction
+     * @param {bool} active enables or disable the product
+     * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+     * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
+     * of rejection
+     */
+    async updateProduct(productAccount, description, details, year,origin,active,overrideOptions = {}){
+
+        let result = await this.__deveryRegistryContract.updateProduct(productAccount, description, details, year,origin,active,overrideOptions);
+        return result.valueOf();
+
+    }
 
     /**
      *
@@ -769,10 +1172,39 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     /**
      *
-     * Checks the total existing supply for the given token
+     * Returns the app data for a  the given address. If the requested app account does not exist
+     * then and empty app data is returned.
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.getAppData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(app => {
+     *      if(app.active){
+     *          console.log(app._appAccount);
+     *          //... other stuff
+     *      }
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
+     *      if(app.active){
+     *          console.log(app._appAccount);
+     *          //... other stuff
+     *      }
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+     *
+     * The returned promise if resolved will return a {@link AppData|AppData you can click here to check its fields}
+     *
+     * @Param {string} appAccount address of the request
+     * @returns {Promise.<AppData>} a promisse that returns an {@link AppData} if it resolves or an error in case of rejection
      */
     async getProductData(productAccount){
         
@@ -783,10 +1215,42 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     /**
      *
-     * Checks the total existing supply for the given token
+     * returns an array of product addresses from the productAccounts array contained in the smart contract.
+     * If you try to access a page that does not exist you will get a promisse that resolves to an empty array as result
+     * the parameters page and pageSize are optional.
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.productAccountsPaginated(0,20).then(addressArr => {
+     *     for(let address of addressArr){
+     *          console.log(address);
+     *     }
+     * })
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *
+     *      //here we don't pass any param to productAccountsPaginated
+     *      //because its parameters are optional
+     *      let addressArr = await productAccountsPaginated.productAccountsPaginated();
+     *          for(let address of addressArr){
+     *              console.log(address);
+     *          }
+     *
+     *          //... do more stuff
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     *
+     * @param {int} page the requested page, this parameter is optional the default value to it is 0
+     * @param {int} pageSize the requested page size, this parameter is optional the default value to it is 10
+     * @returns {Promise.<string[]>} a promise that returns an array of product address if it resolves or an error in case of rejection
      */
     async productAccountsPaginated(page = 0, pagesize = 10){
 
@@ -800,6 +1264,48 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     }
 
+
+    /**
+     *
+     * Returns an brand account address from the brandAccounts array. If you try to access an index that is out of the array
+     * bounds the promise will be rejected.
+     *
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.productAccountsArray(4).then(address => {
+     *     deveryClient.getProduct(address).then(product => {
+     *          console.log(product.productDescription)
+     *          //... do more stuff
+     *     })
+     * }).catch(err =>{
+     *      console.log('index ot of bounds')
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          let productAddress = await deveryRegistryClient.productAccountsArray(4);
+     *          let product = await deveryRegistryClient.getProduct(productAddress);
+     *          console.log(product.productDescription)
+     *          //... do more stuff
+     *      }
+     *      catch(err){
+     *          console.log('index ot of bounds');
+     *      }
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {int} index the account index inside the appAccounts array
+     * @returns {Promise.<string>}  a promisse that returns an product address array if it resolves or an error in case of rejection
+     */
     async productAccountsArray(index){
         let result = await this.__deveryRegistryContract.productAccounts(index);
         return result.valueOf();
@@ -808,10 +1314,36 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     /**
      *
-     * Checks the total existing supply for the given token
+     * returns the total count of brand accounts registered on the smart contract. This method is particulaly usefull
+     * to be used in conjunction with {@link brandAccountsArray} because you can verify the array upper bounds
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * deveryRegistryClient.productAccountsLength().then(totalProducts => {
+     *     for(let i = 0;i< totalProducts;i++){
+     *          deveryRegistryClient.productAccountsArray(i).then(address => {
+     *              deveryClient.getProduct(address).then(brand => {
+     *                  console.log(brand.productDescription)
+     *                   //... do more stuff
+     *              })
+     *           })
+     *      }
+     * })
+     *
+     * //optionaly you can use the async syntax if you prefer
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     *
+     * @param {int} page the requested page, this parameter is optional the default value to it is 0
+     * @param {int} pageSize the requested page size, this parameter is optional the default value to it is 10
+     * @returns {Promise.<int>} a promise that returns the total product accounts registered in the smart contract if it
+     * resolves or an error in case of rejection
      */
     async productAccountsLength(){
         
@@ -820,10 +1352,103 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     }
 
+
+    /**
+     * This is a callback function that will be invoked in response to  ProductEvents
+     *
+     *
+     * @callback ProductEventCallback
+     * @param {string} productAccount
+     * @param {string} brandAccount
+     * @param {string} appAccount
+     * @param {string} description
+     * @param {bools} active
+     *
+     */
+
+
+    /**
+     *
+     * Listener to productAdded events, this event triggers whenever a new product  is created in the blockchain
+     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+     * as param
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryOwnedClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryOwnedClient.setProductAddedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     *
+     *
+     * deveryOwnedClient.setProductAddedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductAdded event is
+     * triggered
+     */
     setProductAddedEventListener(callback){
         this.__deveryRegistryContract.onproductadded = callback
     }
 
+
+
+    /**
+     *
+     * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
+     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+     * as param
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryOwnedClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryOwnedClient.setProductUpdatedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     *
+     *
+     * deveryOwnedClient.setProductUpdatedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+     * triggered
+     */
     setProductUpdatedEventListener(callback){
         this.__deveryRegistryContract.onproductupdated = callback
     }
@@ -835,10 +1460,56 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     /**
      *
-     * Checks the total existing supply for the given token
+     * Returns an brand account address from the brandAccounts array. If you try to access an index that is out of the array
+     * bounds the promise will be rejected.
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * //passing true as param will add the account as marker
+     * deveryRegistryClient.permissionMarker("0x627306090abaB3A6e1400e9345bC60c78a8BEf57",true).then(transaction => {
+     *      console.log('transaction address',transaction.hash);
+     *      //... other stuff
+     * }).catch(err => {
+     *      if(err.message.indexOf('User denied')){
+     *          console.log('The user denied the transaction')
+     *          //...
+     *      }
+     *
+     *      ///handle other exceptions here
+     *
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          //passing false as param will remove the account as marker
+     *          let transaction = await deveryRegistryClient.permissionMarker("0x627306090abaB3A6e1400e9345bC60c78a8BEf57",false)
+     *          console.log('transaction address',transaction.hash);
+     *      }
+     *      catch(err){
+     *          if(err.message.indexOf('User denied')){
+     *               console.log('The user denied the transaction')
+     *              //...
+     *          }
+     *
+     *      ///handle other exceptions here
+     *      }
+     *
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {string} marker The marker account whose permission will be set
+     * @param {bool} permission permission value to the target markes
+     * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
+     * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      */
     async permissionMarker(marker,permission,overrideOptions = {}){
 
@@ -847,14 +1518,58 @@ class DeveryRegistry extends AbstractDeverySmartContract{
     }
 
 
+
     /**
      *
-     * Checks the total existing supply for the given token
+     * Compute item hash from the public key.
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * //passing true as param will add the account as marker
+     * deveryRegistryClient.addressHash("0x627306090abaB3A6e1400e9345bC60c78a8BEf57").then(hash => {
+     *      console.log('transaction address',transaction.hash);
+     *      //... other stuff
+     * }).catch(err => {
+     *      if(err.message.indexOf('User denied')){
+     *          console.log('The user denied the transaction')
+     *          //...
+     *      }
+     *
+     *      ///handle other exceptions here
+     *
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          //passing false as param will remove the account as marker
+     *          let transaction = await deveryRegistryClient.permissionMarker("0x627306090abaB3A6e1400e9345bC60c78a8BEf57",false)
+     *          console.log('transaction address',transaction.hash);
+     *      }
+     *      catch(err){
+     *          if(err.message.indexOf('User denied')){
+     *               console.log('The user denied the transaction')
+     *              //...
+     *          }
+     *
+     *      ///handle other exceptions here
+     *      }
+     *
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {string} marker The marker account whose permission will be set
+     * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      */
-    async addressHash(item,permission){
+    async addressHash(item){
 
         let result = await this.__deveryRegistryContract.addressHash(item);
         return result.valueOf();
@@ -863,10 +1578,55 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
     /**
      *
-     * Checks the total existing supply for the given token
+     * Marks an item in the blockchain.
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * //passing true as param will add the account as marker
+     * deveryRegistryClient.mark("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","0x873306090abaB3A6e1400e9345bC60c78a8BEt87").then(transaction => {
+     *      console.log('transaction address',transaction.hash);
+     *      //... other stuff
+     * }).catch(err => {
+     *      if(err.message.indexOf('User denied')){
+     *          console.log('The user denied the transaction')
+     *          //...
+     *      }
+     *
+     *      ///handle other exceptions here
+     *
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *      try{
+     *          //passing false as param will remove the account as marker
+     *          let transaction = await deveryRegistryClient.mark("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","0x873306090abaB3A6e1400e9345bC60c78a8BEt87")
+     *          console.log('transaction address',transaction.hash);
+     *      }
+     *      catch(err){
+     *          if(err.message.indexOf('User denied')){
+     *               console.log('The user denied the transaction')
+     *              //...
+     *          }
+     *
+     *      ///handle other exceptions here
+     *      }
+     *
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {string} productAccount The marker account whose permission will be set
+     * @param {string} itemHash permission value to the target markes
+     * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
+     * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      */
     async mark(productAccount, itemHash,overrideOptions = {}){
         
@@ -876,11 +1636,54 @@ class DeveryRegistry extends AbstractDeverySmartContract{
 
 
     /**
+     * @typedef {Object} MarkResult
+     * This object configures how the client will connect and communicate to the Ethereum network,
+     * unless you have good reasons to change the default configurations you don't need to worry with any of these values
+     * as the will be automatically resolved
+     * contract address in your current network. Under normal circunstances you don't need to pass any of these fields.
+     * @property {String} appAccount  the current web3 object, like the one injected my metamask
+     * @property {string} brandAccount the accounts' addres that will execute the transactions
+     * @property {string} productAccount expects the contract address in your current network, unless you are running your own
+     * network you don't need to provide it
+     */
+
+    /**
      *
-     * Checks the total existing supply for the given token
+     * (address productAccount, address brandAccount, address appAccount)
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
-     * of the current token
+     *
+     * Check if a given marked item exists in the blockchain.
+     *
+     *
+     * ```
+     * //first you need to get a {@link DeveryOwned} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     *
+     * //passing true as param will add the account as marker
+     * deveryRegistryClient.check("0x627306090abaB3A6e1400e9345bC60c78a8BEf57").then(item => {
+     *      console.log('product brand',item.brandAccount);
+     *      //... other stuff
+     * })
+     *
+     *
+     * //or with the async syntax
+     *
+     * async function(){
+     *          //passing false as param will remove the account as marker
+     *          let item = await deveryRegistryClient.check("0x627306090abaB3A6e1400e9345bC60c78a8BEf57")
+     *          console.log('product brand',item.brandAccount);
+     *
+     *
+     * }
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     *
+     * @param {string} productAccount The marker account whose permission will be set
+     * @param {string} itemHash permission value to the target markes
+     * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
+     * @returns {Promise.<MarkResult>} a promise that if resolved returns an transaction or raise an error in case
      */
     async check(item){
 
