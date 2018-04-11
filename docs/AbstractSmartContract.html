@@ -92,6 +92,12 @@
       </h2>
 
       
+        <div class="class-description">
+          <p>Abstract class that is base for all smart contracts.
+There is no reason to directly instantiate it. Here lies some common logic about how to resolve
+the underlying smart contract address and getting the signer instance. <strong><em> you shall not instantiate it directly</em></strong>.</p>
+        </div>
+      
     
   </header>
 
@@ -101,6 +107,8 @@
         
 
 
+  
+    <h2>Constructor</h2>
   
 
   <span class='name-container'>
@@ -119,13 +127,14 @@
 
 
   <div class="description">
-    <p><strong><em>You shall not call this class constructor directly</em></strong> if you do so you will get an TypeError
-as we are explicitly checking against this</p>
+    <p><strong><em>You shall not call this class constructor directly</em></strong> if you do so you will get a TypeError
+as we are explicitly checking against this.</p>
 <pre class="prettyprint source"><code>//excerpt from the constructor
 
 if (new.target === AbstractDeverySmartContract) {
-            throw new TypeError(&quot;Cannot construct AbstractDeverySmartContract instances directly&quot;);
-        }</code></pre>
+     throw new TypeError(&quot;Cannot construct AbstractDeverySmartContract instances directly&quot;);
+}
+</code></pre>
   </div>
 
 
@@ -162,6 +171,15 @@ if (new.target === AbstractDeverySmartContract) {
         
 
         <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#ClientOptions">ClientOptions</a>
+    </span>
+
+    
+
+
           
         </td>
 
@@ -214,7 +232,7 @@ if (new.target === AbstractDeverySmartContract) {
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line44">line 44</a>
+          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line31">line 31</a>
         </li>
       </ul>
     </dd>
