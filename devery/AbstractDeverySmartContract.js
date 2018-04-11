@@ -13,6 +13,25 @@ const ethers = require('ethers');
  * @extends AbstractSmartContract
  */
 
+
+
+
+/**
+ *
+ * ***You shall not call this class constructor directly*** if you do so you will get an TypeError
+ * as we are explicitly checking against this
+ *
+ * ```
+ * //excerpt from the constructor
+ *
+ *if (new.target === AbstractDeverySmartContract) {
+ *          throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
+ *      }
+ * ```
+ *
+ *
+ * @param options
+ */
 class AbstractDeverySmartContract extends  AbstractSmartContract{
 
     /**
@@ -23,10 +42,9 @@ class AbstractDeverySmartContract extends  AbstractSmartContract{
      * ```
      * //excerpt from the constructor
      *
-     * if (new.target === AbstractDeverySmartContract) {
-            throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
-        }
-
+     *if (new.target === AbstractDeverySmartContract) {
+     *     throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
+     *  }
      * ```
      *
      *

@@ -43,9 +43,10 @@ class EveToken extends AbstractSmartContract{
 
     /**
      *
-     * Checks the total existing supply for the given token
+     * Checks the total existing EVE supply.
      *
-     * @returns {Promise.<*>} a promisse that resolves to the total circulating supply
+     *
+     * @returns {Promise.<BigNumener>} a promisse that resolves to a bigNumber containing the total circulating supply
      * of the current token
      */
     async totalSupply(){
@@ -56,7 +57,7 @@ class EveToken extends AbstractSmartContract{
 
     /**
      *
-     * Checks the balance of a given account
+     * Checks the EVE balance of a given account.
      *
      * @param account  account whose balance is being inquired
      * @returns {Promise.<*>} a promisse that resolves to the current balance of
@@ -67,7 +68,6 @@ class EveToken extends AbstractSmartContract{
         return result;
     }
 
-    //TODO: explain document this function return
     /**
      *
      *  gives the 3rd party the right to facilitate a transaction with the owners token.
@@ -84,7 +84,7 @@ class EveToken extends AbstractSmartContract{
 
     /**
      *
-     * Transfer tokens from the current account to any other account
+     * Transfer EVE tokens from the current account to any other account
      *
      * @param toAdress  address that will receive the tokens
      * @param total quantity of tokens being sent
@@ -97,7 +97,8 @@ class EveToken extends AbstractSmartContract{
 
     /**
      *
-     * Transfer tokens from a specific account to any other account
+     * Transfer EVE tokens from a specific account to any other account, you need to have an allowance permission
+     * to be able to do this transaction.
      *
      * @param toAdress  address that will receive the tokens
      * @param total quantity of tokens being sent

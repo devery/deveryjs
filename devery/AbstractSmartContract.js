@@ -20,7 +20,27 @@ const ethers = require('ethers')
  */
 
 
+
+
 class AbstractSmartContract{
+
+    /**
+     *
+     * ***You shall not call this class constructor directly*** if you do so you will get an TypeError
+     * as we are explicitly checking against this
+     *
+     * ```
+     * //excerpt from the constructor
+     *
+     * if (new.target === AbstractDeverySmartContract) {
+            throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
+        }
+
+     * ```
+     *
+     *
+     * @param options
+     */
     constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
 
         if (new.target === AbstractSmartContract) {
