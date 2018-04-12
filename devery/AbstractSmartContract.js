@@ -53,6 +53,10 @@ class AbstractSmartContract{
             throw new TypeError("Cannot construct AbstractSmartContract instances directly");
         }
 
+        if(!options.web3Instance){
+            options.web3Instance = web3;
+        }
+
         let signer = options.web3Instance;
         let acc = options.acc;
         //TODO: if no web provider is available create a read only one pointing to etherscan API

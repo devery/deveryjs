@@ -38,6 +38,10 @@ class AbstractDeverySmartContract extends  AbstractSmartContract{
             throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
         }
 
+        if(!options.web3Instance){
+            options.web3Instance = web3;
+        }
+
         let address = options.address;
 
         if(!address){
