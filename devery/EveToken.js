@@ -30,6 +30,11 @@ class EveToken extends AbstractSmartContract{
      */
     constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
         super(...arguments)
+
+        if(!options.web3Instance){
+            options.web3Instance = web3
+        }
+
         let address = options.address;
 
         if(!address){
