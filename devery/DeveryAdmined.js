@@ -15,7 +15,9 @@ class DeveryAdmined extends AbstractDeverySmartContract {
 
     /**
      *
-     * Creates a new DeveryAdmined instansce.
+     * Creates a new DeveryAdmined instance.
+     *
+     ****Usage example:***
      *```
      * //creates a deveryAdminedClient with the default params
      * let deveryAdminedClient = new DeveryAdmined();
@@ -36,7 +38,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      *
      * Checks if a given account is admin of the contract.
      *
-     *
+     ****Usage example:***
      * ```
      * //first you need to get a {@link DeveryAdmined} instance
      * let deveryAdminedClient = new DeveryAdmined();
@@ -81,6 +83,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * get an exception and lose you gas if you do a call to this function.***
      *
      *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryAdmined} instance
      * let deveryAdminedClient = new DeveryAdmined();
@@ -118,6 +121,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * is that unless you are the owner of the devery contract (what is a very unlikely condition) you will
      * get an exception and lose you gas if you do a call to this function.***
      *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryAdmined} instance
      * let deveryAdminedClient = new DeveryAdmined();
@@ -167,6 +171,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * as param.
      *
      *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryAdmined} instance
      * let deveryAdminedClient = new DeveryAdmined();
@@ -203,6 +208,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * removing the last one. If you want to remove a AdminRemovedEventListener, just call this function passing undefined
      * as param.
      *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryAdmined} instance
      * let deveryAdminedClient = new DeveryAdmined();

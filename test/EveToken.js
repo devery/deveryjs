@@ -71,7 +71,7 @@ contract('EveToken', function (accounts) {
             const toAcc = accounts[2]
             const fromAcc = accounts[1]
             let eveTokenAcc = createEveToken(web3,null,fromAcc,contractAddress)
-            eveTokenAcc.setTransferListner((from,to,total)=>{
+            eveTokenAcc.setTransferListener((from,to,total)=>{
                 try{
                     assert.equal(from.toLowerCase(),fromAcc.toLowerCase())
                     assert.equal(to.toLowerCase(),toAcc.toLowerCase())
