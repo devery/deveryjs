@@ -13,7 +13,9 @@ class DeveryOwned extends AbstractDeverySmartContract {
 
     /**
      *
-     * Creates a new instansce of DeveryOwned
+     * Creates a new DeveryOwned instance.
+     *
+     * ***Usage example:***
      *```
      * //creates a deverOwnedClient with the default params
      * let deveryOwnedClient = new DeveryOwned();
@@ -34,8 +36,9 @@ class DeveryOwned extends AbstractDeverySmartContract {
     /**
      * If for any reason the current contract owner start an onwnership transfer you can make a call to
      * this method to accept it. ***Beware that if you are are not receiving the contract ownership, you will get an
-     * exception and lose your gass***
+     * exception and lose your gass.***
      *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
@@ -79,12 +82,14 @@ class DeveryOwned extends AbstractDeverySmartContract {
 
     /**
      * If you are the current contract owner(I bet you are not) you c an call this method to transfer it
-     * to someone else by passing the new account owner address as param. The onwership transfer will only be
-     * concluded once the new contract onwer do a call to {@link acceptOwnership}
+     * to someone else by passing the new account owner address as param. The ownership transfer will only be
+     * concluded once the new contract owner do a call to {@link acceptOwnership}.
      *
      * ***Beware that if you are are not the contract owner you will get an
-     * exception and lose your gas***
+     * exception and lose your gas***.
      *
+     *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
@@ -136,8 +141,10 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes
      * please note that OwnershipTransferredEventListeners do not stack, this means that whenever you set one you are
      * removing the last one. If you want to remove a OwnershipTransferredEventListeners, just call this function passing undefined
-     * as param
+     * as param.
      *
+     *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
@@ -172,7 +179,9 @@ class DeveryOwned extends AbstractDeverySmartContract {
     }
 
     /**
-     * Get the current contract owner's address
+     * Get the current contract owner's address.
+     *
+     * ***Usage example:***
      *
      * ```
      * //first you need to get a {@link DeveryOwned} instance
@@ -209,6 +218,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * Get the address of the newOwner account, an value will be return only if an account transfer is pending
      * otherwise you will get 0x00000000000000...
      *
+     * ***Usage example:***
      * ```
      * //first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();

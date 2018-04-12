@@ -15,7 +15,7 @@ class EveToken extends AbstractSmartContract{
 
     /**
      *
-     * Creates a new instansce of EveToken
+     * Creates a new instansce of EveToken.
      *```
      * //creates a eveTokenClient with the default params
      * let deveryRegistryClient = new EveToken();
@@ -72,7 +72,7 @@ class EveToken extends AbstractSmartContract{
      *
      *  gives the 3rd party the right to facilitate a transaction with the owners token.
      *  please note that alowance will not transfer tokens to the 3rd party but instead give him
-     *  permission to facilitate transactions on your behalf
+     *  permission to facilitate transactions on your behalf.
      *
      * @param account  account whose balance is being inquired
      * @returns {Promise.<*>}
@@ -110,7 +110,7 @@ class EveToken extends AbstractSmartContract{
     }
 
     /**
-     * This is a callback function that will be invoked in response to appEvents
+     * This is a callback function that will be invoked in response to appEvents.
      *
      *
      * @callback AppEventCallback
@@ -127,7 +127,7 @@ class EveToken extends AbstractSmartContract{
      * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
      * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
      * removing the last one. If you want to remove a AppAddedEventListener, just call this function passing undefined
-     * as param
+     * as param.
      *
      * ```
      * //first you need to get a {@link DeveryOwned} instance
@@ -180,7 +180,7 @@ class EveToken extends AbstractSmartContract{
      * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
      * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
      * removing the last one. If you want to remove a AppAddedEventListener, just call this function passing undefined
-     * as param
+     * as param.
      *
      * ```
      * //first you need to get a {@link EveToken} instance
