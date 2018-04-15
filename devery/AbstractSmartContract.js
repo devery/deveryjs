@@ -52,10 +52,7 @@ class AbstractSmartContract{
         if (new.target === AbstractSmartContract) {
             throw new TypeError("Cannot construct AbstractSmartContract instances directly");
         }
-
-        if(!options.web3Instance){
-            options.web3Instance = web3;
-        }
+        options = Object.assign({web3Instance:web3,acc:undefined,address:undefined},options)
 
         let signer = options.web3Instance;
         let acc = options.acc;
