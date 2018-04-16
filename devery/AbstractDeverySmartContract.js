@@ -43,7 +43,13 @@ class AbstractDeverySmartContract extends  AbstractSmartContract{
         let address = options.address;
 
         if(!address){
-            address = deveryRegistryArtifact.networks[web3.version.network].address
+            if(this._network == 'homestead'){
+                address = '0x0364a98148b7031451e79b93449b20090d79702a'
+            }
+            else{
+                address = deveryRegistryArtifact.networks[web3.version.network].address
+            }
+
         }
 
         this.__deveryRegistryContract = new ethers.Contract(address, deveryRegistryArtifact.abi,

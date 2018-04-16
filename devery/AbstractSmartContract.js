@@ -56,15 +56,20 @@ class AbstractSmartContract{
 
         let signer = options.web3Instance;
         let acc = options.acc;
+
         //TODO: if no web provider is available create a read only one pointing to etherscan API
 
-
-        this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
-
+        if(signer){
+            this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
+        }
+        else{
+            this._network = 'homestead';
+            this._ethersProvider = new ethers.providers.EtherscanProvider(ethers.providers.networks.homestead);
+        }
 
         this.__signerOrProvider = this._ethersProvider.getSigner?this._ethersProvider.getSigner():this._ethersProvider;
 
-        if(acc){
+        if(acc && this._ethersProvider.getSigner){
             this.__signerOrProvider =
                 this._ethersProvider.getSigner(acc)
         }

@@ -1,4 +1,3 @@
-import DeveryRegistry from './../devery/DeveryRegistry'
 var DeveryRegistryContract = artifacts.require("./DeveryRegistry.sol");
 import {getData} from './helpers/staticData'
 import {createDeveryRegistry} from './helpers/staticData'
@@ -60,7 +59,11 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
     })
 
     it('should be possible to brand accounts add permission marker accounts',async function(){
-        assert.fail("actual", "expected", "test not implemented");
+        let account = data[0]
+        let markerAcc = accounts[3];
+        let deveryClient = createDeveryRegistry(web3,undefined,account.appAccount,contractAddress);
+        await deveryClient.permissionMarker(markerAcc,true);
+        //shall not trow exceptions
     })
 
     it('should be possible to brand accounts change permission marker accounts',async function(){
