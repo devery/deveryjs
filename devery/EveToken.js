@@ -28,10 +28,18 @@ class EveToken extends AbstractSmartContract{
      * @param {ClientOptions} options network connection options
      *
      */
-    constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
+    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}){
         super(...arguments)
 
-        options = Object.assign({web3Instance:web3,acc:undefined,address:undefined},options)
+        options = Object.assign({web3Instance:undefined,acc:undefined,address:undefined},options)
+        try{
+            if(!options.web3Instance){
+                options.web3Instance = web3;
+            }
+        }
+        catch (e){
+            console.log('it was not possible to find global web3')
+        }
 
         let address = options.address;
 

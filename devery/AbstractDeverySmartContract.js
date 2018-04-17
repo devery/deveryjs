@@ -32,7 +32,7 @@ class AbstractDeverySmartContract extends  AbstractSmartContract{
      *
      * @param {ClientOptions} options
      */
-    constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
+    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}){
         super(options)
         options = Object.assign({web3Instance:web3,acc:undefined,address:undefined},options)
         if (new.target === AbstractDeverySmartContract) {

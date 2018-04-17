@@ -47,17 +47,25 @@ class AbstractSmartContract{
      *
      * @param {ClientOptions} options
      */
-    constructor(options = {web3Instance:web3,acc:undefined,address:undefined}){
+    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}){
 
         if (new.target === AbstractSmartContract) {
             throw new TypeError("Cannot construct AbstractSmartContract instances directly");
         }
-        options = Object.assign({web3Instance:web3,acc:undefined,address:undefined},options)
+        options = Object.assign({web3Instance:undefined,acc:undefined,address:undefined},options)
+
+        try{
+            if(!options.web3Instance){
+                options.web3Instance = web3;
+            }
+        }
+        catch (e){
+            console.log('it was not possible to find global web3')
+        }
 
         let signer = options.web3Instance;
         let acc = options.acc;
 
-        //TODO: if no web provider is available create a read only one pointing to etherscan API
 
         if(signer){
             this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
