@@ -22,7 +22,7 @@ class Utils{
             return true;
         } else {
             // Otherwise check each case
-            return isChecksumAddress(address);
+            return Utils.isChecksumAddress(address);
         }
     };
 
