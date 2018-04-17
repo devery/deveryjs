@@ -12,7 +12,6 @@ class Utils{
      * Checks if the given string is an address
      *
      *
-     * @method isAddress
      * @param {String} address the given HEX adress
      * @return {Boolean}
      */
@@ -32,7 +31,6 @@ class Utils{
     /**
      * Checks if the given string is a checksummed address
      *
-     * @method isChecksumAddress
      * @param {String} address the given HEX adress
      * @return {Boolean}
      */
