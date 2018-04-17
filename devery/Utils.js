@@ -33,7 +33,7 @@ class Utils{
      * @param {String} address the given HEX adress
      * @return {Boolean}
      */
-    static function (address) {
+    static isChecksumAddress (address) {
         // Check each case
         address = address.replace('0x','');
         var addressHash = sha3(address.toLowerCase());
