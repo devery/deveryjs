@@ -1,3 +1,6 @@
+const CryptoJS = require('crypto-js');
+const sha3 = require('crypto-js/sha3');
+
 /**
  *
  * This class contains common utitlies methods, you don't need an instance as all the methods here are
@@ -21,7 +24,7 @@ class Utils{
             // If it's all small caps or all all caps, return true
             return true;
         } else {
-            // Otherwise check each case
+            // Otherwise 3check each case
             return Utils.isChecksumAddress(address);
         }
     };
@@ -36,7 +39,7 @@ class Utils{
     static isChecksumAddress (address) {
         // Check each case
         address = address.replace('0x','');
-        var addressHash = sha3(address.toLowerCase());
+        var addressHash = Utils.sha3(address.toLowerCase());
         for (var i = 0; i < 40; i++ ) {
             // the nth letter should be uppercase if the nth digit of casemap is 1
             if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
@@ -44,6 +47,27 @@ class Utils{
             }
         }
         return true;
+    };
+
+
+    /**
+     *
+     * calculates the sha3 of a give value
+     *
+     * @param value - value to have it's sha3 calculated
+     * @param options - calculation options
+     */
+    static sha3 (value, options) {
+        if (options && options.encoding === 'hex') {
+            if (value.length > 2 && value.substr(0, 2) === '0x') {
+                value = value.substr(2);
+            }
+            value = CryptoJS.enc.Hex.parse(value);
+        }
+
+        return sha3(value, {
+            outputLength: 256
+        }).toString();
     };
 }
 
