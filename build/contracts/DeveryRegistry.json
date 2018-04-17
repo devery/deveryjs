@@ -36000,8 +36000,8 @@
       "links": {},
       "address": "0xbd2c938b9f6bfc1a66368d08cb44dc3eb2ae27be",
       "transactionHash": "0xb5452a454e141c977d447e2aae981efdc4db3feaaf91db4865ed770aeba5f187"
-    },
-    "1": {
+    }
+    ,"1": {
       "events": {},
       "links": {},
       "address": "0x0364a98148b7031451e79b93449b20090d79702a",

@@ -34,9 +34,19 @@ class AbstractDeverySmartContract extends  AbstractSmartContract{
      */
     constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}){
         super(options)
-        options = Object.assign({web3Instance:web3,acc:undefined,address:undefined},options)
         if (new.target === AbstractDeverySmartContract) {
             throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
+        }
+
+        options = Object.assign({web3Instance:undefined,acc:undefined,address:undefined},options)
+
+        try{
+            if(!options.web3Instance){
+                options.web3Instance = web3;
+            }
+        }
+        catch (e){
+            console.log('it was not possible to find global web3')
         }
 
 
