@@ -1,5 +1,4 @@
-import AbstractDeverySmartContract from './AbstractDeverySmartContract'
-
+import AbstractDeverySmartContract from './AbstractDeverySmartContract';
 
 
 /**
@@ -11,9 +10,7 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract'
  * @extends AbstractDeverySmartContract
  */
 class DeveryAdmined extends AbstractDeverySmartContract {
-
-
-    /**
+  /**
      *
      * Creates a new DeveryAdmined instance.
      *
@@ -30,11 +27,11 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * @param {ClientOptions} options network connection options
      *
      */
-    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}) {
-        super(options)
-    }
+  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
+    super(options);
+  }
 
-    /**
+  /**
      *
      * Checks if a given account is admin of the contract.
      *
@@ -69,13 +66,13 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * @returns {Promise.<bool>} A promise that resolves to a bool indicating if the requested account
      * is admin of the contract or an Error if the promise is rejected
      */
-    async isAdmin(addr){
-        let result = await this.__deveryRegistryContract.isAdmin(addr);
-        return result.valueOf();
-    }
+  async isAdmin(addr) {
+    const result = await this.__deveryRegistryContract.isAdmin(addr);
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      * Makes an account admin of the contract by adding it to the admin array.
      *
      * ***One important point to observe
@@ -109,12 +106,12 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * @param {string} addr target account address
      * @returns {Promise.<Transaction>} A promise that resolves to a transaction or an Error if the promise is rejected
      */
-    async addAdmin(addr){
-        let result = await this.__deveryRegistryContract.addAdmin(addr);
-        return result.valueOf();
-    }
+  async addAdmin(addr) {
+    const result = await this.__deveryRegistryContract.addAdmin(addr);
+    return result.valueOf();
+  }
 
-    /**
+  /**
      * Removes admin role from a given account.
      *
      * ***One important point to observe
@@ -149,13 +146,13 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * @param {TransactionOptions} [overrideOptions] transaction options like gas price for example
      * @returns {Promise.<Transaction,Error>} A promise that resolves to a transaction or an Error if the promisse is rejected
      */
-    async removeAdmin(addr,overrideOptions = {}){
-        let result = await this.__deveryRegistryContract.removeAdmin(addr,overrideOptions);
-        return result.valueOf();
-    }
+  async removeAdmin(addr, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.removeAdmin(addr, overrideOptions);
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      * This is a callback function that will be invoked in response to adminEvents
      *
      * @callback adminEventCallback
@@ -163,7 +160,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * (this depends on the type of event that you are listening)
      */
 
-    /**
+  /**
      *
      * Listener to AdminAdded events, this event triggers whenever a new address is added as admin.
      * Please note that the AdminAddedEventListeners do not stack, this means that whenever you set one you are
@@ -197,11 +194,11 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * @param {adminEventCallback} callback the callback that will be executed whenever and AdminAdded event is
      * triggered
      */
-    setAdminAddedEventListener(callback){
-        this.__deveryRegistryContract.onadminadded = callback
-    }
+  setAdminAddedEventListener(callback) {
+    this.__deveryRegistryContract.onadminadded = callback;
+  }
 
-    /**
+  /**
      *
      * Listener to AdminRemoved events, this event triggers whenever a new address is removed from the admin list.
      * please note that the AdminRemovedEventListeners do not stack, this means that whenever you set one you are
@@ -234,11 +231,9 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * @param {adminEventCallback} callback the callback that will be executed whenever and AdminRemoved event is
      * triggered
      */
-    setAdminRemovedEventListener(callback){
-        this.__deveryRegistryContract.onadminremoved = callback
-    }
-
-    
+  setAdminRemovedEventListener(callback) {
+    this.__deveryRegistryContract.onadminremoved = callback;
+  }
 }
 
-export default DeveryAdmined
+export default DeveryAdmined;

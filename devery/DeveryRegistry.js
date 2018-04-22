@@ -1,4 +1,4 @@
-import AbstractDeverySmartContract from './AbstractDeverySmartContract'
+import AbstractDeverySmartContract from './AbstractDeverySmartContract';
 
 /**
  *
@@ -71,10 +71,8 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract'
  *
  * @extends AbstractDeverySmartContract
  */
-class DeveryRegistry extends AbstractDeverySmartContract{
-
-
-    /**
+class DeveryRegistry extends AbstractDeverySmartContract {
+  /**
      *
      * Creates a new DeveryRegistry instance.
      *
@@ -91,13 +89,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {ClientOptions} options network connection options
      *
      */
-    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}){
-        super(options)
-    }
+  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
+    super(options);
+  }
 
-    /**********************APP RELATED METHOD**************************************/
+  /** ********************APP RELATED METHOD************************************* */
 
-    /**
+  /**
      * @typedef {Object} App
      * Holds app related data
      * @property {bool} active
@@ -107,7 +105,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @property {string} feeAccount
      */
 
-    /**
+  /**
      * @typedef {Object} AppData
      * Holds app related data
      * @property {bool} active
@@ -116,7 +114,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      */
 
 
-    /**
+  /**
      * @typedef {Object} Brand
      * Holds app related data
      * @property {string} brandAccount
@@ -125,7 +123,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @property {bool} active
      */
 
-    /**
+  /**
      * @typedef {Object} BrandData
      * Holds Brand related data
      * @property {string} appAccount
@@ -133,7 +131,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @property {bool} active
      */
 
-    /**
+  /**
      * @typedef {Object} Product
      * Holds Product related data
      * @property {string} productAccount
@@ -145,7 +143,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @property {bool} active
      */
 
-    /**
+  /**
      * @typedef {Object} ProductData
      * Holds Product related data
      * @property {String} brandAccount
@@ -154,7 +152,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @property {bool} active
      */
 
-    /**
+  /**
      *
      * Creates a new app in the blockchain, each account can have only one account so if your account already
      * have an app you must call {@link updateApp} to change its details. This is a write method so you will need to
@@ -212,14 +210,14 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async addApp(appName,feeAccount,fee,overrideOptions = {}){
-        let result = await this.__deveryRegistryContract.addApp(appName,feeAccount,fee,overrideOptions);
-        return result.valueOf();
-    }
+  async addApp(appName, feeAccount, fee, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .addApp(appName, feeAccount, fee, overrideOptions);
+    return result.valueOf();
+  }
 
 
-
-    /**
+  /**
      *
      * Updates an existing app in the blockchain. This is a write method so you will need to
      * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
@@ -276,13 +274,14 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async updateApp(appName,feeAccount,fee,active,overrideOptions = {}){
-        let result = await this.__deveryRegistryContract.updateApp(appName,feeAccount,fee,active,overrideOptions);
-        return result;
-    }
+  async updateApp(appName, feeAccount, fee, active, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .updateApp(appName, feeAccount, fee, active, overrideOptions);
+    return result;
+  }
 
 
-    /**
+  /**
      *
      * Returns the app with the given address. If the requested app account does not exist
      * then and empty account is returned.
@@ -320,15 +319,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @Param {string} appAccount address of the request
      * @returns {Promise.<App>} a promisse that returns an {@link App} if it resolves or an error in case of rejection
      */
-    async getApp(appAccount){
-        let result = await this.__deveryRegistryContract.apps(appAccount);
-        return result.valueOf();
-
-    }
-
+  async getApp(appAccount) {
+    const result = await this.__deveryRegistryContract.apps(appAccount);
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      *
      * Returns the app data for a  the given address. If the requested app account does not exist
      * then and empty app data is returned.
@@ -365,14 +362,12 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @Param {string} appAccount address of the request
      * @returns {Promise.<AppData>} a promisse that returns an {@link AppData} if it resolves or an error in case of rejection
      */
-    async getAppData(appAccount){
+  async getAppData(appAccount) {
+    const result = await this.__deveryRegistryContract.getAppData(appAccount);
+    return result.valueOf();
+  }
 
-        let result = await this.__deveryRegistryContract.getAppData(appAccount);
-        return result.valueOf();
-
-    }
-
-    /**
+  /**
      *
      * Returns an array of account addresses from the appAccounts array contained in the smart contract.
      * If you try to access a page that does not exist you will get a promisse that resolves to an empty array as result
@@ -412,19 +407,17 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {int} [pageSize=10] the requested page size, this parameter is optional the default value to it is 10
      * @returns {Promise.<string[]>} a promise that returns an array of app address if it resolves or an error in case of rejection
      */
-    async appAccountsPaginated(page = 0, pagesize = 10){
-
-        let size = await this.appAccountsLength();
-        let appAdressPromisse = []
-        for(let i = page*pagesize;i<(page+1)*pagesize && i< size; i++){
-            appAdressPromisse.push(this.appAccountsArray(i))
-        }
-
-        return await Promise.all(appAdressPromisse)
-
+  async appAccountsPaginated(page = 0, pagesize = 10) {
+    const size = await this.appAccountsLength();
+    const appAdressPromisse = [];
+    for (let i = page * pagesize; i < (page + 1) * pagesize && i < size; i += 1) {
+      appAdressPromisse.push(this.appAccountsArray(i));
     }
 
-    /**
+    return Promise.all(appAdressPromisse);
+  }
+
+  /**
      *
      * Returns an account address from the appAccounts array. If you try to access an index that is out of the array
      * bounds the promise will be rejected.
@@ -471,13 +464,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {int} index the account index inside the appAccounts array
      * @returns {Promise.<string>}  a promisse that returns an account app address if it resolves or an error in case of rejection
      */
-    async appAccountsArray(index){
-        let result = await this.__deveryRegistryContract.appAccounts(index);
-        return result.valueOf();
-    }
+  async appAccountsArray(index) {
+    const result = await this.__deveryRegistryContract.appAccounts(index);
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      *
      * Returns the total count of app accounts registered on the smart contract. This method is particulaly usefull
      * to be used in conjunction with {@link appAccountsArray} because you can verify the array upper bounds.
@@ -509,15 +502,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<int>} a promise that returns the total accounts registered in the smart contract if it
      * resolves or an error in case of rejection
      */
-    async appAccountsLength(){
-
-        let result = await this.__deveryRegistryContract.appAccountsLength();
-        return result.toNumber()
-
-    }
+  async appAccountsLength() {
+    const result = await this.__deveryRegistryContract.appAccountsLength();
+    return result.toNumber();
+  }
 
 
-    /**
+  /**
      * This is a callback function that will be invoked in response to appEvents
      *
      *
@@ -530,7 +521,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      *
      */
 
-    /**
+  /**
      *
      * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
      * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
@@ -567,12 +558,12 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {AppEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
      * triggered
      */
-    setAppAddedEventListener(callback){
-        this.__deveryRegistryContract.onappadded = callback
-    }
+  setAppAddedEventListener(callback) {
+    this.__deveryRegistryContract.onappadded = callback;
+  }
 
 
-    /**
+  /**
      *
      * Listener to AppUpdated events, this event triggers whenever an existing devery app is updated in the blockchain
      * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
@@ -609,15 +600,15 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {AppEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
      * triggered
      */
-    setAppUpdatedEventListener(callback){
-        this.__deveryRegistryContract.onappupdated = callback
-    }
+  setAppUpdatedEventListener(callback) {
+    this.__deveryRegistryContract.onappupdated = callback;
+  }
 
 
-    /**********************Brand RELATED METHOD**************************************/
+  /** ********************Brand RELATED METHOD************************************* */
 
 
-    /**
+  /**
      *
      * Creates a new brand in the blockchain. Only one brand can exist per account key so keep in mind that
      * if try to create more than one brand in the same brand account you will get an exception.
@@ -676,14 +667,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async addBrand(brandAccount,brandName,overrideOptions = {}){
-        
-        let result = await this.__deveryRegistryContract.addBrand(brandAccount,brandName,overrideOptions);
-        return result.valueOf();
+  async addBrand(brandAccount, brandName, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .addBrand(brandAccount, brandName, overrideOptions);
+    return result.valueOf();
+  }
 
-    }
-
-    /**
+  /**
      *
      * Updates a existing brand in the blockchain. This is a write method so you will need to
      * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
@@ -739,15 +729,14 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async updateBrand(brandAccount,brandName,active,overrideOptions = {}){
-        
-        let result = await this.__deveryRegistryContract.updateBrand(brandAccount,brandName,active,overrideOptions);
-        return result.valueOf();
+  async updateBrand(brandAccount, brandName, active, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .updateBrand(brandAccount, brandName, active, overrideOptions);
+    return result.valueOf();
+  }
 
-    }
 
-
-    /**
+  /**
      *
      * Returns the app with the given address. If the requested app account does not exist
      * then and empty account is returned.
@@ -786,14 +775,12 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @Param {string} appAccount address of the request
      * @returns {Promise.<Brand>} a promisse that returns an {@link Brand} if it resolves or an error in case of rejection
      */
-    async getBrand(brandAccount){
+  async getBrand(brandAccount) {
+    const result = await this.__deveryRegistryContract.brands(brandAccount);
+    return result.valueOf();
+  }
 
-        let result = await this.__deveryRegistryContract.brands(brandAccount);
-        return result.valueOf();
-
-    }
-
-    /**
+  /**
      *
      * Returns the brand data for a  the given address. If the requested Brand account does not exist
      * then and empty data is returned.
@@ -827,14 +814,12 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @Param {string} brand address of the request
      * @returns {Promise.<BrandData>} a promisse that returns an {@link BrandData} if it resolves or an error in case of rejection
      */
-    async getBrandData(brandAccount){
-        
-        let result = await this.__deveryRegistryContract.getBrandData(brandAccount);
-        return result.valueOf();
+  async getBrandData(brandAccount) {
+    const result = await this.__deveryRegistryContract.getBrandData(brandAccount);
+    return result.valueOf();
+  }
 
-    }
-
-    /**
+  /**
      *
      * Returns an array of account addresses from the appAccounts array contained in the smart contract.
      * If you try to access a page that does not exist you will get a promisse that resolves to an empty array as result
@@ -875,19 +860,17 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {int} [pageSize=10] the requested page size, this parameter is optional the default value to it is 10
      * @returns {Promise.<string[]>} a promise that returns an array of app address if it resolves or an error in case of rejection
      */
-    async brandAccountsPaginated(page = 0, pagesize = 10){
-
-        let size = await this.brandAccountsLength();
-        let appAdressPromisse = []
-        for(let i = page*pagesize;i<(page+1)*pagesize && i< size; i++){
-            appAdressPromisse.push(this.brandAccountsArray(i))
-        }
-
-        return await Promise.all(appAdressPromisse)
-
+  async brandAccountsPaginated(page = 0, pagesize = 10) {
+    const size = await this.brandAccountsLength();
+    const appAdressPromisse = [];
+    for (let i = page * pagesize; i < (page + 1) * pagesize && i < size; i += 1) {
+      appAdressPromisse.push(this.brandAccountsArray(i));
     }
 
-    /**
+    return Promise.all(appAdressPromisse);
+  }
+
+  /**
      *
      * Returns a brand account address from the brandAccounts array. If you try to access an index that is out of the array
      * bounds the promise will be rejected.
@@ -928,12 +911,12 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {int} index the account index inside the appAccounts array
      * @returns {Promise.<string>}  a promisse that returns an brand app address if it resolves or an error in case of rejection
      */
-    async brandAccountsArray(index){
-        let result = await this.__deveryRegistryContract.brandAccounts(index);
-        return result.valueOf();
-    }
+  async brandAccountsArray(index) {
+    const result = await this.__deveryRegistryContract.brandAccounts(index);
+    return result.valueOf();
+  }
 
-    /**
+  /**
      *
      * Returns the total count of brand accounts registered on the smart contract. This method is particulaly usefull
      * to be used in conjunction with {@link brandAccountsArray} because you can verify the array upper bounds.
@@ -963,14 +946,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<int>} a promise that returns the total brand accounts registered in the smart contract if it
      * resolves or an error in case of rejection
      */
-    async brandAccountsLength(){
+  async brandAccountsLength() {
+    const result = await this.__deveryRegistryContract.brandAccountsLength();
+    return result.toNumber();
+  }
 
-        let result = await this.__deveryRegistryContract.brandAccountsLength();
-        return result.toNumber();
-    }
 
-
-    /**
+  /**
      * This is a callback function that will be invoked in response to  BrandEvents
      *
      *
@@ -982,7 +964,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      */
 
 
-    /**
+  /**
      *
      * Listener to BrandAdded events, this event triggers whenever a new devery app is created in the blockchain
      * please note that BrandAddedEventListener do not stack, this means that whenever you set one you are
@@ -1020,11 +1002,11 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {BrandEventCallback} callback the callback that will be executed whenever and BrandAdded event is
      * triggered
      */
-    setBrandAddedEventListener(callback){
-        this.__deveryRegistryContract.onbrandadded = callback
-    }
+  setBrandAddedEventListener(callback) {
+    this.__deveryRegistryContract.onbrandadded = callback;
+  }
 
-    /**
+  /**
      *
      * Listener to BrandUpdated events, this event triggers whenever a existing brand is updated in the blockchain
      * please note that BrandUpdatedListener do not stack, this means that whenever you set one you are
@@ -1061,16 +1043,15 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {BrandEventCallback} callback the callback that will be executed whenever and BrandAdded event is
      * triggered
      */
-    setBrandUpdatedEventListener(callback){
-        this.__deveryRegistryContract.onbrandupdated = callback
-    }
+  setBrandUpdatedEventListener(callback) {
+    this.__deveryRegistryContract.onbrandupdated = callback;
+  }
 
 
-    /**********************PRODUCTS RELATED METHODS**************************************/
+  /** ********************PRODUCTS RELATED METHODS************************************* */
 
 
-
-    /**
+  /**
      *
      * Creates a new Product in the blockchain.  This is a write method so you will need to
      * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
@@ -1130,15 +1111,14 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async addProduct(productAccount, description, details, year,origin,overrideOptions = {}){
-        
-        let result = await this.__deveryRegistryContract.addProduct(productAccount, description, details, year,origin,overrideOptions);
-        return result.valueOf();
+  async addProduct(productAccount, description, details, year, origin, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .addProduct(productAccount, description, details, year, origin, overrideOptions);
+    return result.valueOf();
+  }
 
-    }
 
-
-    /**
+  /**
      *
      * Updates a existing brand in the blockchain. This is a write method so you will need to
      * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
@@ -1199,14 +1179,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async updateProduct(productAccount, description, details, year,origin,active,overrideOptions = {}){
+  async updateProduct(productAccount, description, details, year, origin, active, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .updateProduct(productAccount, description, details, year, origin, active, overrideOptions);
+    return result.valueOf();
+  }
 
-        let result = await this.__deveryRegistryContract.updateProduct(productAccount, description, details, year,origin,active,overrideOptions);
-        return result.valueOf();
-
-    }
-
-    /**
+  /**
      *
      * Returns the Product with the given address. If the requested Product account does not exist
      * then you will receive an object with default data.
@@ -1244,15 +1223,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @Param {string} appAccount address of the request
      * @returns {Promise.<Product>} a promisse that returns an {@link Product} if it resolves or an error in case of rejection
      */
-    async getProduct(productAccount){
-
-        let result = await this.__deveryRegistryContract.products(productAccount);
-        return result.valueOf();
-
-    }
+  async getProduct(productAccount) {
+    const result = await this.__deveryRegistryContract.products(productAccount);
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      *
      * Returns the Product data for a  the given address. If the requested Product account does not exist
      * then and empty data is returned.
@@ -1286,14 +1263,12 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @Param {string} appAccount address of the request
      * @returns {Promise.<ProductData>} a promisse that returns an {@link ProductData} if it resolves or an error in case of rejection
      */
-    async getProductData(productAccount){
-        
-        let result = await this.__deveryRegistryContract.getProductData(productAccount);
-        return result.valueOf();
+  async getProductData(productAccount) {
+    const result = await this.__deveryRegistryContract.getProductData(productAccount);
+    return result.valueOf();
+  }
 
-    }
-
-    /**
+  /**
      *
      * returns an array of product addresses from the productAccounts array contained in the smart contract.
      * If you try to access a page that does not exist you will get a promisse that resolves to an empty array as result
@@ -1332,20 +1307,18 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {int} pageSize the requested page size, this parameter is optional the default value to it is 10
      * @returns {Promise.<string[]>} a promise that returns an array of product address if it resolves or an error in case of rejection
      */
-    async productAccountsPaginated(page = 0, pagesize = 10){
-
-        let size = await this.productAccountsLength();
-        let appAdressPromisse = []
-        for(let i = page*pagesize;i<(page+1)*pagesize && i< size; i++){
-            appAdressPromisse.push(this.productAccountsArray(i))
-        }
-
-        return await Promise.all(appAdressPromisse)
-
+  async productAccountsPaginated(page = 0, pagesize = 10) {
+    const size = await this.productAccountsLength();
+    const appAdressPromisse = [];
+    for (let i = page * pagesize; i < (page + 1) * pagesize && i < size; i += 1) {
+      appAdressPromisse.push(this.productAccountsArray(i));
     }
 
+    return Promise.all(appAdressPromisse);
+  }
 
-    /**
+
+  /**
      *
      * Returns an brand account address from the brandAccounts array. If you try to access an index that is out of the array
      * bounds the promise will be rejected.
@@ -1386,13 +1359,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {int} index the account index inside the appAccounts array
      * @returns {Promise.<string>}  a promisse that returns an product address array if it resolves or an error in case of rejection
      */
-    async productAccountsArray(index){
-        let result = await this.__deveryRegistryContract.productAccounts(index);
-        return result.valueOf();
-    }
+  async productAccountsArray(index) {
+    const result = await this.__deveryRegistryContract.productAccounts(index);
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      *
      * returns the total count of brand accounts registered on the smart contract. This method is particulaly usefull
      * to be used in conjunction with {@link brandAccountsArray} because you can verify the array upper bounds
@@ -1425,15 +1398,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @returns {Promise.<int>} a promise that returns the total product accounts registered in the smart contract if it
      * resolves or an error in case of rejection
      */
-    async productAccountsLength(){
-        
-        let result = await this.__deveryRegistryContract.productAccountsLength();
-        return result.toNumber();
-
-    }
+  async productAccountsLength() {
+    const result = await this.__deveryRegistryContract.productAccountsLength();
+    return result.toNumber();
+  }
 
 
-    /**
+  /**
      * This is a callback function that will be invoked in response to  ProductEvents
      *
      *
@@ -1447,7 +1418,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      */
 
 
-    /**
+  /**
      *
      * Listener to productAdded events, this event triggers whenever a new product  is created in the blockchain
      * please note that ProductAddedEventListener do not stack, this means that whenever you set one you are
@@ -1486,13 +1457,12 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductAdded event is
      * triggered
      */
-    setProductAddedEventListener(callback){
-        this.__deveryRegistryContract.onproductadded = callback
-    }
+  setProductAddedEventListener(callback) {
+    this.__deveryRegistryContract.onproductadded = callback;
+  }
 
 
-
-    /**
+  /**
      *
      * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
      * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
@@ -1532,16 +1502,15 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
      * triggered
      */
-    setProductUpdatedEventListener(callback){
-        this.__deveryRegistryContract.onproductupdated = callback
-    }
+  setProductUpdatedEventListener(callback) {
+    this.__deveryRegistryContract.onproductupdated = callback;
+  }
 
 
+  /** ********************MARKER RELATED METHODS************************************* */
 
-    /**********************MARKER RELATED METHODS**************************************/
 
-
-    /**
+  /**
      *
      * Adds or removes permission from an account to mark items in the blockchain.
      *
@@ -1593,15 +1562,14 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      */
-    async permissionMarker(marker,permission,overrideOptions = {}){
+  async permissionMarker(marker, permission, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .permissionMarker(marker, permission, overrideOptions);
+    return result.valueOf();
+  }
 
-        let result = await this.__deveryRegistryContract.permissionMarker(marker,permission,overrideOptions);
-        return result.valueOf();
-    }
 
-
-
-    /**
+  /**
      *
      * Compute item hash from the public key. You will need this hash to mark your products.
      *
@@ -1625,14 +1593,13 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {string} marker The marker account whose permission will be set
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      */
-    async addressHash(item){
+  async addressHash(item) {
+    const result = await this.__deveryRegistryContract.addressHash(item);
+    return result.valueOf();
+  }
 
-        let result = await this.__deveryRegistryContract.addressHash(item);
-        return result.valueOf();
-    }
 
-
-    /**
+  /**
      *
      * Marks an item in the blockchain. *** you need to pre calculate the item hash before calling this method***
      *
@@ -1684,14 +1651,14 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
      * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
      */
-    async mark(productAccount, itemHash,overrideOptions = {}){
-        
-        let result = await this.__deveryRegistryContract.mark(productAccount,itemHash,overrideOptions);
-        return result.valueOf();
-    }
+  async mark(productAccount, itemHash, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .mark(productAccount, itemHash, overrideOptions);
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      * @typedef {Object} MarkResult
      * This object configures how the client will connect and communicate to the Ethereum network,
      * unless you have good reasons to change the default configurations you don't need to worry with any of these values
@@ -1703,7 +1670,7 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * network you don't need to provide it
      */
 
-    /**
+  /**
      *
      *
      *
@@ -1739,12 +1706,10 @@ class DeveryRegistry extends AbstractDeverySmartContract{
      * @param {string} productAccount The product account address in the blockchain.
      * @returns {Promise.<MarkResult>} a promise that if resolved returns an transaction or raise an error in case
      */
-    async check(item){
-
-        let result = await this.__deveryRegistryContract.check(item);
-        return result.valueOf();
-    }
-
+  async check(item) {
+    const result = await this.__deveryRegistryContract.check(item);
+    return result.valueOf();
+  }
 }
 
-export default DeveryRegistry
+export default DeveryRegistry;

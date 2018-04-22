@@ -1,4 +1,4 @@
-import AbstractDeverySmartContract from './AbstractDeverySmartContract'
+import AbstractDeverySmartContract from './AbstractDeverySmartContract';
 
 /**
  *
@@ -10,8 +10,7 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract'
  * @extends AbstractDeverySmartContract
  */
 class DeveryOwned extends AbstractDeverySmartContract {
-
-    /**
+  /**
      *
      * Creates a new DeveryOwned instance.
      *
@@ -28,12 +27,12 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * @param {ClientOptions} options network connection options
      *
      */
-    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}) {
-        super(...arguments)
-    }
+  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
+    super(...arguments);
+  }
 
 
-    /**
+  /**
      * If for any reason the current contract owner start an onwnership transfer you can make a call to
      * this method to accept it. ***Beware that if you are are not receiving the contract ownership, you will get an
      * exception and lose your gass.***
@@ -74,13 +73,13 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * @returns {Promise.<transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async acceptOwnership(){
-        let result = await this.__deveryRegistryContract.acceptOwnership();
-        return result.valueOf();
-    }
+  async acceptOwnership() {
+    const result = await this.__deveryRegistryContract.acceptOwnership();
+    return result.valueOf();
+  }
 
 
-    /**
+  /**
      * If you are the current contract owner(I bet you are not) you c an call this method to transfer it
      * to someone else by passing the new account owner address as param. The ownership transfer will only be
      * concluded once the new contract owner do a call to {@link acceptOwnership}.
@@ -123,12 +122,12 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * @returns {Promise.<transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-    async transferOwnership(newOwnerAddres){
-        let result = await this.__deveryRegistryContract.transferOwnership(newOwnerAddres);
-        return result.valueOf();
-    }
+  async transferOwnership(newOwnerAddres) {
+    const result = await this.__deveryRegistryContract.transferOwnership(newOwnerAddres);
+    return result.valueOf();
+  }
 
-    /**
+  /**
      * This is a callback function that will be invoked in response to adminEvents
      *
      * @callback OwnershipEventCallback
@@ -136,7 +135,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * @param {string} toAddress
      */
 
-    /**
+  /**
      *
      * Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes
      * please note that OwnershipTransferredEventListeners do not stack, this means that whenever you set one you are
@@ -174,11 +173,11 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * @param {OwnershipEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
      * triggered
      */
-    setOwnershipTransferredListener(callback){
-        this.__deveryRegistryContract.onownershiptransferred = callback
-    }
+  setOwnershipTransferredListener(callback) {
+    this.__deveryRegistryContract.onownershiptransferred = callback;
+  }
 
-    /**
+  /**
      * Get the current contract owner's address.
      *
      * ***Usage example:***
@@ -208,12 +207,12 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}
      */
-    async getOwner(){
-        let result = await this.__deveryRegistryContract.owner();
-        return result.valueOf();
-    }
+  async getOwner() {
+    const result = await this.__deveryRegistryContract.owner();
+    return result.valueOf();
+  }
 
-    /**
+  /**
      *
      * Get the address of the newOwner account, an value will be return only if an account transfer is pending
      * otherwise you will get 0x00000000000000...
@@ -244,10 +243,10 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * @returns {Promise.<string>} a promise that returns the new owner address or raise an error in case of rejection
      */
-    async getNewOwner(){
-        let result = await this.__deveryRegistryContract.newOwner();
-        return result.valueOf();
-    }
+  async getNewOwner() {
+    const result = await this.__deveryRegistryContract.newOwner();
+    return result.valueOf();
+  }
 }
 
-export default DeveryOwned
+export default DeveryOwned;

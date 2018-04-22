@@ -1,6 +1,7 @@
-const eveTokenArtifact = require('../build/contracts/TestEVEToken.json');
 import AbstractSmartContract from './AbstractSmartContract';
-const ethers = require('ethers')
+
+const eveTokenArtifact = require('../build/contracts/TestEVEToken.json');
+const ethers = require('ethers');
 
 
 /**
@@ -11,9 +12,8 @@ const ethers = require('ethers')
  *
  * @extends AbstractDeverySmartContract
  */
-class EveToken extends AbstractSmartContract{
-
-    /**
+class EveToken extends AbstractSmartContract {
+  /**
      *
      * Creates a new instansce of EveToken.
      *```
@@ -28,31 +28,35 @@ class EveToken extends AbstractSmartContract{
      * @param {ClientOptions} options network connection options
      *
      */
-    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}){
-        super(...arguments)
+  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
+    super(...arguments);
 
-        options = Object.assign({web3Instance:undefined,acc:undefined,address:undefined},options)
-        try{
-            if(!options.web3Instance){
-                options.web3Instance = web3;
-            }
-        }
-        catch (e){
-            console.log('it was not possible to find global web3')
-        }
-
-        let address = options.address;
-
-        if(!address){
-            address = eveTokenArtifact.networks[web3.version.network].address
-        }
-
-        this.__eveTokenContract = new ethers.Contract(address, eveTokenArtifact.abi,
-            this.__signerOrProvider);
+    options = Object.assign(
+      { web3Instance: undefined, acc: undefined, address: undefined }
+      , options,
+    );
+    try {
+      if (!options.web3Instance) {
+        options.web3Instance = web3;
+      }
+    } catch (e) {
+      console.log('it was not possible to find global web3');
     }
 
+    let address = options.address;
 
-    /**
+    if (!address) {
+      address = eveTokenArtifact.networks[web3.version.network].address;
+    }
+
+    this.__eveTokenContract = new ethers.Contract(
+      address, eveTokenArtifact.abi,
+      this.__signerOrProvider,
+    );
+  }
+
+
+  /**
      *
      * Checks the total existing EVE supply.
      *
@@ -60,13 +64,12 @@ class EveToken extends AbstractSmartContract{
      * @returns {Promise.<BigNumener>} a promisse that resolves to a bigNumber containing the total circulating supply
      * of the current token
      */
-    async totalSupply(){
-        let result = await this.__eveTokenContract.totalSupply();
-        return result;
+  async totalSupply() {
+    const result = await this.__eveTokenContract.totalSupply();
+    return result;
+  }
 
-    }
-
-    /**
+  /**
      *
      * Checks the EVE balance of a given account.
      *
@@ -74,12 +77,12 @@ class EveToken extends AbstractSmartContract{
      * @returns {Promise.<*>} a promisse that resolves to the current balance of
      * the inquired account
      */
-    async balanceOf(account){
-        let result = await this.__eveTokenContract.balanceOf(account);
-        return result;
-    }
+  async balanceOf(account) {
+    const result = await this.__eveTokenContract.balanceOf(account);
+    return result;
+  }
 
-    /**
+  /**
      *
      *  gives the 3rd party the right to facilitate a transaction with the owners token.
      *  please note that alowance will not transfer tokens to the 3rd party but instead give him
@@ -88,12 +91,12 @@ class EveToken extends AbstractSmartContract{
      * @param account  account whose balance is being inquired
      * @returns {Promise.<*>}
      */
-    async allowance(tokenOwner, spender,overrideOptions = {}){
-        let result = await this.__eveTokenContract.allowance(tokenOwner,spender,overrideOptions);
-        return result.valueOf();
-    }
+  async allowance(tokenOwner, spender, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.allowance(tokenOwner, spender, overrideOptions);
+    return result.valueOf();
+  }
 
-    /**
+  /**
      *
      * Transfer EVE tokens from the current account to any other account
      *
@@ -101,12 +104,12 @@ class EveToken extends AbstractSmartContract{
      * @param total quantity of tokens being sent
      * @returns {Promise.<*>} a promisse that resolves to the transaction receipt
      */
-    async transfer(toAdress, total,overrideOptions = {}){
-        let result = await this.__eveTokenContract.transfer(toAdress,total,overrideOptions);
-        return result.valueOf();
-    }
+  async transfer(toAdress, total, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.transfer(toAdress, total, overrideOptions);
+    return result.valueOf();
+  }
 
-    /**
+  /**
      *
      * Transfer EVE tokens from a specific account to any other account, you need to have an allowance permission
      * to be able to do this transaction.
@@ -115,12 +118,12 @@ class EveToken extends AbstractSmartContract{
      * @param total quantity of tokens being sent
      * @returns {Promise.<*>} a promisse that resolves to the transaction receipt
      */
-    async transferFrom(from, to,tokens,overrideOptions = {}){
-        let result = await this.__eveTokenContract.transferFrom(from, to,tokens,overrideOptions);
-        return result.valueOf();
-    }
+  async transferFrom(from, to, tokens, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.transferFrom(from, to, tokens, overrideOptions);
+    return result.valueOf();
+  }
 
-    /**
+  /**
      * This is a callback function that will be invoked in response to appEvents.
      *
      *
@@ -133,7 +136,7 @@ class EveToken extends AbstractSmartContract{
      *
      */
 
-    /**
+  /**
      *
      * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
      * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
@@ -169,11 +172,11 @@ class EveToken extends AbstractSmartContract{
      * @param {OwnershipEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
      * triggered
      */
-    setApprovalListener(callback){
-        this.__eveTokenContract.onapproval = callback
-    }
+  setApprovalListener(callback) {
+    this.__eveTokenContract.onapproval = callback;
+  }
 
-    /**
+  /**
      * This is a callback function that will be invoked in response to appEvents
      *
      *
@@ -186,7 +189,7 @@ class EveToken extends AbstractSmartContract{
      *
      */
 
-    /**
+  /**
      *
      * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
      * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
@@ -222,9 +225,9 @@ class EveToken extends AbstractSmartContract{
      * @param {OwnershipEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
      * triggered
      */
-    setTransferListener(callback){
-        this.__eveTokenContract.ontransfer = callback
-    }
+  setTransferListener(callback) {
+    this.__eveTokenContract.ontransfer = callback;
+  }
 }
 
-export default EveToken
+export default EveToken;

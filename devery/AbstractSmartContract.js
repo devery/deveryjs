@@ -1,4 +1,4 @@
-const ethers = require('ethers')
+const ethers = require('ethers');
 
 
 /**
@@ -20,7 +20,6 @@ const ethers = require('ethers')
  */
 
 
-
 /**
  *
  * Abstract class that is base for all smart contracts.
@@ -28,9 +27,8 @@ const ethers = require('ethers')
  * the underlying smart contract address and getting the signer instance. *** you shall not instantiate it directly***.
  *
  */
-class AbstractSmartContract{
-
-    /**
+class AbstractSmartContract {
+  /**
      *
      * ***You shall not call this class constructor directly*** if you do so you will get a TypeError
      * as we are explicitly checking against this.
@@ -47,42 +45,38 @@ class AbstractSmartContract{
      *
      * @param {ClientOptions} options
      */
-    constructor(options = {web3Instance:undefined,acc:undefined,address:undefined}){
-
-        if (new.target === AbstractSmartContract) {
-            throw new TypeError("Cannot construct AbstractSmartContract instances directly");
-        }
-        options = Object.assign({web3Instance:undefined,acc:undefined,address:undefined},options)
-
-        try{
-            if(!options.web3Instance){
-                options.web3Instance = web3;
-            }
-        }
-        catch (e){
-            console.log('it was not possible to find global web3')
-        }
-
-        let signer = options.web3Instance;
-        let acc = options.acc;
-
-
-        if(signer){
-            this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
-        }
-        else{
-            this._network = 'homestead';
-            this._ethersProvider = new ethers.providers.EtherscanProvider(ethers.providers.networks.homestead);
-        }
-
-        this.__signerOrProvider = this._ethersProvider.getSigner?this._ethersProvider.getSigner():this._ethersProvider;
-
-        if(acc && this._ethersProvider.getSigner){
-            this.__signerOrProvider =
-                this._ethersProvider.getSigner(acc)
-        }
-
+  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
+    if (new.target === AbstractSmartContract) {
+      throw new TypeError('Cannot construct AbstractSmartContract instances directly');
     }
+    options = Object.assign({ web3Instance: undefined, acc: undefined, address: undefined }, options);
+
+    try {
+      if (!options.web3Instance) {
+        options.web3Instance = web3;
+      }
+    } catch (e) {
+      console.log('it was not possible to find global web3');
+    }
+
+    const signer = options.web3Instance;
+    const acc = options.acc;
+
+
+    if (signer) {
+      this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
+    } else {
+      this._network = 'homestead';
+      this._ethersProvider = new ethers.providers.EtherscanProvider(ethers.providers.networks.homestead);
+    }
+
+    this.__signerOrProvider = this._ethersProvider.getSigner ? this._ethersProvider.getSigner() : this._ethersProvider;
+
+    if (acc && this._ethersProvider.getSigner) {
+      this.__signerOrProvider =
+                this._ethersProvider.getSigner(acc);
+    }
+  }
 }
 
-export default AbstractSmartContract
+export default AbstractSmartContract;
