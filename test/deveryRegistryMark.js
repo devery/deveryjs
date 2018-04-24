@@ -77,9 +77,10 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
 
     it('should compute the hash of an product address', async function () {
         let account = data[0]
-        let markerAcc = accounts[3];
         let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
-        let hash = deveryClient.addressHash(account.products[0].getAc)
+        let hash = await deveryClient.addressHash('0xf17f52151EbEF6C7334FAD080c5704D77216b732');
+        //pre calculated hash
+        assert.equal(hash,'0xe52111628d5433237c36e91f159620decfa7747d736dee9676f3afc40471618a');
     })
 
     it('should be possible to a permissioned account mark an existing product', async function () {
@@ -87,12 +88,45 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
     })
 
     it('should not be possible to a permissioned account mark an non existing product', async function () {
-        assert.fail("actual", "expected", "test not implemented");
-    })
+        this.timeout(5000);
+        return new Promise(async (resolve,reject) =>{
+            let account = data[0]
+            let markerAcc = accounts[3];
+            let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+            await deveryClient.permissionMarker(markerAcc, true);
+            let hash = await deveryClient.addressHash('0x78e8d6760c99d1161cf1ff78aa5e67ad3285bf3e');
 
-    it('should be possible to a non permissioned account mark an existing product', async function () {
-        assert.fail("actual", "expected", "test not implemented");
-    })
+            deveryClient = createDeveryRegistry(web3, undefined, markerAcc, contractAddress);
+            try{
+                await deveryClient.mark('0x78e8d6760c99d1161cf1ff78aa5e67ad3285bf3e',hash)
+            }
+            catch (e){
+                assert.equal(e.message,'VM Exception while processing transaction: revert','wrong exception');
+                resolve('success');
+            }
+        });
+
+    });
+
+    it('should be not possible to a non permissioned account mark an existing product', async function () {
+        this.timeout(5000);
+        return new Promise(async (resolve,reject) =>{
+            let account = data[0]
+            let markerAcc = accounts[3];
+            let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+            await deveryClient.permissionMarker(markerAcc, false);
+            let hash = await deveryClient.addressHash(account.brands[0].products[0].productAccount);
+
+            deveryClient = createDeveryRegistry(web3, undefined, markerAcc, contractAddress);
+            try{
+                await deveryClient.mark(account.brands[0].products[0].productAccount,hash)
+            }
+            catch (e){
+                assert.equal(e.message,'VM Exception while processing transaction: revert','wrong exception');
+                resolve('success');
+            }
+        });
+    });
 
     it('should be possible to a non permissioned account mark an existing product', async function () {
         assert.fail("actual", "expected", "test not implemented");
