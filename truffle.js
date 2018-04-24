@@ -19,6 +19,8 @@ module.exports = {
       },
   },
     mocha: {
-        useColors: true
+        useColors: true,
+        exit:true,
+        retries:2,
     }
 }
