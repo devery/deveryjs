@@ -117,6 +117,8 @@ contract('DeveryRegistry - App - basic tests', function (accounts) {
                 assert.equal(callbackAppName,appName,'appName is not same');
                 assert.equal(callbackFeeAccount.toLowerCase(),feeAccount.toLowerCase(),'feeAccount is not same');
                 assert.equal(callbackFee,fee,'app fee is not same');
+                //we need to remove the listener otherwise mocha will never exit
+                deveryListener.setAppAddedEventListener(null);
                 done();
             }
             catch (e){
@@ -149,6 +151,8 @@ contract('DeveryRegistry - App - basic tests', function (accounts) {
                 assert.equal(callbackFeeAccount.toLowerCase(), feeAccount.toLowerCase(), 'feeAccount is not same');
                 assert.equal(callbackFee, fee, 'app fee is not same');
                 assert.equal(callbackActive, active, 'appStatus is not same');
+                //we need to remove the listener otherwise mocha will never exit
+                deveryListener.setAppUpdatedEventListener(null);
                 done();
             }
             catch (e){

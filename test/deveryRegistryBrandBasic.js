@@ -113,6 +113,8 @@ contract('DeveryRegistry - Brand - basic tests', function (accounts) {
                     assert.equal(appAccount.toLowerCase(),brand.appAccount.toLowerCase())
                     assert.equal(brandName,brand.brandName)
                     assert.equal(active,brand.active)
+                    //we need to remove the listener otherwise mocha will never exit
+                    devery.setBrandAddedEventListener(null);
                     resolve();
                 }
                 catch (e){
@@ -139,6 +141,8 @@ contract('DeveryRegistry - Brand - basic tests', function (accounts) {
                     assert.equal(appAccount.toLowerCase(),brand.appAccount.toLowerCase())
                     assert.equal(brandName,updatedName)
                     assert.equal(active,active)
+                    //we need to remove the listener otherwise mocha will never exit
+                    devery.setBrandUpdatedEventListener(null);
                     resolve();
                 }
                 catch (e){

@@ -63,7 +63,7 @@ contract('DeveryRegistry - Product - basic tests', function (accounts) {
         assert.equal(blockChainProduct.origin,product.origin)
     })
 
-    it('should not be possible to create more than Product with the same Product account address',async function(){
+    it('should not be possible to create more than Product with the same Product account address',function(){
         return new Promise(async function(resolve, reject){
             try{
                 let product = data[0].brands[0].products[0]
@@ -103,6 +103,8 @@ contract('DeveryRegistry - Product - basic tests', function (accounts) {
                 assert.equal(productAccount.toLowerCase(),product.productAccount.toLowerCase())
                 assert.equal(description,product.description)
                 assert.equal(active,true)
+                //we need to remove the listener otherwise mocha will never exit
+                deveryClient.setProductAddedEventListener(null);
                 done();
             }
             catch (e){
@@ -112,21 +114,27 @@ contract('DeveryRegistry - Product - basic tests', function (accounts) {
     })
 
 
-    it('should receive callback when another Product is updated',async function(){
+    it('should receive callback when another Product is updated', function(){
         this.timeout(5000);
-        let product = data[3].brands[0].products[0]
-        let deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
-        deveryClient.updateApp(product.productAccount,product.description,product.details,product.year,product.origin,false,overrideOptions);
-        deveryClient.setProductAddedEventListener((productAccount,brandAccount,appAccount,description,active)=>{
-            try{
-                assert.equal(productAccount.toLowerCase(),product.productAccount.toLowerCase())
-                assert.equal(description,product.description)
-                assert.equal(active,false)
-                done();
-            }
-            catch (e){
+        return new Promise((resolve,reject)=>{
+            let product = data[3].brands[0].products[0]
+            let deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
+            let xxx = deveryClient.updateProduct(product.productAccount, product.description, product.details
+                ,product.year ,product.origin, false, overrideOptions);
+            deveryClient.setProductUpdatedEventListener((productAccount,brandAccount,appAccount,description,active)=>{
+                try{
+                    assert.equal(productAccount.toLowerCase(),product.productAccount.toLowerCase())
+                    assert.equal(description,product.description)
+                    assert.equal(active,false)
+                    //we need to remove the listener otherwise mocha will never exit
+                    deveryClient.setProductUpdatedEventListener(null);
+                    resolve('success');
+                }
+                catch (e){
 
-            }
+                }
+            })
         })
+
     })
 })

@@ -51,11 +51,13 @@ contract('DeveryRegistry - Owned - basic tests', function (accounts) {
             devery.setOwnershipTransferredListener((fromAcc,toAcc) =>{
                 assert.equal(fromAcc.toLowerCase(),newOwnerAccount.toLowerCase())
                 assert.equal(toAcc.toLowerCase(),ownerAccount.toLowerCase())
+                //we need to remove the listener otherwise mocha will never exit
+                devery.setOwnershipTransferredListener(null);
                 resolve()
             })
             await devery.transferOwnership(ownerAccount)
-            devery = createDeveryOwned(web3,undefined,ownerAccount,contractAddress)
-            await devery.acceptOwnership()
+            let devery2 = createDeveryOwned(web3,undefined,ownerAccount,contractAddress)
+            await devery2.acceptOwnership()
 
         })
     })

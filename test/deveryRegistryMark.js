@@ -84,7 +84,16 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
     })
 
     it('should be possible to a permissioned account mark an existing product', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+        let account = data[0]
+        let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+        await deveryClient.permissionMarker(account.appAccount, true);
+        let hash = await deveryClient.addressHash(account.brands[0].products[0].productAccount);
+        await deveryClient.mark(account.brands[0].products[0].productAccount,hash);
+        let markedResult = await deveryClient.check(account.brands[0].products[0].productAccount);
+        assert.notEqual('0x0000000000000000000000000000000000000000',markedResult.appAccount);
+
+
+
     })
 
     it('should not be possible to a permissioned account mark an non existing product', async function () {
@@ -108,7 +117,7 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
 
     });
 
-    it('should be not possible to a non permissioned account mark an existing product', async function () {
+    it('should not be possible to a non permissioned account mark an existing product', async function () {
         this.timeout(5000);
         return new Promise(async (resolve,reject) =>{
             let account = data[0]
@@ -128,24 +137,76 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
         });
     });
 
-    it('should be possible to a non permissioned account mark an existing product', async function () {
-        assert.fail("actual", "expected", "test not implemented");
-    })
-
     it('should be possible to check a marked item', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+        let account = data[0]
+        let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+        let markedResult = await deveryClient.check(account.brands[0].products[0].productAccount);
+        assert.notEqual('0x0000000000000000000000000000000000000000',markedResult.appAccount);
     })
 
     it('should be possible to check a non marked item', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+        let account = data[3]
+        let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+        let markedResult = await deveryClient.check(account.brands[0].products[0].productAccount);
+        assert.equal('0x0000000000000000000000000000000000000000',markedResult.appAccount);
     })
 
     it('should receive callback when a permission marker account is changed', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+        this.timeout(5000);
+        return new Promise(async (resolve,reject)=>{
+            let account = data[1]
+            let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+
+            deveryClient.setPermissionedEventListener((marker,brandAccount,permission) =>{
+                try{
+                    assets.equal(marker.toLowerCase(),account.appAccount.toLowerCase());
+                    assets.equal(brandAccount.toLowerCase(),brandAccount.appAccount.toLowerCase());
+                    assets.equal(permission,true);
+                    //we need to remove the listener otherwise mocha will never exit
+                    deveryClient.setPermissionedEventListener(null);
+                    resolve('true')
+                }
+                catch (e){
+                    //we just got a call from another callback
+                    deveryClient.setPermissionedEventListener(null);
+                    resolve('true')
+                }
+
+
+            })
+
+            await deveryClient.permissionMarker(account.appAccount, true);
+
+        })
     })
 
     it('should receive callback when a product is marked', async function () {
-        assert.fail("actual", "expected", "test not implemented");
+        this.timeout(5000);
+        return new Promise(async (resolve,reject)=>{
+            let account = data[1]
+            let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+
+            deveryClient.setMarkedEventListener((marker, productAccount, appFeeAccount, feeAccount, appFee, fee, itemHash) =>{
+                try{
+                    assets.equal(marker.toLowerCase(),account.appAccount.toLowerCase());
+                    assets.equal(productAccount.toLowerCase(),account.appAccount.toLowerCase());
+                    //we need to remove the listener otherwise mocha will never exit
+                    deveryClient.setMarkedEventListener(null);
+                    resolve('true')
+                }
+                catch (e){
+                    //we just got a call from another callback
+                    deveryClient.setMarkedEventListener(null);
+                    resolve('true')
+                }
+
+            });
+
+            let hash = await deveryClient.addressHash(account.brands[0].products[0].productAccount);
+            await deveryClient.mark(account.brands[0].products[0].productAccount,hash);
+            let markedResult = await deveryClient.check(account.brands[0].products[0].productAccount);
+            assert.notEqual('0x0000000000000000000000000000000000000000',markedResult.appAccount);
+        })
     })
 
 })

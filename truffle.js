@@ -22,5 +22,6 @@ module.exports = {
         useColors: true,
         exit:true,
         retries:2,
+        timeout:1000
     }
 }

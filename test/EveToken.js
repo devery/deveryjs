@@ -45,7 +45,7 @@ contract('EveToken', function (accounts) {
         assert(receiverAfterTransfer,500)
     })
 
-    it('should not be able to transfer more tokens than owns',async function(){
+    it('should not be able to transfer more tokens than owns',function(){
         this.timeout(5000)
         return new Promise(async function(resolve,reject){
             let eveTokenAcc = createEveToken(web3,null,accounts[1],contractAddress)
@@ -59,12 +59,13 @@ contract('EveToken', function (accounts) {
             catch (e){
                 assert(e.message,'VM Exception while processing transaction: revert','wrong exception raised')
                 resolve()
+
             }
 
         })
     })
 
-    it('should receive a callback when a transfer is done',async function(){
+    it('should receive a callback when a transfer is done',function(){
         this.timeout(5000)
         return new Promise(async function(resolve, reject){
             const transfer = 100
@@ -76,6 +77,8 @@ contract('EveToken', function (accounts) {
                     assert.equal(from.toLowerCase(),fromAcc.toLowerCase())
                     assert.equal(to.toLowerCase(),toAcc.toLowerCase())
                     assert.equal(total.toNumber(),transfer)
+                    //we need to remove the listener otherwise mocha will never exit
+                    eveTokenAcc.setTransferListener(null);
                     resolve()
                 }
 

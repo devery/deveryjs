@@ -9,7 +9,7 @@ export function getData(accounts) {
       appAccount: accounts[1],
       appName: 'first app',
       feeAccount: accounts[1],
-      fee: 1,
+      fee: 0,
       active: true,
       brands: [
         {
@@ -35,7 +35,7 @@ export function getData(accounts) {
       appAccount: accounts[2],
       appName: 'first app',
       feeAccount: accounts[2],
-      fee: 2,
+      fee: 0,
       active: true,
       brands: [
         {

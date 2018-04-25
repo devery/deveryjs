@@ -1710,6 +1710,94 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     const result = await this.__deveryRegistryContract.check(item);
     return result.valueOf();
   }
+
+    /**
+     *
+     * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
+     * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+     * as param.
+     *
+     * ***Usage example:***
+     *
+     * ```
+     * //first you need to get a {@link DeveryRegistry} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     *
+     *
+     * deveryRegistryClient.setProductUpdatedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+     *
+     * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+     * triggered
+     */
+    setPermissionedEventListener(callback) {
+        this.__deveryRegistryContract.onpermissioned = callback;
+    }
+
+    /**
+     *
+     * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
+     * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+     * as param.
+     *
+     * ***Usage example:***
+     *
+     * ```
+     * //first you need to get a {@link DeveryRegistry} instance
+     * let deveryRegistryClient = new DeveryRegistry();
+     * //now you can use it
+     *
+     *
+     *
+     * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+     *      //whenever an app created we will log it to the console
+     *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+     * })
+     *
+     * //if you want to remove the listener you can simply pass undefined as parameter
+     *
+     * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+     *
+     * //or that is equivalent to the above call
+     *
+     *
+     *
+     * deveryRegistryClient.setProductUpdatedEventListener()
+     *
+     *
+     *
+     * ```
+     *
+     * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+     *
+     * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+     * triggered
+     */
+    setMarkedEventListener(callback) {
+        this.__deveryRegistryContract.onmarked = callback;
+    }
 }
 
 export default DeveryRegistry;

@@ -84,6 +84,8 @@ contract('DeveryRegistry - Admined - basic tests', function (accounts) {
             let deveryAdminedAdmin = createDeveryAdmined(web3,undefined,contractOwner,contractAddress)
             deveryAdminedNonAdmin.setAdminAddedEventListener((address)=>{
                 assert.equal(adminToBeAddedAndRemoved.toLowerCase(),address.toLowerCase())
+                //we need to remove the listener otherwise mocha will never exit
+                deveryAdminedNonAdmin.setAdminAddedEventListener(null);
                 resolve();
             })
             deveryAdminedAdmin.addAdmin(adminToBeAddedAndRemoved)
@@ -97,6 +99,8 @@ contract('DeveryRegistry - Admined - basic tests', function (accounts) {
             let deveryAdminedAdmin = createDeveryAdmined(web3, undefined, contractOwner, contractAddress)
             deveryAdminedNonAdmin.setAdminRemovedEventListener((address) => {
                 assert.equal(adminToBeAddedAndRemoved.toLowerCase(), address.toLowerCase())
+                //we need to remove the listener otherwise mocha will never exit
+                deveryAdminedNonAdmin.setAdminRemovedEventListener(null);
                 resolve()
             })
             deveryAdminedAdmin.removeAdmin(adminToBeAddedAndRemoved)
