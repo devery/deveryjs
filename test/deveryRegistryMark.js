@@ -158,21 +158,8 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
             let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
 
             deveryClient.setPermissionedEventListener((marker,brandAccount,permission) =>{
-                try{
-                    assets.equal(marker.toLowerCase(),account.appAccount.toLowerCase());
-                    assets.equal(brandAccount.toLowerCase(),brandAccount.appAccount.toLowerCase());
-                    assets.equal(permission,true);
-                    //we need to remove the listener otherwise mocha will never exit
                     deveryClient.setPermissionedEventListener(null);
                     resolve('true')
-                }
-                catch (e){
-                    //we just got a call from another callback
-                    deveryClient.setPermissionedEventListener(null);
-                    resolve('true')
-                }
-
-
             })
 
             await deveryClient.permissionMarker(account.appAccount, true);
@@ -187,18 +174,9 @@ contract('DeveryRegistry - Mark - basic tests', function (accounts) {
             let deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
 
             deveryClient.setMarkedEventListener((marker, productAccount, appFeeAccount, feeAccount, appFee, fee, itemHash) =>{
-                try{
-                    assets.equal(marker.toLowerCase(),account.appAccount.toLowerCase());
-                    assets.equal(productAccount.toLowerCase(),account.appAccount.toLowerCase());
-                    //we need to remove the listener otherwise mocha will never exit
-                    deveryClient.setMarkedEventListener(null);
-                    resolve('true')
-                }
-                catch (e){
-                    //we just got a call from another callback
-                    deveryClient.setMarkedEventListener(null);
-                    resolve('true')
-                }
+                //we need to remove the listener otherwise mocha will never exit
+                deveryClient.setMarkedEventListener(null);
+                resolve('true')
 
             });
 
