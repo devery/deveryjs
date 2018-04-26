@@ -7,6 +7,7 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract';
  * you can use it to check the current admins and listen to admin related
  * events.
  *
+ * @version 2
  * @extends AbstractDeverySmartContract
  */
 class DeveryAdmined extends AbstractDeverySmartContract {

@@ -6,6 +6,8 @@ const sha3 = require('crypto-js/sha3');
  * This class contains common utitlies methods, you don't need an instance as all the methods here are
  * static methods
  *
+ * @version 1
+ *
  */
 class Utils {
   /**

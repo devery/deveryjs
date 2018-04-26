@@ -10,6 +10,7 @@ const ethers = require('ethers');
  * There is no reason to directly instantiate it. Here lies some common logic about how to resolve
  * the underlying smart contract address and getting the signer instance. *** you shall not instantiate it directly***.
  *
+ * @version 2
  * @extends AbstractSmartContract
  */
 class AbstractDeverySmartContract extends AbstractSmartContract {

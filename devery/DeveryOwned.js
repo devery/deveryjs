@@ -7,6 +7,8 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract';
  * events. Take care when you call right functions on this class, because ***unless you are the
  * contract owner you will get an exception and lose your gas.***
  *
+ * @version 2
+ *
  * @extends AbstractDeverySmartContract
  */
 class DeveryOwned extends AbstractDeverySmartContract {

@@ -68,7 +68,7 @@ import AbstractDeverySmartContract from './AbstractDeverySmartContract';
  *
  *
  * ```
- *
+ * @version 1
  * @extends AbstractDeverySmartContract
  */
 class DeveryRegistry extends AbstractDeverySmartContract {
