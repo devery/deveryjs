@@ -25,7 +25,7 @@ const ethers = require('ethers');
  * Abstract class that is base for all smart contracts.
  * There is no reason to directly instantiate it. Here lies some common logic about how to resolve
  * the underlying smart contract address and getting the signer instance. *** you shall not instantiate it directly***.
- * @version 2
+ * @version 3
  */
 class AbstractSmartContract {
   /**

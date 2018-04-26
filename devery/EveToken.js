@@ -10,6 +10,7 @@ const ethers = require('ethers');
  * you can use it to check the current contract owner and list to ownership change related
  * events
  *
+ * @version 2
  * @extends AbstractDeverySmartContract
  */
 class EveToken extends AbstractSmartContract {
