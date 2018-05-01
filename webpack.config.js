@@ -6,7 +6,7 @@ module.exports ={
     devtool: 'eval-source-map',
     output: {
         path: path.resolve(__dirname,''),
-        filename: 'index.js'
+        filename: 'transpiled.js'
     },
     entry: [path.resolve(__dirname, 'devery/devery.js')]
 }
