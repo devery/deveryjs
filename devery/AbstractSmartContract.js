@@ -46,7 +46,7 @@ class AbstractSmartContract {
      * @param {ClientOptions} options
      */
   constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
-    if (new.target === AbstractSmartContract) {
+    if (this.constructor === AbstractSmartContract) {
       throw new TypeError('Cannot construct AbstractSmartContract instances directly');
     }
     options = Object.assign({ web3Instance: undefined, acc: undefined, address: undefined }, options);

@@ -32,7 +32,7 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
      */
   constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
     super(options);
-    if (new.target === AbstractDeverySmartContract) {
+    if (this.constructor === AbstractDeverySmartContract) {
       throw new TypeError('Cannot construct AbstractDeverySmartContract instances directly');
     }
 
