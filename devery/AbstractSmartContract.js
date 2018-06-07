@@ -77,6 +77,11 @@ class AbstractSmartContract {
                 this._ethersProvider.getSigner(acc);
     }
   }
+
+
+  getSignerAddress(){
+    return this.__signerOrProvider.getAddress();
+  }
 }
 
 export default AbstractSmartContract;
