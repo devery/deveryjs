@@ -8,5 +8,5 @@ module.exports ={
         path: path.resolve(__dirname,''),
         filename: 'transpiled.js'
     },
-    entry: [path.resolve(__dirname, 'index.js')]
+    entry: [path.resolve(__dirname, './index.js')]
 }
