@@ -29,25 +29,34 @@ class EveToken extends AbstractSmartContract {
      * @param {ClientOptions} options network connection options
      *
      */
-  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
+  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined ,walletPrivateKey: undefined, networkId: undefined}) {
     super(...arguments);
 
     options = Object.assign(
-      { web3Instance: undefined, acc: undefined, address: undefined }
+      { web3Instance: undefined, acc: undefined, address: undefined ,walletPrivateKey: undefined,networkId: undefined}
       , options,
     );
+
+    let address = options.address;
+    let network = options.networkId;
+
     try {
       if (!options.web3Instance) {
         options.web3Instance = web3;
       }
-    } catch (e) {
+      network = options.web3Instance.version.network;
       console.log('it was not possible to find global web3');
     }
+    catch (e) {
+        console.log('it was not possible to find global web3');
+    }
 
-    let address = options.address;
+    if(!network){
+      network = 1
+    }
 
     if (!address) {
-      address = eveTokenArtifact.networks[web3.version.network].address;
+      address = eveTokenArtifact.networks[network].address;
     }
 
     this.__eveTokenContract = new ethers.Contract(

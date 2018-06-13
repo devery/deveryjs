@@ -89,7 +89,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * @param {ClientOptions} options network connection options
      *
      */
-  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined }) {
+  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined ,walletPrivateKey: undefined,networkId: undefined}) {
     super(options);
   }
 
