@@ -5,8 +5,8 @@ module.exports ={
     mode:'development',
     devtool: 'eval-source-map',
     output: {
-        path: path.resolve(__dirname,''),
+        path: path.resolve(__dirname,'dist'),
         filename: 'index.js'
     },
-    entry: [path.resolve(__dirname, './exports.js')]
+    entry: [path.resolve(__dirname, './index.js')]
 }

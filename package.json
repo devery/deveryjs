@@ -2,6 +2,7 @@
   "name": "devery",
   "version": "0.0.15",
   "description": "Make calls to the devery protocol using js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "nodemon server.js",
     "debug": "nodemon --inspect server.js",
