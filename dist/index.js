@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["devery"] = factory();
-	else
-		root["devery"] = factory();
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
+window["devery"] =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -1658,4 +1649,3 @@ eval("/* (ignored) *///# sourceURL=[module]\n//# sourceMappingURL=data:applicati
 /***/ })
 
 /******/ });
-});

@@ -8,7 +8,7 @@ module.exports ={
         path: path.resolve(__dirname,'dist'),
         filename: 'index.js',
         library: "devery",
-        libraryTarget: "umd"
+        libraryTarget: "global"
     },
     entry: [path.resolve(__dirname, './index.js')]
 }
