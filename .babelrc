@@ -4,5 +4,7 @@
     "test": {
       "plugins": [ "istanbul" ]
     }
-  }
+  },
+  "sourceMaps": true,
+  "retainLines": true
 }

@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import EveTokenLib from './devery/EveToken';
 import DeveryRegistryLib from './devery/DeveryRegistry';
 import DeveryAdminedLib from './devery/DeveryAdmined';

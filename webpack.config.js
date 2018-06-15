@@ -1,6 +1,7 @@
 const path = require('path')
+const webpack = require('webpack')
+
 var libraryName = 'devery';
-var outputFile = libraryName + '.js';
 
 module.exports ={
     mode:'development',
@@ -9,8 +10,22 @@ module.exports ={
         path: path.resolve(__dirname,'dist'),
         filename: 'index.js',
         library: libraryName,
-        libraryTarget: 'umd',
-        umdNamedDefine: true
+        libraryTarget: "commonjs-module"
     },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+
+            }]
+    },
+    plugins:[new webpack.DefinePlugin({
+        Url: require("url"),
+        spawn : require("child_process").spawn,
+        fs : require("fs"),
+        XMLHttpRequest: require('./helpers/node-xhr').XMLHttpRequest,
+
+    })],
     entry: [path.resolve(__dirname, './index.js')]
 }
