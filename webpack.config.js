@@ -1,5 +1,6 @@
 const path = require('path')
-
+var libraryName = 'devery';
+var outputFile = libraryName + '.js';
 
 module.exports ={
     mode:'development',
@@ -7,8 +8,9 @@ module.exports ={
     output: {
         path: path.resolve(__dirname,'dist'),
         filename: 'index.js',
-        library: "devery",
-        libraryTarget: "global"
+        library: libraryName,
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     entry: [path.resolve(__dirname, './index.js')]
 }
