@@ -36,13 +36,25 @@
 
 exports.XMLHttpRequest = function() {
 
-    if(window && window.XMLHttpRequest){
-        return new window.XMLHttpRequest([...arguments])
+    try{
+        if(window && window.XMLHttpRequest){
+            return new window.XMLHttpRequest([...arguments])
+        }
+    }
+    catch(e){
+        //just continue
     }
 
-    if(global && global.XMLHttpRequest){
-        return new global.XMLHttpRequest([...arguments])
+
+    try{
+        if(global && global.XMLHttpRequest){
+            return new global.XMLHttpRequest([...arguments])
+        }
     }
+    catch (e){
+        //just continue
+    }
+
 
     var Url = require("url");
     var spawn = require("child_process").spawn;
