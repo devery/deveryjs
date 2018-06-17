@@ -36,6 +36,14 @@
 
 exports.XMLHttpRequest = function() {
 
+    if(window && window.XMLHttpRequest){
+        return new window.XMLHttpRequest([...arguments])
+    }
+
+    if(global && global.XMLHttpRequest){
+        return new global.XMLHttpRequest([...arguments])
+    }
+
     var Url = require("url");
     var spawn = require("child_process").spawn;
     var fs = require("fs");

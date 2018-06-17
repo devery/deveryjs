@@ -21,9 +21,6 @@ module.exports ={
             }]
     },
     plugins:[new webpack.DefinePlugin({
-        Url: require("url"),
-        spawn : require("child_process").spawn,
-        fs : require("fs"),
         XMLHttpRequest: require('./helpers/node-xhr').XMLHttpRequest,
 
     })],
