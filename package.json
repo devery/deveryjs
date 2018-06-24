@@ -1,6 +1,6 @@
 {
   "name": "devery",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Make calls to the devery protocol using js",
   "main": "./dist/index.js",
   "scripts": {

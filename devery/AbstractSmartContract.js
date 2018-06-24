@@ -98,6 +98,10 @@ class AbstractSmartContract {
   getSignerAddress(){
     return this.__signerOrProvider.getAddress();
   }
+
+  getProvider(){
+    return this.__signerOrProvider;
+  }
 }
 
 export default AbstractSmartContract;
