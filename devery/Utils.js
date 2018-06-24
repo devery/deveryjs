@@ -1,5 +1,6 @@
 const CryptoJS = require('crypto-js');
 const sha3 = require('crypto-js/sha3');
+const ethers = require('ethers')
 
 /**
  *
@@ -47,6 +48,15 @@ class Utils {
       }
     }
     return true;
+  }
+
+    /**
+     * Generates a random ethereum  address
+     *
+     * @return {String} a random eth address
+     */
+  static getRandomAddress(){
+    return ethers.Wallet.createRandom().address
   }
 
 
