@@ -89,7 +89,9 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * @param {ClientOptions} options network connection options
      *
      */
-  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined ,walletPrivateKey: undefined,networkId: undefined}) {
+  constructor(options = {
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+  }) {
     super(options);
   }
 
@@ -1711,7 +1713,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
-    /**
+  /**
      *
      * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
      * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
@@ -1751,11 +1753,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
      * triggered
      */
-    setPermissionedEventListener(callback) {
-        this.__deveryRegistryContract.onpermissioned = callback;
-    }
+  setPermissionedEventListener(callback) {
+    this.__deveryRegistryContract.onpermissioned = callback;
+  }
 
-    /**
+  /**
      *
      * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
      * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
@@ -1795,9 +1797,9 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
      * triggered
      */
-    setMarkedEventListener(callback) {
-        this.__deveryRegistryContract.onmarked = callback;
-    }
+  setMarkedEventListener(callback) {
+    this.__deveryRegistryContract.onmarked = callback;
+  }
 }
 
 export default DeveryRegistry;

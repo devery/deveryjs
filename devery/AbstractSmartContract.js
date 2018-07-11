@@ -45,11 +45,15 @@ class AbstractSmartContract {
      *
      * @param {ClientOptions} options
      */
-  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined , walletPrivateKey: undefined, networkId: undefined}) {
+  constructor(options = {
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+  }) {
     if (this.constructor === AbstractSmartContract) {
       throw new TypeError('Cannot construct AbstractSmartContract instances directly');
     }
-    options = Object.assign({ web3Instance: undefined, acc: undefined, address: undefined ,walletPrivateKey: undefined, networkId: undefined}, options);
+    options = Object.assign({
+      web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+    }, options);
 
     try {
       if (!options.web3Instance) {
@@ -67,24 +71,22 @@ class AbstractSmartContract {
       this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
     } else {
       let network;
-      for(let candidateNetwork in ethers.providers.networks){
-        if(ethers.providers.networks[candidateNetwork].chainId === (options.networkId||1)){
-          network = ethers.providers.networks[candidateNetwork]
+      for (const candidateNetwork in ethers.providers.networks) {
+        if (ethers.providers.networks[candidateNetwork].chainId === (options.networkId || 1)) {
+          network = ethers.providers.networks[candidateNetwork];
         }
       }
       this._ethersProvider = new ethers.providers.EtherscanProvider(network);
     }
 
-    //TODO: refactor and make more readable
-    //TODO: write tests
-    if(options.walletPrivateKey){
-      this._wallet = new ethers.Wallet(options.walletPrivateKey)
-      this._wallet.provider =  this._ethersProvider;
-      this.__signerOrProvider = this._wallet
-    }
-
-    else{
-        this.__signerOrProvider = this._ethersProvider.getSigner ? this._ethersProvider.getSigner() : this._ethersProvider;
+    // TODO: refactor and make more readable
+    // TODO: write tests
+    if (options.walletPrivateKey) {
+      this._wallet = new ethers.Wallet(options.walletPrivateKey);
+      this._wallet.provider = this._ethersProvider;
+      this.__signerOrProvider = this._wallet;
+    } else {
+      this.__signerOrProvider = this._ethersProvider.getSigner ? this._ethersProvider.getSigner() : this._ethersProvider;
     }
 
 
@@ -95,11 +97,11 @@ class AbstractSmartContract {
   }
 
 
-  getSignerAddress(){
+  getSignerAddress() {
     return this.__signerOrProvider.getAddress();
   }
 
-  getProvider(){
+  getProvider() {
     return this.__signerOrProvider;
   }
 }

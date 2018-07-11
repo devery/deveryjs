@@ -29,11 +29,15 @@ class EveToken extends AbstractSmartContract {
      * @param {ClientOptions} options network connection options
      *
      */
-  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined ,walletPrivateKey: undefined, networkId: undefined}) {
+  constructor(options = {
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+  }) {
     super(...arguments);
 
     options = Object.assign(
-      { web3Instance: undefined, acc: undefined, address: undefined ,walletPrivateKey: undefined,networkId: undefined}
+      {
+        web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+      }
       , options,
     );
 
@@ -46,13 +50,12 @@ class EveToken extends AbstractSmartContract {
       }
       network = options.web3Instance.version.network;
       console.log('it was not possible to find global web3');
-    }
-    catch (e) {
-        console.log('it was not possible to find global web3');
+    } catch (e) {
+      console.log('it was not possible to find global web3');
     }
 
-    if(!network){
-      network = 1
+    if (!network) {
+      network = 1;
     }
 
     if (!address) {

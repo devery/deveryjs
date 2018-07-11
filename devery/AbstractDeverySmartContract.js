@@ -30,16 +30,19 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
      *
      * @param {ClientOptions} options
      */
-  constructor(options = { web3Instance: undefined, acc: undefined, address: undefined , walletPrivateKey: undefined, networkId: undefined}) {
+  constructor(options = {
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+  }) {
     super(options);
     if (this.constructor === AbstractDeverySmartContract) {
       throw new TypeError('Cannot construct AbstractDeverySmartContract instances directly');
     }
 
 
-
     options = Object.assign(
-      { web3Instance: undefined, acc: undefined, address: undefined, networkId:undefined }
+      {
+        web3Instance: undefined, acc: undefined, address: undefined, networkId: undefined,
+      }
       , options,
     );
 
@@ -51,17 +54,16 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
         options.web3Instance = web3;
       }
       network = options.web3Instance.version.network;
-
     } catch (e) {
       console.log('it was not possible to find global web3');
     }
 
-    if(!network){
-      network = 1
+    if (!network) {
+      network = 1;
     }
 
     if (!address) {
-        address = deveryRegistryArtifact.networks[network].address;
+      address = deveryRegistryArtifact.networks[network].address;
     }
 
     this.__deveryRegistryContract = new ethers.Contract(
