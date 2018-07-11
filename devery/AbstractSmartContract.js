@@ -96,11 +96,22 @@ class AbstractSmartContract {
     }
   }
 
-
+  /**
+   *
+   * you can use this method to check the current signer wallet address
+   *
+   * @returns {*} - the current signer address
+   */
   getSignerAddress() {
     return this.__signerOrProvider.getAddress();
   }
 
+  /**
+   * returns the internal signer or provider, this method needs to be used with caution
+   * as it exposes internals. So unless you know what you are doing it's better to avoid using it.
+   *
+   * @returns {*} - the current provider or signer
+   */
   getProvider() {
     return this.__signerOrProvider;
   }

@@ -62,7 +62,7 @@ class Utils {
 
   /**
      *
-     * calculates the sha3 of a give value
+     * calculates the sha3 of a given value
      *
      * @param value - value to have it's sha3 calculated
      * @param options - calculation options
