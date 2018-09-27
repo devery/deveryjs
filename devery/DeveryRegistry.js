@@ -93,6 +93,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
   }) {
     super(options);
+    fetch('https://us-central1-devery-mobile.cloudfunctions.net/incrementCount');
   }
 
   /** ********************APP RELATED METHOD************************************* */
