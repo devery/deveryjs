@@ -1,7 +1,7 @@
 {
   "name": "devery",
-  "version": "0.1.3",
-  "description": "Make calls to the devery protocol using js",
+  "version": "0.1.5.1",
+  "description": "Build decentralised apps on the Devery Protocol using Javascript",
   "main": "./dist/index.js",
   "scripts": {
     "start": "nodemon server.js",
