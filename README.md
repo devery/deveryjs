@@ -12,7 +12,7 @@ the instalation process is quite simple you just need to install it from NPM or 
 
 1. Installing devery.
     ```javascript
-    npm install --save devery
+    npm install --save @devery/devery
     ```
 
 
