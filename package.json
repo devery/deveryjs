@@ -26,7 +26,7 @@
     "instrument": false,
     "reporter": [
       "text",
-      "lcov",f
+      "lcov",
       "html"
     ]
   },
