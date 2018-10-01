@@ -1,5 +1,5 @@
 # Devery.js
-[![npm version](https://badge.fury.io/js/@devery/devery.svg)](https://badge.fury.io/js/@devery/devery)
+[![npm version](https://badge.fury.io/js/%40devery%2Fdevery.svg)](https://badge.fury.io/js/%40devery%2Fdevery)
 
 Javascript library for the Devery protocol.
 
