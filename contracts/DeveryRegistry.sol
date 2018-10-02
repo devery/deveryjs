@@ -1,4 +1,5 @@
 pragma solidity ^0.4.17;
+pragma experimental ABIEncoderV2;
 
 // ----------------------------------------------------------------------------
 // Devery Contracts - The Monolithic Registry
@@ -117,7 +118,7 @@ contract DeveryRegistry is Admined {
         bool active;
     }
 
-    ERC20Interface public token; 
+    ERC20Interface public token;
     address public feeAccount;
     uint public fee;
     mapping(address => App) public apps;
