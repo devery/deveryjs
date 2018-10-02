@@ -1,4 +1,5 @@
 # Devery.js
+[![npm version](https://badge.fury.io/js/%40devery%2Fdevery.svg)](https://badge.fury.io/js/%40devery%2Fdevery)
 
 Javascript library for the Devery protocol.
 
@@ -11,7 +12,7 @@ the instalation process is quite simple you just need to install it from NPM or 
 
 1. Installing devery.
     ```javascript
-    npm install --save-dev devery
+    npm install --save @devery/devery
     ```
 
 
