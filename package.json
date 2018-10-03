@@ -1,6 +1,6 @@
 {
   "name": "@devery/devery",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Build decentralised apps on the Devery Protocol using Javascript",
   "main": "./dist/index.js",
   "scripts": {
@@ -13,8 +13,12 @@
     "lint:fix": "eslint devery/**/*.js test/**/*.js --fix",
     "lint:watch": "esw devery/**/*.js test/**/*.js --watch"
   },
-  "author": "Victor Eloy ",
+  "author": "Victor Eloy",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/devery/deveryjs"
+  },
   "nyc": {
     "include": [
       "devery"
