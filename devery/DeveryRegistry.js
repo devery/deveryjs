@@ -1,5 +1,10 @@
 import AbstractDeverySmartContract from './AbstractDeverySmartContract';
 
+if ((typeof process !== 'undefined') && (process.release.name === 'node')) {
+  // eslint-disable-next-line global-require
+  global.fetch = require('cross-fetch');
+}
+
 /**
  *
  * DeveryRegistry is the main class to interact with the devery registry. With it you have all the tools
