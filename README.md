@@ -2,7 +2,7 @@
 [![npm version](https://badge.fury.io/js/%40devery%2Fdevery.svg)](https://badge.fury.io/js/%40devery%2Fdevery)
 [![Coverage Status](https://coveralls.io/repos/github/devery/deveryjs/badge.svg)](https://coveralls.io/github/devery/deveryjs)
 [![Build Status](https://travis-ci.org/devery/deveryjs.svg?branch=master)](https://travis-ci.org/devery/deveryjs)
-[![Inline docs](http://inch-ci.org/github/devery/deveryjs.svg?branch=master)](http://inch-ci.org/github/devery/deveryjs)
+
 
 Javascript library for the Devery protocol.
 
