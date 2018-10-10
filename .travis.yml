@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+- "stable"
+before_script:
+- npm install -g ganache-cli
+script:
+- ganache-cli -p 7545 > /dev/null &
+- sleep 5
+- npm run test
