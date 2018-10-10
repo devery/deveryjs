@@ -6,4 +6,4 @@ before_script:
 script:
 - ganache-cli -p 7545 > /dev/null &
 - sleep 5
-- npm run test
+- npm run coverage
