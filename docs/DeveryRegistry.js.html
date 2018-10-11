@@ -89,6 +89,11 @@
   <article>
     <pre class="prettyprint source linenums"><code>import AbstractDeverySmartContract from './AbstractDeverySmartContract';
 
+if ((typeof process !== 'undefined') &amp;&amp; (process.release.name === 'node')) {
+  // eslint-disable-next-line global-require
+  global.fetch = require('cross-fetch');
+}
+
 /**
  *
  * DeveryRegistry is the main class to interact with the devery registry. With it you have all the tools
@@ -182,6 +187,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
   }) {
     super(options);
+    fetch('https://us-central1-devery-mobile.cloudfunctions.net/incrementCount');
   }
 
   /** ********************APP RELATED METHOD************************************* */
