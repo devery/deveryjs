@@ -28,7 +28,7 @@ you can use require or import like syntax access devery classes
 
 1. require like syntax.
     ```javascript
-    const devery = require('devery');
+    const devery = require('@devery/devery');
     const DeveryRegistry = devery.DeveryRegistry;
 
     let deveryRegistryClient = new DeveryRegistry();
@@ -37,7 +37,7 @@ or alternatively you can use this.
 
 2. ES6 import sytax
     ```javascript
-    import {DeveryRegistry} from 'devery';
+    import {DeveryRegistry} from '@devery/devery';
 
     let deveryRegistryClient = new DeveryRegistry();
     ```
