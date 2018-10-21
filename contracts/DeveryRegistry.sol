@@ -17,9 +17,9 @@ pragma experimental ABIEncoderV2;
 // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
 // ----------------------------------------------------------------------------
 contract ERC20Interface {
-    function totalSupply() public constant returns (uint);
-    function balanceOf(address tokenOwner) public constant returns (uint balance);
-    function allowance(address tokenOwner, address spender) public constant returns (uint remaining);
+    function totalSupply() public view returns (uint);
+    function balanceOf(address tokenOwner) public view returns (uint balance);
+    function allowance(address tokenOwner, address spender) public view returns (uint remaining);
     function transfer(address to, uint tokens) public returns (bool success);
     function approve(address spender, uint tokens) public returns (bool success);
     function transferFrom(address from, address to, uint tokens) public returns (bool success);
@@ -74,7 +74,7 @@ contract Admined is Owned {
         _;
     }
 
-    function isAdmin(address addr) public constant returns (bool) {
+    function isAdmin(address addr) public view returns (bool) {
         return (admins[addr] || owner == addr);
     }
     function addAdmin(address addr) public onlyOwner {
@@ -180,16 +180,16 @@ contract DeveryRegistry is Admined {
         e.active = active;
         AppUpdated(msg.sender, appName, _feeAccount, _fee, active);
     }
-    function getApp(address appAccount) public constant returns (App app) {
+    function getApp(address appAccount) public view returns (App app) {
         app = apps[appAccount];
     }
-    function getAppData(address appAccount) public constant returns (address _feeAccount, uint _fee, bool active) {
+    function getAppData(address appAccount) public view returns (address _feeAccount, uint _fee, bool active) {
         App storage e = apps[appAccount];
         _feeAccount = e.feeAccount;
         _fee = e.fee;
         active = e.active;
     }
-    function appAccountsLength() public constant returns (uint) {
+    function appAccountsLength() public view returns (uint) {
         return appAccounts.length;
     }
 
@@ -218,10 +218,10 @@ contract DeveryRegistry is Admined {
 
         BrandUpdated(brandAccount, msg.sender, brandName, active);
     }
-    function getBrand(address brandAccount) public constant returns (Brand brand) {
+    function getBrand(address brandAccount) public view returns (Brand brand) {
         brand = brands[brandAccount];
     }
-    function getBrandData(address brandAccount) public constant returns (address appAccount, address appFeeAccount, bool active) {
+    function getBrandData(address brandAccount) public view returns (address appAccount, address appFeeAccount, bool active) {
         Brand storage brand = brands[brandAccount];
         require(brand.appAccount != address(0));
         App storage app = apps[brand.appAccount];
@@ -230,7 +230,7 @@ contract DeveryRegistry is Admined {
         appFeeAccount = app.feeAccount;
         active = app.active && brand.active;
     }
-    function brandAccountsLength() public constant returns (uint) {
+    function brandAccountsLength() public view returns (uint) {
         return brandAccounts.length;
     }
 
@@ -269,10 +269,12 @@ contract DeveryRegistry is Admined {
         product.active = active;
         ProductUpdated(productAccount, product.brandAccount, app.appAccount, description, active);
     }
-    function getProduct(address productAccount) public constant returns (Product product) {
+    function getProduct(address productAccount) public view returns (Product product) {
         product = products[productAccount];
     }
-    function getProductData(address productAccount) public constant returns (address brandAccount, address appAccount, address appFeeAccount, bool active) {
+
+    //change constant modifier to view, beacuse it will be deprecated and will be dropped in version 0.5.0.
+    function getProductData(address productAccount) public view returns (address brandAccount, address appAccount, address appFeeAccount, bool active) {
         Product storage product = products[productAccount];
         require(product.brandAccount != address(0));
         Brand storage brand = brands[brandAccount];
@@ -284,7 +286,7 @@ contract DeveryRegistry is Admined {
         appFeeAccount = app.feeAccount;
         active = app.active && brand.active && brand.active;
     }
-    function productAccountsLength() public constant returns (uint) {
+    function productAccountsLength() public view returns (uint) {
         return productAccounts.length;
     }
 
@@ -296,6 +298,14 @@ contract DeveryRegistry is Admined {
         require(brand.brandAccount != address(0));
         permissions[marker][msg.sender] = permission;
         Permissioned(marker, msg.sender, permission);
+    }
+
+    // ------------------------------------------------------------------------
+    // check if user has permission
+    // ------------------------------------------------------------------------  
+
+    function checkPermission(address brandAccount) view public returns(bool hasPermission) {
+        hasPermission = permissions[msg.sender][brandAccount];
     }
 
     // ------------------------------------------------------------------------
@@ -327,10 +337,11 @@ contract DeveryRegistry is Admined {
         }
     }
 
+
     // ------------------------------------------------------------------------
     // Check itemPublicKey has been registered
     // ------------------------------------------------------------------------
-    function check(address item) public constant returns (address productAccount, address brandAccount, address appAccount) {
+    function check(address item) public view returns (address productAccount, address brandAccount, address appAccount) {
         bytes32 hash = keccak256(item);
         productAccount = markings[hash];
         // require(productAccount != address(0));
@@ -341,4 +352,8 @@ contract DeveryRegistry is Admined {
         brandAccount = product.brandAccount;
         appAccount = brand.appAccount;
     }
+
+
+   
+
 }
