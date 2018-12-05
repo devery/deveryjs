@@ -1,5 +1,5 @@
 pragma solidity ^0.4.25;
-import "./Owned.sol"
+import "./Owned.sol";
 
 contract Admined is Owned {
 
