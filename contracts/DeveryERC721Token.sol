@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import "./ERC721.sol";
 import "./DeveryRegistry.sol";
-import "./Admined";
+import "./Admined.sol";
 
 /**
  * @title DeveryERC721Token
