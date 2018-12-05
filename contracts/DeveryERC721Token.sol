@@ -4,7 +4,6 @@ pragma experimental ABIEncoderV2;
 
 import "./ERC721.sol";
 import "./DeveryRegistry.sol";
-import "./Admined.sol";
 
 /**
  * @title DeveryERC721Token
@@ -25,15 +24,15 @@ contract DeveryERC721Token is ERC721,Admined {
         address productBrandAddress;
         (,productBrandAddress,,,,,) = deveryRegistry.products(_productAddress);
         require(productBrandAddress == msg.sender);
-        uint nextId = claimedProducts.push(productBrandAddress) - 1;
+        uint nextId = tokenIdToProduct.push(_productAddress) - 1;
         _mint(msg.sender,nextId);
     }
 
     function getProductsByOwner(address _owner) external view returns (address[]){
-        uint[] products = new address[](_ownedTokensCount[_owner]);
+        address[] memory products = new address[](balanceOf(_owner));
         uint counter = 0;
         for(uint i = 0; i < tokenIdToProduct.length;i++){
-            if(_tokenOwner[i] == _owner){
+            if(ownerOf(i) == _owner){
                 products[counter] = tokenIdToProduct[i];
                 counter++;
             }
