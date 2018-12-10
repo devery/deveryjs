@@ -441,9 +441,15 @@ contract ERC721 is ERC165 {
 }
 
 /**
+ * @dev Manages Devery specific ERC721 functionality. We are going to control the ownership of products through the
+ * ERC721 specification, so every product ownership can be represented as a non fungible token. Brands
+ * might choose to create, mark and mint a ERC721 for every physical unit of a product or create and mark a single
+ * product and then mint multiple units of it. This flexibility will make the process of marking low ticket items
+ * expenentially cheaper without compromise the security that you get by creating and marking every single product in case
+ * of higher ticket items
+ *
  * @title DeveryERC721Token
  * @author victor eloy
- * @dev links the products with our ERC721Token
  */
 contract DeveryERC721Token is ERC721,Admined {
 
@@ -453,6 +459,10 @@ contract DeveryERC721Token is ERC721,Admined {
     mapping(address => uint) public totalMintedProducts;
     DeveryRegistry deveryRegistry;
 
+    /**
+      * @dev modifier to enforce that only the brand that created a given product can change it
+      * this modifier will check the core devery registry to fetch the brand address.
+      */
     modifier brandOwnerOnly(address _productAddress){
         address productBrandAddress;
         (,productBrandAddress,,,,,) = deveryRegistry.products(_productAddress);
@@ -460,15 +470,24 @@ contract DeveryERC721Token is ERC721,Admined {
         _;
     }
 
+    /**
+      * @dev Allow contract admins to set the address of Core Devery Registry contract
+      */
     function setDeveryRegistryAddress(address _deveryRegistryAddress) external onlyAdmin {
         deveryRegistry = DeveryRegistry(_deveryRegistryAddress);
     }
 
+    /**
+      * @dev adjusts the maximum mintable amount of a certain product
+      */
     function setMaximumMintableQuantity(address _productAddress, uint _quantity) external payable brandOwnerOnly(_productAddress){
         require(_quantity >= totalMintedProducts[_productAddress] || _quantity == 0);
         totalAllowedProducts[_productAddress] = _quantity;
     }
 
+    /**
+      * @dev mint a new ERC721 token for a given product and assing it to the original product brand;
+      */
     function claimProduct(address _productAddress,uint _quantity) external payable  brandOwnerOnly(_productAddress) {
         require(totalAllowedProducts[_productAddress] == 0 || totalAllowedProducts[_productAddress] >= totalMintedProducts[_productAddress] + _quantity);
         totalMintedProducts[_productAddress]+=_quantity;
@@ -478,6 +497,9 @@ contract DeveryERC721Token is ERC721,Admined {
         }
     }
 
+    /**
+      * @dev returns the products owned by a given ethereum address
+      */
     function getProductsByOwner(address _owner) external view returns (address[]){
         address[] memory products = new address[](balanceOf(_owner));
         uint counter = 0;
