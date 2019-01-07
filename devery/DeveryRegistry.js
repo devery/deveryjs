@@ -1,6 +1,6 @@
 import AbstractDeverySmartContract from './AbstractDeverySmartContract';
 
-if ((typeof process !== 'undefined') && (process.release.name === 'node')) {
+if ((typeof process !== 'undefined') && (process.release) && (process.release.name === 'node')) {
   // eslint-disable-next-line global-require
   global.fetch = require('cross-fetch');
 }
