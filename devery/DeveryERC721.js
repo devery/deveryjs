@@ -16,13 +16,13 @@ const ethers = require('ethers');
 export default class DeveryERC721 extends AbstractSmartContract {
   /**
      *
-     * Creates a new instansce of EveToken.
+     * Creates a new instansce of DeveryERC721.
      *```
-     * //creates a eveTokenClient with the default params
-     * let deveryRegistryClient = new EveToken();
+     * //creates a DeveryERC721Client with the default params
+     * let deveryERC721Client = new DeveryERC721();
      *
      * //creates a deveryRegistryClient pointing to a custom address
-     * let deveryRegistryClient = new EveToken({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+     * let deveryERC721Client = new DeveryERC721({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
      *
      * ```
      *
