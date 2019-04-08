@@ -10,8 +10,8 @@ const ethers = require('ethers');
  * you can use it to check the current contract owner and list to ownership change related
  * events
  *
- * @version 2
- * @extends AbstractDeverySmartContract
+ * @version 1
+ * @extends AbstractSmartContract
  */
 export default class DeveryERC721 extends AbstractSmartContract {
   /**
