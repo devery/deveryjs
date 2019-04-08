@@ -151,42 +151,42 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    *
-   * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
-   * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
-   * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+   * Listener for transfer approval for all events, this event triggers whenever a devery item is transferred in the blockchain
+   * please note that ApprovalEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
    * as param.
    *
    * ***Usage example:***
    *
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
-   * let deveryRegistryClient = new DeveryRegistry();
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
    *
    *
-   * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+   * deveryErc721Client.setApprovalForAllEventListener((brandAccount,appAccount,active) => {
    *      //whenever an app created we will log it to the console
    *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
    * })
    *
    * //if you want to remove the listener you can simply pass undefined as parameter
    *
-   * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+   * deveryRegistryClient.setApprovalForAllEventListener(undefined)
    *
    * //or that is equivalent to the above call
    *
    *
    *
-   * deveryRegistryClient.setProductUpdatedEventListener()
+   * deveryRegistryClient.setApprovalForAllEventListener()
    *
    *
    *
    * ```
    *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * @param {ApprovalEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
    * triggered
    */
   setApprovalForAllEventListener(callback) {
@@ -195,49 +195,100 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    *
-   * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
-   * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
-   * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+   * Listener for transfer  events, this event triggers whenever a devery item is transfered in the blockchain
+   * please note that ApprovalEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
    * as param.
    *
    * ***Usage example:***
    *
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
-   * let deveryRegistryClient = new DeveryRegistry();
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
    *
    *
-   * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+   * deveryErc721Client.setTransferEventListener((brandAccount,appAccount,active) => {
    *      //whenever an app created we will log it to the console
    *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
    * })
    *
    * //if you want to remove the listener you can simply pass undefined as parameter
    *
-   * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+   * deveryRegistryClient.setTransferEventListener(undefined)
    *
    * //or that is equivalent to the above call
    *
    *
    *
-   * deveryRegistryClient.setProductUpdatedEventListener()
+   * deveryRegistryClient.setTransferEventListener()
    *
    *
    *
    * ```
    *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * @param {ApprovalEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
    * triggered
    */
   setTransferEventListener(callback) {
     this.__deveryERC721Contract.ontransfer = callback;
   }
 
-  // x.__deveryERC721Contract.setMaximumMintableQuantitys
+  /**
+   *
+   * Sets the maximum mintable quantity of a given token. *** If you don't set the maximum mintable quantity it will be infinite by defaul**
+   *
+   *  ***Usage example:***
+   * ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   *
+   * //passing true as param will add the account as marker
+   * deveryRegistryClient.mark("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","0x873306090abaB3A6e1400e9345bC60c78a8BEt87").then(transaction => {
+   *      console.log('transaction address',transaction.hash);
+   *      //... other stuff
+   * }).catch(err => {
+   *      if(err.message.indexOf('User denied')){
+   *          console.log('The user denied the transaction')
+   *          //...
+   *      }
+   *
+   *      ///handle other exceptions here
+   *
+   * })
+   *
+   *
+   * //or with the async syntax
+   *
+   * async function(){
+   *      try{
+   *          //passing false as param will remove the account as marker
+   *          let transaction = await deveryRegistryClient.mark("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","0x873306090abaB3A6e1400e9345bC60c78a8BEt87")
+   *          console.log('transaction address',transaction.hash);
+   *      }
+   *      catch(err){
+   *          if(err.message.indexOf('User denied')){
+   *               console.log('The user denied the transaction')
+   *              //...
+   *          }
+   *
+   *      ///handle other exceptions here
+   *      }
+   *
+   * }
+   *
+   * ```
+   *
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   *
+   * @param {string} productAccount The marker account whose permission will be set
+   * @param {string} itemHash permission value to the target markes
+   * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
+   * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
+   */
   async setMaximumMintableQuantity(productAddress, quantity, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
       .setMaximumMintableQuantity(productAddress, quantity, overrideOptions);
