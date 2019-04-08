@@ -8,7 +8,7 @@
     "debug": "nodemon --inspect server.js",
     "test": "truffle test test/*",
     "coverage": "cross-env NODE_ENV=test nyc truffle test && nyc report --reporter=text-lcov | coveralls",
-    "generage-doc": "jsdoc --configure .jsdoc.json --verbose",
+    "generate-doc": "jsdoc --configure .jsdoc.json --verbose",
     "lint": "eslint devery/**/*.js test/**/*.js",
     "lint:fix": "eslint devery/**/*.js test/**/*.js --fix",
     "lint:watch": "esw devery/**/*.js test/**/*.js --watch",

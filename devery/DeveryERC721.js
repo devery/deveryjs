@@ -13,7 +13,7 @@ const ethers = require('ethers');
  * @version 1
  * @extends AbstractSmartContract
  */
-export default class DeveryERC721 extends AbstractSmartContract {
+class DeveryERC721 extends AbstractSmartContract {
   /**
      *
      * Creates a new instansce of DeveryERC721.
@@ -262,3 +262,6 @@ export default class DeveryERC721 extends AbstractSmartContract {
     return result.toNumber();
   }
 }
+
+
+export default DeveryERC721;

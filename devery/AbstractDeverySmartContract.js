@@ -31,7 +31,11 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
      * @param {ClientOptions} options
      */
   constructor(options = {
-    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+    web3Instance: undefined,
+    acc: undefined,
+    address: undefined,
+    walletPrivateKey: undefined,
+    networkId: undefined,
   }) {
     super(options);
     if (this.constructor === AbstractDeverySmartContract) {
