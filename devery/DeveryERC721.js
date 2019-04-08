@@ -92,17 +92,147 @@ export default class DeveryERC721 extends AbstractSmartContract {
     return result.valueOf();
   }
 
-  // x.__deveryERC721Contract.onapproval
+  /**
+   *
+   * Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain
+   * please note that ApprovalEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+   * as param.
+   *
+   * ***Usage example:***
+   *
+   * ```
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
+   * //now you can use it
+   *
+   *
+   *
+   * deveryErc721Client.setApprovalEventListener((brandAccount,appAccount,active) => {
+   *      //whenever an app created we will log it to the console
+   *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+   * })
+   *
+   * //if you want to remove the listener you can simply pass undefined as parameter
+   *
+   * deveryRegistryClient.setApprovalEventListener(undefined)
+   *
+   * //or that is equivalent to the above call
+   *
+   *
+   *
+   * deveryRegistryClient.setApprovalEventListener()
+   *
+   *
+   *
+   * ```
+   *
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
+   *
+   * @param {ApprovalEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * triggered
+   */
   setApprovalEventListener(callback) {
     this.__deveryERC721Contract.onapproval = callback;
   }
 
-  // x.__deveryERC721Contract.onapprovalforall
+  /**
+   * This is a callback function that will be invoked in response to  ApprovalEvents
+   *
+   *
+   * @callback ApprovalEventCallback
+   * @param {string} productAccount
+   * @param {string} brandAccount
+   * @param {string} appAccount
+   * @param {string} description
+   * @param {bools} active
+   *
+   */
+
+  /**
+   *
+   * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
+   * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+   * as param.
+   *
+   * ***Usage example:***
+   *
+   * ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   * //now you can use it
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+   *      //whenever an app created we will log it to the console
+   *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+   * })
+   *
+   * //if you want to remove the listener you can simply pass undefined as parameter
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+   *
+   * //or that is equivalent to the above call
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener()
+   *
+   *
+   *
+   * ```
+   *
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   *
+   * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * triggered
+   */
   setApprovalForAllEventListener(callback) {
     this.__deveryERC721Contract.onapprovalforall = callback;
   }
 
-  // x.__deveryERC721Contract.ontransfer
+  /**
+   *
+   * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
+   * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+   * as param.
+   *
+   * ***Usage example:***
+   *
+   * ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   * //now you can use it
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+   *      //whenever an app created we will log it to the console
+   *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+   * })
+   *
+   * //if you want to remove the listener you can simply pass undefined as parameter
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+   *
+   * //or that is equivalent to the above call
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener()
+   *
+   *
+   *
+   * ```
+   *
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   *
+   * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * triggered
+   */
   setTransferEventListener(callback) {
     this.__deveryERC721Contract.ontransfer = callback;
   }

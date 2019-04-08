@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>
-      AbstractSmartContract - Documentation
+      DeveryERC721.js - Documentation
   </title>
 
   <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
@@ -76,408 +78,284 @@
   <div id="main">
     
       <h1 class="page-title">
-        AbstractSmartContract
+        DeveryERC721.js
       </h1>
     
 
     
+      
 
 <section>
-  <header>
-    
-      <h2>
-        
-        AbstractSmartContract
-        
-      </h2>
-
-      
-        <div class="class-description">
-          <p>Abstract class that is base for all smart contracts.
-There is no reason to directly instantiate it. Here lies some common logic about how to resolve
-the underlying smart contract address and getting the signer instance. <strong><em> you shall not instantiate it directly</em></strong>.</p>
-        </div>
-      
-    
-  </header>
-
   <article>
-    <div class="container-overview">
-      
-        
+    <pre class="prettyprint source linenums"><code>import AbstractSmartContract from './AbstractSmartContract';
+
+const deveryERC721Artifact = require('../build/contracts/DeveryERC721Token.json');
+const ethers = require('ethers');
 
 
-  
-    <h2>Constructor</h2>
-  
+/**
+ *
+ * Main class to deal with the owned smart contract interface and related operations,
+ * you can use it to check the current contract owner and list to ownership change related
+ * events
+ *
+ * @version 2
+ * @extends AbstractDeverySmartContract
+ */
+export default class DeveryERC721 extends AbstractSmartContract {
+  /**
+     *
+     * Creates a new instansce of DeveryERC721.
+     *```
+     * //creates a DeveryERC721Client with the default params
+     * let deveryERC721Client = new DeveryERC721();
+     *
+     * //creates a deveryRegistryClient pointing to a custom address
+     * let deveryERC721Client = new DeveryERC721({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+     *
+     * ```
+     *
+     * @param {ClientOptions} options network connection options
+     *
+     */
+  constructor(options = {
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+  }) {
+    super(...arguments);
 
-  <span class='name-container'>
-    <a class="link-icon" href="#AbstractSmartContract">
-      <svg height="20" width="20" style="fill: black;">
-        <use xlink:href="#linkIcon"></use>
-      </svg>
-    </a>
-    <h4 class="name" id="AbstractSmartContract">
-      <span class="type-signature"></span>new AbstractSmartContract<span class="signature">(options)</span><span class="type-signature"></span>
-    </h4>
-  </span>
+    options = Object.assign(
+      {
+        web3Instance: undefined,
+        acc: undefined,
+        address: undefined,
+        walletPrivateKey: undefined,
+        networkId: undefined,
+      }
+      , options,
+    );
 
-  
+    let address = options.address;
+    let network = options.networkId;
 
+    try {
+      if (!options.web3Instance) {
+        options.web3Instance = web3;
+      }
+      network = options.web3Instance.version.network;
+      console.log('it was not possible to find global web3');
+    } catch (e) {
+      console.log('it was not possible to find global web3');
+    }
 
+    if (!network) {
+      network = 1;
+    }
 
-  <div class="description">
-    <p><strong><em>You shall not call this class constructor directly</em></strong> if you do so you will get a TypeError
-as we are explicitly checking against this.</p>
-<pre class="prettyprint source"><code>//excerpt from the constructor
+    if (!address) {
+      address = deveryERC721Artifact.networks[network].address;
+    }
 
-if (new.target === AbstractDeverySmartContract) {
-     throw new TypeError(&quot;Cannot construct AbstractDeverySmartContract instances directly&quot;);
+    this.__deveryERC721Contract = new ethers.Contract(
+      address, deveryERC721Artifact.abi,
+      this.__signerOrProvider,
+    );
+  }
+
+  // x.__deveryERC721Contract.claimProduct
+  async claimProduct(productAddress, quantity = 1, overrideOptions = {}) {
+    const result = await this.__deveryERC721Contract
+      .claimProduct(productAddress, quantity, overrideOptions);
+    return result.valueOf();
+  }
+
+  // x.__deveryERC721Contract.getApproved
+  async getApproved(address, overrideOptions = {}) {
+    const result = await this.__deveryERC721Contract.getApproved(address, overrideOptions);
+    return result;
+  }
+
+  // x.__deveryERC721Contract.getProductsByOwner
+  async getProductsByOwner(addressOwner, overrideOptions = {}) {
+    const result = await this.__deveryERC721Contract
+      .getProductsByOwner(addressOwner, overrideOptions);
+    return result.valueOf();
+  }
+
+  /**
+   *
+   * Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain
+   * please note that ApprovalEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+   * as param.
+   *
+   * ***Usage example:***
+   *
+   * ```
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
+   * //now you can use it
+   *
+   *
+   *
+   * deveryErc721Client.setApprovalEventListener((brandAccount,appAccount,active) => {
+   *      //whenever an app created we will log it to the console
+   *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+   * })
+   *
+   * //if you want to remove the listener you can simply pass undefined as parameter
+   *
+   * deveryRegistryClient.setApprovalEventListener(undefined)
+   *
+   * //or that is equivalent to the above call
+   *
+   *
+   *
+   * deveryRegistryClient.setApprovalEventListener()
+   *
+   *
+   *
+   * ```
+   *
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
+   *
+   * @param {ApprovalEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * triggered
+   */
+  setApprovalEventListener(callback) {
+    this.__deveryERC721Contract.onapproval = callback;
+  }
+
+  /**
+   * This is a callback function that will be invoked in response to  ApprovalEvents
+   *
+   *
+   * @callback ApprovalEventCallback
+   * @param {string} productAccount
+   * @param {string} brandAccount
+   * @param {string} appAccount
+   * @param {string} description
+   * @param {bools} active
+   *
+   */
+
+  /**
+   *
+   * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
+   * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+   * as param.
+   *
+   * ***Usage example:***
+   *
+   * ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   * //now you can use it
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+   *      //whenever an app created we will log it to the console
+   *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+   * })
+   *
+   * //if you want to remove the listener you can simply pass undefined as parameter
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+   *
+   * //or that is equivalent to the above call
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener()
+   *
+   *
+   *
+   * ```
+   *
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   *
+   * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * triggered
+   */
+  setApprovalForAllEventListener(callback) {
+    this.__deveryERC721Contract.onapprovalforall = callback;
+  }
+
+  /**
+   *
+   * Listener to productUpdated events, this event triggers whenever a new devery app is created in the blockchain
+   * please note that ProductUpdatedEventListener do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove am AppAddedEventListener, just call this function passing undefined
+   * as param.
+   *
+   * ***Usage example:***
+   *
+   * ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   * //now you can use it
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener((brandAccount,appAccount,active) => {
+   *      //whenever an app created we will log it to the console
+   *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+   * })
+   *
+   * //if you want to remove the listener you can simply pass undefined as parameter
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+   *
+   * //or that is equivalent to the above call
+   *
+   *
+   *
+   * deveryRegistryClient.setProductUpdatedEventListener()
+   *
+   *
+   *
+   * ```
+   *
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   *
+   * @param {ProductEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * triggered
+   */
+  setTransferEventListener(callback) {
+    this.__deveryERC721Contract.ontransfer = callback;
+  }
+
+  // x.__deveryERC721Contract.setMaximumMintableQuantitys
+  async setMaximumMintableQuantity(productAddress, quantity, overrideOptions = {}) {
+    const result = await this.__deveryERC721Contract
+      .setMaximumMintableQuantity(productAddress, quantity, overrideOptions);
+    return result.valueOf();
+  }
+
+  // x.__deveryERC721Contract.tokenIdToProduct
+  async tokenIdToProduct(tokenId) {
+    const result = await this.__deveryERC721Contract.tokenIdToProduct(tokenId);
+    return result.valueOf();
+  }
+
+  // x.__deveryERC721Contract.totalAllowedProducts
+  async totalAllowedProducts(productAddress) {
+    const result = await this.__deveryERC721Contract.totalAllowedProducts(productAddress);
+    return result.toNumber();
+  }
+
+  // x.__deveryERC721Contract.totalMintedProducts
+  async totalMintedProducts(productAddress) {
+    const result = await this.__deveryERC721Contract.totalMintedProducts(productAddress);
+    return result.toNumber();
+  }
 }
 </code></pre>
-  </div>
-
-
-
-
-
-
-
-  <h5>Parameters:</h5>
-  
-
-<table class="params">
-  <thead>
-    <tr>
-      
-        <th>Name</th>
-      
-
-      <th>Type</th>
-
-      
-
-      
-
-      <th class="last">Description</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    
-      <tr>
-        
-          <td class="name"><code>options</code></td>
-        
-
-        <td class="type">
-          
-            
-    <span class="param-type">
-      <a href="global.html#ClientOptions">ClientOptions</a>
-    </span>
-
-    
-
-
-          
-        </td>
-
-        
-
-        
-
-        <td class="description last">
-          
-          
-        </td>
-      </tr>
-
-    
-  </tbody>
-</table>
-
-
-
-
-
-<dl class="details">
-
-  
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version">
-      <ul class="dummy">
-        <li>
-          3
-        </li>
-      </ul>
-    </dd>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-      <ul class="dummy">
-        <li>
-          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line30">line 30</a>
-        </li>
-      </ul>
-    </dd>
-  
-
-  
-
-  
-
-  
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-      <h3 class="subsection-title">Methods</h3>
-
-      
-        
-
-
-  
-
-  <span class='name-container'>
-    <a class="link-icon" href="#getSignerAddress">
-      <svg height="20" width="20" style="fill: black;">
-        <use xlink:href="#linkIcon"></use>
-      </svg>
-    </a>
-    <h4 class="name" id="getSignerAddress">
-      <span class="type-signature"></span>getSignerAddress<span class="signature">()</span><span class="type-signature"> &rarr; {*}</span>
-    </h4>
-  </span>
-
-  
-
-
-
-  <div class="description">
-    <p>you can use this method to check the current signer wallet address</p>
-  </div>
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-      <ul class="dummy">
-        <li>
-          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line105">line 105</a>
-        </li>
-      </ul>
-    </dd>
-  
-
-  
-
-  
-
-  
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-        
-
-
-  
-
-  <span class='name-container'>
-    <a class="link-icon" href="#getProvider">
-      <svg height="20" width="20" style="fill: black;">
-        <use xlink:href="#linkIcon"></use>
-      </svg>
-    </a>
-    <h4 class="name" id="getProvider">
-      <span class="type-signature"></span>getProvider<span class="signature">()</span><span class="type-signature"> &rarr; {*}</span>
-    </h4>
-  </span>
-
-  
-
-
-
-  <div class="description">
-    <p>returns the internal signer or provider, this method needs to be used with caution
-as it exposes internals. So unless you know what you are doing it's better to avoid using it.</p>
-  </div>
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-      <ul class="dummy">
-        <li>
-          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line115">line 115</a>
-        </li>
-      </ul>
-    </dd>
-  
-
-  
-
-  
-
-  
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    
-
-    
-
-    
   </article>
 </section>
 
-
+    
 
 
   </div>
