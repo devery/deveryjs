@@ -59,7 +59,7 @@ class DeveryERC721 extends AbstractSmartContract {
     }
 
     if (!network) {
-      network = 1;
+      network = options.networkId || 1;
     }
 
     if (!address) {
