@@ -301,6 +301,17 @@ class DeveryERC721 extends AbstractSmartContract {
     return result.valueOf();
   }
 
+
+  async balanceOf(ownerAddress, overrideOptions = {}) {
+    const result = await this.__deveryERC721Contract.balanceOf(ownerAddress, overrideOptions);
+    return result.valueOf();
+  }
+
+  async tokenOfOwnerByIndex(ownerAddress, index, overrideOptions = {}) {
+    const result = await this.__deveryERC721Contract.tokenIdToProduct(ownerAddress, index, overrideOptions);
+    return result.valueOf();
+  }
+
   // x.__deveryERC721Contract.totalAllowedProducts
   async totalAllowedProducts(productAddress) {
     const result = await this.__deveryERC721Contract.totalAllowedProducts(productAddress);
