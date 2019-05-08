@@ -59,7 +59,7 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
       }
       network = options.web3Instance.version.network;
     } catch (e) {
-      console.log('it was not possible to find global web3');
+      //console.log('it was not possible to find global web3');
     }
 
     if (!network) {

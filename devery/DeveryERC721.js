@@ -30,7 +30,11 @@ class DeveryERC721 extends AbstractSmartContract {
      *
      */
   constructor(options = {
-    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+    web3Instance: undefined,
+    acc: undefined,
+    address: undefined,
+    walletPrivateKey: undefined,
+    networkId: undefined,
   }) {
     super(...arguments);
 
@@ -53,9 +57,9 @@ class DeveryERC721 extends AbstractSmartContract {
         options.web3Instance = web3;
       }
       network = options.web3Instance.version.network;
-      console.log('it was not possible to find global web3');
+      //console.log('it was not possible to find global web3');
     } catch (e) {
-      console.log('it was not possible to find global web3');
+      //console.log('it was not possible to find global web3');
     }
 
     if (!network) {
@@ -304,12 +308,13 @@ class DeveryERC721 extends AbstractSmartContract {
 
   async balanceOf(ownerAddress, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.balanceOf(ownerAddress, overrideOptions);
-    return result.valueOf();
+    return result.toNumber();
   }
 
   async tokenOfOwnerByIndex(ownerAddress, index, overrideOptions = {}) {
-    const result = await this.__deveryERC721Contract.tokenIdToProduct(ownerAddress, index, overrideOptions);
-    return result.valueOf();
+    const result = await this.__deveryERC721Contract
+      .tokenOfOwnerByIndex(ownerAddress, index, overrideOptions);
+    return result.toNumber();
   }
 
   // x.__deveryERC721Contract.totalAllowedProducts
@@ -322,6 +327,12 @@ class DeveryERC721 extends AbstractSmartContract {
   async totalMintedProducts(productAddress) {
     const result = await this.__deveryERC721Contract.totalMintedProducts(productAddress);
     return result.toNumber();
+  }
+
+  async safeTransferFrom(fromAddress, toAddress, tokenId) {
+    const result = await this.__deveryERC721Contract.safeTransferFrom(
+      fromAddress, toAddress, tokenId );
+    return result.valueOf();
   }
 }
 
