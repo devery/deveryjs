@@ -90,12 +90,40 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
   // x.__deveryERC721Contract.getProductsByOwner
+  /**
+   * Each brand has and devery user blockchain address. Each blockchain addres has tokens associated with it
+   * representing the products it owns.
+   * This method returns us all the tokens linked to the address we pass into the function
+   * 
+   * ***usage example:***
+   * 
+   * ```
+   *  //first you need to get a {@link DeveryERC721} instance
+   *  let deveryErc721Client = new DeveryERC721();
+   *  //now you can use it
+   *
+   *  //Let's log the simplest case of use in the console.
+   * 
+   *  deveryErc721Client.getProductsByOwner(addresOwner).then(response => console.log('these are the products owneds by this address', response))
+   * 
+   *  //Since this is a promise function you will need a promise to display the result
+   * 
+   *  //This function you return you an array with all the tokens owned by the address passed as a parameter
+   * 
+   *  
+   * ```
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
+   * 
+   * DeveryERC721Client.getProductsByOwner()
+   * @param {string} addressOwner the blockchain addres of whom we want to know the owned tokens
+   * @param {TransactionOptions} [overrideOptions] 
+   */
   async getProductsByOwner(addressOwner, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
       .getProductsByOwner(addressOwner, overrideOptions);
     return result.valueOf();
   }
-
+  
   /**
    *
    * Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain
@@ -243,7 +271,7 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    *
-   * Sets the maximum mintable quantity of a given token. *** If you don't set the maximum mintable quantity it will be infinite by defaul**
+   * Sets the maximum mintable quantity of a given token. *** If you don't set the maximum mintable quantity it will be infinite by default**
    *
    *  ***Usage example:***
    * ```
