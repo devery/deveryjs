@@ -1320,21 +1320,21 @@ async function(){
 
 
   <div class="description">
-    <p>This method returns the blockchain addres of a product, using it's token as a parameter</p>
+    <p>This method returns the blockchain address of a product, using it's token as a parameter</p>
 <p><strong><em>Usage Example:</em></strong></p>
-<pre class="prettyprint source"><code>//first you need to get a <a href="DeveryRegistry.html">DeveryRegistry</a> instance
+<pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 
-let deveryRegistryClient = new DeveryRegistry();
+let deveryERC721Client = new DeveryERC721();
 
 //now you can use it
 
 //to use this function you need to have a token, which can be get through a function like tokenOfOwnerByIndex
 //The token is a hexadecimal number
 
-deveryRegistryClient.__deveryERC721Contract.tokenIdToProduct(&quot;token&quot;).then(response => console.log(&quot;this is your product address&quot;, response))
+deveryERC721Client.tokenIdToProduct(&quot;token&quot;).then(response => console.log(&quot;this is your product address&quot;, response))
 
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
-<p> DeveryERC721Client.tokenIdToProduct()</p>
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+<p>DeveryERC721Client.tokenIdToProduct()</p>
   </div>
 
 
@@ -1481,7 +1481,7 @@ deveryRegistryClient.__deveryERC721Contract.tokenIdToProduct(&quot;token&quot;).
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryERC721.js.html">DeveryERC721.js</a>, <a href="DeveryERC721.js.html#line360">line 360</a>
+          <a href="DeveryERC721.js.html">DeveryERC721.js</a>, <a href="DeveryERC721.js.html#line359">line 359</a>
         </li>
       </ul>
     </dd>
@@ -1531,18 +1531,18 @@ deveryRegistryClient.__deveryERC721Contract.tokenIdToProduct(&quot;token&quot;).
   <div class="description">
     <p>This Method returns the token of a product using the by it's index (it's position in an array containing all the products owned by the owner address).</p>
 <p><strong><em>Usage Example:</em></strong></p>
-<pre class="prettyprint source"><code>//first you need to get a <a href="DeveryRegistry.html">DeveryRegistry</a> instance
+<pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 
-let deveryRegistryClient = new DeveryRegistry();
+let deveryERC721Client = new DeveryERC721();
 
 //now you can use it
 
 
-deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, index).then(response => ( console.log('product token', response)))
+deveryERC721Client.tokenOfOwnerByIndex(ownerAddress, index).then(response => ( console.log('product token', response)))
 
-//the product order is the same as the array returned by getProductByOwner() . Wherefore the index 0 it's the first addres returned by the getProductByOwner method,
+//the product order is the same as the array returned by getProductByOwner() . Wherefore the index 0 it's the first address returned by the getProductByOwner method,
 //the index 1 is the  second address and so on.
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
   </div>
 
 
@@ -1726,7 +1726,7 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryERC721.js.html">DeveryERC721.js</a>, <a href="DeveryERC721.js.html#line396">line 396</a>
+          <a href="DeveryERC721.js.html">DeveryERC721.js</a>, <a href="DeveryERC721.js.html#line395">line 395</a>
         </li>
       </ul>
     </dd>
@@ -1775,14 +1775,14 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
 
   <div class="description">
     <p>This method transfers the ownership of a product from one account to another.
-The transfer must be made logged in the account referenced in the &quot;fromAddres&quot; parameter,
+The transfer must be made logged in the account referenced in the &quot;fromAddress&quot; parameter,
 otherwise the transfer will be denied</p>
 <p><strong><em> Usage Example: </em></strong></p>
-<pre class="prettyprint source"><code>//first you need to get a <a href="DeveryRegistry.html">DeveryRegistry</a> instance
-let deveryRegistryClient = new DeveryRegistry();
+<pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryRegistryClient = new DeveryERC721();
 //now you can use it
 
-deveryRegistryClient.__deveryERC721Contract.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
+deveryERC721Client.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
    console.log('your transaction was a success');
    //other stuff
 }).catch(err => {
@@ -1792,7 +1792,7 @@ deveryRegistryClient.__deveryERC721Contract.safeTransferFrom(fromAddress, toAddr
 
 
 
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
   </div>
 
 
@@ -1948,7 +1948,7 @@ deveryRegistryClient.__deveryERC721Contract.safeTransferFrom(fromAddress, toAddr
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryERC721.js.html">DeveryERC721.js</a>, <a href="DeveryERC721.js.html#line445">line 445</a>
+          <a href="DeveryERC721.js.html">DeveryERC721.js</a>, <a href="DeveryERC721.js.html#line444">line 444</a>
         </li>
       </ul>
     </dd>
