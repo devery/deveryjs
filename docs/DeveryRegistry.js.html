@@ -845,9 +845,9 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * //first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
-     * deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(app => {
+     * deveryRegistryClient.getBrand('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(brand => {
      *      if(app.active){
-     *          console.log(app.appName);
+     *          console.log(brand);
      *          //... other stuff
      *      }
      * })
@@ -856,9 +856,9 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * //or with the async syntax
      *
      * async function(){
-     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
+     *      let app = await deveryRegistryClient.getBrand('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
      *      if(app.active){
-     *          console.log(app.appName);
+     *          console.log(brand);
      *          //... other stuff
      *      }
      * }
