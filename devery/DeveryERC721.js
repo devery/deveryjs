@@ -84,6 +84,30 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
   // x.__deveryERC721Contract.getApproved
+  /**
+   * This method returns you the total amount of approved transactions of the inspected producted (referenced by it's token)
+   * 
+   * ***Usage example:***
+   * 
+   * ```
+   *  //first you need to get a {@link DeveryERC721} instance
+   *  let deveryErc721Client = new DeveryERC721();
+   *  //now you can use it
+   * 
+   * //Let's log the simplest case of use in the console
+   * 
+   * deveryRegistryClient.__deveryERC721Contract.getApproved(address).then(response => console.log(`Number of approved transactions ${response}`))
+   * 
+   * //response is going to be an hexadecimal number representing the amount of approved transactions made with it
+   * 
+   * ```
+   *
+   *  for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
+   * 
+   * 
+   * @param {string} address tokenAddres to be inspected
+   * @param {TransactionOptions} [overrideOptions]
+   */
   async getApproved(address, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.getApproved(address, overrideOptions);
     return result;
@@ -400,6 +424,29 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
   // x.__deveryERC721Contract.totalAllowedProducts
+  /**
+   * This method allows you to query the number of tokens linked to the product addres,
+   * representing the amount of that product generated. 
+   *  The response is returnet as a hexadecimal number
+   * 
+   * ***Usage example:***
+   * ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   * //now you can use it
+   * 
+   * deveryRegistryClient.__deveryERC721Contract.totalAllowedProducts(productAddress).then(response => {
+   * console.log(`this is the total amount of products Allowed ${productAddress}`)
+   * }).catch(err => { 
+   *  //handle exceptions here
+   * })
+   * 
+   * ```
+   * 
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * 
+   * @param {string} productAddress Blockchain addres of the consulted product 
+   */
   async totalAllowedProducts(productAddress) {
     const result = await this.__deveryERC721Contract.totalAllowedProducts(productAddress);
     return result.toNumber();
