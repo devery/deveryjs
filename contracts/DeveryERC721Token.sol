@@ -656,6 +656,15 @@ contract DeveryERC721Token is ERC721Enumerable,Admined {
     mapping(address => uint) public totalAllowedProducts;
     mapping(address => uint) public totalMintedProducts;
     DeveryRegistry deveryRegistry;
+    ERC20Interface public token;
+
+    event TokenUpdated(address indexed oldToken, address indexed newToken);
+
+
+    function setToken(address _token) public onlyAdmin {
+        TokenUpdated(address(token), _token);
+        token = ERC20Interface(_token);
+    }
 
     /**
       * @dev modifier to enforce that only the brand that created a given product can change it
@@ -684,15 +693,35 @@ contract DeveryERC721Token is ERC721Enumerable,Admined {
     }
 
     /**
-      * @dev mint a new ERC721 token for a given product and assing it to the original product brand;
-      */
+     * @dev mint a new ERC721 token for a given product and assing it to the original product brand;
+     */
     function claimProduct(address _productAddress,uint _quantity) external payable  brandOwnerOnly(_productAddress) {
         require(totalAllowedProducts[_productAddress] == 0 || totalAllowedProducts[_productAddress] >= totalMintedProducts[_productAddress] + _quantity);
-        totalMintedProducts[_productAddress]+=_quantity;
+        //********************************************************************charges the fee****************************************
+        address productBrandAddress;
+        address appAccountAddress;
+        address appFeeAccount;
+        address deveryFeeAccount;
+        uint appFee;
+        uint deveryFee;
+        (,productBrandAddress,,,,,) = deveryRegistry.products(_productAddress);
+        (,appAccountAddress,,) = deveryRegistry.brands(productBrandAddress);
+        (,,appFeeAccount,appFee,) = deveryRegistry.apps(appAccountAddress);
+        deveryFee = deveryRegistry.fee();
+        deveryFeeAccount = deveryRegistry.feeAccount();
+        if (appFee > 0) {
+            token.transferFrom(productBrandAddress, appFeeAccount, appFee*_quantity);
+        }
+        if (deveryFee > 0) {
+            token.transferFrom(productBrandAddress, deveryFeeAccount, deveryFee*_quantity);
+        }
+        //********************************************************************charges the fee****************************************
         for(uint i = 0;i<_quantity;i++){
             uint nextId = tokenIdToProduct.push(_productAddress) - 1;
             _mint(msg.sender,nextId);
         }
+
+        totalMintedProducts[_productAddress]+=_quantity;
     }
 
     /**
