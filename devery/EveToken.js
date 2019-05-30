@@ -1,6 +1,6 @@
 import AbstractSmartContract from './AbstractSmartContract';
 
-const eveTokenArtifact = require('../build/contracts/TestEVEToken.json');
+const eveTokenArtifact = require('../build/contracts/BTTSToken.json');
 const ethers = require('ethers');
 
 
@@ -49,9 +49,9 @@ class EveToken extends AbstractSmartContract {
         options.web3Instance = web3;
       }
       network = options.web3Instance.version.network;
-      //console.log('it was not possible to find global web3');
+      // console.log('it was not possible to find global web3');
     } catch (e) {
-      //console.log('it was not possible to find global web3');
+      // console.log('it was not possible to find global web3');
     }
 
     if (!network) {
@@ -97,8 +97,8 @@ class EveToken extends AbstractSmartContract {
 
   /**
      *
-     *  gives the 3rd party the right to facilitate a transaction with the owners token.
-     *  please note that alowance will not transfer tokens to the 3rd party but instead give him
+     *  checks  how many tokens a 3rd party  can use to facilitate a transaction with the owners token.
+     *  please note that allowance will does transfer tokens to the 3rd party but instead give him
      *  permission to facilitate transactions on your behalf.
      *
      * @param account  account whose balance is being inquired
@@ -106,6 +106,22 @@ class EveToken extends AbstractSmartContract {
      */
   async allowance(tokenOwner, spender, overrideOptions = {}) {
     const result = await this.__eveTokenContract.allowance(tokenOwner, spender, overrideOptions);
+    return result.valueOf();
+  }
+
+  /**
+   *
+   *  gives the 3rd party the right to facilitate a transaction with the owners token.
+   *  please note that `approve` will not transfer tokens to the 3rd party but instead give him
+   *  permission to facilitate transactions on your behalf.
+   *
+   * @param spender  ethereum address that has right to spend the approved tokens, this can be a contract address
+   * or any other address
+   * @param quantity that the 3rd party is allowed to spend
+   * @returns {Promise.<*>}
+   */
+  async approve(spender, quantity, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.approve(spender, quantity, overrideOptions);
     return result.valueOf();
   }
 
