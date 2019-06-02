@@ -305,7 +305,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * let deveryRegistryClient = new DeveryRegistry();
    *
    * //passing true as param will add the account as marker
-   * deveryRegistryClient.mark("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","0x873306090abaB3A6e1400e9345bC60c78a8BEt87").then(transaction => {
+   * deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','0x873306090abaB3A6e1400e9345bC60c78a8BEt87').then(transaction => {
    *      console.log('transaction address',transaction.hash);
    *      //... other stuff
    * }).catch(err => {
@@ -324,7 +324,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * async function(){
    *      try{
    *          //passing false as param will remove the account as marker
-   *          let transaction = await deveryRegistryClient.mark("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","0x873306090abaB3A6e1400e9345bC60c78a8BEt87")
+   *          let transaction = await deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','0x873306090abaB3A6e1400e9345bC60c78a8BEt87')
    *          console.log('transaction address',transaction.hash);
    *      }
    *      catch(err){
@@ -369,7 +369,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * //to use this function you need to have a token, which can be get through a function like tokenOfOwnerByIndex
    * //The token is a hexadecimal number
    * 
-   * deveryRegistryClient.__deveryERC721Contract.tokenIdToProduct("token").then(response => console.log("this is your product address", response))
+   * deveryRegistryClient.__deveryERC721Contract.tokenIdToProduct('token').then(response => console.log('this is your product address', response))
    *
    * 
    * ```
@@ -387,7 +387,28 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
 
-  // don't actually know what this one does
+  /**
+   * This method returns the (hexadecimal) number of products owned by the account address passed as parameter to the function
+   * 
+   * ***Usage Example:***
+   * 
+   *  ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * 
+   * let deveryRegistryClient = new DeveryRegistry();
+   * 
+   * //now you can use it
+   * 
+   * //this method requires a owner addres, which can be obtained on the metamask extension by clicking on your account name
+   * 
+   *  
+   * deveryRegistryClient.__deveryERC721Contract.balanceOf('ownerAddress').then(response => console.log('this is account owns this many products', response))
+   *
+   * ```
+   * 
+   * @param {string} ownerAddress Blockchain address of the inpsected account
+   * @param {TransactionOptions} [overrideOptions] 
+   */
   async balanceOf(ownerAddress, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.balanceOf(ownerAddress, overrideOptions);
     return result.toNumber();
@@ -452,7 +473,30 @@ class DeveryERC721 extends AbstractSmartContract {
     return result.toNumber();
   }
 
-  // x.__deveryERC721Contract.totalMintedProducts
+  /**
+   * You can generate a limited amount of products for each product address.
+   * If you try to generated more products than you are allowed this product
+   * is going to be minted.
+   * This method returns you the minted products for a specific product address
+   * 
+   * ***Usage Example:***
+   * 
+   * ```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   * //now you can use it
+   * 
+   * deveryRegistryClient.__deveryERC721Contract.totalMintedProducts('productAdrres').then(response => 
+   *  (console.log('you have this many minted products for this addres')))
+   * 
+   * ```
+   * 
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * 
+   * 
+   * 
+   * @param {string} productAddress inspected product addres
+   */
   async totalMintedProducts(productAddress) {
     const result = await this.__deveryERC721Contract.totalMintedProducts(productAddress);
     return result.toNumber();
@@ -460,7 +504,7 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    * This method transfers the ownership of a product from one account to another.
-   * The transfer must be made logged in the account referenced in the "fromAddres" parameter,
+   * The transfer must be made logged in the account referenced in the 'fromAddres' parameter,
    * otherwise the transfer will be denied
    * 
    * *** Usage Example: ***
@@ -473,7 +517,7 @@ class DeveryERC721 extends AbstractSmartContract {
    *    console.log('your transaction was a success');
    *    //other stuff
    * }).catch(err => {
-   *  if(err.message.indexOf("gas required exceeds allowance or always failing transaction"){
+   *  if(err.message.indexOf('gas required exceeds allowance or always failing transaction'){
    *    console.log('You do not own the product you are trying to transfer')}
    * })
    * 
