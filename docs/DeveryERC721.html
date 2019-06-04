@@ -325,7 +325,7 @@ let deveryERC721Client = new DeveryERC721({address:'0xf17f52151EbEF6C7334FAD080c
 
 //Let's log the simplest case of use in the console
 
-deveryRegistryClient.__deveryERC721Contract.getApproved(address).then(response => console.log(`Number of approved transactions ${response}`))
+deveryErc721Client.getApproved(address).then(response => console.log(`Number of approved transactions ${response}`))
 
 //response is going to be an hexadecimal number representing the amount of approved transactions made with it
 </code></pre><p> for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
@@ -1537,7 +1537,7 @@ let deveryRegistryClient = new DeveryRegistry();
 //to use this function you need to have a token, which can be get through a function like tokenOfOwnerByIndex
 //The token is a hexadecimal number
 
-deveryRegistryClient.__deveryERC721Contract.tokenIdToProduct('token').then(response => console.log('this is your product address', response))
+deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('this is your product address', response))
 
 </code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
 <p> DeveryERC721Client.tokenIdToProduct()</p>
@@ -2188,16 +2188,16 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
 
   <div class="description">
     <p>This method allows you to query the number of tokens linked to the product addres,
-representing the amount of that product generated. 
+representing the amount of that product generated.
  The response is returnet as a hexadecimal number</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryRegistry.html">DeveryRegistry</a> instance
 let deveryRegistryClient = new DeveryRegistry();
 //now you can use it
 
-deveryRegistryClient.__deveryERC721Contract.totalAllowedProducts(productAddress).then(response => {
+deveryRegistryClient.totalAllowedProducts(productAddress).then(response => {
 console.log(`this is the total amount of products Allowed ${productAddress}`)
-}).catch(err => { 
+}).catch(err => {
  //handle exceptions here
 })
 </code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
@@ -2355,7 +2355,7 @@ This method returns you the minted products for a specific product address</p>
 let deveryRegistryClient = new DeveryRegistry();
 //now you can use it
 
-deveryRegistryClient.__deveryERC721Contract.totalMintedProducts('productAdrres').then(response => 
+deveryRegistryClient.totalMintedProducts('productAdrres').then(response =>
  (console.log('you have this many minted products for this addres')))
 </code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
   </div>
@@ -2511,7 +2511,7 @@ otherwise the transfer will be denied</p>
 let deveryRegistryClient = new DeveryRegistry();
 //now you can use it
 
-deveryRegistryClient.__deveryERC721Contract.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
+deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
    console.log('your transaction was a success');
    //other stuff
 }).catch(err => {
