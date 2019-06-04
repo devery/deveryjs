@@ -74,4 +74,5 @@ a signer you will not be able to perform read operations.
 ## Main Classes documentation.
 
 1. [DeveryRegistry](https://devery.github.io/deveryjs/DeveryRegistry.html)
-2. [EveToken](https://devery.github.io/deveryjs/EveToken.html)
+2. [DeveryERC721](https://devery.github.io/deveryjs/DeveryERC721.html)
+3. [EveToken](https://devery.github.io/deveryjs/EveToken.html)
