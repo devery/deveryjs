@@ -111,7 +111,9 @@
 
  let deveryRegistryClient = new DeveryRegistry();</code></pre></li>
 </ol>
-<h2>Simple usage example</h2><ol>
+<h2>Simple usage example</h2><ul>
+<li><p>Important read the permissioning session, to be aware of possible gotchas and pitfalls.</p>
+</li>
 <li><p>Checking if a product has been marked.</p>
 <pre class="prettyprint source lang-javascript"><code>   //first you need to get a <a href="DeveryRegistry.html">DeveryRegistry</a> instance
    let deveryRegistryClient = new DeveryRegistry();
@@ -129,10 +131,50 @@
             let item = await deveryRegistryClient.check(&quot;0x627306090abaB3A6e1400e9345bC60c78a8BEf57&quot;)
             console.log('product brand',item.brandAccount);
    }</code></pre></li>
-</ol>
+</ul>
 <h2>Access to the ethereum network</h2><p>Devery.js will try to automatically get the web3 object instance present in your context(page, app,etc). If this is
 not possible then it will fallback to a read only provider poiting to the main network. As the fallback does not contain
 a signer you will not be able to perform read operations.</p>
+<h2>Permissioning</h2><h3>web3 permissioning</h3><p>Metamask requires you to give permission to your app by default. So it's very important to call <code>web3.currentProvider.enable()</code> to open metamask window permission. it's  a good idea to safeguard your code in case web3 is not present and possibilities like this. One example of how to request these permissions safely would be</p>
+<pre class="prettyprint source"><code>// init metamask
+try {
+  if (web3 && web3.currentProvider && web3.currentProvider.isMetaMask) {
+    // TODO: move this to deveryjs
+    web3.currentProvider.enable()
+  }
+} 
+catch(e){
+//Handle exceptions here
+}
+</code></pre><p>If you don't do this you will not be able to interact with the contracts using metamask.</p>
+<h3>Fee charge permissions</h3><p>Some operations charge may chage a fee from the message sender, example of these transactions are marking a product and claiming a token for a marked item. The contracts that charge these fees need your permission, you can pre approve these transfers by calling the <code>approve</code> <a href="https://devery.github.io/deveryjs/EveToken.html">EveToken</a>.</p>
+<p>Here's a full example on how to check the current allowance and try to increase the approval if it's bellow a certain number </p>
+<pre class="prettyprint source"><code>export async function checkAndUpdateAllowance (address, minAllowance , total) {
+  try {
+    //creates a new eve token instance
+    let eveTokenClient = new EveToken();
+    //get the current connection provider the the ethereum network
+    let provider = eveTokenClient.getProvider()
+    //check the current allowance for the requested contract
+    let currentAllowance = await eveToken.allowance(web3.eth.accounts[0], address);
+    //we need to do the division by 10e17 because devery token uses the base 18
+    if(parseFloat(currentAllowance.toString()) / 10e17 &lt; minAllowance){
+        //here in the approve function we need to add the 17 0s for the same reason
+        let txn = await eveTokenClient.approve(address, total + '000000000000000000')
+            await provider.provider.waitForTransaction(txn.hash)
+    }
+
+  } catch (e) {
+      //Add your excepption handling here
+  }
+}
+
+//checks and approves the allowance for the deveryRegistry contract
+checkAndUpdateAllowance('0x0364a98148b7031451e79b93449b20090d79702a',40,100);
+
+//checks and approves the allowance for the deveryErc721 contract
+checkAndUpdateAllowance('0x032ef0359eb068d3dddd6e91021c02f397afce5a',40,100);
+</code></pre><p>this example would check and approve the allowance for both transactions (marking and claiming tokens) in the live network, you can always improve and change the code to fit your needs.</p>
 <h2>Main Classes documentation.</h2><ol>
 <li><a href="https://devery.github.io/deveryjs/DeveryRegistry.html">DeveryRegistry</a></li>
 <li><a href="https://devery.github.io/deveryjs/DeveryERC721.html">DeveryERC721</a></li>
