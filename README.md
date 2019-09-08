@@ -44,6 +44,8 @@ or alternatively you can use this.
 
 ## Simple usage example
 
+* Important read the permissioning session, to be aware of possible gotchas and pitfalls.
+
 1. Checking if a product has been marked.
 
     ```javascript
@@ -70,6 +72,66 @@ or alternatively you can use this.
 Devery.js will try to automatically get the web3 object instance present in your context(page, app,etc). If this is
 not possible then it will fallback to a read only provider poiting to the main network. As the fallback does not contain
 a signer you will not be able to perform read operations.
+
+## Permissioning
+
+### web3 permissioning
+
+Metamask requires you to give permission to your app by default. So it's very important to call `web3.currentProvider.enable()` to open metamask window permission. it's  a good idea to safeguard your code in case web3 is not present and possibilities like this. One example of how to request these permissions safely would be
+
+```
+// init metamask
+try {
+  if (web3 && web3.currentProvider && web3.currentProvider.isMetaMask) {
+    // TODO: move this to deveryjs
+    web3.currentProvider.enable()
+  }
+} 
+catch(e){
+//Handle exceptions here
+}
+
+```
+
+If you don't do this you will not be able to interact with the contracts using metamask.
+
+### Fee charge permissions
+
+Some operations charge may chage a fee from the message sender, example of these transactions are marking a product and claiming a token for a marked item. The contracts that charge these fees need your permission, you can pre approve these transfers by calling the `approve` [EveToken](https://devery.github.io/deveryjs/EveToken.html).
+
+Here's a full example on how to check the current allowance and try to increase the approval if it's bellow a certain number 
+
+```
+export async function checkAndUpdateAllowance (address, minAllowance , total) {
+  try {
+    //creates a new eve token instance
+    let eveTokenClient = new EveToken();
+    //get the current connection provider the the ethereum network
+    let provider = eveTokenClient.getProvider()
+    //check the current allowance for the requested contract
+    let currentAllowance = await eveToken.allowance(web3.eth.accounts[0], address);
+    //we need to do the division by 10e17 because devery token uses the base 18
+    if(parseFloat(currentAllowance.toString()) / 10e17 < minAllowance){
+        //here in the approve function we need to add the 17 0s for the same reason
+        let txn = await eveTokenClient.approve(address, total + '000000000000000000')
+            await provider.provider.waitForTransaction(txn.hash)
+    }
+   
+  } catch (e) {
+      //Add your excepption handling here
+  }
+}
+
+//checks and approves the allowance for the deveryRegistry contract
+checkAndUpdateAllowance('0x0364a98148b7031451e79b93449b20090d79702a',40,100);
+
+//checks and approves the allowance for the deveryErc721 contract
+checkAndUpdateAllowance('0x032ef0359eb068d3dddd6e91021c02f397afce5a',40,100);
+
+```
+
+this example would check and approve the allowance for both transactions (marking and claiming tokens) in the live network, you can always improve and change the code to fit your needs.
+
 
 ## Main Classes documentation.
 
