@@ -63,13 +63,22 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
     assert.equal(blockChainProduct.origin, product.origin);
   });
 
+  it('should return 0x0000000000000000000000000000000000000000 for non existing products', async () => {
+    const deveryClient = createDeveryRegistry(web3, undefined, accounts[9], contractAddress);
+    const blockChainProduct = await deveryClient.
+    getProduct('0xFBFba92F40B1507B7b087885f0d2F4C40aEd6d9F');
+    assert.equal(blockChainProduct.productAccount.toLowerCase(),'0x0000000000000000000000000000000000000000');
+  });
+
+
+
   it('should not be possible to create more than Product with the same Product account address', () => new Promise((async (resolve, reject) => {
     try {
       const product = data[0].brands[0].products[0];
       const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
       await deveryClient.addProduct(product.productAccount, product.description, product.details, product.year, product.origin, overrideOptions);
     } catch (e) {
-      assert.equal(e.message, 'VM Exception while processing transaction: revert', 'wrong exception');
+      assert.true(e.message.startsWith("the product that you're trying to mark already exists"),  `wrong exception ${e.message}`);
       resolve('success');
     }
   })));

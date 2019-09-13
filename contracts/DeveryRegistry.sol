@@ -239,11 +239,11 @@ contract DeveryRegistry is Admined {
     // ------------------------------------------------------------------------
     function addProduct(address productAccount, string description, string details, uint year, string origin) public {
         Brand storage brand = brands[msg.sender];
-        require(brand.brandAccount != address(0));
+        require(brand.brandAccount != address(0),"brand account is not valid");
         App storage app = apps[brand.appAccount];
-        require(app.appAccount != address(0));
+        require(app.appAccount != address(0),"app account is not valid");
         Product storage product = products[productAccount];
-        require(product.productAccount == address(0));
+        require(product.productAccount == address(0),"product account is not valid");
         products[productAccount] = Product({
             productAccount: productAccount,
             brandAccount: msg.sender,

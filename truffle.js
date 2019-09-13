@@ -27,7 +27,7 @@ module.exports = {
   mocha: {
     useColors: true,
     exit: true,
-    retries: 2,
+    retries: 0,
     timeout: 1000,
   },
 };

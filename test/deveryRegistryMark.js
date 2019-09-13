@@ -92,6 +92,30 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
     assert.notEqual('0x0000000000000000000000000000000000000000', markedResult.appAccount);
   });
 
+  it('should be possible to a add and mark the products in one go', async () => {
+    const account = data[0];
+    const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+    const customProduct = {
+      productAccount: '0xCAF3CEE3557E22c76Afee33246ec64468Cd9362b',
+      brandAccount: accounts[1],
+      description: 'Another product',
+      details: 'Another product 1 details',
+      year: 2010,
+      origin: 'Another product 1 origin',
+      active: true,
+    };
+    await deveryClient.AddProductAndMark(
+      customProduct.productAccount,
+      customProduct.description,
+      customProduct.details,
+      customProduct.year,
+      customProduct.origin,
+      overrideOptions,
+    );
+    const markedResult = await deveryClient.check(customProduct.productAccount);
+    assert.equal(customProduct.productAccount, markedResult.productAccount);
+  });
+
   it('should not be possible to a permissioned account mark an non existing product', async function () {
     this.timeout(5000);
     return new Promise(async (resolve, reject) => {

@@ -1,4 +1,5 @@
 import AbstractDeverySmartContract from './AbstractDeverySmartContract';
+import { createDeveryRegistry } from '../test/helpers/staticData';
 
 if ((typeof process !== 'undefined') && (process.release) && (process.release.name === 'node')) {
   // eslint-disable-next-line global-require
@@ -1120,6 +1121,10 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * of rejection
      */
   async addProduct(productAccount, description, details, year, origin, overrideOptions = {}) {
+    const productCheck = await this.getProduct(productAccount);
+    if (productCheck.productAccount.toLowerCase() != '0x0000000000000000000000000000000000000000') {
+      throw new Error(`the product that you're trying to mark already exists ${productCheck}`);
+    }
     const result = await this.__deveryRegistryContract
       .addProduct(productAccount, description, details, year, origin, overrideOptions);
     return result.valueOf();
@@ -1665,6 +1670,76 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+
+  /**
+   *
+   * Creates a new Product in the blockchain and automatically mark it.
+   * Calling `addProduct` and `mark` separately will have the same result, this is just a wrapper that does both calls on your behalf
+   * which means that once you call this you will see 2 transactions (1 for add product and 1 for mark)
+   * This is a write method so you will need to
+   * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
+   * make sure that your user have access to metamask or other web3 object.
+   *
+   *
+   * ***Usage example:***
+   *
+   *```
+   * //first you need to get a {@link DeveryRegistry} instance
+   * let deveryRegistryClient = new DeveryRegistry();
+   *
+   *
+   * deveryRegistryClient.AddProductAndMark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','My nice product','batch 001',2018,'Unknown place').then(transaction => {
+   *      console.log('transaction address',transaction.hash);
+   *      //... other stuff
+   * }).catch(err => {
+   *      if(err.message.indexOf('User denied')){
+   *          console.log('The user denied the transaction')
+   *          //...
+   *      }
+   *
+   *      ///handle other exceptions here
+   *
+   * })
+   *
+   *
+   * //or with the async syntax
+   *
+   * async function(){
+   *      try{
+   *          let transaction = await deveryRegistryClient.AddProductAndMark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','My nice product','batch 001',2018,'Unknown place')
+   *          console.log('transaction address',transaction.hash);
+   *      }
+   *      catch(err){
+   *          if(err.message.indexOf('User denied')){
+   *               console.log('The user denied the transaction')
+   *              //...
+   *          }
+   *
+   *      ///handle other exceptions here
+   *      }
+   *
+   * }
+   *
+   * ```
+   *
+   *
+   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   *
+   * @param {string} productAccount product account address
+   * @param {string} description your product name and description
+   * @param {string} details any extra details about your product
+   * @param {int} year product production date
+   * @param {string} origin information about the product origin
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+   * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
+   * of rejection
+   */
+  async AddProductAndMark(productAccount, description, details, year, origin, overrideOption = {}) {
+    await this.addProduct(productAccount, description, details, year, origin, overrideOption);
+    const hash = await this.addressHash(productAccount);
+    const result = await this.mark(productAccount, hash, overrideOption);
+    return result;
+  }
 
   /**
      * @typedef {Object} MarkResult
