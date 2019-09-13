@@ -78,7 +78,7 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
       const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
       await deveryClient.addProduct(product.productAccount, product.description, product.details, product.year, product.origin, overrideOptions);
     } catch (e) {
-      assert.true(e.message.startsWith("the product that you're trying to mark already exists"),  `wrong exception ${e.message}`);
+      assert(e.message.startsWith("the product that you're trying to mark already exists"),  `wrong exception ${e.message}`);
       resolve('success');
     }
   })));
