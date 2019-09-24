@@ -77,6 +77,12 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
   // x.__deveryERC721Contract.claimProduct
+  /**
+  *
+   * @param {*} productAddress 
+   * @param {*} quantity 
+   * @param {*} overrideOptions 
+   */
   async claimProduct(productAddress, quantity = 1, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
       .claimProduct(productAddress, quantity, overrideOptions);
@@ -537,6 +543,13 @@ class DeveryERC721 extends AbstractSmartContract {
     const result = await this.__deveryERC721Contract
       .safeTransferFrom(fromAddress, toAddress, tokenId);
     return result.valueOf();
+  }
+
+
+  async setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions = {}){
+    const result = await this.__deveryERC721Contract
+      .setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions);
+    return result.valueOf();    
   }
 }
 
