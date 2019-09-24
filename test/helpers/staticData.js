@@ -2,6 +2,7 @@ import DeveryAdmined from './../../devery/DeveryAdmined';
 import DeveryRegistry from './../../devery/DeveryRegistry';
 import EveToken from './../../devery/EveToken';
 import DeveryOwned from './../../devery/DeveryOwned';
+import DeveryERC721 from '../../devery/DeveryERC721';
 
 export function getData(accounts) {
   return [
@@ -241,3 +242,10 @@ export function createEveToken(web3, provider, account, contractAddress) {
     web3Instance: web3, provider, acc: account, address: contractAddress,
   });
 }
+
+export function createDeveryERC721(web3, provider, account, contractAddress) {
+  return new DeveryERC721({
+    web3Instance: web3, provider, acc: account, address: contractAddress,
+  });
+}
+
