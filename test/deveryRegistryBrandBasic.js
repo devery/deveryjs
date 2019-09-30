@@ -68,7 +68,7 @@ contract('DeveryRegistry - Brand - basic tests', (accounts) => {
         await devery.addBrand(brand.brandAccount, brand.brandName, overrideOptions);
         reject('This account has alread been added');
       } catch (e) {
-        assert.equal(e.message, 'VM Exception while processing transaction: revert', 'wrong exception');
+        assert(e.message.lastIndexOf('revert') > 0, `wrong exception raised --> ${e.message}`);
         resolve();
       }
     }));

@@ -56,7 +56,7 @@ contract('EveToken', (accounts) => {
       try {
         await eveTokenAcc.transfer(accounts[2], total, overrideOptions);
       } catch (e) {
-        assert(e.message, 'VM Exception while processing transaction: revert', 'wrong exception raised');
+        assert(e.message.lastIndexOf('revert') > 0, `wrong exception raised --> ${e.message}`);
         resolve();
       }
     }));

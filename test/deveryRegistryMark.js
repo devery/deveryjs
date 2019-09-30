@@ -129,7 +129,7 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
       try {
         await deveryClient.mark('0x78e8d6760c99d1161cf1ff78aa5e67ad3285bf3e', hash);
       } catch (e) {
-        assert.equal(e.message, 'VM Exception while processing transaction: revert', 'wrong exception');
+        assert(e.message.lastIndexOf('revert') > 0, `wrong exception raised --> ${e.message}`);
         resolve('success');
       }
     });
@@ -148,7 +148,7 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
       try {
         await deveryClient.mark(account.brands[0].products[0].productAccount, hash);
       } catch (e) {
-        assert.equal(e.message, 'VM Exception while processing transaction: revert', 'wrong exception');
+        assert(e.message.lastIndexOf('revert') > 0, `wrong exception raised --> ${e.message}`);
         resolve('success');
       }
     });

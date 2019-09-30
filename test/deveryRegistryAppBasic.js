@@ -70,7 +70,7 @@ contract('DeveryRegistry - App - basic tests', (accounts) => {
         const transaction = await devery.addApp(appName, feeAcc, tx, overrideOptions);
         done('No exception raised');
       } catch (e) {
-        assert.equal(e.message, 'VM Exception while processing transaction: revert', 'wrong exception');
+        assert(e.message.lastIndexOf('revert') > 0, `wrong exception raised --> ${e.message}`);
         done();
       }
     }());
