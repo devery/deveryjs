@@ -76,13 +76,35 @@ class DeveryERC721 extends AbstractSmartContract {
     );
   }
 
-  // x.__deveryERC721Contract.claimProduct
   /**
+  *   This method is used for claiming a product. The method returns you the transaction address of the claim.
+  *   If the product have a maximum mintable quantity set and you try to claim a number of product bigger than the mintable products number set
+  *   the method will not work
+  * 
+  *   ***Usage example:***
+  * 
+  *   ```
+  *    *  //first you need to get a {@link DeveryERC721} instance
+  *  let deveryErc721Client = new DeveryERC721();
+  *  //now you can use it
   *
-   * @param {*} productAddress
-   * @param {*} quantity
-   * @param {*} overrideOptions
-   */
+  * //Let's log the simplest case of use in the console
+  *
+  * deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(response => 
+  *    console.log('response').catch(err => {
+  *  //treat you error
+  *  })
+  * )
+  *
+  *   ```
+  * 
+  *  for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
+  * 
+  * 
+  * @param {string} productAddress address of the claimed product
+  * @param {number} quantity quantity of claimed products
+  * @param {TransactionOptions} [overrideOptions]
+  */
   async claimProduct(productAddress, quantity = 1, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
       .claimProduct(productAddress, quantity, overrideOptions);
@@ -319,11 +341,11 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    *  ***Usage example:***
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
-   * let deveryRegistryClient = new DeveryRegistry();
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
    *
    * //passing true as param will add the account as marker
-   * deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','0x873306090abaB3A6e1400e9345bC60c78a8BEt87').then(transaction => {
+   * deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(transaction => {
    *      console.log('transaction address',transaction.hash);
    *      //... other stuff
    * }).catch(err => {
@@ -338,11 +360,11 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    *
    * //or with the async syntax
-   *for more info about how to get let deveryRegistryClient = new DeveryRegistry();a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   *for more info about how to get let deveryErc721Client = new DeveryERC721();a {@link DeveryRegistry|DeveryRegistry instance click here}.
    * async function(){
    *      try{
    *          //passing false as param will remove the account as marker
-   *          let transaction = await deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','0x873306090abaB3A6e1400e9345bC60c78a8BEt87')
+   *          let transaction = await deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57',1)
    *          console.log('transaction address',transaction.hash);
    *      }
    *      catch(err){
@@ -360,8 +382,8 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
    *
-   * @param {string} productAccount The marker account whose permission will be set
-   * @param {string} itemHash permission value to the target markes
+   * @param {string} productAddress The product address of the product which the mintable quantity will be set
+   * @param {string} quantity the allowed quantity of mintable products
    * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
    * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
    */
@@ -378,9 +400,9 @@ class DeveryERC721 extends AbstractSmartContract {
    * ***Usage Example:***
    *
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
+   * //first you need to get a {@link DeveryERC721} instance
    *
-   * let deveryRegistryClient = new DeveryRegistry();
+   * let deveryErc721Client = new DeveryERC721();
    *
    * //now you can use it
    *
@@ -411,9 +433,9 @@ class DeveryERC721 extends AbstractSmartContract {
    * ***Usage Example:***
    *
    *  ```
-   * //first you need to get a {@link DeveryRegistry} instance
+   * //first you need to get a {@link DeveryERC721} instance
    *
-   * let deveryRegistryClient = new DeveryRegistry();
+   * let deveryErc721Client = new DeveryERC721();
    *
    * //now you can use it
    *
@@ -436,9 +458,9 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * ***Usage Example:***
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
+   * //first you need to get a {@link DeveryERC721} instance
    *
-   * let deveryRegistryClient = new DeveryRegistry();
+   * let deveryErc721Client = new DeveryERC721();
    *
    * //now you can use it
    *
@@ -470,8 +492,8 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * ***Usage example:***
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
-   * let deveryRegistryClient = new DeveryRegistry();
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
    * deveryRegistryClient.totalAllowedProducts(productAddress).then(response => {
@@ -500,8 +522,8 @@ class DeveryERC721 extends AbstractSmartContract {
    * ***Usage Example:***
    *
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
-   * let deveryRegistryClient = new DeveryRegistry();
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
    * deveryRegistryClient.totalMintedProducts('productAdrres').then(response =>
@@ -527,8 +549,8 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * *** Usage Example: ***
    * ```
-   * //first you need to get a {@link DeveryRegistry} instance
-   * let deveryRegistryClient = new DeveryRegistry();
+   * //first you need to get a {@link DeveryERC721} instance
+   * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
    * deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
@@ -557,7 +579,27 @@ class DeveryERC721 extends AbstractSmartContract {
     return result.valueOf();
   }
 
-
+  /**
+   *  This method creates a devery registry address for the desired contract,
+   *  so the user is able to properly use the devery ERC 721 methods
+   *  
+   * 
+   *  ***Usage example:***
+   * 
+   *  ```
+   *  //first you need to get a {@link DeveryERC721} instance
+   *  let deveryErc721Client = new DeveryERC721();
+   * //now you can use it
+   * 
+   *  //then you have to pass the devery contract method passing the contract as a parameter
+   *  deveryErc721Client.setDeveryRegistryAddress(transaction => {
+   *    console.log(transaction) }).catch(err => {
+   *      //treat your errors here
+   *    })
+   *  ```
+   * @param {string} deveryRegistryContractAddres address of an deployed contract
+   * @param {TransactionOptions} [overrideOptions]
+   */
   async setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions = {}){
     const result = await this.__deveryERC721Contract
       .setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions);
