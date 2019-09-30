@@ -202,7 +202,11 @@ class EveToken extends AbstractSmartContract {
      * triggered
      */
   setApprovalListener(callback) {
-    this.__eveTokenContract.onapproval = callback;
+    const eventName = 'Approval';
+    this.__eveTokenContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__eveTokenContract.on(eventName, callback);
+    }
   }
 
   /**
@@ -255,7 +259,11 @@ class EveToken extends AbstractSmartContract {
      * triggered
      */
   setTransferListener(callback) {
-    this.__eveTokenContract.ontransfer = callback;
+    const eventName = 'Transfer';
+    this.__eveTokenContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__eveTokenContract.on(eventName, callback);
+    }
   }
 }
 
