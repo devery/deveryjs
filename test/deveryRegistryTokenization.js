@@ -59,28 +59,50 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     assert.equal(productsBeforeTransaction.length, productsAfterTransaction.length - 1, "The product wasn't trasnfered to the account")
   });
 
-  it('Should  be able to tranfer a token', async () => {
+  // it('Should  be able to tranfer a token', async () => {
     //should use two accounts 
     //should transfer a product between the two of them
     //should verify if the product sent from account number 1 matches product on account number 2
     //should check if account one is empty
-    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    // const deveryERC721Contract = await DeveryERC721Contract.deployed();
+    // const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
     
-    const fromAccount = myAccount;
-    const toAccount = accounts[1];
-    let productsOwnedByFromaccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
-    assert.equal(productsOwnedByFromaccount.length, 1, "The from account doesn't have any product" );
-    let producstOwnedByToAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
+    // const fromAccount = myAccount;
+    // const toAccount = accounts[1];
+
+
+    // let productsOwnedByFromaccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
+    // assert.equal(productsOwnedByFromaccount.length, 1, "The from account doesn't have any product" );
+    // let producstOwnedByToAccount = await deveryERC721Instance.getProductsByOwner(toAccount);
     // assert.equal(producstOwnedByToAccount.length, 0, "the to account has products (expected to have none)");
     //we already know the from account has one product, so we can get it's token using
-    const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0, overrideOptions)
-    console.log('\n\n\n\n', productTokenId)
-    await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
+    // const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0);
+    // const productAddres = await deveryERC721Instance.tokenIdToProduct(productTokenId);
 
+    // console.log('\n\n\n\n productAddrres', productAddres)
+    //refactor this message
+    // assert.equal(productsOwnedByFromaccount[0], productAddres,"The token doesn't correspond to the product you desire");
+    // await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
+    // const productsOwnedByToAccountAfterTransfer = deveryERC721Instance.getProductsByOwner(toAccount, overrideOptions)
+    // assert.equal(producstOwnedByToAccount, productsOwnedByToAccountAfterTransfer - 1, "The product wasn't transfered correctly");
+  // })
 
+  it('Should set the maximum mintable quantity of a product and respect it', async () => {
+    //Should use two accounts
+    //should set the maximum mintable quantity as one
+    //should try to claim two products and fail
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+
+    const account = myAccount;
+    //we already know that there is a product associated with the account const (associated previously)
+    //So we will just use it's address
+    await deveryERC721Instance.setMaximumMintableQuantity(account, 1);
+    let hasTransactionFailed = false
+    const FailedTransaction = deveryERC721Instance.claimProduct(account, 2, overrideOptions).then(transaction  => {
+      console.log('the transaction was a success (which means things went wrong)');
+    }).catch(err => {
+      hasTransactionFailed = true
+    })
+    assert.equal(hasTransactionFailed, false, "The transaction didn't failed, something went wrong when setting the maximum mintable quantity");
   })
-
-
-
-
 });
