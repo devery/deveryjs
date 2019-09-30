@@ -83,7 +83,9 @@ class AbstractSmartContract {
     // TODO: write tests
     if (options.walletPrivateKey) {
       this._wallet = new ethers.Wallet(options.walletPrivateKey);
-      this._wallet.provider = this._ethersProvider;
+      //TODO: commented on new version
+      //TODO: write tests for this!!!
+      //this._wallet.provider = this._ethersProvider;
       this.__signerOrProvider = this._wallet;
     } else {
       this.__signerOrProvider = this._ethersProvider.getSigner ? this._ethersProvider.getSigner() : this._ethersProvider;
