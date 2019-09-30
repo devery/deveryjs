@@ -178,7 +178,11 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * triggered
      */
   setOwnershipTransferredListener(callback) {
-    this.__deveryRegistryContract.onownershiptransferred = callback;
+    const eventName = 'OwnershipTransferred';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
   /**

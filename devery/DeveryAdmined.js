@@ -198,7 +198,11 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * triggered
      */
   setAdminAddedEventListener(callback) {
-    this.__deveryRegistryContract.onadminadded = callback;
+    const eventName = 'AdminAdded';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
   /**
@@ -235,7 +239,11 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * triggered
      */
   setAdminRemovedEventListener(callback) {
-    this.__deveryRegistryContract.onadminremoved = callback;
+    const eventName = 'AdminRemoved';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 }
 

@@ -79,9 +79,9 @@ class DeveryERC721 extends AbstractSmartContract {
   // x.__deveryERC721Contract.claimProduct
   /**
   *
-   * @param {*} productAddress 
-   * @param {*} quantity 
-   * @param {*} overrideOptions 
+   * @param {*} productAddress
+   * @param {*} quantity
+   * @param {*} overrideOptions
    */
   async claimProduct(productAddress, quantity = 1, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
@@ -196,7 +196,11 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setApprovalEventListener(callback) {
-    this.__deveryERC721Contract.onapproval = callback;
+    const eventName = 'ApprovalForAll';
+    this.__deveryERC721Contract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryERC721Contract.on(eventName, callback);
+    }
   }
 
   /**
@@ -254,7 +258,11 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setApprovalForAllEventListener(callback) {
-    this.__deveryERC721Contract.onapprovalforall = callback;
+    const eventName = 'Approval';
+    this.__deveryERC721Contract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryERC721Contract.on(eventName, callback);
+    }
   }
 
   /**
@@ -298,7 +306,11 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setTransferEventListener(callback) {
-    this.__deveryERC721Contract.ontransfer = callback;
+    const eventName = 'Transfer';
+    this.__deveryERC721Contract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryERC721Contract.on(eventName, callback);
+    }
   }
 
   /**
@@ -549,7 +561,7 @@ class DeveryERC721 extends AbstractSmartContract {
   async setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions = {}){
     const result = await this.__deveryERC721Contract
       .setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions);
-    return result.valueOf();    
+    return result.valueOf();
   }
 }
 
