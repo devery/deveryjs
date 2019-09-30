@@ -76,7 +76,7 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
     try {
       const product = data[0].brands[0].products[0];
       const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
-      await deveryClient.addProduct(product.productAccount, product.description, product.details, product.year, product.origin, overrideOptions);
+      await deveryClient.addProduct(product.productAccount, product.description, product.details, product.year, product.origin);
     } catch (e) {
       assert(e.message.startsWith("the product that you're trying to mark already exists"),  `wrong exception ${e.message}`);
       resolve('success');
@@ -89,7 +89,7 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
     const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
     await deveryClient.updateProduct(
       product.productAccount, productUpdated.description, productUpdated.details
-      , productUpdated.year, productUpdated.origin, true, overrideOptions,
+      , productUpdated.year, productUpdated.origin, true,
     );
     const blockChainProduct = await deveryClient.getProduct(product.productAccount);
     assert.equal(blockChainProduct.productAccount.toLowerCase(), product.productAccount.toLowerCase());
@@ -103,7 +103,7 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
     this.timeout(5000);
     const product = data[3].brands[0].products[0];
     const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
-    deveryClient.addProduct(product.productAccount, product.description, product.details, product.year, product.origin, overrideOptions);
+    deveryClient.addProduct(product.productAccount, product.description, product.details, product.year, product.origin);
     deveryClient.setProductAddedEventListener((productAccount, brandAccount, appAccount, description, active) => {
       try {
         assert.equal(productAccount.toLowerCase(), product.productAccount.toLowerCase());
@@ -126,7 +126,7 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
       const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
       const xxx = deveryClient.updateProduct(
         product.productAccount, product.description, product.details
-        , product.year, product.origin, false, overrideOptions,
+        , product.year, product.origin, false,
       );
       deveryClient.setProductUpdatedEventListener((productAccount, brandAccount, appAccount, description, active) => {
         try {

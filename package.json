@@ -1,6 +1,6 @@
 {
   "name": "@devery/devery",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "description": "Build decentralised apps on the Devery Protocol using Javascript",
   "main": "./dist/index.js",
   "scripts": {
@@ -70,7 +70,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "crypto-js": "^3.1.9-1",
-    "ethers": "^3.0.15",
+    "ethers": "^4.0.37",
     "inchjs": "^0.4.1",
     "truffle": "^4.1.14",
     "webpack": "^4.6.0",

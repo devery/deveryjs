@@ -568,7 +568,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setAppAddedEventListener(callback) {
-    this.__deveryRegistryContract.onappadded = callback;
+    const eventName = 'AppAdded';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
 
@@ -610,7 +614,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setAppUpdatedEventListener(callback) {
-    this.__deveryRegistryContract.onappupdated = callback;
+    const eventName = 'AppUpdated';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
 
@@ -1012,7 +1020,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setBrandAddedEventListener(callback) {
-    this.__deveryRegistryContract.onbrandadded = callback;
+    const eventName = 'BrandAdded';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
   /**
@@ -1053,7 +1065,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setBrandUpdatedEventListener(callback) {
-    this.__deveryRegistryContract.onbrandupdated = callback;
+    const eventName = 'BrandUpdated';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
 
@@ -1471,7 +1487,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setProductAddedEventListener(callback) {
-    this.__deveryRegistryContract.onproductadded = callback;
+    const eventName = 'ProductAdded';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
 
@@ -1516,7 +1536,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setProductUpdatedEventListener(callback) {
-    this.__deveryRegistryContract.onproductupdated = callback;
+    const eventName = 'ProductUpdated';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
 
@@ -1835,7 +1859,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setPermissionedEventListener(callback) {
-    this.__deveryRegistryContract.onpermissioned = callback;
+    const eventName = 'Permissioned';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 
   /**
@@ -1879,7 +1907,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * triggered
      */
   setMarkedEventListener(callback) {
-    this.__deveryRegistryContract.onmarked = callback;
+    const eventName = 'Marked';
+    this.__deveryRegistryContract.removeAllListeners(eventName);
+    if (callback) {
+      this.__deveryRegistryContract.on(eventName, callback);
+    }
   }
 }
 
