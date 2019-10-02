@@ -575,7 +575,7 @@ class DeveryERC721 extends AbstractSmartContract {
    */
   async safeTransferFrom(fromAddress, toAddress, tokenId) {
     const result = await this.__deveryERC721Contract
-      .safeTransferFrom(fromAddress, toAddress, tokenId);
+      ['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
     return result.valueOf();
   }
 

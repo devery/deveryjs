@@ -6,9 +6,9 @@ const DeveryRegistryContract = artifacts.require('./DeveryRegistry.sol');
 const DeveryERC721Contract = artifacts.require('./DeveryERC721Token.sol');
 
 const overrideOptions = {
-    gasLimit: 250000,
-    gasPrice: 9000000000,
-  };
+  gasLimit: 250000,
+  gasPrice: 9000000000,
+};
 
 contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
   let contractAddress;
@@ -82,9 +82,9 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     console.log('\n\n\n\n productTokenId', productTokenId)
     //refactor this message
     assert.equal(productsOwnedByFromaccount[0], productAddres,"The token doesn't correspond to the product you desire");
-    // await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
-    // const productsOwnedByToAccountAfterTransfer = deveryERC721Instance.getProductsByOwner(toAccount, overrideOptions)
-    // assert.equal(producstOwnedByToAccount, productsOwnedByToAccountAfterTransfer - 1, "The product wasn't transfered correctly");
+    await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
+    const productsOwnedByToAccountAfterTransfer = await deveryERC721Instance.getProductsByOwner(toAccount);
+    assert.equal(producstOwnedByToAccount.length, productsOwnedByToAccountAfterTransfer.length - 1, "The product wasn't transfered correctly");
   })
 
   it('Should set the maximum mintable quantity of a product and respect it', async () => {
@@ -92,14 +92,13 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     //should set the maximum mintable quantity as one
     //should try to claim two products and fail
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
-
     const account = myAccount;
     //we already know that there is a product associated with the account const (associated previously)
     //So we will just use it's address
     await deveryERC721Instance.setMaximumMintableQuantity(account, 1);
     let hasTransactionFailed = false
     const FailedTransaction = deveryERC721Instance.claimProduct(account, 2, overrideOptions).then(transaction  => {
-      console.log('the transaction was a success (which means things went wrong)');
+      console.log('the transasction was a success (which means things went wrong)');
     }).catch(err => {
       hasTransactionFailed = true
     })
