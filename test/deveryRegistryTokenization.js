@@ -71,8 +71,8 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const toAccount = accounts[1];
 
 
-    let productsOwnedByFromaccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
-    assert.equal(productsOwnedByFromaccount.length, 1, "The from account doesn't have any product" );
+    let productsOwnedByFromAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
+    assert.equal(productsOwnedByFromAccount.length, 1, "The from account doesn't have any product" );
     let producstOwnedByToAccount = await deveryERC721Instance.getProductsByOwner(toAccount);
     assert.equal(producstOwnedByToAccount.length, 0, "the to account has products (expected to have none)");
     // we already know the from account has one product, so we can get it's token using
@@ -81,11 +81,11 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
 
     console.log('\n\n\n\n productAddrres', productAddres)
     // refactor this message
-    assert.equal(productsOwnedByFromaccount[0], productAddres,"The token doesn't correspond to the product you desire");
+    assert.equal(productsOwnedByFromAccount[0], productAddres,"The token doesn't correspond to the product you desire");
     await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
     const productsOwnedByToAccountAfterTransfer = await deveryERC721Instance.getProductsByOwner(toAccount)
     assert.equal(producstOwnedByToAccount.length, productsOwnedByToAccountAfterTransfer.length - 1, "The product wasn't transfered correctly");
-    assert.equal(producstOwnedByFromAccount[0], productsOwnedByToAccountAfterTransfer[0], 'The product trasnfered from the original account is not the same product in the destination account');
+    assert.equal(productsOwnedByFromAccount[0], productsOwnedByToAccountAfterTransfer[0], 'The product trasnfered from the original account is not the same product in the destination account');
   })
 
   it('Should set the maximum mintable quantity of a product and respect it', async () => {

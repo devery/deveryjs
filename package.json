@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "debug": "nodemon --inspect server.js",
-    "test": "truffle test test/deveryRegistryTokenization.js",
+    "test": "truffle test test/*",
     "coverage": "cross-env NODE_ENV=test nyc truffle test && nyc report --reporter=text-lcov | coveralls",
     "generate-doc": "jsdoc --configure .jsdoc.json --verbose",
     "lint": "eslint devery/**/*.js test/**/*.js",
