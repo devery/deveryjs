@@ -122,7 +122,7 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     await deveryERC721Instance.setMaximumMintableQuantity(account, 1);
     let hasTransactionFailed = false
     const FailedTransaction = deveryERC721Instance.claimProduct(account, 2, overrideOptions).then(transaction  => {
-      console.log('the transasction was a success (which means things went wrong)');
+      console.log('the transaction was a success (which means things went wrong)');
     }).catch(err => {
       hasTransactionFailed = true
     })
