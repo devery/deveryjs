@@ -70,19 +70,13 @@ class AbstractSmartContract {
     if (signer && !options.walletPrivateKey) {
       this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
     } else {
-      let network;
-      for (const candidateNetwork in ethers.providers.networks) {
-        if (ethers.providers.networks[candidateNetwork].chainId === (options.networkId || 1)) {
-          network = ethers.providers.networks[candidateNetwork];
-        }
-      }
-      this._ethersProvider = new ethers.providers.EtherscanProvider(network);
+      this._ethersProvider = new ethers.providers.EtherscanProvider(options.networkId || 1);
     }
 
     // TODO: refactor and make more readable
     // TODO: write tests
     if (options.walletPrivateKey) {
-      this._wallet = new ethers.Wallet(options.walletPrivateKey);
+      this._wallet = new ethers.Wallet(options.walletPrivateKey , this._ethersProvider);
       //TODO: commented on new version
       //TODO: write tests for this!!!
       //this._wallet.provider = this._ethersProvider;
