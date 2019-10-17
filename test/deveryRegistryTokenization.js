@@ -6,9 +6,9 @@ const DeveryRegistryContract = artifacts.require('./DeveryRegistry.sol');
 const DeveryERC721Contract = artifacts.require('./DeveryERC721Token.sol');
 
 const overrideOptions = {
-    gasLimit: 250000,
-    gasPrice: 9000000000,
-  };
+  gasLimit: 250000,
+  gasPrice: 9000000000,
+};
 
 contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
   let contractAddress;
@@ -88,12 +88,44 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     assert.equal(productsOwnedByFromAccount[0], productsOwnedByToAccountAfterTransfer[0], 'The product trasnfered from the original account is not the same product in the destination account');
   })
 
+  it('Should test if the method balanceOf returns the number of tokens correctly', async () => {
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    
+    const accountWithProducts = myAccount
+    const originalOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
+    const originalOwnedProductsQuantity = await deveryERC721Instance.balanceOf(accountWithProducts);
+
+    assert.equal(originalOwnedProductsArray.length, originalOwnedProductsQuantity, 'The length of the owned products array (at first comparison) does not equals the number returned by the balanceOf method');
+
+    //creating a new product to be claimed by the account so we can how the methods react to this
+
+    const productAddress = accounts[2]
+    await deveryRegistry.addProduct(productAddress, 'productName', 'productDetails', 2019, 'brazil');
+    await deveryERC721Instance.claimProduct(productAddress, 1);
+
+    const afterAddOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
+    const afterAddOwnedProductsQuantity = await deveryERC721Instance.balanceOf(accountWithProducts);
+
+    assert.equal(afterAddOwnedProductsArray.length, afterAddOwnedProductsQuantity, 'The length of the owned products array (after product add) does not equals the number returned by the balanceOf method');
+    assert.equal(afterAddOwnedProductsQuantity, (originalOwnedProductsQuantity + 1), 'The value returned by balanceOf is not changing after the use of claimProduct');
+
+    //transfering the product so the length of the account goes back to zero
+    const accountToTransfer = accounts[2]
+    const productToken = await deveryERC721Instance.tokenOfOwnerByIndex(accountWithProducts, 0);
+    await deveryERC721Instance.safeTransferFrom(accountWithProducts, accountToTransfer,  productToken);
+
+    const afterTransferOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
+    const afterTransferOwnedProductsQuantity = await deveryERC721Instance.balanceOf(accountWithProducts);
+
+    assert.equal(afterTransferOwnedProductsArray.length, afterTransferOwnedProductsQuantity, 'the length of the owned products array (after transfer) does not equals the number returned by the balanceOf method')
+    assert.equal(afterTransferOwnedProductsQuantity, afterAddOwnedProductsQuantity - 1, 'The value returned by balanceOf is not changing after the use of safeTransferFrom')
+  })
+
   it('Should set the maximum mintable quantity of a product and respect it', async () => {
     //Should use two accounts
     //should set the maximum mintable quantity as one
     //should try to claim two products and fail
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
-
     const account = myAccount;
     //we already know that there is a product associated with the account const (associated previously)
     //So we will just use it's address
