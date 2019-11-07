@@ -57,7 +57,7 @@ contract('DeveryRegistry - Brand - basic tests', (accounts) => {
     assert.equal(retrievedAcc.active, brand.active);
   });
 
-  it('should not be possible to create more than brand with the same brand account address', async function () {
+  it('should not be possible to create more than one brand with the same brand account address', async function () {
     this.timeout(5000);
     return new Promise((async (resolve, reject) => {
       const accData = data[0];
@@ -66,7 +66,7 @@ contract('DeveryRegistry - Brand - basic tests', (accounts) => {
       const devery = createDeveryRegistry(web3, undefined, accData.appAccount, contractAddress);
       try {
         await devery.addBrand(brand.brandAccount, brand.brandName, overrideOptions);
-        reject('This account has alread been added');
+        reject('This account has already been added');
       } catch (e) {
         assert(e.message.lastIndexOf('revert') > 0, `wrong exception raised --> ${e.message}`);
         resolve();
