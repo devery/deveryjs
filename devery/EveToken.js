@@ -5,7 +5,6 @@ const ethers = require('ethers');
 
 
 /**
- *
  * Main class to deal with the owned smart contract interface and related operations,
  * you can use it to check the current contract owner and list to ownership change related
  * events
@@ -16,13 +15,13 @@ const ethers = require('ethers');
 class EveToken extends AbstractSmartContract {
   /**
      *
-     * Creates a new instansce of EveToken.
+     * Creates a new instance of EveToken.
      *```
-     * //creates a eveTokenClient with the default params
-     * let deveryRegistryClient = new EveToken();
+     * //creates an eveTokenClient with the default params
+     * let eveTokenClient = new EveToken();
      *
-     * //creates a deveryRegistryClient pointing to a custom address
-     * let deveryRegistryClient = new EveToken({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+     * //creates an eveTokenClient pointing to a custom address
+     * let eveTokenClient = new EveToken({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
      *
      * ```
      *
@@ -68,40 +67,38 @@ class EveToken extends AbstractSmartContract {
     );
   }
 
-
   /**
      *
      * Checks the total existing EVE supply.
      *
-     *
-     * @returns {Promise.<BigNumener>} a promisse that resolves to a bigNumber containing the total circulating supply
+     * @returns {Promise.<BigNumber>} a promise that resolves to a BigNumber containing the total circulating supply
      * of the current token
      */
   async totalSupply() {
-    const result = await this.__eveTokenContract.totalSupply();
-    return result;
+    return await this.__eveTokenContract.totalSupply();
   }
 
   /**
      *
      * Checks the EVE balance of a given account.
      *
-     * @param account  account whose balance is being inquired
-     * @returns {Promise.<*>} a promisse that resolves to the current balance of
+     * @param account account whose balance is being inquired
+     * @returns {Promise.<*>} a promise, that resolves to the current balance of
      * the inquired account
      */
   async balanceOf(account) {
-    const result = await this.__eveTokenContract.balanceOf(account);
-    return result;
+    return await this.__eveTokenContract.balanceOf(account);
   }
 
   /**
      *
-     *  checks  how many tokens a 3rd party  can use to facilitate a transaction with the owners token.
-     *  please note that allowance will does transfer tokens to the 3rd party but instead give him
+     *  Checks how many tokens a 3rd party can use to facilitate a transaction with the owners token.
+     *  Please note that `allowance` will not transfer tokens to the 3rd party, but instead give him
      *  permission to facilitate transactions on your behalf.
      *
-     * @param account  account whose balance is being inquired
+     * @param tokenOwner token owner
+     * @param spender ethereum address
+     * @param {TransactionOptions} overrideOptions
      * @returns {Promise.<*>}
      */
   async allowance(tokenOwner, spender, overrideOptions = {}) {
@@ -111,13 +108,14 @@ class EveToken extends AbstractSmartContract {
 
   /**
    *
-   *  gives the 3rd party the right to facilitate a transaction with the owners token.
-   *  please note that `approve` will not transfer tokens to the 3rd party but instead give him
+   *  Gives the 3rd party the right to facilitate a transaction with the owners token.
+   *  Please note that `approve` will not transfer tokens to the 3rd party, but instead give him
    *  permission to facilitate transactions on your behalf.
    *
-   * @param spender  ethereum address that has right to spend the approved tokens, this can be a contract address
+   * @param spender ethereum address, that has right to spend the approved tokens, this can be a contract address
    * or any other address
    * @param quantity that the 3rd party is allowed to spend
+   * @param {TransactionOptions} overrideOptions
    * @returns {Promise.<*>}
    */
   async approve(spender, quantity, overrideOptions = {}) {
@@ -129,22 +127,25 @@ class EveToken extends AbstractSmartContract {
      *
      * Transfer EVE tokens from the current account to any other account
      *
-     * @param toAdress  address that will receive the tokens
+     * @param toAddress address, that will receive the tokens
      * @param total quantity of tokens being sent
-     * @returns {Promise.<*>} a promisse that resolves to the transaction receipt
+     * @param {TransactionOptions} overrideOptions
+     * @returns {Promise.<*>} a promise, that resolves to the transaction receipt
      */
-  async transfer(toAdress, total, overrideOptions = {}) {
-    const result = await this.__eveTokenContract.transfer(toAdress, total, overrideOptions);
+  async transfer(toAddress, total, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.transfer(toAddress, total, overrideOptions);
     return result.valueOf();
   }
 
   /**
      *
-     * Transfer EVE tokens from a specific account to any other account, you need to have an allowance permission
+     * Transfer EVE tokens from a specific account to any other account. You need to have an allowance permission
      * to be able to do this transaction.
      *
-     * @param toAdress  address that will receive the tokens
-     * @param total quantity of tokens being sent
+     * @param from the address, that EVE tokens will be sent from
+     * @param to the address, that will receive the tokens
+     * @param tokens quantity of tokens being sent
+     * @param {TransactionOptions} overrideOptions
      * @returns {Promise.<*>} a promisse that resolves to the transaction receipt
      */
   async transferFrom(from, to, tokens, overrideOptions = {}) {
@@ -153,52 +154,49 @@ class EveToken extends AbstractSmartContract {
   }
 
   /**
-     * This is a callback function that will be invoked in response to appEvents.
+     * This is a callback function that will be invoked in response to the Approval event.
      *
-     *
-     * @callback AppEventCallback
-     * @param {string} appAccount
-     * @param {string} appName
-     * @param {string} feeAccount
-     * @param {int} fee
-     * @param {bool} active
-     *
+     * @callback AprovalEventCallback
+     * @param tokenOwner token owner
+     * @param spender ethereum address, that has right to spend the approved tokens, this can be a contract address
+     * or any other address
+     * @param tokens quantity of tokens
      */
 
   /**
      *
-     * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
-     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
-     * removing the last one. If you want to remove a AppAddedEventListener, just call this function passing undefined
+     * Listener to the Approval events, this event triggers whenever a new devery app is created in the blockchain.
+     * Please note, that ApprovalEventListeners do not stack, this means that whenever you set one - you are
+     * removing the last one. If you want to remove an ApprovalEventListener, just call this function passing undefined
      * as param.
      *
      * ```
-     * //first you need to get a {@link DeveryOwned} instance
-     * let deveryRegistryClient = new DeveryRegistry();
+     * //first you need to get a {@link EveToken} instance
+     * let eveTokenClient = new EveToken();
      * //now you can use it
      *
      *
      *
-     * deveryOwnedClient.setApprovalListener((appAccount,appName,feeAccount,fee,active) => {
+     * eveTokenClient.setApprovalListener((appAccount,appName,feeAccount,fee,active) => {
      *      //whenever an app created we will log it to the console
      *      console.log(`new app created ${appAccount} - ${appName} ...`);
      * })
      *
      * //if you want to remove the listener you can simply pass undefined as parameter
      *
-     * deveryOwnedClient.setApprovalListener(undefined)
+     * eveTokenClient.setApprovalListener(undefined)
      *
      * //or that is equivalent to the above call
      *
-     * deveryOwnedClient.setApprovalListener()
+     * eveTokenClient.setApprovalListener()
      *
      *
      *
      * ```
      *
-     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     * for more info about how to get a {@link EveToken|EveToken instance click here}.
      *
-     * @param {OwnershipEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
+     * @param {AprovalEventCallback} callback the callback that will be executed whenever the Transfer event is
      * triggered
      */
   setApprovalListener(callback) {
@@ -210,23 +208,19 @@ class EveToken extends AbstractSmartContract {
   }
 
   /**
-     * This is a callback function that will be invoked in response to appEvents
+     * This is a callback function that will be invoked in response to the OwnershipTransferred event
      *
-     *
-     * @callback AppEventCallback
-     * @param {string} appAccount
-     * @param {string} appName
-     * @param {string} feeAccount
-     * @param {int} fee
-     * @param {bool} active
-     *
+     * @callback TransferEventCallback
+     * @param from the address the transfer goes from
+     * @param to the address the transfer goes to
+     * @param tokens amount transferred
      */
 
   /**
      *
-     * Listener to AppAdded events, this event triggers whenever a new devery app is created in the blockchain
-     * please note that AppAddedEventListener do not stack, this means that whenever you set one you are
-     * removing the last one. If you want to remove a AppAddedEventListener, just call this function passing undefined
+     * Listener to the Transfer events, this event triggers whenever a new devery app is created in the blockchain.
+     * Please note that TransferEventListeners do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove a TransferEventListener, just call this function passing undefined
      * as param.
      *
      * ```
@@ -253,9 +247,9 @@ class EveToken extends AbstractSmartContract {
      *
      * ```
      *
-     * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}.
+     * for more info about how to get a {@link EveToken|EveToken instance click here}.
      *
-     * @param {OwnershipEventCallback} callback the callback that will be executed whenever and OwnershipTransferred event is
+     * @param {TransferEventCallback} callback the callback that will be executed whenever the OwnershipTransferred event is
      * triggered
      */
   setTransferListener(callback) {

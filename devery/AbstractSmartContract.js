@@ -3,19 +3,24 @@ const ethers = require('ethers');
 
 /**
  * @typedef {Object} ClientOptions
- * This object configures how the client will connect and communicate to the Ethereum network,
- * unless you have good reasons to change the default configurations you don't need to worry with any of these values
+ * This object configures how the client will connect and communicate to the Ethereum network.
+ * Unless you have good reasons to change the default configurations you don't need to worry with any of these values
  * as the will be automatically resolved
- * contract address in your current network. Under normal circunstances you don't need to pass any of these fields.
- * @property {Object} web3Instance  the current web3 object, like the one injected my metamask
- * @property {string} acc the accounts' addres that will execute the transactions
+ * contract address in your current network. Under normal circumstances you don't need to pass any of these fields.
+ * @property {Object} web3Instance the current web3 object, like the one injected by metamask
+ * @property {string} acc the accounts' address that will execute the transactions
  * @property {string} address expects the contract address in your current network, unless you are running your own
  * network you don't need to provide it
+ * @property walletPrivateKey private key for the wallet.
+ * @property networkId current network Id.
  */
 
 /**
  *
  * @typedef {Object} TransactionOptions
+ * This object configures gas transaction options to override.
+ * @property gasLimit gas limit
+ * @property gasPrice gas price
  *
  */
 
@@ -36,8 +41,8 @@ class AbstractSmartContract {
      * ```
      * //excerpt from the constructor
      *
-     * if (new.target === AbstractDeverySmartContract) {
-     *      throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
+     * if (this.constructor === AbstractDeverySmartContract) {
+     *      throw new TypeError("Cannot construct AbstractSmartContract instances directly");
      *}
      *
      * ```
