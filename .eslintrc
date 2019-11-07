@@ -16,9 +16,9 @@
     "airbnb-base"
   ],
   "rules" : {
-    "arrow-body-style" : 'warn',
+    "arrow-body-style" : "warn",
     "max-len":["error",{ "ignoreComments": true, "code":100 }],
-    "no-underscore-dangle":0,
-    "no-param-reassign": 0,
+    "no-underscore-dangle": 0,
+    "no-param-reassign": 0
   }
 }
