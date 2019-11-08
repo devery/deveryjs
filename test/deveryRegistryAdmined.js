@@ -20,7 +20,7 @@ contract('DeveryRegistry - Admined - basic tests', (accounts) => {
     contractAddress = contract.address;
   });
 
-  it('should be possible check if someone is admin', async () => {
+  it('should be possible to check if someone is admin', async () => {
     const deveryAdmined = createDeveryAdmined(web3, undefined, contractOwner, contractAddress);
     let isAdmin = await deveryAdmined.isAdmin(contractOwner);
     assert.isTrue(isAdmin, 'someshow the contract owner is not admin');
@@ -28,7 +28,7 @@ contract('DeveryRegistry - Admined - basic tests', (accounts) => {
     assert.isNotTrue(isAdmin, 'this account should not be admin');
   });
 
-  it('should be possible to owners add admins', async () => {
+  it('should be possible to owners to add admins', async () => {
     const deveryAdmined = createDeveryAdmined(web3, undefined, contractOwner, contractAddress);
     let isAdmin = await deveryAdmined.isAdmin(adminToBeAddedAndRemoved);
     assert.isNotTrue(isAdmin, 'this account should not be admin');
@@ -37,7 +37,7 @@ contract('DeveryRegistry - Admined - basic tests', (accounts) => {
     assert.isTrue(isAdmin, 'this account should be admin now');
   });
 
-  it('should be possible to owners remove admins', async () => {
+  it('should be possible to owners to remove admins', async () => {
     const deveryAdmined = createDeveryAdmined(web3, undefined, contractOwner, contractAddress);
     let isAdmin = await deveryAdmined.isAdmin(adminToBeAddedAndRemoved);
     assert.isTrue(isAdmin, 'this account should be admin now');
@@ -46,7 +46,7 @@ contract('DeveryRegistry - Admined - basic tests', (accounts) => {
     assert.isNotTrue(isAdmin, 'this account should not be admin');
   });
 
-  it('should not be possible add admins if you are not owner', (done) => {
+  it('should not be possible to add admins if you are not owner', (done) => {
     (async function () {
       const deveryAdmined = createDeveryAdmined(web3, undefined, accountFromNonAdmin, contractAddress);
       try {
@@ -59,7 +59,7 @@ contract('DeveryRegistry - Admined - basic tests', (accounts) => {
     }());
   });
 
-  it('should not be possible remove admins if you are not owner', (done) => {
+  it('should not be possible to remove admins if you are not owner', (done) => {
     (async function () {
       const deveryAdmined = createDeveryAdmined(web3, undefined, accountFromNonAdmin, contractAddress);
       try {

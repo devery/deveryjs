@@ -51,7 +51,7 @@ contract('EveToken', (accounts) => {
       const eveTokenAcc = createEveToken(web3, null, accounts[1], contractAddress);
       let total = await eveTokenAcc.balanceOf(accounts[1]);
       total = total.toNumber();
-      // we add 1 token to exced my total balance
+      // we add 1 token to exceed my total balance
       total += 1;
       try {
         await eveTokenAcc.transfer(accounts[2], total, overrideOptions);

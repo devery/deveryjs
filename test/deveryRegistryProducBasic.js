@@ -72,7 +72,7 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
 
 
 
-  it('should not be possible to create more than Product with the same Product account address', () => new Promise((async (resolve, reject) => {
+  it('should not be possible to create more than one Product with the same Product account address', () => new Promise((async (resolve, reject) => {
     try {
       const product = data[0].brands[0].products[0];
       const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
@@ -99,7 +99,7 @@ contract('DeveryRegistry - Product - basic tests', (accounts) => {
   });
 
 
-  it('should receive callback when another brad is created', function (done) {
+  it('should receive callback when another product is created', function (done) {
     this.timeout(5000);
     const product = data[3].brands[0].products[0];
     const deveryClient = createDeveryRegistry(web3, undefined, product.productAccount, contractAddress);
