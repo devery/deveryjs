@@ -62,7 +62,7 @@ contract('DeveryRegistry - Product - collection tests', (accounts) => {
     assert.equal(productsAccountsLenght, totalProducts, 'Total brand accounts does not match');
   });
 
-  it('shoulbe be possible to return access Product accounts addresses individually', async () => {
+  it('should be possible to access Product accounts addresses individually', async () => {
     const randomIndex = Math.floor(Math.random() * productsArr.length);
     const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
     const accAddress = await deveryInstance.productAccountsArray(randomIndex);

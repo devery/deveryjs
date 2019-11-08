@@ -52,13 +52,13 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * //if your function is async you can use the await syntax too
      *
      *
-     *async function(){
+     * async function(){
      *      let deveryAdminedClient = new DeveryAdmined();
      *      let isAdmin = await deveryAdminedClient.isAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
      *      if(isAdmin){
      *          //continue your code here ...
      *      }
-     *}
+     * }
      *
      * ```
      *
@@ -66,7 +66,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      *
      *
      * @param addr target account address
-     * @returns {Promise.<bool>} A promise that resolves to a bool indicating if the requested account
+     * @returns {Promise.<boolean>} A promise that resolves to a boolean indicating if the requested account
      * is admin of the contract or an Error if the promise is rejected
      */
   async isAdmin(addr) {
@@ -95,12 +95,12 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * //if your function is async you can use the await syntax too
      *
      *
-     *async function(){
+     * async function(){
      *      let deveryAdminedClient = new DeveryAdmined();
      *      let transaction = await deveryAdminedClient.addAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
      *      //continue your code here ...
      *
-     *}
+     * }
      *
      * ```
      *
@@ -133,13 +133,13 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * //if your function is async you can use the await syntax too
      *
      *
-     *async function(){
+     * async function(){
      *      let deveryAdminedClient = new DeveryAdmined();
      *      let transaction = await deveryAdminedClient.removeAdmin('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
      *      //continue your code here ...
      *
      *
-     *}
+     * }
      *
      * for more info about how to get a {@link DeveryAdmined|DeveryAdmined instance click here}
      *
@@ -167,7 +167,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      *
      * Listener to AdminAdded events, this event triggers whenever a new address is added as admin.
      * Please note that the AdminAddedEventListeners do not stack, this means that whenever you set one you are
-     * removing the last one. If you want to remove an AdminAddedEventListeners, just call this function passing undefined
+     * removing the last one. If you want to remove an AdminAddedEventListener, just call this function passing undefined
      * as param.
      *
      *
@@ -207,9 +207,9 @@ class DeveryAdmined extends AbstractDeverySmartContract {
 
   /**
      *
-     * Listener to AdminRemoved events, this event triggers whenever a new address is removed from the admin list.
-     * please note that the AdminRemovedEventListeners do not stack, this means that whenever you set one you are
-     * removing the last one. If you want to remove a AdminRemovedEventListener, just call this function passing undefined
+     * Listener to AdminRemoved events, this event triggers whenever an address is removed from the admin list.
+     * Please note that the AdminRemovedEventListeners do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove an AdminRemovedEventListener, just call this function passing undefined
      * as param.
      *
      * ***Usage example:***
@@ -218,9 +218,9 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      * let deveryAdminedClient = new DeveryAdmined();
      *
      *  //now you can use it
-     * deveryAdminedClient.setAdminAddedEventListener((newAdminAddress) => {
+     * deveryAdminedClient.setAdminRemovedEventListener((address) => {
      *      //whenever an admin is removed we will log it to the console
-     *      console.log(newAdminAddress);
+     *      console.log(address);
      * })
      *
      * //if you want to remove the listener you can simply pass undefined as parameter

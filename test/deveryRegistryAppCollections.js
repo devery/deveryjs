@@ -30,10 +30,10 @@ contract('DeveryRegistry - App - collection tests', (accounts) => {
   it('should return the correct number of accounts - 8', async () => {
     const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
     const appAccountsLenght = await deveryInstance.appAccountsLength();
-    assert.equal(data.length, appAccountsLenght, 'total accounts does not match expect accounts length');
+    assert.equal(data.length, appAccountsLenght, 'total number of accounts does not match expected accounts length');
   });
 
-  it('shoulbe be possible to return access account addresses individually', async () => {
+  it('should be possible to return access account addresses individually', async () => {
     const randomIndex = Math.floor(Math.random() * data.length);
     const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
     const accAddress = await deveryInstance.appAccountsArray(randomIndex);
