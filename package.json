@@ -1,6 +1,6 @@
 {
   "name": "@devery/devery",
-  "version": "0.1.34",
+  "version": "0.1.36",
   "description": "Build decentralised apps on the Devery Protocol using Javascript",
   "main": "./dist/index.js",
   "scripts": {

@@ -76,7 +76,11 @@ class AbstractSmartContract {
     }
 
     if (signer && !options.walletPrivateKey) {
-      this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
+      if (signer.currentProvider) {
+        this._ethersProvider = new ethers.providers.Web3Provider(signer.currentProvider);
+      } else {
+        this._ethersProvider = signer;
+      }
     } else {
       this._ethersProvider = new ethers.providers.EtherscanProvider(options.networkId || 1);
     }
