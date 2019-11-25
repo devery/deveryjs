@@ -137,6 +137,29 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     assert.equal(afterSetMintableAllowerProductsNumber, allowedProducts, 'The number of allowed products does not equals the number defined by setMaximumMintableQuantity')
   })
 
+  it('Should correctly return the minted products', async () => {
+    const productAddrress = accounts[3]
+    const account = myAccount;
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const devery = createDeveryRegistry(web3, undefined, myAccount, deveryERC721Contract.address);
+
+    await deveryRegistry.addProduct(productAddrress, 'newProduct', 'productDetails', 2019, 'brazil');
+    const originalMintedProducts = await deveryERC721Instance.totalMintedProducts(productAddrress)
+
+    const claimedProductsQuantity = 1
+    await deveryERC721Instance.claimProduct(productAddrress, claimedProductsQuantity);
+
+    const afterAddMintedProducts = await deveryERC721Instance.totalMintedProducts(productAddrress)
+    assert.equal(afterAddMintedProducts, originalMintedProducts + claimedProductsQuantity, 'The number of minted products is not updating after product being clamed');
+
+    const secondClaimProductsQuantity = 10;
+    await deveryERC721Instance.claimProduct(productAddrress, secondClaimProductsQuantity);
+
+    const afterSecondMintProducts = await deveryERC721Instance.totalMintedProducts(productAddrress);
+    assert.equal(afterSecondMintProducts, afterAddMintedProducts + secondClaimProductsQuantity, 'The number of minted producst is not updating after second product claim');
+
+  })
+
   it('Should set the maximum mintable quantity of a product and respect it', async () => {
     //Should use two accounts
     //should set the maximum mintable quantity as one
