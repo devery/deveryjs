@@ -72,15 +72,15 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
 
     let productsOwnedByFromAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
     assert.equal(productsOwnedByFromAccount.length, 1, "The from account doesn't have any product" );
-    
+
     let producstOwnedByToAccount = await deveryERC721Instance.getProductsByOwner(toAccount);
     assert.equal(producstOwnedByToAccount.length, 0, "the to account has products (expected to have none)");
-    
+
     // we already know the from account has one product, so we can get it's token using
     const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0);
     const productAddres = await deveryERC721Instance.tokenIdToProduct(productTokenId);
 
-    
+
     // refactor this message
     assert.equal(productsOwnedByFromAccount[0], productAddres,"The token doesn't correspond to the product you desire");
     await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
@@ -126,10 +126,10 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
     const deveryInstance = createDeveryRegistry(web3, undefined, myAccount, deveryERC721Contract.address);
     
-    const productAdrress = accounts[2]
+    const productAdrress = accounts[4]
     await deveryRegistry.addProduct(productAdrress, 'newProduct', 'productDetails', 2019, 'brazil');
     const originalAllowedProductsNumber = await deveryERC721Instance.totalAllowedProducts(productAdrress);
-    
+
     const allowedProducts = 5
     await deveryERC721Instance.setMaximumMintableQuantity(productAdrress, allowedProducts);
     const afterSetMintableAllowerProductsNumber = await deveryERC721Instance.totalAllowedProducts(productAdrress);
