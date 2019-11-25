@@ -4,8 +4,8 @@ const ethers = require('ethers');
 
 /**
  *
- * This class contains common utitlies methods, you don't need an instance as all the methods here are
- * static methods
+ * This class contains common utility methods, you don't need to create an instance as all the methods here are
+ * static
  *
  * @version 1
  *
@@ -14,8 +14,7 @@ class Utils {
   /**
      * Checks if the given string is an address
      *
-     *
-     * @param {String} address the given HEX adress
+     * @param {String} address the given HEX address
      * @return {Boolean}
      */
   static isAddress(address) {
@@ -33,7 +32,7 @@ class Utils {
   /**
      * Checks if the given string is a checksummed address
      *
-     * @param {String} address the given HEX adress
+     * @param {String} address the given HEX address
      * @return {Boolean}
      */
   static isChecksumAddress(address) {
@@ -51,7 +50,7 @@ class Utils {
   }
 
   /**
-     * Generates a random ethereum  address
+     * Generates a random ethereum address
      *
      * @return {String} a random eth address
      */
@@ -59,13 +58,13 @@ class Utils {
     return ethers.Wallet.createRandom().address;
   }
 
-
   /**
      *
-     * calculates the sha3 of a given value
+     * Calculates the sha3 of a given value.
      *
-     * @param value - value to have it's sha3 calculated
-     * @param options - calculation options
+     * @param value value to have it's sha3 calculated.
+     * @param options calculation options.
+     * @return {String} sha3 of the given value.
      */
   static sha3(value, options) {
     if (options && options.encoding === 'hex') {

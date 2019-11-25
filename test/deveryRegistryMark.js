@@ -74,7 +74,7 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
     // maybe try to mark an item
   });
 
-  it('should compute the hash of an product address', async () => {
+  it('should compute the hash of the product address', async () => {
     const account = data[0];
     const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
     const hash = await deveryClient.addressHash('0xf17f52151EbEF6C7334FAD080c5704D77216b732');
@@ -92,7 +92,7 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
     assert.notEqual('0x0000000000000000000000000000000000000000', markedResult.appAccount);
   });
 
-  it('should be possible to a add and mark the products in one go', async () => {
+  it('should be possible to add and mark the products in one go', async () => {
     const account = data[0];
     const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
     const customProduct = {
@@ -116,7 +116,7 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
     assert.equal(customProduct.productAccount, markedResult.productAccount);
   });
 
-  it('should not be possible to a permissioned account mark an non existing product', async function () {
+  it('should not be possible for a permissioned account to mark a non existing product', async function () {
     this.timeout(5000);
     return new Promise(async (resolve, reject) => {
       const account = data[0];
@@ -135,7 +135,7 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
     });
   });
 
-  it('should not be possible to a non permissioned account mark an existing product', async function () {
+  it('should not be possible for a non permissioned account to mark an existing product', async function () {
     this.timeout(5000);
     return new Promise(async (resolve, reject) => {
       const account = data[0];

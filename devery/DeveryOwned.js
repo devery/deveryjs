@@ -21,7 +21,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * //creates a deverOwnedClient with the default params
      * let deveryOwnedClient = new DeveryOwned();
      *
-     * //creates a deveryAdminedClient pointing to a custom address
+     * //creates a deveryOwnedClient pointing to a custom address
      * let deveryOwnedClient = new DeveryOwned({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
      *
      * ```
@@ -54,7 +54,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *      //ownership
      * })
      *
-     * //optionaly you can can use the async syntax
+     * //optionally you can can use the async syntax
      *
      *
      * async function(){
@@ -84,7 +84,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
 
 
   /**
-     * If you are the current contract owner(I bet you are not) you c an call this method to transfer it
+     * If you are the current contract owner (I bet you are not) you can call this method to transfer it
      * to someone else by passing the new account owner address as param. The ownership transfer will only be
      * concluded once the new contract owner do a call to {@link acceptOwnership}.
      *
@@ -104,7 +104,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *      //sorry mate I told you not to call this function unless you were the contract onwer
      * })
      *
-     * //optionaly you can can use the async syntax
+     * //optionally you can can use the async syntax
      *
      *
      * async function(){
@@ -113,7 +113,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *          //congrats you are the new owner
      *      }
      *      catch(err){
-     *          //sorry mate I told you not to call this function unless you were the contract onwer
+     *          //sorry mate I told you not to call this function unless you were the contract owner
      *      }
      * }
      *
@@ -122,12 +122,12 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}
      *
-     * @param {string} newOwnerAddres The new contract owner address
+     * @param {string} newOwnerAddress The new contract owner address.
      * @returns {Promise.<transaction>} a promise that if resolved returns an transaction or raise an error in case
      * of rejection
      */
-  async transferOwnership(newOwnerAddres) {
-    const result = await this.__deveryRegistryContract.transferOwnership(newOwnerAddres);
+  async transferOwnership(newOwnerAddress) {
+    const result = await this.__deveryRegistryContract.transferOwnership(newOwnerAddress);
     return result.valueOf();
   }
 
@@ -141,9 +141,9 @@ class DeveryOwned extends AbstractDeverySmartContract {
 
   /**
      *
-     * Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes
-     * please note that OwnershipTransferredEventListeners do not stack, this means that whenever you set one you are
-     * removing the last one. If you want to remove a OwnershipTransferredEventListeners, just call this function passing undefined
+     * Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes.
+     * Please note that OwnershipTransferredListeners do not stack, this means that whenever you set one you are
+     * removing the last one. If you want to remove a OwnershipTransferredListener, just call this function passing undefined
      * as param.
      *
      *
@@ -154,10 +154,9 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * //now you can use it
      *
      *
-     *
      * deveryOwnedClient.setOwnershipTransferredListener((fromAddress,toAddress) => {
      *      //whenever an admin is removed we will log it to the console
-     *      console.log(`the ownership is being trasnfered from ${fromAddress} to  ${toAddress}`);
+     *      console.log(`the ownership is being transferred from ${fromAddress} to ${toAddress}`);
      * })
      *
      * //if you want to remove the listener you can simply pass undefined as parameter
@@ -200,20 +199,20 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *      //... do stuff
      * })
      *
-     * //optionaly you can can use the async syntax
+     * //optionally you can use the async syntax
      *
      *
      * async function(){
-     *       let contractOwnerAddress = await getNewOwner.getOwner();
+     *       let contractOwnerAddress = await deveryOwnedClient.getOwner();
      *       console.log(contractOwnerAddress)
      *       //... do stuff
      * }
      * ```
      *
      *
-     * @returns {Promise.<string>} a promise that returns the contract owner address or raise an error in case of rejection
-     *
      * for more info about how to get a {@link DeveryOwned|DeveryOwned instance click here}
+     *
+     * @returns {Promise.<string>} a promise that returns the contract owner address or raise an error in case of rejection
      */
   async getOwner() {
     const result = await this.__deveryRegistryContract.owner();
@@ -222,7 +221,7 @@ class DeveryOwned extends AbstractDeverySmartContract {
 
   /**
      *
-     * Get the address of the newOwner account, an value will be return only if an account transfer is pending
+     * Get the address of the newOwner account. A value will be returned only if the account transfer is pending
      * otherwise you will get 0x00000000000000...
      *
      * ***Usage example:***
@@ -236,11 +235,11 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *      //... do stuff
      * })
      *
-     * //optionaly you can can use the async syntax
+     * //optionally you can use the async syntax
      *
      *
      * async function(){
-     *       let newOwnerAddress = await getNewOwner.getNewOwner();
+     *       let newOwnerAddress = await deveryOwnedClient.getNewOwner();
      *       console.log(newOwnerAddress)
      *       //... do stuff
      * }

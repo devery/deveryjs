@@ -7,7 +7,7 @@ const ethers = require('ethers');
 /**
  *
  * Main class to deal with the owned smart contract interface and related operations,
- * you can use it to check the current contract owner and list to ownership change related
+ * you can use it to check the current contract owner and listen to ownership change related
  * events
  *
  * @version 1
@@ -80,30 +80,30 @@ class DeveryERC721 extends AbstractSmartContract {
   *   This method is used for claiming a product. The method returns you the transaction address of the claim.
   *   If the product have a maximum mintable quantity set and you try to claim a number of product bigger than the mintable products number set
   *   the method will not work
-  * 
+  *
   *   ***Usage example:***
-  * 
+  *
   *   ```
-  *    *  //first you need to get a {@link DeveryERC721} instance
+  *  //first you need to get a {@link DeveryERC721} instance
   *  let deveryErc721Client = new DeveryERC721();
   *  //now you can use it
   *
   * //Let's log the simplest case of use in the console
   *
-  * deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(response => 
+  * deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(response =>
   *    console.log('response').catch(err => {
   *  //treat you error
   *  })
   * )
   *
   *   ```
-  * 
+  *
   *  for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
-  * 
-  * 
+  *
+  *
   * @param {string} productAddress address of the claimed product
   * @param {number} quantity quantity of claimed products
-  * @param {TransactionOptions} [overrideOptions]
+  * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
   */
   async claimProduct(productAddress, quantity = 1, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
@@ -113,7 +113,7 @@ class DeveryERC721 extends AbstractSmartContract {
 
   // x.__deveryERC721Contract.getApproved
   /**
-   * This method returns you the total amount of approved transactions of the inspected producted (referenced by it's token)
+   * This method returns you the total amount of approved transactions of the inspected product (referenced by it's token).
    *
    * ***Usage example:***
    *
@@ -133,18 +133,17 @@ class DeveryERC721 extends AbstractSmartContract {
    *  for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
    *
-   * @param {string} address tokenAddres to be inspected
-   * @param {TransactionOptions} [overrideOptions]
+   * @param {string} address token address to be inspected.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
    */
   async getApproved(address, overrideOptions = {}) {
-    const result = await this.__deveryERC721Contract.getApproved(address, overrideOptions);
-    return result;
+    return await this.__deveryERC721Contract.getApproved(address, overrideOptions);
   }
 
   // x.__deveryERC721Contract.getProductsByOwner
   /**
-   * Each brand has and devery user blockchain address. This method returns the address of all the products
-   * of all the products linked to the account passed as a parameter
+   * Each brand has a blockchain address. This method returns the address
+   * of all the products linked to the account passed as a parameter.
    *
    *
    *
@@ -157,19 +156,18 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    *  //Let's log the simplest case of use in the console.
    *
-   *  deveryErc721Client.getProductsByOwner(addresOwner).then(response => console.log('these are the products owneds by this address', response))
+   *  deveryErc721Client.getProductsByOwner(addressOwner).then(response => console.log('these are the products owned by this address', response))
    *
    *  //Since this is a promise function you will need a .then statement to display the result
    *
-   *  //This function you return you an array with all the product addresses owned by the address passed as a parameter
+   *  //This function returns you an array with all the product addresses owned by the address passed as a parameter
    *
    *
    * ```
    * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * DeveryERC721Client.getProductsByOwner()
-   * @param {string} addressOwner the blockchain addres of whom we want to know the owned tokens
-   * @param {TransactionOptions} [overrideOptions]
+   * @param {string} addressOwner the blockchain address of whom we want to know the owned tokens
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
    */
   async getProductsByOwner(addressOwner, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
@@ -179,9 +177,9 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    *
-   * Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain
-   * please note that ApprovalEventListener do not stack, this means that whenever you set one you are
-   * removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+   * Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain.
+   * Please note that ApprovalEventListeners do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove an ApprovalEventListener, just call this function passing undefined
    * as param.
    *
    * ***Usage example:***
@@ -200,13 +198,13 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * //if you want to remove the listener you can simply pass undefined as parameter
    *
-   * deveryRegistryClient.setApprovalEventListener(undefined)
+   * deveryErc721Client.setApprovalEventListener(undefined)
    *
    * //or that is equivalent to the above call
    *
    *
    *
-   * deveryRegistryClient.setApprovalEventListener()
+   * deveryErc721Client.setApprovalEventListener()
    *
    *
    *
@@ -214,11 +212,11 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * @param {ApprovalEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * @param {ApprovalEventCallback} callback the callback that will be executed whenever an ApprovalForAll event is
    * triggered
    */
   setApprovalEventListener(callback) {
-    const eventName = 'ApprovalForAll';
+    const eventName = 'ApprovalForAll'; //@todo: check - may be it should be 'Approval'??
     this.__deveryERC721Contract.removeAllListeners(eventName);
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
@@ -226,23 +224,23 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
   /**
-   * This is a callback function that will be invoked in response to  ApprovalEvents
+   * This is a callback function that will be invoked in response to ApprovalEvents
    *
    *
    * @callback ApprovalEventCallback
-   * @param {string} productAccount
-   * @param {string} brandAccount
-   * @param {string} appAccount
-   * @param {string} description
-   * @param {bools} active
+   * @param {string} productAccount product account address.
+   * @param {string} brandAccount brand account address.
+   * @param {string} appAccount application account address.
+   * @param {string} description description
+   * @param {boolean} active
    *
    */
 
   /**
    *
-   * Listener for transfer approval for all events, this event triggers whenever a devery item is transferred in the blockchain
-   * please note that ApprovalEventListener do not stack, this means that whenever you set one you are
-   * removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+   * Listener for transfer approval for all events, this event triggers whenever a devery item is transferred in the blockchain.
+   * Please note that ApprovalForAllEventListeners do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove an ApprovalForAllEventListener, just call this function passing undefined
    * as param.
    *
    * ***Usage example:***
@@ -276,22 +274,22 @@ class DeveryERC721 extends AbstractSmartContract {
    * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
    *
-   * @param {ApprovalEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * @param {ApprovalEventCallback} callback the callback that will be executed whenever a Approval event is
    * triggered
    */
   setApprovalForAllEventListener(callback) {
-    const eventName = 'Approval';
+    const eventName = 'Approval'; //@todo: check - may be it should be 'ApprovalAll'??
     this.__deveryERC721Contract.removeAllListeners(eventName);
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
     }
   }
-
+//@todo: re-check callback description
   /**
    *
-   * Listener for transfer  events, this event triggers whenever a devery item is transfered in the blockchain
-   * please note that ApprovalEventListener do not stack, this means that whenever you set one you are
-   * removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+   * Listener for transfer events, this event triggers whenever a devery item is transferred in the blockchain.
+   * Please note that TransferEventListeners do not stack, this means that whenever you set one you are
+   * removing the last one. If you want to remove a TransferEventListener, just call this function passing undefined
    * as param.
    *
    * ***Usage example:***
@@ -310,13 +308,13 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * //if you want to remove the listener you can simply pass undefined as parameter
    *
-   * deveryRegistryClient.setTransferEventListener(undefined)
+   * deveryErc721Client.setTransferEventListener(undefined)
    *
    * //or that is equivalent to the above call
    *
    *
    *
-   * deveryRegistryClient.setTransferEventListener()
+   * deveryErc721Client.setTransferEventListener()
    *
    *
    *
@@ -324,7 +322,7 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * @param {ApprovalEventCallback} callback the callback that will be executed whenever and ProductUpdated event is
+   * @param {ApprovalEventCallback} callback the callback that will be executed whenever a Transfer event is
    * triggered
    */
   setTransferEventListener(callback) {
@@ -339,53 +337,10 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * Sets the maximum mintable quantity of a given token. *** If you don't set the maximum mintable quantity it will be infinite by default**
    *
-   *  ***Usage example:***
-   * ```
-   * //first you need to get a {@link DeveryERC721} instance
-   * let deveryErc721Client = new DeveryERC721();
-   *
-   * //passing true as param will add the account as marker
-   * deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(transaction => {
-   *      console.log('transaction address',transaction.hash);
-   *      //... other stuff
-   * }).catch(err => {
-   *      if(err.message.indexOf('User denied')){
-   *          console.log('The user denied the transaction')
-   *          //...
-   *      }
-   *
-   *      ///handle other exceptions here
-   *
-   * })
-   *
-   *
-   * //or with the async syntax
-   *for more info about how to get let deveryErc721Client = new DeveryERC721();a {@link DeveryRegistry|DeveryRegistry instance click here}.
-   * async function(){
-   *      try{
-   *          //passing false as param will remove the account as marker
-   *          let transaction = await deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57',1)
-   *          console.log('transaction address',transaction.hash);
-   *      }
-   *      catch(err){
-   *          if(err.message.indexOf('User denied')){
-   *               console.log('The user denied the transaction')
-   *              //...
-   *          }
-   *
-   *      ///handle other exceptions here
-   *      }x1'
-   *
-   * }
-   *
-   * ```
-   *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
-   *
-   * @param {string} productAddress The product address of the product which the mintable quantity will be set
-   * @param {string} quantity the allowed quantity of mintable products
-   * @param {TransactionOptions} [overrideOptions] the account index inside the appAccounts array
-   * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case
+   * @param {string} productAddress The address of the product which the mintable quantity will be set.
+   * @param {string} quantity the allowed quantity of mintable products.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+   * @returns {Promise.<Transaction>} a promise that if resolved returns an transaction or raise an error in case of rejection.
    */
   async setMaximumMintableQuantity(productAddress, quantity, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
@@ -395,7 +350,7 @@ class DeveryERC721 extends AbstractSmartContract {
 
   // x.__deveryERC721Contract.tokenIdToProduct
   /**
-   * This method returns the blockchain addres of a product, using it's token as a parameter
+   * This method returns the blockchain address of a product, using its token as a parameter.
    *
    * ***Usage Example:***
    *
@@ -409,16 +364,15 @@ class DeveryERC721 extends AbstractSmartContract {
    * //to use this function you need to have a token, which can be get through a function like tokenOfOwnerByIndex
    * //The token is a hexadecimal number
    *
-   * deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('this is your product address', response))
+   * deveryErc721Client.tokenIdToProduct(tokenId).then(response => console.log('this is your product address', response))
    *
    *
    * ```
    *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   *  DeveryERC721Client.tokenIdToProduct()
-   * @param {string} token The token of the product you wish to get the address from
-   * @param {TransactionOptions} [overrideOptions]
+   * @param {string} tokenId The token of the product you wish to get the address of.
+   * @return {Promise.<String>} a promise that if resolved returns a blockchain product address or raise an error in case of rejection.
    *
    */
   async tokenIdToProduct(tokenId) {
@@ -428,7 +382,7 @@ class DeveryERC721 extends AbstractSmartContract {
 
 
   /**
-   * This method returns the (hexadecimal) number of products owned by the account address passed as parameter to the function
+   * This method returns the (hexadecimal) number of products owned by the account address passed as parameter to the function.
    *
    * ***Usage Example:***
    *
@@ -439,22 +393,24 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * //now you can use it
    *
-   * //this method requires a owner addres, which can be obtained on the metamask extension by clicking on your account name
+   * //this method requires an owner address, which can be obtained on the metamask extension by clicking on your account name
    *
    *
-   * deveryRegistryClient.__deveryERC721Contract.balanceOf('ownerAddress').then(response => console.log('this is account owns this many products', response))
+   * deveryErc721Client.__deveryERC721Contract.balanceOf(ownerAddress).then(response => console.log('this account owns number of products: ', response))
    *
    * ```
    *
-   * @param {string} ownerAddress Blockchain address of the inpsected account
-   * @param {TransactionOptions} [overrideOptions]
+   * @param {string} ownerAddress Blockchain address of the inspected account.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+   * @return {Promise.<*>} a promise that if resolved returns a hexadecimal number of products or raise an error in case of rejection.
    */
   async balanceOf(ownerAddress, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.balanceOf(ownerAddress, overrideOptions);
     return result.toNumber();
   }
+
   /**
-   * This Method returns the token of a product using the by it's index (it's position in an array containing all the products owned by the owner address).
+   * This method returns the token of a product by its index (it's a position in an array containing all the products owned by the owner address).
    *
    * ***Usage Example:***
    * ```
@@ -465,18 +421,19 @@ class DeveryERC721 extends AbstractSmartContract {
    * //now you can use it
    *
    *
-   * deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, index).then(response => ( console.log('product token', response)))
+   * deveryErc721Client.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, index).then(response => ( console.log('product token', response)))
    *
-   * //the product order is the same as the array returned by getProductByOwner() . Wherefore the index 0 it's the first addres returned by the getProductByOwner method,
-   * //the index 1 is the  second address and so on.
+   * //the product order is the same as the array returned by getProductByOwner() . Wherefore the index 0 it's the first address returned by the getProductByOwner method,
+   * //the index 1 is the second address and so on.
    *
    * ```
    *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * @param {string} ownerAddress blockchain addres of whom we want to know the owned tokens
-   * @param {number} index position of the product in the array of all the products owned by the account correspondant to the address
-   * @param {TransactionOptions} [overrideOptions]
+   * @param {string} ownerAddress blockchain address of that we want to know the owned tokens.
+   * @param {number} index position of the product in the array of all products owned by the account corresponding to the address.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+   * @return {Promise.<*>} a promise that if resolved returns a token or raise an error in case of rejection.
    */
   async tokenOfOwnerByIndex(ownerAddress, index, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
@@ -486,9 +443,9 @@ class DeveryERC721 extends AbstractSmartContract {
 
   // x.__deveryERC721Contract.totalAllowedProducts
   /**
-   * This method allows you to query the number of tokens linked to the product addres,
+   * This method allows you to query the number of tokens linked to the product address,
    * representing the amount of that product generated.
-   *  The response is returnet as a hexadecimal number
+   * The response is returned as a hexadecimal number.
    *
    * ***Usage example:***
    * ```
@@ -496,17 +453,18 @@ class DeveryERC721 extends AbstractSmartContract {
    * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
-   * deveryRegistryClient.totalAllowedProducts(productAddress).then(response => {
-   * console.log(`this is the total amount of products Allowed ${productAddress}`)
+   * deveryErc721Client.totalAllowedProducts(productAddress).then(response => {
+   *     console.log(`this is the total amount of products Allowed ${response}`)
    * }).catch(err => {
    *  //handle exceptions here
    * })
    *
    * ```
    *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * @param {string} productAddress Blockchain addres of the consulted product
+   * @param {string} productAddress Blockchain address of the product.
+   * @return {Promise.<Number>} a promise that if resolved returns number of tokens or raise an error in case of rejection.
    */
   async totalAllowedProducts(productAddress) {
     const result = await this.__deveryERC721Contract.totalAllowedProducts(productAddress);
@@ -515,9 +473,9 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    * You can generate a limited amount of products for each product address.
-   * If you try to generated more products than you are allowed this product
+   * If you try to generated more products than you are allowed, this product
    * is going to be minted.
-   * This method returns you the minted products for a specific product address
+   * This method returns you the number of minted products for a specific product address.
    *
    * ***Usage Example:***
    *
@@ -526,16 +484,16 @@ class DeveryERC721 extends AbstractSmartContract {
    * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
-   * deveryRegistryClient.totalMintedProducts('productAdrres').then(response =>
-   *  (console.log('you have this many minted products for this addres')))
+   * deveryErc721Client.totalMintedProducts(productAddress).then(response =>
+   *  (console.log('you have the following number of minted products for this address ', response)))
    *
    * ```
    *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
    *
-   *
-   * @param {string} productAddress inspected product addres
+   * @param {string} productAddress inspected product address.
+   * @return {Promise.<Number>} a promise that if resolved returns number of minted products or raise an error in case of rejection.
    */
   async totalMintedProducts(productAddress) {
     const result = await this.__deveryERC721Contract.totalMintedProducts(productAddress);
@@ -544,8 +502,8 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    * This method transfers the ownership of a product from one account to another.
-   * The transfer must be made logged in the account referenced in the 'fromAddres' parameter,
-   * otherwise the transfer will be denied
+   * The transfer must be made logged in the account referenced in the 'fromAddress' parameter,
+   * otherwise the transfer will be denied.
    *
    * *** Usage Example: ***
    * ```
@@ -553,8 +511,8 @@ class DeveryERC721 extends AbstractSmartContract {
    * let deveryErc721Client = new DeveryERC721();
    * //now you can use it
    *
-   * deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
-   *    console.log('your transaction was a success');
+   * deveryErc721Client.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
+   *    console.log('your transaction was successful');
    *    //other stuff
    * }).catch(err => {
    *  if(err.message.indexOf('gas required exceeds allowance or always failing transaction'){
@@ -566,12 +524,12 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * ```
    *
-   * for more info about how to get a {@link DeveryRegistry|DeveryRegistry instance click here}.
+   * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
    *
    * @param {string} fromAddress blockchain address which the transfer is coming from
-   * @param {string} toAddress blockchain address which the transfer is goingo to
-   * @param {string} tokenId Token of  the product being transfered
+   * @param {string} toAddress blockchain address which the transfer is going to
+   * @param {string} tokenId Token of the product being transferred
    */
   async safeTransferFrom(fromAddress, toAddress, tokenId) {
     const result = await this.__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
@@ -580,28 +538,28 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    *  This method creates a devery registry address for the desired contract,
-   *  so the user is able to properly use the devery ERC 721 methods
-   *  
-   * 
+   *  so the user is able to properly use the devery ERC721 methods.
+   *
+   *
    *  ***Usage example:***
-   * 
+   *
    *  ```
    *  //first you need to get a {@link DeveryERC721} instance
    *  let deveryErc721Client = new DeveryERC721();
    * //now you can use it
-   * 
+   *
    *  //then you have to pass the devery contract method passing the contract as a parameter
-   *  deveryErc721Client.setDeveryRegistryAddress(transaction => {
+   *  deveryErc721Client.setDeveryRegistryAddress(address).then(transaction => {
    *    console.log(transaction) }).catch(err => {
    *      //treat your errors here
    *    })
    *  ```
-   * @param {string} deveryRegistryContractAddres address of an deployed contract
-   * @param {TransactionOptions} [overrideOptions]
+   * @param {string} deveryRegistryContractAddress address of the deployed contract.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
    */
-  async setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions = {}){
+  async setDeveryRegistryAddress(deveryRegistryContractAddress, overrideOptions = {}){
     const result = await this.__deveryERC721Contract
-      .setDeveryRegistryAddress(deveryRegistryContractAddres, overrideOptions);
+      .setDeveryRegistryAddress(deveryRegistryContractAddress, overrideOptions);
     return result.valueOf();
   }
 }

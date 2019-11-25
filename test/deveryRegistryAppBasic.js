@@ -89,7 +89,7 @@ contract('DeveryRegistry - App - basic tests', (accounts) => {
     assert.equal(1, appsLength, 'new account was not created');
     const app = await devery.getApp(myAcc);
     assert.equal(appName, app.appName, 'App name does not match');
-    assert.equal(feeAcc.toLowerCase(), app.feeAccount.toLowerCase(), 'Fee accountsdoes not match');
+    assert.equal(feeAcc.toLowerCase(), app.feeAccount.toLowerCase(), 'Fee account does not match');
     assert.equal(fee, app.fee, 'Fees does not match');
     assert.equal(active, app.active, 'active status does not match');
     assert.equal(myAcc.toLowerCase(), app.appAccount.toLowerCase(), 'App account does not match');
@@ -108,10 +108,10 @@ contract('DeveryRegistry - App - basic tests', (accounts) => {
     const deveryListener = createDeveryRegistry(web3, undefined, listenerAccount, contractAddress);
     deveryListener.setAppAddedEventListener((callbackAppAcc, callbackAppName, callbackFeeAccount, callbackFee) => {
       try {
-        assert.equal(callbackAppAcc.toLowerCase(), senderAccount.toLowerCase(), 'appAcount is not same');
-        assert.equal(callbackAppName, appName, 'appName is not same');
-        assert.equal(callbackFeeAccount.toLowerCase(), feeAccount.toLowerCase(), 'feeAccount is not same');
-        assert.equal(callbackFee, fee, 'app fee is not same');
+        assert.equal(callbackAppAcc.toLowerCase(), senderAccount.toLowerCase(), 'appAccount is not the same');
+        assert.equal(callbackAppName, appName, 'appName is not the same');
+        assert.equal(callbackFeeAccount.toLowerCase(), feeAccount.toLowerCase(), 'feeAccount is not the same');
+        assert.equal(callbackFee, fee, 'app fee is not the same');
         // we need to remove the listener otherwise mocha will never exit
         deveryListener.setAppAddedEventListener(null);
         done();
@@ -140,11 +140,11 @@ contract('DeveryRegistry - App - basic tests', (accounts) => {
       , callbackActive,
     ) => {
       try {
-        assert.equal(callbackAppAcc.toLowerCase(), senderAccount.toLowerCase(), 'appAcount is not same');
-        assert.equal(callbackAppName, appName, 'appName is not same');
-        assert.equal(callbackFeeAccount.toLowerCase(), feeAccount.toLowerCase(), 'feeAccount is not same');
-        assert.equal(callbackFee, fee, 'app fee is not same');
-        assert.equal(callbackActive, active, 'appStatus is not same');
+        assert.equal(callbackAppAcc.toLowerCase(), senderAccount.toLowerCase(), 'appAccount is not the same');
+        assert.equal(callbackAppName, appName, 'appName is not the same');
+        assert.equal(callbackFeeAccount.toLowerCase(), feeAccount.toLowerCase(), 'feeAccount is not the same');
+        assert.equal(callbackFee, fee, 'app fee is not the same');
+        assert.equal(callbackActive, active, 'appStatus is not the same');
         // we need to remove the listener otherwise mocha will never exit
         deveryListener.setAppUpdatedEventListener(null);
         done();
