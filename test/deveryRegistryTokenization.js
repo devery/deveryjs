@@ -70,16 +70,17 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const fromAccount = myAccount;
     const toAccount = accounts[1];
 
-
     let productsOwnedByFromAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
     assert.equal(productsOwnedByFromAccount.length, 1, "The from account doesn't have any product" );
+    
     let producstOwnedByToAccount = await deveryERC721Instance.getProductsByOwner(toAccount);
     assert.equal(producstOwnedByToAccount.length, 0, "the to account has products (expected to have none)");
+    
     // we already know the from account has one product, so we can get it's token using
     const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0);
     const productAddres = await deveryERC721Instance.tokenIdToProduct(productTokenId);
 
-    console.log('\n\n\n\n productAddress', productAddres)
+    
     // refactor this message
     assert.equal(productsOwnedByFromAccount[0], productAddres,"The token doesn't correspond to the product you desire");
     await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
@@ -121,6 +122,21 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     assert.equal(afterTransferOwnedProductsQuantity, afterAddOwnedProductsQuantity - 1, 'The value returned by balanceOf is not changing after the use of safeTransferFrom')
   })
 
+  it('Should return the correct total of allowed products', async () => {
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const deveryInstance = createDeveryRegistry(web3, undefined, myAccount, deveryERC721Contract.address);
+    
+    const productAdrress = accounts[2]
+    await deveryRegistry.addProduct(productAdrress, 'newProduct', 'productDetails', 2019, 'brazil');
+    const originalAllowedProductsNumber = await deveryERC721Instance.totalAllowedProducts(productAdrress);
+    
+    const allowedProducts = 5
+    await deveryERC721Instance.setMaximumMintableQuantity(productAdrress, allowedProducts);
+    const afterSetMintableAllowerProductsNumber = await deveryERC721Instance.totalAllowedProducts(productAdrress);
+
+    assert.equal(afterSetMintableAllowerProductsNumber, allowedProducts, 'The number of allowed products does not equals the number defined by setMaximumMintableQuantity')
+  })
+
   it('Should set the maximum mintable quantity of a product and respect it', async () => {
     //Should use two accounts
     //should set the maximum mintable quantity as one
@@ -132,7 +148,7 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     await deveryERC721Instance.setMaximumMintableQuantity(account, 1);
     let hasTransactionFailed = false
     const FailedTransaction = deveryERC721Instance.claimProduct(account, 2, overrideOptions).then(transaction  => {
-      console.log('the transaction was a success (which means things went wrong)');
+      console.log('the transasction was a success (which means things went wrong)');
     }).catch(err => {
       hasTransactionFailed = true
     })
