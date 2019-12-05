@@ -29,21 +29,21 @@ const ethers = require('ethers');
  *
  * Abstract class that is base for all smart contracts.
  * There is no reason to directly instantiate it. Here lies some common logic about how to resolve
- * the underlying smart contract address and getting the signer instance. *** you shall not instantiate it directly***.
+ * the underlying smart contract address and getting the signer instance. *** you should not instantiate it directly***.
  * @version 3
  */
 class AbstractSmartContract {
   /**
      *
-     * ***You shall not call this class constructor directly*** if you do so you will get a TypeError
+     * ***You should not call this class constructor directly*** if you do so you will get a TypeError
      * as we are explicitly checking against this.
      *
      * ```
-     * //excerpt from the constructor
+     * // excerpt from the constructor
      *
-     * if (this.constructor === AbstractDeverySmartContract) {
+     * if (this.constructor === AbstractSmartContract) {
      *      throw new TypeError("Cannot construct AbstractSmartContract instances directly");
-     *}
+     * }
      *
      * ```
      *
@@ -107,7 +107,7 @@ class AbstractSmartContract {
 
   /**
    *
-   * you can use this method to check the current signer wallet address
+   * You can use this method to check the current signer wallet address.
    *
    * @returns {*} - the current signer address
    */
@@ -116,7 +116,7 @@ class AbstractSmartContract {
   }
 
   /**
-   * returns the internal signer or provider, this method needs to be used with caution
+   * Returns the internal signer or provider, this method needs to be used with caution
    * as it exposes internals. So unless you know what you are doing it's better to avoid using it.
    *
    * @returns {*} - the current provider or signer

@@ -18,10 +18,10 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      *```
-     * //creates a deverOwnedClient with the default params
+     * // creates a deverOwnedClient with the default params
      * let deveryOwnedClient = new DeveryOwned();
      *
-     * //creates a deveryOwnedClient pointing to a custom address
+     * // creates a deveryOwnedClient pointing to a custom address
      * let deveryOwnedClient = new DeveryOwned({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
      *
      * ```
@@ -43,28 +43,27 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryOwned} instance
+     * // first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
      *
-     * //then you can use it
-     * deveryOwnedClient.acceptOwnership().then(function(transaction){
-     *      //congrats you are the new owner
-     * }).catch(function(err){
-     *      //sorry mate I told you not to call this function unless you were about to receive the
-     *      //ownership
+     * // then you can use it
+     * deveryOwnedClient.acceptOwnership().then(function(transaction) {
+     *      // congrats you are the new owner
+     * }).catch(function(err) {
+     *      // sorry mate I told you not to call this function unless you were about to receive the
+     *      // ownership
      * })
      *
-     * //optionally you can can use the async syntax
+     * // optionally you can can use the async syntax
      *
-     *
-     * async function(){
-     *      try{
+     * async function foo() {
+     *      try {
      *          let transactionResult = await deveryOwnedClient.acceptOwnership();
-     *          //congrats you are the new owner
+     *          // congrats you are the new owner
      *      }
-     *      catch(err){
-     *          //sorry mate I told you not to call this function unless you were about to receive the
-     *          //ownership
+     *      catch(err) {
+     *          // sorry mate I told you not to call this function unless you were about to receive the
+     *          // ownership
      *      }
      * }
      *
@@ -94,26 +93,26 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryOwned} instance
+     * // first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
      *
-     * //then you can use it
-     * deveryOwnedClient.transferOwnership('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(function(transaction){
-     *      //you just started the contract transfer
-     * }).catch(function(err){
-     *      //sorry mate I told you not to call this function unless you were the contract onwer
+     * // then you can use it
+     * deveryOwnedClient.transferOwnership('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(function(transaction) {
+     *      // you just started the contract transfer
+     * }).catch(function(err) {
+     *      // sorry mate I told you not to call this function unless you were the contract onwer
      * })
      *
-     * //optionally you can can use the async syntax
+     * // optionally you can can use the async syntax
      *
      *
-     * async function(){
+     * async function foo() {
      *      try{
      *          let transactionResult = await deveryOwnedClient.transferOwnership('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
-     *          //congrats you are the new owner
+     *          // congrats you are the new owner
      *      }
-     *      catch(err){
-     *          //sorry mate I told you not to call this function unless you were the contract owner
+     *      catch(err) {
+     *          // sorry mate I told you not to call this function unless you were the contract owner
      *      }
      * }
      *
@@ -149,21 +148,21 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryOwned} instance
+     * // first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
-     * //now you can use it
+     * // now you can use it
      *
      *
      * deveryOwnedClient.setOwnershipTransferredListener((fromAddress,toAddress) => {
-     *      //whenever an admin is removed we will log it to the console
+     *      // whenever an admin is removed we will log it to the console
      *      console.log(`the ownership is being transferred from ${fromAddress} to ${toAddress}`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
      * deveryOwnedClient.setOwnershipTransferredListener(undefined)
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
      * deveryOwnedClient.setOwnershipTransferredListener()
      *
@@ -190,19 +189,19 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      * ```
-     * //first you need to get a {@link DeveryOwned} instance
+     * // first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
      *
-     * //then you can use it
-     * deveryOwnedClient.getOwner().then(function(contractOwnerAddress){
+     * // then you can use it
+     * deveryOwnedClient.getOwner().then(function(contractOwnerAddress) {
      *      console.log(contractOwnerAddress)
      *      //... do stuff
      * })
      *
-     * //optionally you can use the async syntax
+     * // optionally you can use the async syntax
      *
      *
-     * async function(){
+     * async function foo() {
      *       let contractOwnerAddress = await deveryOwnedClient.getOwner();
      *       console.log(contractOwnerAddress)
      *       //... do stuff
@@ -226,19 +225,19 @@ class DeveryOwned extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryOwned} instance
+     * // first you need to get a {@link DeveryOwned} instance
      * let deveryOwnedClient = new DeveryOwned();
      *
-     * //then you can use it
-     * deveryOwnedClient.getNewOwner().then(function(newOwnerAddress){
+     * // then you can use it
+     * deveryOwnedClient.getNewOwner().then(function(newOwnerAddress) {
      *      console.log(newOwnerAddress)
      *      //... do stuff
      * })
      *
-     * //optionally you can use the async syntax
+     * // optionally you can use the async syntax
      *
      *
-     * async function(){
+     * async function foo() {
      *       let newOwnerAddress = await deveryOwnedClient.getNewOwner();
      *       console.log(newOwnerAddress)
      *       //... do stuff
