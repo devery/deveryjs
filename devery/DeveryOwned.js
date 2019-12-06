@@ -152,7 +152,6 @@ class DeveryOwned extends AbstractDeverySmartContract {
      * let deveryOwnedClient = new DeveryOwned();
      * // now you can use it
      *
-     *
      * deveryOwnedClient.setOwnershipTransferredListener((fromAddress,toAddress) => {
      *      // whenever an admin is removed we will log it to the console
      *      console.log(`the ownership is being transferred from ${fromAddress} to ${toAddress}`);
