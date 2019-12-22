@@ -16,11 +16,11 @@ class EveToken extends AbstractSmartContract {
   /**
      *
      * Creates a new instance of EveToken.
-     *```
-     * //creates an eveTokenClient with the default params
+     * ```
+     * // creates an eveTokenClient with the default params
      * let eveTokenClient = new EveToken();
      *
-     * //creates an eveTokenClient pointing to a custom address
+     * // creates an eveTokenClient pointing to a custom address
      * let eveTokenClient = new EveToken({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
      *
      * ```
@@ -171,22 +171,22 @@ class EveToken extends AbstractSmartContract {
      * as param.
      *
      * ```
-     * //first you need to get a {@link EveToken} instance
+     * // first you need to get a {@link EveToken} instance
      * let eveTokenClient = new EveToken();
-     * //now you can use it
+     * // now you can use it
      *
      *
      *
      * eveTokenClient.setApprovalListener((appAccount,appName,feeAccount,fee,active) => {
-     *      //whenever an app created we will log it to the console
+     *      // whenever an app created we will log it to the console
      *      console.log(`new app created ${appAccount} - ${appName} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
      * eveTokenClient.setApprovalListener(undefined)
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
      * eveTokenClient.setApprovalListener()
      *
@@ -224,22 +224,22 @@ class EveToken extends AbstractSmartContract {
      * as param.
      *
      * ```
-     * //first you need to get a {@link EveToken} instance
+     * // first you need to get a {@link EveToken} instance
      * let eveTokenClient = new EveToken();
-     * //now you can use it
+     * // now you can use it
      *
      *
      *
      * eveTokenClient.setTransferListener((appAccount,appName,feeAccount,fee,active) => {
-     *      //whenever an app created we will log it to the console
+     *      // whenever an app created we will log it to the console
      *      console.log(`new app created ${appAccount} - ${appName} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
      * eveTokenClient.setTransferListener(undefined)
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
      * eveTokenClient.setTransferListener()
      *

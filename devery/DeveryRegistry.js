@@ -83,10 +83,10 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      *```
-     * //creates a deveryRegistryClient with the default params
+     * // creates a deveryRegistryClient with the default params
      * let deveryRegistryClient = new DeveryRegistry();
      *
-     * //creates a deveryRegistryClient pointing to a custom address
+     * // creates a deveryRegistryClient pointing to a custom address
      * let deveryRegistryClient = new DeveryRegistry({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
      *
      * ```
@@ -170,7 +170,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      *```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      *
@@ -178,30 +178,30 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *      console.log('transaction address',transaction.hash);
      *      //... other stuff
      * }).catch(err => {
-     *      if(err.message.indexOf('User denied')){
-     *          console.log('The user denied the transaction')
+     *      if(err.message.indexOf('User denied')) {
+     *          console.log('The user denied the transaction');
      *          //...
      *      }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
+     * async function foo() {
      *      try{
-     *          let transaction = await deveryRegistryClient.addApp("Logistics co. app","0x627306090abaB3A6e1400e9345bC60c78a8BEf57",5)
+     *          let transaction = await deveryRegistryClient.addApp("Logistics co. app","0x627306090abaB3A6e1400e9345bC60c78a8BEf57",5);
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
-     *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *      catch(err) {
+     *          if(err.message.indexOf('User denied')) {
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *      ///handle other exceptions here
+     *          // handle other exceptions here
      *      }
      *
      * }
@@ -234,7 +234,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      *```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      *
@@ -242,30 +242,30 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *      console.log('transaction address',transaction.hash);
      *      //... other stuff
      * }).catch(err => {
-     *      if(err.message.indexOf('User denied')){
+     *      if(err.message.indexOf('User denied')) {
      *          console.log('The user denied the transaction')
      *          //...
      *      }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
-     *          let transaction = await deveryRegistryClient.updateApp("Logistics co. app","0x627306090abaB3A6e1400e9345bC60c78a8BEf57",5,true)
+     * async function foo() {
+     *      try {
+     *          let transaction = await deveryRegistryClient.updateApp("Logistics co. app","0x627306090abaB3A6e1400e9345bC60c78a8BEf57",5,true);
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
-     *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *      catch(err) {
+     *          if(err.message.indexOf('User denied')) {
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *      ///handle other exceptions here
+     *          // handle other exceptions here
      *      }
      *
      * }
@@ -297,22 +297,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(app => {
-     *      if(app.active){
+     *      if(app.active) {
      *          console.log(app.appName);
      *          //... other stuff
      *      }
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
-     *      if(app.active){
+     * async function foo() {
+     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *      if(app.active) {
      *          console.log(app.appName);
      *          //... other stuff
      *      }
@@ -340,22 +340,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.getAppData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(app => {
-     *      if(app.active){
+     *      if(app.active) {
      *          console.log(app._appAccount);
      *          //... other stuff
      *      }
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
-     *      if(app.active){
+     * async function foo() {
+     *      let app = await deveryRegistryClient.getApp('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *      if(app.active) {
      *          console.log(app._appAccount);
      *          //... other stuff
      *      }
@@ -383,7 +383,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.appAccountsPaginated(0,20).then(addressArr => {
@@ -392,17 +392,17 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *     }
      * })
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      //here we don't pass any param to appAccountsPaginated
-     *      //because its parameters are optional
+     * async function foo() {
+     *      // here we don't pass any param to appAccountsPaginated
+     *      // because these parameters are optional
      *      let addressArr = await deveryRegistryClient.appAccountsPaginated();
-     *          for(let address of addressArr){
-     *              console.log(address);
-     *          }
+     *      for(let address of addressArr) {
+     *          console.log(address);
+     *      }
      *
-     *          //... do more stuff
+     *      //... do more stuff
      * }
      *
      * ```
@@ -432,32 +432,32 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.appAccountsArray(4).then(address => {
      *     deveryClient.getApp(address).then(app => {
-     *          console.log(app.appName)
+     *          console.log(app.appName);
      *          //... do more stuff
      *     })
-     * }).catch(err =>{
-     *      console.log('index ot of bounds')
+     * }).catch(err => {
+     *      console.log('index ot of bounds');
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
+     * async function foo() {
+     *      try {
      *          let accountAddress = await deveryRegistryClient.appAccountsArray(4);
      *          let app = await deveryRegistryClient.getApp(accountAddress);
-     *          if(app.active){
+     *          if(app.active) {
      *              console.log(app.appName);
      *              //... other stuff
      *          }
      *
      *      }
-     *      catch(err){
+     *      catch(err) {
      *          console.log('index ot of bounds');
      *      }
      *
@@ -485,21 +485,21 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.appAccountsLength().then(totalAccounts => {
-     *     for(let i = 0;i< totalAccounts;i++){
+     *     for(let i = 0;i< totalAccounts;i++) {
      *          deveryRegistryClient.appAccountsArray(i).then(address => {
      *              deveryClient.getApp(address).then(app => {
-     *                  console.log(app.appName)
-     *                   //... do more stuff
+     *                  console.log(app.appName);
+     *                  //... do more stuff
      *              })
      *           })
      *      }
      * })
      *
-     * //optionally you can use the async syntax if you prefer
+     * // optionally you can use the async syntax if you prefer
      *
      * ```
      *
@@ -537,24 +537,23 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
-     *
+     * // now you can use it
      *
      *
      * DeveryRegistryClient.setAppAddedEventListener((appAccount,appName,feeAccount,fee,active) => {
-     *      //whenever an app created we will log it to the console
+     *      // whenever an app created we will log it to the console
      *      console.log(`new app created ${appAccount} - ${appName} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
-     * DeveryRegistryClient.setAppAddedEventListener(undefined)
+     * DeveryRegistryClient.setAppAddedEventListener(undefined);
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
-     * DeveryRegistryClient.setAppAddedEventListener()
+     * DeveryRegistryClient.setAppAddedEventListener();
      *
      *
      *
@@ -583,24 +582,24 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
+     * // now you can use it
      *
      *
      *
      * DeveryRegistryClient.setUpdatedEventListener((appAccount,appName,feeAccount,fee,active) => {
-     *      //whenever an app gets updated we will log it to the console
+     *      // whenever an app gets updated we will log it to the console
      *      console.log(`an App has been updated ${appAccount} - ${appName} - ${active} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
-     * DeveryRegistryClient.setAppUpdatedEventListener(undefined)
+     * DeveryRegistryClient.setAppUpdatedEventListener(undefined);
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
-     * DeveryRegistryClient.setAppUpdatedEventListener()
+     * DeveryRegistryClient.setAppUpdatedEventListener();
      *
      *
      *
@@ -628,14 +627,14 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * Creates a new brand in the blockchain. Only one brand can exist per account key so keep in mind that.
      * If you try to create more than one brand in the same brand account then you will get an exception.
      *
-     * This is a write method so you will need to
-     * provide some gas to run it, plus keep in mind that your environment need to have access to an signer so
-     * make sure that your user have access to metamask or other web3 object.
+     * This is a write method, so you will need to
+     * provide some gas to run it. Plus keep in mind that your environment needs to have access to a signer, so
+     * make sure that your user have access to Metamask or other web3 object.
      *
      *
      * ***Usage example:***
      *```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      *
@@ -644,29 +643,29 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *      //... other stuff
      * }).catch(err => {
      *      if(err.message.indexOf('User denied')){
-     *          console.log('The user denied the transaction')
+     *          console.log('The user denied the transaction');
      *          //...
      *      }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
-     *          let transaction = await deveryRegistryClient.addBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name")
+     * async function foo() {
+     *      try {
+     *          let transaction = await deveryRegistryClient.addBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name");
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
-     *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *      catch(err) {
+     *          if(err.message.indexOf('User denied')) {
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *      ///handle other exceptions here
+     *          // handle other exceptions here
      *      }
      *
      * }
@@ -697,7 +696,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      *```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      *
@@ -705,30 +704,30 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *      console.log('transaction address',transaction.hash);
      *      //... other stuff
      * }).catch(err => {
-     *      if(err.message.indexOf('User denied')){
-     *          console.log('The user denied the transaction')
+     *      if(err.message.indexOf('User denied')) {
+     *          console.log('The user denied the transaction');
      *          //...
      *      }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
-     *          let transaction = await deveryRegistryClient.updateBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name",true)
+     * async function foo() {
+     *      try {
+     *          let transaction = await deveryRegistryClient.updateBrand("0x627306090abaB3A6e1400e9345bC60c78a8BEf57","My Brand name",true);
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
-     *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *      catch(err) {
+     *          if(err.message.indexOf('User denied')) {
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *      ///handle other exceptions here
+     *          // handle other exceptions here
      *      }
      *
      * }
@@ -761,22 +760,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.getBrand('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(brand => {
-     *      if(brand.active){
+     *      if(brand.active) {
      *          console.log(brand);
      *          //... other stuff
      *      }
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      let brand = await deveryRegistryClient.getBrand('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
-     *      if(brand.active){
+     * async function foo() {
+     *      let brand = await deveryRegistryClient.getBrand('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *      if(brand.active) {
      *          console.log(brand);
      *          //... other stuff
      *      }
@@ -804,7 +803,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.getBrandData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(brandData => {
@@ -813,10 +812,10 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      let brandData = await deveryRegistryClient.getBrandData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
+     * async function foo() {
+     *      let brandData = await deveryRegistryClient.getBrandData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
      *      console.log(brandData.appFeeAccount);
      *      //... other stuff
      * }
@@ -844,27 +843,27 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.brandAccountsPaginated(0,20).then(addressArr => {
-     *     for(let address of addressArr){
+     *     for(let address of addressArr) {
      *          console.log(address);
      *     }
      * })
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
+     * async function foo() {
      *
-     *      //here we don't pass any param to brandAccountsPaginated
-     *      //because its parameters are optional
+     *      // here we don't pass any param to brandAccountsPaginated
+     *      // because its parameters are optional
      *      let addressArr = await deveryRegistryClient.brandAccountsPaginated();
-     *          for(let address of addressArr){
-     *              console.log(address);
-     *          }
+     *      for(let address of addressArr) {
+     *          console.log(address);
+     *      }
      *
-     *          //... do more stuff
+     *      //... do more stuff
      * }
      *
      * ```
@@ -893,29 +892,29 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.brandAccountsArray(4).then(address => {
      *     deveryClient.getBrand(address).then(brand => {
-     *          console.log(brand.brandName)
+     *          console.log(brand.brandName);
      *          //... do more stuff
      *     })
-     * }).catch(err =>{
-     *      console.log('index ot of bounds')
+     * }).catch(err => {
+     *      console.log('index ot of bounds');
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
+     * async function foo() {
+     *      try {
      *          let accountAddress = await deveryRegistryClient.brandAccountsArray(4);
      *          let brand = await deveryRegistryClient.getBrand(accountAddress);
-     *          console.log(brand.brandName)
+     *          console.log(brand.brandName);
      *          //... do more stuff
      *      }
-     *      catch(err){
+     *      catch(err) {
      *          console.log('index ot of bounds');
      *      }
      * }
@@ -939,26 +938,26 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.brandAccountsLength().then(totalAccounts => {
-     *     for(let i = 0;i< totalAccounts;i++){
+     *     for(let i = 0;i< totalAccounts;i++) {
      *          deveryRegistryClient.brandAccountsArray(i).then(address => {
      *              deveryRegistryClient.getBrand(address).then(brand => {
-     *                  console.log(brand.brandName)
+     *                  console.log(brand.brandName);
      *                   //... do more stuff
      *              })
      *           })
      *      }
      * })
      *
-     * //optionally you can use the async syntax if you prefer
-     * const totalAccounts = await deveryRegistryClient.brandAccountsLength()
+     * // optionally you can use the async syntax if you prefer
+     * const totalAccounts = await deveryRegistryClient.brandAccountsLength();
      * for(let i = 0; i < totalAccounts; i++) {
-     *     const address = await deveryRegistryClient.brandAccountsArray(i)
-     *     const brand = await deveryRegistryClient.getBrand(address)
-     *     console.log(brand.brandName)
+     *     const address = await deveryRegistryClient.brandAccountsArray(i);
+     *     const brand = await deveryRegistryClient.getBrand(address);
+     *     console.log(brand.brandName);
      *     //... do more stuff
      * }
      *
@@ -996,23 +995,23 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
+     * // now you can use it
      *
      *
      * DeveryRegistryClient.setBrandAddedEventListener((brandAccount,appAccount,active) => {
-     *      //whenever a brand added we will log it to the console
+     *      // whenever a brand added we will log it to the console
      *      console.log(`new brand has been added ${brandAccount} - ${appAccount} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
-     * DeveryRegistryClient.setBrandAddedEventListener(undefined)
+     * DeveryRegistryClient.setBrandAddedEventListener(undefined);
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
-     * DeveryRegistryClient.setBrandAddedEventListener()
+     * DeveryRegistryClient.setBrandAddedEventListener();
      *
      *
      *
@@ -1040,23 +1039,23 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
+     * // now you can use it
      *
      *
      * deveryRegistryClient.setBrandUpdatedEventListener((brandAccount,appAccount,active) => {
-     *      //whenever a brand updated we will log it to the console
+     *      // whenever a brand updated we will log it to the console
      *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
-     * deveryRegistryClient.setBrandUpdatedEventListener(undefined)
+     * deveryRegistryClient.setBrandUpdatedEventListener(undefined);
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
-     * deveryRegistryClient.setBrandUpdatedEventListener()
+     * deveryRegistryClient.setBrandUpdatedEventListener();
      *
      *
      *
@@ -1081,15 +1080,15 @@ class DeveryRegistry extends AbstractDeverySmartContract {
 
   /**
      *
-     * Creates a new Product in the blockchain. This is a write method so you will need to
-     * provide some gas to run it, plus keep in mind that your environment need to have access to a signer so
-     * make sure that your user have access to metamask or other web3 object.
+     * Creates a new Product in the blockchain. This is a write method, so you will need to
+     * provide some gas to run it. Plus keep in mind that your environment needs to have access to a signer, so
+     * make sure that you user have access to Metamask or other web3 object.
      *
      *
      * ***Usage example:***
      *
      *```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      *
@@ -1097,30 +1096,30 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *      console.log('transaction address',transaction.hash);
      *      //... other stuff
      * }).catch(err => {
-     *      if(err.message.indexOf('User denied')){
-     *          console.log('The user denied the transaction')
+     *      if(err.message.indexOf('User denied')) {
+     *          console.log('The user denied the transaction');
      *          //...
      *      }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
-     *          let transaction = await deveryRegistryClient.addProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','My nice product','batch 001',2018,'Unknown place')
+     * async function foo() {
+     *      try {
+     *          let transaction = await deveryRegistryClient.addProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','My nice product','batch 001',2018,'Unknown place');
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
-     *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *      catch(err) {
+     *          if(err.message.indexOf('User denied')) {
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *      }
      *
      * }
@@ -1152,13 +1151,13 @@ class DeveryRegistry extends AbstractDeverySmartContract {
 
   /**
      *
-     * Updates an existing Product in the blockchain. This is a write method so you will need to
-     * provide some gas to run it, plus keep in mind that your environment need to have access to a signer so
-     * make sure that your user have access to metamask or other web3 object.
+     * Updates an existing Product in the blockchain. This is a write method, so you will need to
+     * provide some gas to run it. Plus keep in mind that your environment needs to have access to a signer, so
+     * make sure that your user have access to Metamask or other web3 object.
      *
      * ***Usage example:***
      *```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      *
@@ -1167,31 +1166,31 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *      console.log('transaction address',transaction.hash);
      *      //... other stuff
      * }).catch(err => {
-     *      if(err.message.indexOf('User denied')){
-     *          console.log('The user denied the transaction')
+     *      if(err.message.indexOf('User denied')) {
+     *          console.log('The user denied the transaction');
      *          //...
      *      }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
+     * async function foo() {
+     *      try {
      *          let transaction = await deveryRegistryClient.updateProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','My nice product'
-     *                                                          ,'batch 001',2018,'Unknown place',true)
+     *                                                          ,'batch 001',2018,'Unknown place',true);
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
-     *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *      catch(err) {
+     *          if(err.message.indexOf('User denied')) {
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *      ///handle other exceptions here
+     *      // handle other exceptions here
      *      }
      *
      * }
@@ -1225,22 +1224,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.getProduct('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(product => {
-     *      if(product.active){
+     *      if(product.active) {
      *          console.log(product.details);
      *          //... other stuff
      *      }
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      let product = await deveryRegistryClient.getProduct('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
-     *      if(product.active){
+     * async function foo() {
+     *      let product = await deveryRegistryClient.getProduct('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
+     *      if(product.active) {
      *          console.log(product.details);
      *          //... other stuff
      *      }
@@ -1269,7 +1268,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.getProductData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732').then(productData => {
@@ -1278,10 +1277,10 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      let productData = await deveryRegistryClient.getProductData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732')
+     * async function foo() {
+     *      let productData = await deveryRegistryClient.getProductData('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732');
      *      console.log(productData.brandAccount);
      *      //... other stuff
      * }
@@ -1307,23 +1306,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * The parameters `page` and `pagesize` are optional.
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.productAccountsPaginated(0,20).then(addressArr => {
-     *     for(let address of addressArr){
+     *     for(let address of addressArr) {
      *          console.log(address);
      *     }
      * })
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *
-     *      //here we don't pass any param to productAccountsPaginated
-     *      //because its parameters are optional
+     * async function foo() {
+     *      // here we don't pass any param to productAccountsPaginated
+     *      // because its parameters are optional
      *      let addressArr = await deveryRegistryClient.productAccountsPaginated();
-     *      for(let address of addressArr){
+     *      for(let address of addressArr) {
      *          console.log(address);
      *      }
      *
@@ -1357,29 +1355,29 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.productAccountsArray(4).then(address => {
      *     deveryClient.getProduct(address).then(product => {
-     *          console.log(product.productDescription)
+     *          console.log(product.productDescription);
      *          //... do more stuff
      *     })
-     * }).catch(err =>{
-     *      console.log('index ot of bounds')
+     * }).catch(err => {
+     *      console.log('index ot of bounds');
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
+     * async function foo() {
+     *      try {
      *          let productAddress = await deveryRegistryClient.productAccountsArray(4);
      *          let product = await deveryRegistryClient.getProduct(productAddress);
-     *          console.log(product.productDescription)
+     *          console.log(product.productDescription);
      *          //... do more stuff
      *      }
-     *      catch(err){
+     *      catch(err) {
      *          console.log('index ot of bounds');
      *      }
      * }
@@ -1404,26 +1402,26 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.productAccountsLength().then(totalProducts => {
-     *     for(let i = 0;i< totalProducts;i++){
+     *     for(let i = 0;i< totalProducts;i++) {
      *          deveryRegistryClient.productAccountsArray(i).then(address => {
      *              deveryRegistryClient.getProduct(address).then(product => {
-     *                  console.log(product.productDescription)
+     *                  console.log(product.productDescription);
      *                   //... do more stuff
      *              })
      *           })
      *      }
      * })
      *
-     * //optionally you can use the async syntax if you prefer
-     * const totalProducts = await deveryRegistryClient.productAccountsLength()
+     * // optionally you can use the async syntax if you prefer
+     * const totalProducts = await deveryRegistryClient.productAccountsLength();
      * for(let i = 0; i < totalProducts; i++) {
-     *     const address = await deveryRegistryClient.productAccountsArray(i)
-     *     const product = await deveryRegistryClient.getProduct(address)
-     *     console.log(product.productDescription)
+     *     const address = await deveryRegistryClient.productAccountsArray(i);
+     *     const product = await deveryRegistryClient.getProduct(address);
+     *     console.log(product.productDescription);
      *     //... do more stuff
      * }
      *
@@ -1462,23 +1460,21 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
+     * // now you can use it
      *
      *
      * deveryRegistryClient.setProductAddedEventListener((productAccount,brandAccount,appAccount,description,active) => {
-     *      //whenever a product created we will log it to the console
+     *      // whenever a product created we will log it to the console
      *      console.log(`a product has been added ${productAccount} - ${brandAccount} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
+     * deveryRegistryClient.setProductAddedEventListener(undefined);
      *
-     * deveryRegistryClient.setProductAddedEventListener(undefined)
-     *
-     * //or that is equivalent to the above call
-     *
-     * deveryRegistryClient.setProductAddedEventListener()
+     * // or that is equivalent to the above call
+     * deveryRegistryClient.setProductAddedEventListener();
      *
      *
      * ```
@@ -1507,23 +1503,21 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
-     *
-     *
+     * // now you can use it
      * deveryRegistryClient.setProductUpdatedEventListener((productAccount,brandAccount,appAccount,description,active) => {
      *      //whenever a product updated we will log it to the console
      *      console.log(`a product has been updated ${productAccount} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
-     * deveryRegistryClient.setProductUpdatedEventListener(undefined)
+     * deveryRegistryClient.setProductUpdatedEventListener(undefined);
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
-     * deveryRegistryClient.setProductUpdatedEventListener()
+     * deveryRegistryClient.setProductUpdatedEventListener();
      *
      *
      * ```
@@ -1551,39 +1545,39 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
-     * //passing true as param will add the account as marker
+     * // passing true as param will add the account as marker
      * deveryRegistryClient.permissionMarker('0x627306090abaB3A6e1400e9345bC60c78a8BEf57',true).then(transaction => {
      *      console.log('transaction address',transaction.hash);
      *      //... other stuff
      * }).catch(err => {
-     *      if(err.message.indexOf('User denied')){
-     *          console.log('The user denied the transaction')
+     *      if(err.message.indexOf('User denied')) {
+     *          console.log('The user denied the transaction');
      *          //...
      *      }
      *
-     *      //handle other exceptions here
+     *      // handle other exceptions here
      *
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
-     *          //passing false as param will remove the account as marker
-     *          let transaction = await deveryRegistryClient.permissionMarker('0x627306090abaB3A6e1400e9345bC60c78a8BEf57',false)
+     * async function foo() {
+     *      try {
+     *          // passing false as param will remove the account as marker
+     *          let transaction = await deveryRegistryClient.permissionMarker('0x627306090abaB3A6e1400e9345bC60c78a8BEf57',false);
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
-     *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *      catch(err) {
+     *          if(err.message.indexOf('User denied')) {
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *          //handle other exceptions here
+     *          // handle other exceptions here
      *      }
      *
      * }
@@ -1610,7 +1604,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.addressHash('0x627306090abaB3A6e1400e9345bC60c78a8BEf57').then(hash => {
@@ -1638,7 +1632,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      *  ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * const address = '0x627306090abaB3A6e1400e9345bC60c78a8BEf57'
@@ -1647,31 +1641,31 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *         console.log('transaction address',transaction.hash);
      *         //... other stuff
      *     }).catch(err => {
-     *         if(err.message.indexOf('User denied')){
-     *             console.log('The user denied the transaction')
+     *         if(err.message.indexOf('User denied')) {
+     *             console.log('The user denied the transaction');
      *             //...
      *         }
-     *         //handle other exceptions here
+     *         // handle other exceptions here
      *     }
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *      try{
-     *          const address = '0x627306090abaB3A6e1400e9345bC60c78a8BEf57'
-     *          const hash = await deveryRegistryClient.addressHash(address)
-     *          let transaction = await deveryRegistryClient.mark(address,hash)
+     * async function foo() {
+     *      try {
+     *          const address = '0x627306090abaB3A6e1400e9345bC60c78a8BEf57';
+     *          const hash = await deveryRegistryClient.addressHash(address);
+     *          let transaction = await deveryRegistryClient.mark(address,hash);
      *          console.log('transaction address',transaction.hash);
      *      }
-     *      catch(err){
+     *      catch(err) {
      *          if(err.message.indexOf('User denied')){
-     *               console.log('The user denied the transaction')
+     *               console.log('The user denied the transaction');
      *              //...
      *          }
      *
-     *      //handle other exceptions here
+     *      // handle other exceptions here
      *      }
      *
      * }
@@ -1705,7 +1699,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
    * ***Usage example:***
    *
    *```
-   * //first you need to get a {@link DeveryRegistry} instance
+   * // first you need to get a {@link DeveryRegistry} instance
    * let deveryRegistryClient = new DeveryRegistry();
    *
    *
@@ -1713,30 +1707,30 @@ class DeveryRegistry extends AbstractDeverySmartContract {
    *      console.log('transaction address',transaction.hash);
    *      //... other stuff
    * }).catch(err => {
-   *      if(err.message.indexOf('User denied')){
-   *          console.log('The user denied the transaction')
+   *      if(err.message.indexOf('User denied')) {
+   *          console.log('The user denied the transaction');
    *          //...
    *      }
    *
-   *      ///handle other exceptions here
+   *      // handle other exceptions here
    *
    * })
    *
    *
-   * //or with the async syntax
+   * // or with the async syntax
    *
-   * async function(){
-   *      try{
-   *          let transaction = await deveryRegistryClient.AddProductAndMark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','My nice product','batch 001',2018,'Unknown place')
+   * async function foo() {
+   *      try {
+   *          let transaction = await deveryRegistryClient.AddProductAndMark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57','My nice product','batch 001',2018,'Unknown place');
    *          console.log('transaction address',transaction.hash);
    *      }
-   *      catch(err){
+   *      catch(err) {
    *          if(err.message.indexOf('User denied')){
-   *               console.log('The user denied the transaction')
+   *               console.log('The user denied the transaction');
    *              //...
    *          }
    *
-   *      //handle other exceptions here
+   *          // handle other exceptions here
    *      }
    *
    * }
@@ -1775,7 +1769,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      *
      * ***Usage example:***
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
      *
      * deveryRegistryClient.check('0x627306090abaB3A6e1400e9345bC60c78a8BEf57').then(item => {
@@ -1784,10 +1778,10 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * })
      *
      *
-     * //or with the async syntax
+     * // or with the async syntax
      *
-     * async function(){
-     *          let item = await deveryRegistryClient.check('0x627306090abaB3A6e1400e9345bC60c78a8BEf57')
+     * async function foo() {
+     *          let item = await deveryRegistryClient.check('0x627306090abaB3A6e1400e9345bC60c78a8BEf57');
      *          console.log('product brand',item.brandAccount);
      *
      *
@@ -1825,23 +1819,21 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
-     *
+     * // now you can use it
      *
      * deveryRegistryClient.setPermissionedEventListener((marker,brandAccount,permission) => {
      *      console.log(`a brand has been updated ${brandAccount} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
-     * deveryRegistryClient.setPermissionedEventListener(undefined)
+     * deveryRegistryClient.setPermissionedEventListener(undefined);
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
-     *
-     * deveryRegistryClient.setPermissionedEventListener()
+     * deveryRegistryClient.setPermissionedEventListener();
      *
      *
      *
@@ -1885,22 +1877,21 @@ class DeveryRegistry extends AbstractDeverySmartContract {
      * ***Usage example:***
      *
      * ```
-     * //first you need to get a {@link DeveryRegistry} instance
+     * // first you need to get a {@link DeveryRegistry} instance
      * let deveryRegistryClient = new DeveryRegistry();
-     * //now you can use it
-     *
+     * // now you can use it
      *
      * deveryRegistryClient.setMarkedEventListener((brandAccount,appAccount,active) => {
      *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
      * })
      *
-     * //if you want to remove the listener you can simply pass undefined as parameter
+     * // if you want to remove the listener you can simply pass undefined as parameter
      *
-     * deveryRegistryClient.setMarkedEventListener(undefined)
+     * deveryRegistryClient.setMarkedEventListener(undefined);
      *
-     * //or that is equivalent to the above call
+     * // or that is equivalent to the above call
      *
-     * deveryRegistryClient.setMarkedEventListener()
+     * deveryRegistryClient.setMarkedEventListener();
      *
      *
      *
