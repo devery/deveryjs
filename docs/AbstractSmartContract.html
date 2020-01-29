@@ -131,8 +131,8 @@ the underlying smart contract address and getting the signer instance. <strong><
 as we are explicitly checking against this.</p>
 <pre class="prettyprint source"><code>//excerpt from the constructor
 
-if (new.target === AbstractDeverySmartContract) {
-     throw new TypeError(&quot;Cannot construct AbstractDeverySmartContract instances directly&quot;);
+if (this.constructor === AbstractDeverySmartContract) {
+     throw new TypeError(&quot;Cannot construct AbstractSmartContract instances directly&quot;);
 }
 </code></pre>
   </div>
@@ -241,7 +241,7 @@ if (new.target === AbstractDeverySmartContract) {
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line30">line 30</a>
+          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line35">line 35</a>
         </li>
       </ul>
     </dd>

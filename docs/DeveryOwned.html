@@ -133,7 +133,7 @@ contract owner you will get an exception and lose your gas.</em></strong></p>
 <pre class="prettyprint source"><code>//creates a deverOwnedClient with the default params
 let deveryOwnedClient = new DeveryOwned();
 
-//creates a deveryAdminedClient pointing to a custom address
+//creates a deveryOwnedClient pointing to a custom address
 let deveryOwnedClient = new DeveryOwned({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
 </code></pre>
   </div>
@@ -334,7 +334,7 @@ deveryOwnedClient.acceptOwnership().then(function(transaction){
      //ownership
 })
 
-//optionaly you can can use the async syntax
+//optionally you can can use the async syntax
 
 
 async function(){
@@ -430,7 +430,7 @@ async function(){
       </svg>
     </a>
     <h4 class="name" id="transferOwnership">
-      <span class="type-signature">(async) </span>transferOwnership<span class="signature">(newOwnerAddres)</span><span class="type-signature"> &rarr; {Promise.&lt;transaction>}</span>
+      <span class="type-signature">(async) </span>transferOwnership<span class="signature">(newOwnerAddress)</span><span class="type-signature"> &rarr; {Promise.&lt;transaction>}</span>
     </h4>
   </span>
 
@@ -439,7 +439,7 @@ async function(){
 
 
   <div class="description">
-    <p>If you are the current contract owner(I bet you are not) you c an call this method to transfer it
+    <p>If you are the current contract owner (I bet you are not) you can call this method to transfer it
 to someone else by passing the new account owner address as param. The ownership transfer will only be
 concluded once the new contract owner do a call to acceptOwnership.</p>
 <p><strong><em>Beware that if you are are not the contract owner you will get an
@@ -455,7 +455,7 @@ deveryOwnedClient.transferOwnership('0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'
      //sorry mate I told you not to call this function unless you were the contract onwer
 })
 
-//optionaly you can can use the async syntax
+//optionally you can can use the async syntax
 
 
 async function(){
@@ -464,7 +464,7 @@ async function(){
          //congrats you are the new owner
      }
      catch(err){
-         //sorry mate I told you not to call this function unless you were the contract onwer
+         //sorry mate I told you not to call this function unless you were the contract owner
      }
 }
 
@@ -501,7 +501,7 @@ async function(){
     
       <tr>
         
-          <td class="name"><code>newOwnerAddres</code></td>
+          <td class="name"><code>newOwnerAddress</code></td>
         
 
         <td class="type">
@@ -522,7 +522,7 @@ async function(){
         
 
         <td class="description last">
-          <p>The new contract owner address</p>
+          <p>The new contract owner address.</p>
           
         </td>
       </tr>
@@ -614,9 +614,9 @@ async function(){
 
 
   <div class="description">
-    <p>Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes
-please note that OwnershipTransferredEventListeners do not stack, this means that whenever you set one you are
-removing the last one. If you want to remove a OwnershipTransferredEventListeners, just call this function passing undefined
+    <p>Listener to OwnershipTransferred events, this event triggers whenever the smart contract ownership changes.
+Please note that OwnershipTransferredListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove a OwnershipTransferredListener, just call this function passing undefined
 as param.</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryOwned.html">DeveryOwned</a> instance
@@ -624,10 +624,9 @@ let deveryOwnedClient = new DeveryOwned();
 //now you can use it
 
 
-
 deveryOwnedClient.setOwnershipTransferredListener((fromAddress,toAddress) => {
      //whenever an admin is removed we will log it to the console
-     console.log(`the ownership is being trasnfered from ${fromAddress} to  ${toAddress}`);
+     console.log(`the ownership is being transferred from ${fromAddress} to ${toAddress}`);
 })
 
 //if you want to remove the listener you can simply pass undefined as parameter
@@ -738,7 +737,7 @@ triggered</p>
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="DeveryOwned.js.html">DeveryOwned.js</a>, <a href="DeveryOwned.js.html#line180">line 180</a>
+          <a href="DeveryOwned.js.html">DeveryOwned.js</a>, <a href="DeveryOwned.js.html#line179">line 179</a>
         </li>
       </ul>
     </dd>
@@ -797,14 +796,14 @@ deveryOwnedClient.getOwner().then(function(contractOwnerAddress){
      //... do stuff
 })
 
-//optionaly you can can use the async syntax
+//optionally you can use the async syntax
 
 
 async function(){
-      let contractOwnerAddress = await getNewOwner.getOwner();
+      let contractOwnerAddress = await deveryOwnedClient.getOwner();
       console.log(contractOwnerAddress)
       //... do stuff
-}</code></pre>
+}</code></pre><p>for more info about how to get a <a href="DeveryOwned.html">DeveryOwned instance click here</a></p>
   </div>
 
 
@@ -895,7 +894,7 @@ async function(){
 
 
   <div class="description">
-    <p>Get the address of the newOwner account, an value will be return only if an account transfer is pending
+    <p>Get the address of the newOwner account. A value will be returned only if the account transfer is pending
 otherwise you will get 0x00000000000000...</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryOwned.html">DeveryOwned</a> instance
@@ -907,11 +906,11 @@ deveryOwnedClient.getNewOwner().then(function(newOwnerAddress){
      //... do stuff
 })
 
-//optionaly you can can use the async syntax
+//optionally you can use the async syntax
 
 
 async function(){
-      let newOwnerAddress = await getNewOwner.getNewOwner();
+      let newOwnerAddress = await deveryOwnedClient.getNewOwner();
       console.log(newOwnerAddress)
       //... do stuff
 }

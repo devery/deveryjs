@@ -309,7 +309,7 @@ let deveryAdminedCustomAddress = new DeveryAdmined({address:'0xf17f52151EbEF6C73
       </svg>
     </a>
     <h4 class="name" id="isAdmin">
-      <span class="type-signature">(async) </span>isAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;bool>}</span>
+      <span class="type-signature">(async) </span>isAdmin<span class="signature">(addr)</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span>
     </h4>
   </span>
 
@@ -864,7 +864,7 @@ for more info about how to get a <a href="DeveryAdmined.html">DeveryAdmined inst
   <div class="description">
     <p>Listener to AdminAdded events, this event triggers whenever a new address is added as admin.
 Please note that the AdminAddedEventListeners do not stack, this means that whenever you set one you are
-removing the last one. If you want to remove an AdminAddedEventListeners, just call this function passing undefined
+removing the last one. If you want to remove an AdminAddedEventListener, just call this function passing undefined
 as param.</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryAdmined.html">DeveryAdmined</a> instance
@@ -1030,18 +1030,18 @@ triggered</p>
 
 
   <div class="description">
-    <p>Listener to AdminRemoved events, this event triggers whenever a new address is removed from the admin list.
-please note that the AdminRemovedEventListeners do not stack, this means that whenever you set one you are
-removing the last one. If you want to remove a AdminRemovedEventListener, just call this function passing undefined
+    <p>Listener to AdminRemoved events, this event triggers whenever an address is removed from the admin list.
+Please note that the AdminRemovedEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove an AdminRemovedEventListener, just call this function passing undefined
 as param.</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryAdmined.html">DeveryAdmined</a> instance
 let deveryAdminedClient = new DeveryAdmined();
 
  //now you can use it
-deveryAdminedClient.setAdminAddedEventListener((newAdminAddress) => {
+deveryAdminedClient.setAdminRemovedEventListener((address) => {
      //whenever an admin is removed we will log it to the console
-     console.log(newAdminAddress);
+     console.log(address);
 })
 
 //if you want to remove the listener you can simply pass undefined as parameter

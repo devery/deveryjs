@@ -1,5 +1,6 @@
 node_modules/
 .idea/
+*.iml
 coverage.json
 .nyc_output/
 coverage/

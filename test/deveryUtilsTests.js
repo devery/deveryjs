@@ -2,7 +2,7 @@ import Utils from './../devery/Utils';
 
 
 contract('Utils tests', (accounts) => {
-  it('shall not generete repeated random addresses', () => {
+  it('shall not generate repeated random addresses', () => {
     const addressArr = [];
     for (let i = 0; i < 50; i++) {
       addressArr.push(Utils.getRandomAddress());

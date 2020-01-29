@@ -93,7 +93,7 @@
 
       
         <div class="class-description">
-          <p>Abstract class that is base for all the devery registry related smart contracts.
+          <p>Abstract class, that is a base for all the devery registry related smart contracts.
 There is no reason to directly instantiate it. Here lies some common logic about how to resolve
 the underlying smart contract address and getting the signer instance. <strong><em> you shall not instantiate it directly</em></strong>.</p>
         </div>
@@ -131,7 +131,7 @@ the underlying smart contract address and getting the signer instance. <strong><
 as we are explicitly checking against this.</p>
 <pre class="prettyprint source"><code>//excerpt from the constructor
 
-if (new.target === AbstractDeverySmartContract) {
+if (this.constructor === AbstractDeverySmartContract) {
     throw new TypeError(&quot;Cannot construct AbstractDeverySmartContract instances directly&quot;);
 }</code></pre>
   </div>

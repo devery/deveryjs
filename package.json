@@ -1,12 +1,12 @@
 {
   "name": "@devery/devery",
-  "version": "0.1.28",
+  "version": "0.1.36",
   "description": "Build decentralised apps on the Devery Protocol using Javascript",
   "main": "./dist/index.js",
   "scripts": {
     "start": "nodemon server.js",
     "debug": "nodemon --inspect server.js",
-    "test": "truffle test test/deveryRegistryTokenization.js",
+    "test": "truffle test test/*",
     "coverage": "cross-env NODE_ENV=test nyc truffle test && nyc report --reporter=text-lcov | coveralls",
     "generate-doc": "jsdoc --configure .jsdoc.json --verbose",
     "lint": "eslint devery/**/*.js test/**/*.js",
@@ -47,7 +47,6 @@
     "babel-register": "^6.22.0",
     "coveralls": "^3.0.2",
     "cross-env": "^5.1.4",
-    "cross-fetch": "^2.2.2",
     "css-loader": "^0.26.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -73,6 +72,7 @@
     "crypto-js": "^3.1.9-1",
     "ethers": "^4.0.37",
     "inchjs": "^0.4.1",
-    "truffle": "^4.1.14"
+    "truffle": "^4.1.14",
+    "cross-fetch": "^2.2.2"
   }
 }

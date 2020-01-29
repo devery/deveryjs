@@ -95,7 +95,7 @@ const ethers = require('ethers');
 
 /**
  *
- * Abstract class that is base for all the devery registry related smart contracts.
+ * Abstract class, that is a base for all the devery registry related smart contracts.
  * There is no reason to directly instantiate it. Here lies some common logic about how to resolve
  * the underlying smart contract address and getting the signer instance. *** you shall not instantiate it directly***.
  *
@@ -111,7 +111,7 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
      * ```
      * //excerpt from the constructor
      *
-     *if (new.target === AbstractDeverySmartContract) {
+     *if (this.constructor === AbstractDeverySmartContract) {
      *     throw new TypeError("Cannot construct AbstractDeverySmartContract instances directly");
      * }
      * ```

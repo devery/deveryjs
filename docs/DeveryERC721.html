@@ -94,7 +94,7 @@
       
         <div class="class-description">
           <p>Main class to deal with the owned smart contract interface and related operations,
-you can use it to check the current contract owner and list to ownership change related
+you can use it to check the current contract owner and listen to ownership change related
 events</p>
         </div>
       
@@ -321,13 +321,13 @@ let deveryERC721Client = new DeveryERC721({address:'0xf17f52151EbEF6C7334FAD080c
   If the product have a maximum mintable quantity set and you try to claim a number of product bigger than the mintable products number set
   the method will not work</p>
 <p>  <strong><em>Usage example:</em></strong></p>
-<pre class="prettyprint source"><code>   *  //first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+<pre class="prettyprint source"><code> //first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
  let deveryErc721Client = new DeveryERC721();
  //now you can use it
 
 //Let's log the simplest case of use in the console
 
-deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(response => 
+deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(response =>
    console.log('response').catch(err => {
  //treat you error
  })
@@ -488,7 +488,7 @@ deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1)
         
 
         <td class="description last">
-          
+          <p>gas options to override the default ones.</p>
           
         </td>
       </tr>
@@ -580,7 +580,7 @@ deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1)
 
 
   <div class="description">
-    <p>This method returns you the total amount of approved transactions of the inspected producted (referenced by it's token)</p>
+    <p>This method returns you the total amount of approved transactions of the inspected product (referenced by it's token).</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code> //first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
  let deveryErc721Client = new DeveryERC721();
@@ -655,7 +655,7 @@ deveryErc721Client.getApproved(address).then(response => console.log(`Number of 
         
 
         <td class="description last">
-          <p>tokenAddres to be inspected</p>
+          <p>token address to be inspected.</p>
           
         </td>
       </tr>
@@ -694,7 +694,7 @@ deveryErc721Client.getApproved(address).then(response => console.log(`Number of 
         
 
         <td class="description last">
-          
+          <p>gas options to override the default ones.</p>
           
         </td>
       </tr>
@@ -786,8 +786,8 @@ deveryErc721Client.getApproved(address).then(response => console.log(`Number of 
 
 
   <div class="description">
-    <p>Each brand has and devery user blockchain address. This method returns the address of all the products
-of all the products linked to the account passed as a parameter</p>
+    <p>Each brand has a blockchain address. This method returns the address
+of all the products linked to the account passed as a parameter.</p>
 <p><strong><em>usage example:</em></strong></p>
 <pre class="prettyprint source"><code> //first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
  let deveryErc721Client = new DeveryERC721();
@@ -795,14 +795,13 @@ of all the products linked to the account passed as a parameter</p>
 
  //Let's log the simplest case of use in the console.
 
- deveryErc721Client.getProductsByOwner(addresOwner).then(response => console.log('these are the products owneds by this address', response))
+ deveryErc721Client.getProductsByOwner(addressOwner).then(response => console.log('these are the products owned by this address', response))
 
  //Since this is a promise function you will need a .then statement to display the result
 
- //This function you return you an array with all the product addresses owned by the address passed as a parameter
+ //This function returns you an array with all the product addresses owned by the address passed as a parameter
 
 </code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
-<p>DeveryERC721Client.getProductsByOwner()</p>
   </div>
 
 
@@ -866,7 +865,7 @@ of all the products linked to the account passed as a parameter</p>
         
 
         <td class="description last">
-          <p>the blockchain addres of whom we want to know the owned tokens</p>
+          <p>the blockchain address of whom we want to know the owned tokens</p>
           
         </td>
       </tr>
@@ -905,7 +904,7 @@ of all the products linked to the account passed as a parameter</p>
         
 
         <td class="description last">
-          
+          <p>gas options to override the default ones</p>
           
         </td>
       </tr>
@@ -997,9 +996,9 @@ of all the products linked to the account passed as a parameter</p>
 
 
   <div class="description">
-    <p>Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain
-please note that ApprovalEventListener do not stack, this means that whenever you set one you are
-removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+    <p>Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain.
+Please note that ApprovalEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove an ApprovalEventListener, just call this function passing undefined
 as param.</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
@@ -1015,13 +1014,13 @@ deveryErc721Client.setApprovalEventListener((brandAccount,appAccount,active) => 
 
 //if you want to remove the listener you can simply pass undefined as parameter
 
-deveryRegistryClient.setApprovalEventListener(undefined)
+deveryErc721Client.setApprovalEventListener(undefined)
 
 //or that is equivalent to the above call
 
 
 
-deveryRegistryClient.setApprovalEventListener()
+deveryErc721Client.setApprovalEventListener()
 
 
 </code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
@@ -1078,7 +1077,7 @@ deveryRegistryClient.setApprovalEventListener()
         
 
         <td class="description last">
-          <p>the callback that will be executed whenever and ProductUpdated event is
+          <p>the callback that will be executed whenever an ApprovalForAll event is
 triggered</p>
           
         </td>
@@ -1171,9 +1170,9 @@ triggered</p>
 
 
   <div class="description">
-    <p>Listener for transfer approval for all events, this event triggers whenever a devery item is transferred in the blockchain
-please note that ApprovalEventListener do not stack, this means that whenever you set one you are
-removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+    <p>Listener for transfer approval for all events, this event triggers whenever a devery item is transferred in the blockchain.
+Please note that ApprovalForAllEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove an ApprovalForAllEventListener, just call this function passing undefined
 as param.</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
@@ -1252,7 +1251,7 @@ deveryRegistryClient.setApprovalForAllEventListener()
         
 
         <td class="description last">
-          <p>the callback that will be executed whenever and ProductUpdated event is
+          <p>the callback that will be executed whenever a Approval event is
 triggered</p>
           
         </td>
@@ -1345,9 +1344,9 @@ triggered</p>
 
 
   <div class="description">
-    <p>Listener for transfer  events, this event triggers whenever a devery item is transfered in the blockchain
-please note that ApprovalEventListener do not stack, this means that whenever you set one you are
-removing the last one. If you want to remove am ApprovalEventListener, just call this function passing undefined
+    <p>Listener for transfer events, this event triggers whenever a devery item is transferred in the blockchain.
+Please note that TransferEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove a TransferEventListener, just call this function passing undefined
 as param.</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
@@ -1363,13 +1362,13 @@ deveryErc721Client.setTransferEventListener((brandAccount,appAccount,active) => 
 
 //if you want to remove the listener you can simply pass undefined as parameter
 
-deveryRegistryClient.setTransferEventListener(undefined)
+deveryErc721Client.setTransferEventListener(undefined)
 
 //or that is equivalent to the above call
 
 
 
-deveryRegistryClient.setTransferEventListener()
+deveryErc721Client.setTransferEventListener()
 
 
 </code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
@@ -1426,7 +1425,7 @@ deveryRegistryClient.setTransferEventListener()
         
 
         <td class="description last">
-          <p>the callback that will be executed whenever and ProductUpdated event is
+          <p>the callback that will be executed whenever a Transfer event is
 triggered</p>
           
         </td>
@@ -1520,44 +1519,6 @@ triggered</p>
 
   <div class="description">
     <p>Sets the maximum mintable quantity of a given token. <strong>* If you don't set the maximum mintable quantity it will be infinite by default</strong></p>
-<p> <strong><em>Usage example:</em></strong></p>
-<pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
-let deveryErc721Client = new DeveryERC721();
-
-//passing true as param will add the account as marker
-deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(transaction => {
-     console.log('transaction address',transaction.hash);
-     //... other stuff
-}).catch(err => {
-     if(err.message.indexOf('User denied')){
-         console.log('The user denied the transaction')
-         //...
-     }
-
-     ///handle other exceptions here
-
-})
-
-
-//or with the async syntax
-for more info about how to get let deveryErc721Client = new DeveryERC721();a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.
-async function(){
-     try{
-         //passing false as param will remove the account as marker
-         let transaction = await deveryRegistryClient.mark('0x627306090abaB3A6e1400e9345bC60c78a8BEf57',1)
-         console.log('transaction address',transaction.hash);
-     }
-     catch(err){
-         if(err.message.indexOf('User denied')){
-              console.log('The user denied the transaction')
-             //...
-         }
-
-     ///handle other exceptions here
-     }x1'
-
-}
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
   </div>
 
 
@@ -1621,7 +1582,7 @@ async function(){
         
 
         <td class="description last">
-          <p>The product address of the product which the mintable quantity will be set</p>
+          <p>The address of the product which the mintable quantity will be set.</p>
           
         </td>
       </tr>
@@ -1658,7 +1619,7 @@ async function(){
         
 
         <td class="description last">
-          <p>the allowed quantity of mintable products</p>
+          <p>the allowed quantity of mintable products.</p>
           
         </td>
       </tr>
@@ -1697,7 +1658,7 @@ async function(){
         
 
         <td class="description last">
-          <p>the account index inside the appAccounts array</p>
+          <p>gas options to override the default ones</p>
           
         </td>
       </tr>
@@ -1780,7 +1741,7 @@ async function(){
       </svg>
     </a>
     <h4 class="name" id="tokenIdToProduct">
-      <span class="type-signature">(async) </span>tokenIdToProduct<span class="signature">(token, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+      <span class="type-signature">(async) </span>tokenIdToProduct<span class="signature">(tokenId)</span><span class="type-signature"> &rarr; {Promise.&lt;String>}</span>
     </h4>
   </span>
 
@@ -1789,7 +1750,7 @@ async function(){
 
 
   <div class="description">
-    <p>This method returns the blockchain addres of a product, using it's token as a parameter</p>
+    <p>This method returns the blockchain address of a product, using its token as a parameter.</p>
 <p><strong><em>Usage Example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 
@@ -1800,10 +1761,9 @@ let deveryErc721Client = new DeveryERC721();
 //to use this function you need to have a token, which can be get through a function like tokenOfOwnerByIndex
 //The token is a hexadecimal number
 
-deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('this is your product address', response))
+deveryErc721Client.tokenIdToProduct(tokenId).then(response => console.log('this is your product address', response))
 
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
-<p> DeveryERC721Client.tokenIdToProduct()</p>
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
   </div>
 
 
@@ -1825,8 +1785,6 @@ deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('thi
       <th>Type</th>
 
       
-        <th>Attributes</th>
-      
 
       
 
@@ -1838,7 +1796,7 @@ deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('thi
     
       <tr>
         
-          <td class="name"><code>token</code></td>
+          <td class="name"><code>tokenId</code></td>
         
 
         <td class="type">
@@ -1855,58 +1813,11 @@ deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('thi
         </td>
 
         
-          <td class="attributes">
-            
-
-            
-
-            
-          </td>
-        
 
         
 
         <td class="description last">
-          <p>The token of the product you wish to get the address from</p>
-          
-        </td>
-      </tr>
-
-    
-      <tr>
-        
-          <td class="name"><code>overrideOptions</code></td>
-        
-
-        <td class="type">
-          
-            
-    <span class="param-type">
-      <a href="global.html#TransactionOptions">TransactionOptions</a>
-    </span>
-
-    
-
-
-          
-        </td>
-
-        
-          <td class="attributes">
-            
-              &lt;optional><br>
-            
-
-            
-
-            
-          </td>
-        
-
-        
-
-        <td class="description last">
-          
+          <p>The token of the product you wish to get the address of.</p>
           
         </td>
       </tr>
@@ -1989,7 +1900,7 @@ deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('thi
       </svg>
     </a>
     <h4 class="name" id="balanceOf">
-      <span class="type-signature">(async) </span>balanceOf<span class="signature">(ownerAddress, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+      <span class="type-signature">(async) </span>balanceOf<span class="signature">(ownerAddress, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span>
     </h4>
   </span>
 
@@ -1998,7 +1909,7 @@ deveryRegistryClient.tokenIdToProduct('token').then(response => console.log('thi
 
 
   <div class="description">
-    <p>This method returns the (hexadecimal) number of products owned by the account address passed as parameter to the function</p>
+    <p>This method returns the (hexadecimal) number of products owned by the account address passed as parameter to the function.</p>
 <p><strong><em>Usage Example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 
@@ -2006,10 +1917,10 @@ let deveryErc721Client = new DeveryERC721();
 
 //now you can use it
 
-//this method requires a owner addres, which can be obtained on the metamask extension by clicking on your account name
+//this method requires an owner address, which can be obtained on the metamask extension by clicking on your account name
 
 
-deveryRegistryClient.__deveryERC721Contract.balanceOf('ownerAddress').then(response => console.log('this is account owns this many products', response))
+deveryErc721Client.__deveryERC721Contract.balanceOf(ownerAddress).then(response => console.log('this account owns number of products: ', response))
 </code></pre>
   </div>
 
@@ -2113,7 +2024,7 @@ deveryRegistryClient.__deveryERC721Contract.balanceOf('ownerAddress').then(respo
         
 
         <td class="description last">
-          
+          <p>gas options to override the default ones.</p>
           
         </td>
       </tr>
@@ -2196,7 +2107,7 @@ deveryRegistryClient.__deveryERC721Contract.balanceOf('ownerAddress').then(respo
       </svg>
     </a>
     <h4 class="name" id="tokenOfOwnerByIndex">
-      <span class="type-signature">(async) </span>tokenOfOwnerByIndex<span class="signature">(ownerAddress, index, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+      <span class="type-signature">(async) </span>tokenOfOwnerByIndex<span class="signature">(ownerAddress, index, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span>
     </h4>
   </span>
 
@@ -2205,7 +2116,7 @@ deveryRegistryClient.__deveryERC721Contract.balanceOf('ownerAddress').then(respo
 
 
   <div class="description">
-    <p>This Method returns the token of a product using the by it's index (it's position in an array containing all the products owned by the owner address).</p>
+    <p>This method returns the token of a product by its index (it's a position in an array containing all the products owned by the owner address).</p>
 <p><strong><em>Usage Example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 
@@ -2214,11 +2125,11 @@ let deveryErc721Client = new DeveryERC721();
 //now you can use it
 
 
-deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, index).then(response => ( console.log('product token', response)))
+deveryErc721Client.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, index).then(response => ( console.log('product token', response)))
 
-//the product order is the same as the array returned by getProductByOwner() . Wherefore the index 0 it's the first addres returned by the getProductByOwner method,
-//the index 1 is the  second address and so on.
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
+//the product order is the same as the array returned by getProductByOwner() . Wherefore the index 0 it's the first address returned by the getProductByOwner method,
+//the index 1 is the second address and so on.
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
   </div>
 
 
@@ -2282,7 +2193,7 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
         
 
         <td class="description last">
-          <p>blockchain addres of whom we want to know the owned tokens</p>
+          <p>blockchain address of that we want to know the owned tokens.</p>
           
         </td>
       </tr>
@@ -2319,7 +2230,7 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
         
 
         <td class="description last">
-          <p>position of the product in the array of all the products owned by the account correspondant to the address</p>
+          <p>position of the product in the array of all products owned by the account corresponding to the address.</p>
           
         </td>
       </tr>
@@ -2358,7 +2269,7 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
         
 
         <td class="description last">
-          
+          <p>gas options to override the default ones</p>
           
         </td>
       </tr>
@@ -2441,7 +2352,7 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
       </svg>
     </a>
     <h4 class="name" id="totalAllowedProducts">
-      <span class="type-signature">(async) </span>totalAllowedProducts<span class="signature">(productAddress)</span><span class="type-signature"></span>
+      <span class="type-signature">(async) </span>totalAllowedProducts<span class="signature">(productAddress)</span><span class="type-signature"> &rarr; {Promise.&lt;Number>}</span>
     </h4>
   </span>
 
@@ -2450,20 +2361,20 @@ deveryRegistryClient.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, in
 
 
   <div class="description">
-    <p>This method allows you to query the number of tokens linked to the product addres,
+    <p>This method allows you to query the number of tokens linked to the product address,
 representing the amount of that product generated.
- The response is returnet as a hexadecimal number</p>
+The response is returned as a hexadecimal number.</p>
 <p><strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 let deveryErc721Client = new DeveryERC721();
 //now you can use it
 
-deveryRegistryClient.totalAllowedProducts(productAddress).then(response => {
-console.log(`this is the total amount of products Allowed ${productAddress}`)
+deveryErc721Client.totalAllowedProducts(productAddress).then(response => {
+    console.log(`this is the total amount of products Allowed ${response}`)
 }).catch(err => {
  //handle exceptions here
 })
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
   </div>
 
 
@@ -2517,7 +2428,7 @@ console.log(`this is the total amount of products Allowed ${productAddress}`)
         
 
         <td class="description last">
-          <p>Blockchain addres of the consulted product</p>
+          <p>Blockchain address of the product.</p>
           
         </td>
       </tr>
@@ -2600,7 +2511,7 @@ console.log(`this is the total amount of products Allowed ${productAddress}`)
       </svg>
     </a>
     <h4 class="name" id="totalMintedProducts">
-      <span class="type-signature">(async) </span>totalMintedProducts<span class="signature">(productAddress)</span><span class="type-signature"></span>
+      <span class="type-signature">(async) </span>totalMintedProducts<span class="signature">(productAddress)</span><span class="type-signature"> &rarr; {Promise.&lt;Number>}</span>
     </h4>
   </span>
 
@@ -2610,17 +2521,17 @@ console.log(`this is the total amount of products Allowed ${productAddress}`)
 
   <div class="description">
     <p>You can generate a limited amount of products for each product address.
-If you try to generated more products than you are allowed this product
+If you try to generated more products than you are allowed, this product
 is going to be minted.
-This method returns you the minted products for a specific product address</p>
+This method returns you the number of minted products for a specific product address.</p>
 <p><strong><em>Usage Example:</em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 let deveryErc721Client = new DeveryERC721();
 //now you can use it
 
-deveryRegistryClient.totalMintedProducts('productAdrres').then(response =>
- (console.log('you have this many minted products for this addres')))
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
+deveryErc721Client.totalMintedProducts(productAddress).then(response =>
+ (console.log('you have the following number of minted products for this address ', response)))
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
   </div>
 
 
@@ -2674,7 +2585,7 @@ deveryRegistryClient.totalMintedProducts('productAdrres').then(response =>
         
 
         <td class="description last">
-          <p>inspected product addres</p>
+          <p>inspected product address.</p>
           
         </td>
       </tr>
@@ -2767,15 +2678,15 @@ deveryRegistryClient.totalMintedProducts('productAdrres').then(response =>
 
   <div class="description">
     <p>This method transfers the ownership of a product from one account to another.
-The transfer must be made logged in the account referenced in the 'fromAddres' parameter,
-otherwise the transfer will be denied</p>
+The transfer must be made logged in the account referenced in the 'fromAddress' parameter,
+otherwise the transfer will be denied.</p>
 <p><strong><em> Usage Example: </em></strong></p>
 <pre class="prettyprint source"><code>//first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
 let deveryErc721Client = new DeveryERC721();
 //now you can use it
 
-deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
-   console.log('your transaction was a success');
+deveryErc721Client.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
+   console.log('your transaction was successful');
    //other stuff
 }).catch(err => {
  if(err.message.indexOf('gas required exceeds allowance or always failing transaction'){
@@ -2784,7 +2695,7 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
 
 
 
-</code></pre><p>for more info about how to get a <a href="DeveryRegistry.html">DeveryRegistry instance click here</a>.</p>
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
   </div>
 
 
@@ -2867,7 +2778,7 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
         
 
         <td class="description last">
-          <p>blockchain address which the transfer is goingo to</p>
+          <p>blockchain address which the transfer is going to</p>
           
         </td>
       </tr>
@@ -2896,7 +2807,7 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
         
 
         <td class="description last">
-          <p>Token of  the product being transfered</p>
+          <p>Token of the product being transferred</p>
           
         </td>
       </tr>
@@ -2979,7 +2890,7 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
       </svg>
     </a>
     <h4 class="name" id="setDeveryRegistryAddress">
-      <span class="type-signature">(async) </span>setDeveryRegistryAddress<span class="signature">(deveryRegistryContractAddres, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+      <span class="type-signature">(async) </span>setDeveryRegistryAddress<span class="signature">(deveryRegistryContractAddress, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
     </h4>
   </span>
 
@@ -2989,14 +2900,14 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
 
   <div class="description">
     <p>This method creates a devery registry address for the desired contract,
- so the user is able to properly use the devery ERC 721 methods</p>
+ so the user is able to properly use the devery ERC721 methods.</p>
 <p> <strong><em>Usage example:</em></strong></p>
 <pre class="prettyprint source"><code> //first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
  let deveryErc721Client = new DeveryERC721();
 //now you can use it
 
  //then you have to pass the devery contract method passing the contract as a parameter
- deveryErc721Client.setDeveryRegistryAddress(transaction => {
+ deveryErc721Client.setDeveryRegistryAddress(address).then(transaction => {
    console.log(transaction) }).catch(err => {
      //treat your errors here
    })</code></pre>
@@ -3034,7 +2945,7 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
     
       <tr>
         
-          <td class="name"><code>deveryRegistryContractAddres</code></td>
+          <td class="name"><code>deveryRegistryContractAddress</code></td>
         
 
         <td class="type">
@@ -3063,7 +2974,7 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
         
 
         <td class="description last">
-          <p>address of an deployed contract</p>
+          <p>address of the deployed contract.</p>
           
         </td>
       </tr>
@@ -3102,7 +3013,7 @@ deveryRegistryClient.safeTransferFrom(fromAddress, toAddress, tokenId).then(tran
         
 
         <td class="description last">
-          
+          <p>gas options to override the default ones.</p>
           
         </td>
       </tr>
