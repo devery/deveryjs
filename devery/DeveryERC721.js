@@ -395,14 +395,9 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * ```
    *
-<<<<<<< HEAD
-   * @param {string} ownerAddress Blockchain address of the inspected account
-   * @param {TransactionOptions} [overrideOptions]
-=======
    * @param {string} ownerAddress Blockchain address of the inspected account.
    * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
    * @return {Promise.<*>} a promise that if resolved returns a hexadecimal number of products or raise an error in case of rejection.
->>>>>>> 519ac00afc8f2e0e8e984a84ac07bc4fcdbb3f71
    */
   async balanceOf(ownerAddress, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.balanceOf(ownerAddress, overrideOptions);
@@ -570,7 +565,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * let deveryErc721Client = new DeveryERC721();
    * 
    * //Then you will need to pass an account address and a product address as parameters
-   * deveryErc721Client.accountOwnsProduct(ownerAddres, productAddres)
+   * deveryErc721Client.hasAccountClaimendProduct(ownerAddres, productAddres)
    *  .then(hasProduct => console.log(hasProduct))
    *  .catch(err => {
    *    //treat errors  
@@ -580,10 +575,8 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} ownerAddres Blockchain address of the inspect account
    * @param {string} productAddres Blockchain addres of the checked product
    */
-  async accountOwnsProduct(ownerAddres, productAddress){
-    const ownedProducts = await this.__deveryERC721Contract
-      .getProductsByOwner(ownerAddres);
-    
+  async hasAccountClaimendProduct(ownerAddres, productAddress){
+    const ownedProducts = await this.getProductsByOwner(ownerAddres);
     return ownedProducts.includes(productAddress)
   }
 }

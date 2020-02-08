@@ -55,7 +55,7 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const productsBeforeTransaction = await deveryERC721Instance.getProductsByOwner(myAccount)
     await deveryERC721Instance.claimProduct(myAccount, 1, overrideOptions);
     const productsAfterTransaction = await deveryERC721Instance.getProductsByOwner(myAccount)
-    // assert.equal(productsBeforeTransaction.length, productsAfterTransaction.length - 1, "The product wasn't trasnfered to the account")
+    assert.equal(productsBeforeTransaction.length, productsAfterTransaction.length - 1, "The product wasn't trasnfered to the account")
   });
 
   it('Should be able to transfer a token', async () => {
@@ -184,15 +184,20 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
     
     const withProductAccount = myAccount;
-    const withoutProductsAccount = accounts[1];
-    //TODO: remove magic strings and use values created inside this test
-    //instead of leveraging from values that come from side effects of other tests
-    const productAddress = '0xde266616A37934Abe076816CBc89256B499004E2';
+    const withoutProductsAccount = accounts[3];
     
-    const shouldreturnTrue = await deveryERC721Instance.accountOwnsProduct(withProductAccount, productAddress);
-    const shouldreturnFalse = await deveryERC721Instance.accountOwnsProduct(withoutProductsAccount, productAddress);
+    const withProductsAccountOwned = await deveryERC721Instance.getProductsByOwner(withProductAccount);
+    assert.isAbove(withProductsAccountOwned.length, 0, 'The account should have owned products');
+    
+    const productlessAccountOwned = await deveryERC721Instance.getProductsByOwner(withoutProductsAccount);
+    assert.equal(productlessAccountOwned.length, 0, 'The product should not have pre-owned produts');
 
-    assert.equal(shouldreturnFalse, false, `returned ${shouldreturnFalse} (expected false)`);
-    assert.equal(shouldreturnTrue, true, `returned ${shouldreturnTrue} (expected true)`);
+    const transferedProductAddress = withProductsAccountOwned[0]
+    const transferedProductToken = await deveryERC721Instance.tokenOfOwnerByIndex(withProductAccount, 0);
+    
+    await deveryERC721Instance.safeTransferFrom(withProductAccount, withoutProductsAccount, transferedProductToken);
+
+    const accountOwnProduct = await deveryERC721Instance.hasAccountClaimendProduct(withoutProductsAccount, transferedProductAddress);
+    assert.equal(accountOwnProduct, true, 'The account should have the tested product, hence it was recently transfered');
   })
 });
