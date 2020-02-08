@@ -553,6 +553,32 @@ class DeveryERC721 extends AbstractSmartContract {
       .setDeveryRegistryAddress(deveryRegistryContractAddress, overrideOptions);
     return result.valueOf();
   }
+
+  /**
+   * This method return you wether a account owns tokens of a determined product or not
+   * the return of this function is a boolean value
+   * 
+   * ***Usage Example***
+   * ```
+   * //First you'll need to get a {@link DeveryERC721} instance
+   * 
+   * let deveryErc721Client = new DeveryERC721();
+   * 
+   * //Then you will need to pass an account address and a product address as parameters
+   * deveryErc721Client.hasAccountClaimendProduct(ownerAddres, productAddres)
+   *  .then(hasProduct => console.log(hasProduct))
+   *  .catch(err => {
+   *    //treat errors  
+   *  })
+   * ```
+   * 
+   * @param {string} ownerAddres Blockchain address of the inspect account
+   * @param {string} productAddres Blockchain addres of the checked product
+   */
+  async hasAccountClaimendProduct(ownerAddres, productAddress){
+    const ownedProducts = await this.getProductsByOwner(ownerAddres);
+    return ownedProducts.includes(productAddress)
+  }
 }
 
 

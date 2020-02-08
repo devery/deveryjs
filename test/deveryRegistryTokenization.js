@@ -1,6 +1,5 @@
 import { createDeveryERC721, createDeveryRegistry } from './helpers/staticData';
 import DeveryRegistry from '../devery/DeveryRegistry';
-import DeveryERC721 from '../devery/DeveryERC721';
 
 const DeveryRegistryContract = artifacts.require('./DeveryRegistry.sol');
 const DeveryERC721Contract = artifacts.require('./DeveryERC721Token.sol');
@@ -174,7 +173,31 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
       console.log('the transasction was a success (which means things went wrong)');
     }).catch(err => {
       hasTransactionFailed = true
-    })
+    });
     assert.equal(hasTransactionFailed, false, "The transaction didn't failed, something went wrong when setting the maximum mintable quantity");
+  });
+
+  it('should check if an account has a specific product', async () => {
+    //Will use two accounts, one of them will have the specific product
+    //The other won't
+
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    
+    const withProductAccount = myAccount;
+    const withoutProductsAccount = accounts[3];
+    
+    const withProductsAccountOwned = await deveryERC721Instance.getProductsByOwner(withProductAccount);
+    assert.isAbove(withProductsAccountOwned.length, 0, 'The account should have owned products');
+    
+    const productlessAccountOwned = await deveryERC721Instance.getProductsByOwner(withoutProductsAccount);
+    assert.equal(productlessAccountOwned.length, 0, 'The product should not have pre-owned produts');
+
+    const transferedProductAddress = withProductsAccountOwned[0]
+    const transferedProductToken = await deveryERC721Instance.tokenOfOwnerByIndex(withProductAccount, 0);
+    
+    await deveryERC721Instance.safeTransferFrom(withProductAccount, withoutProductsAccount, transferedProductToken);
+
+    const accountOwnProduct = await deveryERC721Instance.hasAccountClaimendProduct(withoutProductsAccount, transferedProductAddress);
+    assert.equal(accountOwnProduct, true, 'The account should have the tested product, hence it was recently transfered');
   })
 });
