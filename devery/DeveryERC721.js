@@ -523,8 +523,26 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} tokenId Token of the product being transferred
    */
   async safeTransferFrom(fromAddress, toAddress, tokenId) {
+    if (!/^\d*$/.test(`${tokenId}`)){
+      tokenId = await this.getTokenIdByAddress(fromAddress,tokenId)
+    }
     const result = await this.__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
     return result.valueOf();
+  }
+
+
+   async getTokenIdByAddress(address, wallet) {
+    const balance = await client.balanceOf(wallet)
+    address = address.toLocaleLowerCase()
+    for (let i = 0; i < balance; i++) {
+      //TODO: optimize
+      const tokenId = await this.tokenOfOwnerByIndex(wallet, i)
+      const prodAddress = await this.tokenIdToProduct(tokenId)
+      if (prodAddress.toLocaleLowerCase() === address) {
+        return tokenId;
+      }
+    }
+    throw new Error('token id not found');
   }
 
   /**
@@ -557,21 +575,21 @@ class DeveryERC721 extends AbstractSmartContract {
   /**
    * This method return you wether a account owns tokens of a determined product or not
    * the return of this function is a boolean value
-   * 
+   *
    * ***Usage Example***
    * ```
    * //First you'll need to get a {@link DeveryERC721} instance
-   * 
+   *
    * let deveryErc721Client = new DeveryERC721();
-   * 
+   *
    * //Then you will need to pass an account address and a product address as parameters
    * deveryErc721Client.hasAccountClaimendProduct(ownerAddres, productAddres)
    *  .then(hasProduct => console.log(hasProduct))
    *  .catch(err => {
-   *    //treat errors  
+   *    //treat errors
    *  })
    * ```
-   * 
+   *
    * @param {string} ownerAddres Blockchain address of the inspect account
    * @param {string} productAddres Blockchain addres of the checked product
    */

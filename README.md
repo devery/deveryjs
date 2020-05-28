@@ -63,6 +63,46 @@ or alternatively you can use this.
       }
      ```
 
+     ## usefull snippets
+
+
+
+### Create and mark a product for an existing brand
+
+```javascript
+      import { DeveryRegistry, Utils } from '@devery/devery'
+      async function markProduct (){
+        let deveryRegistry = new DeveryRegistry();
+        const address = Utils.getRandomAddress();
+
+        let txn = await deveryRegistry.addProduct(product.productAccount, "product description", "product details", 2020, "Aukland")
+        let provider = deveryRegistry.getProvider()
+        await provider.provider.waitForTransaction(txn.hash)
+        let hash = await deveryRegistry.addressHash(address)
+        txn = await deveryRegistry.mark(address, hash)
+        await provider.provider.waitForTransaction(txn.hash)
+      }
+      markProduct();
+```
+
+### Mint token for an existing product
+
+```javascript
+
+import { DeveryERC721, Utils } from '@devery/devery'
+
+async function claim (){
+        let deveryErc721 = new DeveryERC721();
+        
+        let txn = await deveryErc721.claimProduct(product.address, quantity)
+        let provider = deveryErc721.getProvider()
+        await provider.provider.waitForTransaction(txn.hash)
+        
+      }
+
+      claim();
+```
+
 ## Access to the ethereum network
 
 Devery.js will try to automatically get the web3 object instance presented in your context(page, app etc). If this is
@@ -127,6 +167,7 @@ checkAndUpdateAllowance('0x032ef0359eb068d3dddd6e91021c02f397afce5a',40,100);
 ```
 
 This example would check and approve the allowance for both transactions (marking and claiming tokens) in the live network, you can always improve and change the code to fit your needs.
+
 
 
 ## Main Classes documentation.

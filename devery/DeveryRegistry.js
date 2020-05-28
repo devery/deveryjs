@@ -1750,9 +1750,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
    * of rejection
    */
   async AddProductAndMark(productAccount, description, details, year, origin, overrideOptions = {}) {
-    await this.addProduct(productAccount, description, details, year, origin, overrideOptions);
+    let transaction = await this.addProduct(productAccount, description, details, year, origin, overrideOptions);
+    await this.getProvider().provider.waitForTransaction(transaction);
     const hash = await this.addressHash(productAccount);
-    return await this.mark(productAccount, hash, overrideOptions);
+    return this.mark(productAccount, hash, overrideOptions);
+  }
+
+
+  /***
+   *
+   * @param productAccount
+   * @param overrideOptions
+   * @returns {Promise<Transaction>}
+   */
+  async hashAndMark(productAccount,overrideOptions){
+    const hash = await this.addressHash(productAccount);
+    return this.mark(productAccount, hash, overrideOptions);
   }
 
   /**

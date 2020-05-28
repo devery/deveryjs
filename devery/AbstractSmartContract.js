@@ -82,7 +82,7 @@ class AbstractSmartContract {
         this._ethersProvider = signer;
       }
     } else {
-      this._ethersProvider = new ethers.providers.EtherscanProvider(options.networkId || 1);
+      this._ethersProvider = ethers.getDefaultProvider(options.networkId || 1);
     }
 
     // TODO: refactor and make more readable
