@@ -1763,6 +1763,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
    * @param overrideOptions
    * @returns {Promise<Transaction>}
    */
+  
   async hashAndMark(productAccount,overrideOptions){
     const hash = await this.addressHash(productAccount);
     return this.mark(productAccount, hash, overrideOptions);
