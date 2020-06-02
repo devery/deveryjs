@@ -3,6 +3,7 @@ import DeveryRegistry from './../../devery/DeveryRegistry';
 import EveToken from './../../devery/EveToken';
 import DeveryOwned from './../../devery/DeveryOwned';
 import DeveryERC721 from '../../devery/DeveryERC721';
+import Utils from '../../devery/Utils'
 
 export function getData(accounts) {
   return [
@@ -21,6 +22,15 @@ export function getData(accounts) {
           products: [
             {
               productAccount: accounts[1],
+              brandAccount: accounts[1],
+              description: 'product 1 description',
+              details: 'product 1 details',
+              year: 2010,
+              origin: 'product 1 origin',
+              active: true,
+            },
+            {
+              productAccount: Utils.getRandomAddress(),
               brandAccount: accounts[1],
               description: 'product 1 description',
               details: 'product 1 details',

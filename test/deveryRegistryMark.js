@@ -92,6 +92,15 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
     assert.notEqual('0x0000000000000000000000000000000000000000', markedResult.appAccount);
   });
 
+  it('should be possible to a permissioned account mark an existing in one single operation', async () => {
+    const account = data[0];
+    const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+    await deveryClient.permissionMarker(account.appAccount, true);
+    await deveryClient.hashAndMark(account.brands[0].products[1].productAccount);
+    const markedResult = await deveryClient.check(account.brands[0].products[1].productAccount);
+    assert.notEqual('0x0000000000000000000000000000000000000000', markedResult.appAccount);
+  });
+
   it('should be possible to add and mark the products in one go', async () => {
     const account = data[0];
     const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
