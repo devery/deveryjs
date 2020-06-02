@@ -211,7 +211,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setApprovalEventListener(callback) {
-    const eventName = 'ApprovalForAll'; //@todo: check - may be it should be 'Approval'??
+    const eventName = 'ApprovalForAll'; // @todo: check - may be it should be 'Approval'??
     this.__deveryERC721Contract.removeAllListeners(eventName);
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
@@ -273,13 +273,13 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setApprovalForAllEventListener(callback) {
-    const eventName = 'Approval'; //@todo: check - may be it should be 'ApprovalAll'??
+    const eventName = 'Approval'; // @todo: check - may be it should be 'ApprovalAll'??
     this.__deveryERC721Contract.removeAllListeners(eventName);
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
     }
   }
-//@todo: re-check callback description
+  // @todo: re-check callback description
   /**
    *
    * Listener for transfer events, this event triggers whenever a devery item is transferred in the blockchain.
@@ -523,21 +523,21 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} tokenId Token of the product being transferred
    */
   async safeTransferFrom(fromAddress, toAddress, tokenId) {
-    if (!/^\d*$/.test(`${tokenId}`)){
-      tokenId = await this.getTokenIdByAddress(fromAddress,tokenId)
+    if (!/^\d*$/.test(`${tokenId}`)) {
+      tokenId = await this.getTokenIdByAddress(fromAddress, tokenId);
     }
     const result = await this.__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
     return result.valueOf();
   }
 
 
-   async getTokenIdByAddress(address, wallet) {
-    const balance = await client.balanceOf(wallet)
-    address = address.toLocaleLowerCase()
+  async getTokenIdByAddress(address, wallet) {
+    const balance = await client.balanceOf(wallet);
+    address = address.toLocaleLowerCase();
     for (let i = 0; i < balance; i++) {
-      //TODO: optimize
-      const tokenId = await this.tokenOfOwnerByIndex(wallet, i)
-      const prodAddress = await this.tokenIdToProduct(tokenId)
+      // TODO: optimize
+      const tokenId = await this.tokenOfOwnerByIndex(wallet, i);
+      const prodAddress = await this.tokenIdToProduct(tokenId);
       if (prodAddress.toLocaleLowerCase() === address) {
         return tokenId;
       }
@@ -566,7 +566,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} deveryRegistryContractAddress address of the deployed contract.
    * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
    */
-  async setDeveryRegistryAddress(deveryRegistryContractAddress, overrideOptions = {}){
+  async setDeveryRegistryAddress(deveryRegistryContractAddress, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract
       .setDeveryRegistryAddress(deveryRegistryContractAddress, overrideOptions);
     return result.valueOf();
@@ -593,9 +593,9 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} ownerAddres Blockchain address of the inspect account
    * @param {string} productAddres Blockchain addres of the checked product
    */
-  async hasAccountClaimendProduct(ownerAddres, productAddress){
+  async hasAccountClaimendProduct(ownerAddres, productAddress) {
     const ownedProducts = await this.getProductsByOwner(ownerAddres);
-    return ownedProducts.includes(productAddress)
+    return ownedProducts.includes(productAddress);
   }
 }
 

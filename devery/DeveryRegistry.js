@@ -1756,14 +1756,14 @@ class DeveryRegistry extends AbstractDeverySmartContract {
   }
 
 
-  /***
+  /** *
    *
    * @param productAccount
    * @param overrideOptions
    * @returns {Promise<Transaction>}
    */
 
-  async hashAndMark(productAccount,overrideOptions){
+  async hashAndMark(productAccount, overrideOptions) {
     const hash = await this.addressHash(productAccount);
     return this.mark(productAccount, hash, overrideOptions);
   }
@@ -1811,7 +1811,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     const result = await this.__deveryRegistryContract.check(item);
     return result.valueOf();
   }
-//@todo: to check
+  // @todo: to check
   /**
    * This is a callback function that will be invoked in response to Permissioned event.
    *
@@ -1865,7 +1865,7 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     }
   }
 
-//@todo: to check
+  // @todo: to check
   /**
    * This is a callback function that will be invoked in response to Marked event.
    *

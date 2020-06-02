@@ -14,7 +14,6 @@ const ethers = require('ethers');
  * @extends AbstractSmartContract
  */
 class DeveryTrust extends AbstractSmartContract {
-
   constructor(options = {
     web3Instance: undefined,
     acc: undefined,
@@ -63,25 +62,25 @@ class DeveryTrust extends AbstractSmartContract {
   }
 
 
-  async approve(brandKey,overrideOptions = {}){
-    const result = await this.__deveryTrustContract.approve(brandKey,overrideOptions);
+  async approve(brandKey, overrideOptions = {}) {
+    const result = await this.__deveryTrustContract.approve(brandKey, overrideOptions);
     return result.valueOf();
   }
 
-  async revoke(brandKey,overrideOptions = {}){
-    const result = await this.__deveryTrustContract.revoke(brandKey,overrideOptions);
+  async revoke(brandKey, overrideOptions = {}) {
+    const result = await this.__deveryTrustContract.revoke(brandKey, overrideOptions);
     return result.valueOf();
   }
 
-  async check(approver,brandKey,overrideOptions = {}){
+  async check(approver, brandKey, overrideOptions = {}) {
     throw new Error('Deprecated method');
   }
 
-  async checkBrand(brandKey,overrideOptions = {}){
+  async checkBrand(brandKey, overrideOptions = {}) {
     throw new Error('Deprecated method');
   }
 
-  async isApprover(addr,overrideOptions = {}){
+  async isApprover(addr, overrideOptions = {}) {
     throw new Error('Deprecated method');
   }
 
@@ -94,8 +93,6 @@ class DeveryTrust extends AbstractSmartContract {
     const result = await this.__deveryTrustContract.getBrandApprovals(addr);
     return result;
   }
-
-
 }
 
 export default DeveryTrust;
