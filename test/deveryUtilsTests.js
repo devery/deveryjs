@@ -16,6 +16,8 @@ contract('Utils tests', (accounts) => {
     }
     assert(!Utils.isAddress(123));
     assert(!Utils.isAddress('OX23232323'));
+    assert(Utils.isAddress('0xcafe8af8fb8fca7b22541fadd28027f56fe0079d'));
+    assert(Utils.isAddress('0XCAFE8AF8FB8FCA7B22541FADD28027F56FE0079D'));
     for(let i =0; i< 50; i++){
       assert(!Utils.isAddress(Utils.getRandomAddress()+'8'));
     }
