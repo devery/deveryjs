@@ -524,7 +524,7 @@ class DeveryERC721 extends AbstractSmartContract {
    */
   async safeTransferFrom(fromAddress, toAddress, tokenId) {
     if (!/^\d*$/.test(`${tokenId}`)) {
-      tokenId = await this.getTokenIdByAddress(fromAddress, tokenId);
+      tokenId = await this.getTokenIdByAddress(tokenId, fromAddress );
     }
     const result = await this.__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
     return result.valueOf();
@@ -532,7 +532,7 @@ class DeveryERC721 extends AbstractSmartContract {
 
 
   async getTokenIdByAddress(address, wallet) {
-    const balance = await client.balanceOf(wallet);
+    const balance = await this.balanceOf(wallet);
     address = address.toLocaleLowerCase();
     for (let i = 0; i < balance; i++) {
       // TODO: optimize
