@@ -29,6 +29,7 @@ class DeveryERC721 extends AbstractSmartContract {
      * @param {ClientOptions} options network connection options
      *
      */
+
   constructor(options = {
     web3Instance: undefined,
     acc: undefined,
@@ -51,7 +52,7 @@ class DeveryERC721 extends AbstractSmartContract {
 
     let address = options.address;
     let network = options.networkId;
-
+    this.networId = network;
     try {
       if (!options.web3Instance) {
         options.web3Instance = web3;
@@ -74,6 +75,8 @@ class DeveryERC721 extends AbstractSmartContract {
       address, deveryERC721Artifact.abi,
       this.__signerOrProvider,
     );
+    this.address = address;
+    this.abi = deveryERC721Artifact.abi;
   }
 
   /**
@@ -326,6 +329,53 @@ class DeveryERC721 extends AbstractSmartContract {
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
     }
+  }
+
+  async getTransferHistory(callback,timeout = 60000){
+    // Add the web3 node module
+    var Web3 = require('web3');
+
+// Show web3 where it needs to look for the Ethereum node.
+    var web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/ded14a7232434a4eb1116ad370d0fb86'));
+
+// The address we want to search by.
+    var addr = this.address
+
+// Show the Hash in the console.
+    console.log('Events by Address: ' + addr);
+
+// Define the contract ABI
+    var abi = this.abi
+
+// Define the contract ABI and Address
+    var contract = new web3.eth.Contract(abi,addr);
+
+// Fun console text, you can ignore this.
+    console.log('-----------------------------------');
+    console.log('Matching Smart Contract Events');
+    console.log('-----------------------------------');
+
+// Search the contract events for the hash in the event logs and show matching events.
+    contract.getPastEvents('Transfer', {
+      filter: {_from: addr},
+      fromBlock: 0,
+      toBlock: 'latest'
+    }, (error, events) => {
+      console.log(events.length);
+      // console.log(error)
+      // for (var i=0; i<events.length; i++) {
+      //   var eventObj = events[i];
+      //   console.log('Address: ', eventObj);
+      //
+      // }
+    });
+
+    // const erc721 = new DeveryERC721({networkId:this.networId});
+    // erc721.getProvider().resetEventsBlock(0);
+    // erc721.setTransferEventListener(callback)
+    // setTimeout( () => {
+    //     erc721.setTransferEventListener(null);
+    //   } ,timeout );
   }
 
   /**

@@ -6,11 +6,12 @@ var libraryName = 'devery';
 module.exports ={
     mode:'development',
     devtool: 'eval-source-map',
+    target: 'node',
     output: {
         path: path.resolve(__dirname,'dist'),
         filename: 'index.js',
         library: libraryName,
-        libraryTarget: "commonjs-module"
+        libraryTarget: "commonjs-module",
     },
     module: {
         rules: [

@@ -5,6 +5,7 @@ if ((typeof process !== 'undefined') && (process.release) && (process.release.na
   global.fetch = require('cross-fetch');
 }
 
+
 /**
  *
  * DeveryRegistry is the main class to interact with the devery registry. With it you have all the tools
