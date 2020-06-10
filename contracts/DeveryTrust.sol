@@ -12,6 +12,7 @@ contract DeveryTrust {
         for(uint i=0;i<brandApprovals[brandKey].length;i++){
             if(brandApprovals[brandKey][i] == msg.sender){
                 alreadyExists = 1;
+                break;
             }
         }
         if(alreadyExists == 0){
