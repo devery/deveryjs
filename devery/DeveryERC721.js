@@ -74,6 +74,9 @@ class DeveryERC721 extends AbstractSmartContract {
       address, deveryERC721Artifact.abi,
       this.__signerOrProvider,
     );
+
+    this.address = address;
+    this.abi = deveryERC721Artifact.abi;
   }
 
   /**
@@ -524,10 +527,10 @@ class DeveryERC721 extends AbstractSmartContract {
    */
   async safeTransferFrom(fromAddress, toAddress, tokenId) {
     if (!/^\d*$/.test(`${tokenId}`)) {
-      tokenId = await this.getTokenIdByAddress(tokenId, fromAddress );
+      tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
     }
-    const result = await this.
-      __deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
+    const result = await this
+      .__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
     return result.valueOf();
   }
 

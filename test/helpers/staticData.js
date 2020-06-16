@@ -3,7 +3,7 @@ import DeveryRegistry from './../../devery/DeveryRegistry';
 import EveToken from './../../devery/EveToken';
 import DeveryOwned from './../../devery/DeveryOwned';
 import DeveryERC721 from '../../devery/DeveryERC721';
-import Utils from '../../devery/Utils'
+import Utils from '../../devery/Utils';
 
 export function getData(accounts) {
   return [

@@ -157,7 +157,7 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
   it('Should return the correct total of allowed products', async () => {
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
     const deveryInstance = createDeveryRegistry(web3, undefined, myAccount, deveryERC721Contract.address);
-    
+
     const productAdrress = accounts[4]
     await deveryRegistry.addProduct(productAdrress, 'newProduct', 'productDetails', 2019, 'brazil');
     const originalAllowedProductsNumber = await deveryERC721Instance.totalAllowedProducts(productAdrress);
@@ -210,24 +210,42 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     assert.equal(hasTransactionFailed, false, "The transaction didn't failed, something went wrong when setting the maximum mintable quantity");
   });
 
+  it('should be possible to transfer multiple items from that come from the same address', async() => {
+    const TRANSFERS = 10;
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const productAddress = Utils.getRandomAddress();
+    await deveryRegistry.addProduct(productAddress, 'productName', 'productDetails', 2019, 'brazil');
+    await deveryERC721Instance.claimProduct(productAddress, 20);
+
+    const withoutProductsAccount = accounts[6];
+    const totalBeforeTransfer =  await deveryERC721Instance.getProductsByOwner(withoutProductsAccount)
+
+
+    for(let i = 0;i < TRANSFERS;i++){
+      await deveryERC721Instance.safeTransferFrom(myAccount, withoutProductsAccount, productAddress);
+    }
+    const totalAfterTransfer =  await deveryERC721Instance.getProductsByOwner(withoutProductsAccount)
+    assert.equal(totalAfterTransfer.length,totalBeforeTransfer.length+TRANSFERS, "it seems that the transfers are not happening");
+  })
+
   it('should check if an account has a specific product', async () => {
     //Will use two accounts, one of them will have the specific product
     //The other won't
 
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
-    
+
     const withProductAccount = myAccount;
     const withoutProductsAccount = accounts[3];
-    
+
     const withProductsAccountOwned = await deveryERC721Instance.getProductsByOwner(withProductAccount);
     assert.isAbove(withProductsAccountOwned.length, 0, 'The account should have owned products');
-    
+
     const productlessAccountOwned = await deveryERC721Instance.getProductsByOwner(withoutProductsAccount);
     assert.equal(productlessAccountOwned.length, 0, 'The product should not have pre-owned produts');
 
     const transferedProductAddress = withProductsAccountOwned[0]
     const transferedProductToken = await deveryERC721Instance.tokenOfOwnerByIndex(withProductAccount, 0);
-    
+
     await deveryERC721Instance.safeTransferFrom(withProductAccount, withoutProductsAccount, transferedProductToken);
 
     const accountOwnProduct = await deveryERC721Instance.hasAccountClaimendProduct(withoutProductsAccount, transferedProductAddress);
