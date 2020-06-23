@@ -74,6 +74,9 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
       address, deveryRegistryArtifact.abi,
       this.__signerOrProvider,
     );
+
+    this.address = address;
+    this.abi = deveryRegistryArtifact.abi;
   }
 }
 

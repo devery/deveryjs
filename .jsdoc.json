@@ -21,6 +21,7 @@
     "private": true,
     "recurse": true,
     "template": "node_modules/jsdoc-template-devery",
-    "sort":"since"
+    "sort":"since",
+    "tutorials": "./guides/"
   }
 }
