@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+       - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Devery.js docs
+    </h3>
+
+    <h3>Guides</h3><ul><li id="getting-started-nav"><a href="tutorial-getting-started.html">getting-started</a></li></ul><h3>Classes</h3><ul><li id="DeveryERC721-nav"><a href="DeveryERC721.html">DeveryERC721</a><ul class='methods'><li data-type="method" id="DeveryERC721-claimProduct-nav"><a href="DeveryERC721.html#claimProduct">claimProduct</a></li><li data-type="method" id="DeveryERC721-getApproved-nav"><a href="DeveryERC721.html#getApproved">getApproved</a></li><li data-type="method" id="DeveryERC721-getProductsByOwner-nav"><a href="DeveryERC721.html#getProductsByOwner">getProductsByOwner</a></li><li data-type="method" id="DeveryERC721-setApprovalEventListener-nav"><a href="DeveryERC721.html#setApprovalEventListener">setApprovalEventListener</a></li><li data-type="method" id="DeveryERC721-setApprovalForAllEventListener-nav"><a href="DeveryERC721.html#setApprovalForAllEventListener">setApprovalForAllEventListener</a></li><li data-type="method" id="DeveryERC721-setTransferEventListener-nav"><a href="DeveryERC721.html#setTransferEventListener">setTransferEventListener</a></li><li data-type="method" id="DeveryERC721-setMaximumMintableQuantity-nav"><a href="DeveryERC721.html#setMaximumMintableQuantity">setMaximumMintableQuantity</a></li><li data-type="method" id="DeveryERC721-tokenIdToProduct-nav"><a href="DeveryERC721.html#tokenIdToProduct">tokenIdToProduct</a></li><li data-type="method" id="DeveryERC721-balanceOf-nav"><a href="DeveryERC721.html#balanceOf">balanceOf</a></li><li data-type="method" id="DeveryERC721-tokenOfOwnerByIndex-nav"><a href="DeveryERC721.html#tokenOfOwnerByIndex">tokenOfOwnerByIndex</a></li><li data-type="method" id="DeveryERC721-totalAllowedProducts-nav"><a href="DeveryERC721.html#totalAllowedProducts">totalAllowedProducts</a></li><li data-type="method" id="DeveryERC721-totalMintedProducts-nav"><a href="DeveryERC721.html#totalMintedProducts">totalMintedProducts</a></li><li data-type="method" id="DeveryERC721-safeTransferFrom-nav"><a href="DeveryERC721.html#safeTransferFrom">safeTransferFrom</a></li><li data-type="method" id="DeveryERC721-setDeveryRegistryAddress-nav"><a href="DeveryERC721.html#setDeveryRegistryAddress">setDeveryRegistryAddress</a></li><li data-type="method" id="DeveryERC721-hasAccountClaimendProduct-nav"><a href="DeveryERC721.html#hasAccountClaimendProduct">hasAccountClaimendProduct</a></li><li data-type="method" id="DeveryERC721-getSignerAddress-nav"><a href="DeveryERC721.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryERC721-getProvider-nav"><a href="DeveryERC721.html#getProvider">getProvider</a></li></ul></li><li id="DeveryRegistry-nav"><a href="DeveryRegistry.html">DeveryRegistry</a><ul class='methods'><li data-type="method" id="DeveryRegistry-brandAccountsPaginated-nav"><a href="DeveryRegistry.html#brandAccountsPaginated">brandAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-addApp-nav"><a href="DeveryRegistry.html#addApp">addApp</a></li><li data-type="method" id="DeveryRegistry-updateApp-nav"><a href="DeveryRegistry.html#updateApp">updateApp</a></li><li data-type="method" id="DeveryRegistry-getApp-nav"><a href="DeveryRegistry.html#getApp">getApp</a></li><li data-type="method" id="DeveryRegistry-getAppData-nav"><a href="DeveryRegistry.html#getAppData">getAppData</a></li><li data-type="method" id="DeveryRegistry-appAccountsPaginated-nav"><a href="DeveryRegistry.html#appAccountsPaginated">appAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-appAccountsArray-nav"><a href="DeveryRegistry.html#appAccountsArray">appAccountsArray</a></li><li data-type="method" id="DeveryRegistry-appAccountsLength-nav"><a href="DeveryRegistry.html#appAccountsLength">appAccountsLength</a></li><li data-type="method" id="DeveryRegistry-setAppAddedEventListener-nav"><a href="DeveryRegistry.html#setAppAddedEventListener">setAppAddedEventListener</a></li><li data-type="method" id="DeveryRegistry-setAppUpdatedEventListener-nav"><a href="DeveryRegistry.html#setAppUpdatedEventListener">setAppUpdatedEventListener</a></li><li data-type="method" id="DeveryRegistry-addBrand-nav"><a href="DeveryRegistry.html#addBrand">addBrand</a></li><li data-type="method" id="DeveryRegistry-updateBrand-nav"><a href="DeveryRegistry.html#updateBrand">updateBrand</a></li><li data-type="method" id="DeveryRegistry-getBrand-nav"><a href="DeveryRegistry.html#getBrand">getBrand</a></li><li data-type="method" id="DeveryRegistry-getBrandData-nav"><a href="DeveryRegistry.html#getBrandData">getBrandData</a></li><li data-type="method" id="DeveryRegistry-brandAccountsArray-nav"><a href="DeveryRegistry.html#brandAccountsArray">brandAccountsArray</a></li><li data-type="method" id="DeveryRegistry-brandAccountsLength-nav"><a href="DeveryRegistry.html#brandAccountsLength">brandAccountsLength</a></li><li data-type="method" id="DeveryRegistry-setBrandAddedEventListener-nav"><a href="DeveryRegistry.html#setBrandAddedEventListener">setBrandAddedEventListener</a></li><li data-type="method" id="DeveryRegistry-setBrandUpdatedEventListener-nav"><a href="DeveryRegistry.html#setBrandUpdatedEventListener">setBrandUpdatedEventListener</a></li><li data-type="method" id="DeveryRegistry-addProduct-nav"><a href="DeveryRegistry.html#addProduct">addProduct</a></li><li data-type="method" id="DeveryRegistry-updateProduct-nav"><a href="DeveryRegistry.html#updateProduct">updateProduct</a></li><li data-type="method" id="DeveryRegistry-getProduct-nav"><a href="DeveryRegistry.html#getProduct">getProduct</a></li><li data-type="method" id="DeveryRegistry-getProductData-nav"><a href="DeveryRegistry.html#getProductData">getProductData</a></li><li data-type="method" id="DeveryRegistry-productAccountsPaginated-nav"><a href="DeveryRegistry.html#productAccountsPaginated">productAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-productAccountsArray-nav"><a href="DeveryRegistry.html#productAccountsArray">productAccountsArray</a></li><li data-type="method" id="DeveryRegistry-productAccountsLength-nav"><a href="DeveryRegistry.html#productAccountsLength">productAccountsLength</a></li><li data-type="method" id="DeveryRegistry-setProductAddedEventListener-nav"><a href="DeveryRegistry.html#setProductAddedEventListener">setProductAddedEventListener</a></li><li data-type="method" id="DeveryRegistry-setProductUpdatedEventListener-nav"><a href="DeveryRegistry.html#setProductUpdatedEventListener">setProductUpdatedEventListener</a></li><li data-type="method" id="DeveryRegistry-permissionMarker-nav"><a href="DeveryRegistry.html#permissionMarker">permissionMarker</a></li><li data-type="method" id="DeveryRegistry-addressHash-nav"><a href="DeveryRegistry.html#addressHash">addressHash</a></li><li data-type="method" id="DeveryRegistry-mark-nav"><a href="DeveryRegistry.html#mark">mark</a></li><li data-type="method" id="DeveryRegistry-AddProductAndMark-nav"><a href="DeveryRegistry.html#AddProductAndMark">AddProductAndMark</a></li><li data-type="method" id="DeveryRegistry-hashAndMark-nav"><a href="DeveryRegistry.html#hashAndMark">hashAndMark</a></li><li data-type="method" id="DeveryRegistry-check-nav"><a href="DeveryRegistry.html#check">check</a></li><li data-type="method" id="DeveryRegistry-setPermissionedEventListener-nav"><a href="DeveryRegistry.html#setPermissionedEventListener">setPermissionedEventListener</a></li><li data-type="method" id="DeveryRegistry-setMarkedEventListener-nav"><a href="DeveryRegistry.html#setMarkedEventListener">setMarkedEventListener</a></li><li data-type="method" id="DeveryRegistry-getSignerAddress-nav"><a href="DeveryRegistry.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryRegistry-getProvider-nav"><a href="DeveryRegistry.html#getProvider">getProvider</a></li></ul></li><li id="DeveryTrust-nav"><a href="DeveryTrust.html">DeveryTrust</a><ul class='methods'><li data-type="method" id="DeveryTrust-getSignerAddress-nav"><a href="DeveryTrust.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryTrust-getProvider-nav"><a href="DeveryTrust.html#getProvider">getProvider</a></li></ul></li><li id="Utils-nav"><a href="Utils.html">Utils</a><ul class='methods'><li data-type="method" id="Utils-isAddress-nav"><a href="Utils.html#.isAddress">isAddress</a></li><li data-type="method" id="Utils-isChecksumAddress-nav"><a href="Utils.html#.isChecksumAddress">isChecksumAddress</a></li><li data-type="method" id="Utils-getRandomAddress-nav"><a href="Utils.html#.getRandomAddress">getRandomAddress</a></li><li data-type="method" id="Utils-sha3-nav"><a href="Utils.html#.sha3">sha3</a></li></ul></li><li id="DeveryAdmined-nav"><a href="DeveryAdmined.html">DeveryAdmined</a><ul class='methods'><li data-type="method" id="DeveryAdmined-addAdmin-nav"><a href="DeveryAdmined.html#addAdmin">addAdmin</a></li><li data-type="method" id="DeveryAdmined-removeAdmin-nav"><a href="DeveryAdmined.html#removeAdmin">removeAdmin</a></li><li data-type="method" id="DeveryAdmined-setAdminAddedEventListener-nav"><a href="DeveryAdmined.html#setAdminAddedEventListener">setAdminAddedEventListener</a></li><li data-type="method" id="DeveryAdmined-setAdminRemovedEventListener-nav"><a href="DeveryAdmined.html#setAdminRemovedEventListener">setAdminRemovedEventListener</a></li><li data-type="method" id="DeveryAdmined-isAdmin-nav"><a href="DeveryAdmined.html#isAdmin">isAdmin</a></li><li data-type="method" id="DeveryAdmined-getSignerAddress-nav"><a href="DeveryAdmined.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryAdmined-getProvider-nav"><a href="DeveryAdmined.html#getProvider">getProvider</a></li></ul></li><li id="DeveryOwned-nav"><a href="DeveryOwned.html">DeveryOwned</a><ul class='methods'><li data-type="method" id="DeveryOwned-acceptOwnership-nav"><a href="DeveryOwned.html#acceptOwnership">acceptOwnership</a></li><li data-type="method" id="DeveryOwned-transferOwnership-nav"><a href="DeveryOwned.html#transferOwnership">transferOwnership</a></li><li data-type="method" id="DeveryOwned-setOwnershipTransferredListener-nav"><a href="DeveryOwned.html#setOwnershipTransferredListener">setOwnershipTransferredListener</a></li><li data-type="method" id="DeveryOwned-getOwner-nav"><a href="DeveryOwned.html#getOwner">getOwner</a></li><li data-type="method" id="DeveryOwned-getNewOwner-nav"><a href="DeveryOwned.html#getNewOwner">getNewOwner</a></li><li data-type="method" id="DeveryOwned-getSignerAddress-nav"><a href="DeveryOwned.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryOwned-getProvider-nav"><a href="DeveryOwned.html#getProvider">getProvider</a></li></ul></li><li id="EveToken-nav"><a href="EveToken.html">EveToken</a><ul class='methods'><li data-type="method" id="EveToken-totalSupply-nav"><a href="EveToken.html#totalSupply">totalSupply</a></li><li data-type="method" id="EveToken-balanceOf-nav"><a href="EveToken.html#balanceOf">balanceOf</a></li><li data-type="method" id="EveToken-allowance-nav"><a href="EveToken.html#allowance">allowance</a></li><li data-type="method" id="EveToken-approve-nav"><a href="EveToken.html#approve">approve</a></li><li data-type="method" id="EveToken-transfer-nav"><a href="EveToken.html#transfer">transfer</a></li><li data-type="method" id="EveToken-transferFrom-nav"><a href="EveToken.html#transferFrom">transferFrom</a></li><li data-type="method" id="EveToken-setApprovalListener-nav"><a href="EveToken.html#setApprovalListener">setApprovalListener</a></li><li data-type="method" id="EveToken-setTransferListener-nav"><a href="EveToken.html#setTransferListener">setTransferListener</a></li><li data-type="method" id="EveToken-getSignerAddress-nav"><a href="EveToken.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="EveToken-getProvider-nav"><a href="EveToken.html#getProvider">getProvider</a></li></ul></li><li id="AbstractSmartContract-nav"><a href="AbstractSmartContract.html">AbstractSmartContract</a><ul class='methods'><li data-type="method" id="AbstractSmartContract-getSignerAddress-nav"><a href="AbstractSmartContract.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="AbstractSmartContract-getProvider-nav"><a href="AbstractSmartContract.html#getProvider">getProvider</a></li></ul></li><li id="AbstractDeverySmartContract-nav"><a href="AbstractDeverySmartContract.html">AbstractDeverySmartContract</a><ul class='methods'><li data-type="method" id="AbstractDeverySmartContract-getSignerAddress-nav"><a href="AbstractDeverySmartContract.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="AbstractDeverySmartContract-getProvider-nav"><a href="AbstractDeverySmartContract.html#getProvider">getProvider</a></li></ul></li></ul><h3 id="global-nav"><a href="global.html">Global</a></h3>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        
+      </h1>
+    
+
+    <section>
+  <header>
+    
+
+    <h2>
+      
+    </h2>
+  </header>
+
+  <article>
+    <h1>DeveryJS: Getting Started Guide</h1><h2>Introduction</h2><p>DeveryJS is a JavaScript library that allows developers to easily integrate the Devery Protocol into their business applications to enable products to be individually identified, tracked and verified. The Devery Protocol enables anyone to record and read product information on the Ethereum public ledger, effectively enabling a decentralized digital product passport.
+This guide describes basic DeveryJS API calls and use cases.</p>
+<h2>Devery Data Model</h2><p>Devery Protocol assumes the following data model:  </p>
+<blockquote>
+<p>Application --(1:N)--&gt; Brand --(1:N)--&gt; Product --(1:N)--&gt; Item</p>
+</blockquote>
+<p><strong>Application</strong> - represents a blockchain Devery application account. One blockchain account could own only a single application. The main attributes are:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>Name of the application</td>
+</tr>
+<tr>
+<td>feeAccount</td>
+<td>Ethereum blockchain account address that should be used to transfer all fees collected for the Devery application transactions</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>The amount paid per application transaction in EVE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brand</strong> - represents some group of products united under one brand or grouped by some other attribute. Each Application account could have many associated Brand accounts. Brand has just one attribute - its name.</p>
+<p><strong>Product</strong> - represents product (or product model) produced under the Brand. Each Brand account could have many associated Product accounts. The main attributes of the Product are:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>description</td>
+<td>Product name and description</td>
+</tr>
+<tr>
+<td>year</td>
+<td>Product's year of production</td>
+</tr>
+<tr>
+<td>origin</td>
+<td>Information about the product origin, like country it’s produced in</td>
+</tr>
+<tr>
+<td>details</td>
+<td>Any additional information about the product</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Item</strong> - particular instance of the Product that was produced and sold/transferred to some owner.</p>
+<p>For example:</p>
+<ul>
+<li>The shoes maker called “Super Shoes” decided to protect his unique products and provide buyers of the shoes with the possibility to verify the identity of bought products. And thus decided to register an Application called “Super Shoes App” on the blockchain using DeveryJS API.</li>
+<li>Using created instance of the Application the company registered on blockchain their brands: “Athletic” for sport shoes line and “Cowboy” for their cowboy boot line of shoes.</li>
+<li>And for each brand there were registered several products:<ul>
+<li>For the “Athletic” brand: “Run-2020”, “Marathon”</li>
+<li>For the “Cowboy” brand: “Western-2000”, “Montana”</li>
+</ul>
+</li>
+<li>Now clients who buy these shoes at some store could verify the identity of their product and register online their bought product Item using the “Super Shoes App” application.</li>
+</ul>
+<p>Thus objects Application, Brand, Product and set of related API calls could be considered as API for user-”goods producer” and Item and related calls - as API for user-”consumer”.</p>
+<h2>DeveryJS API for user-”goods producer”</h2><p>This kind of API for registering products information on blockchain is implemented through the <a href="https://devery.github.io/deveryjs/DeveryRegistry.html">class DeveryRegistry and its methods</a>.</p>
+<h3>Initialization of DeveryRegistry class instance</h3><p>In order to initialize an instance of DeveryRegistry class it needs to be provided with an instance of blockchain connection provider or web3 object instance. Thus depending on the environment where the JavaScript code runs there are two possible ways to do it:</p>
+<ol>
+<li><p>The code runs in a browser with installed <a href="https://metamask.io/">MetaMask</a> plugin. In this case Devery.js will automatically get the web3 object instance presented in your context. And you could initialize your DeveryRegistry instance as simple as: </p>
+<pre class="prettyprint source lang-javascript"><code> // init metamask
+ try {
+     if (web3 && web3.currentProvider && web3.currentProvider.isMetaMask) {
+         web3.currentProvider.enable();
+     }
+ } catch (e) {
+     // Handle exceptions here
+ }
+
+ const deveryRegistry = new DeveryRegistry()</code></pre></li>
+<li><p>In other cases (you do not have MetaMask plugin in browser or run your code in node.js on server-side) you should provide DeveryRegistry constructor with parameters required to initiate such a provider:</p>
+<pre class="prettyprint source lang-javascript"><code> const deveryRegistry = new DeveryRegistry({
+    walletPrivateKey: process.env.WALLET_PRIVATE_KEY,
+    networkId, // 1-mainnet, 3-ropsten test network, etc.
+ })</code></pre><p> I.e. you should provide as minimum:</p>
+<ul>
+<li>Wallet private key for the blockchain account from that operations should be performed</li>
+<li>Blockchain network ID or chain ID - the full list is available at https://chainid.network</li>
+</ul>
+</li>
+</ol>
+<p>Please reference <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#DeveryRegistry">the documentation</a> on more details.</p>
+<h3>Registering Application on blockchain</h3><p>In order to register application on blockchain the following steps need to be done:</p>
+<ol>
+<li>Initialize DeveryRegistry instance with account that should be the application owner</li>
+<li>Call the <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#addApp">addApp()</a> method</li>
+</ol>
+<p>Also it’s a good practice to check whether application already exists prior to creating it:</p>
+<pre class="prettyprint source lang-javascript"><code>import { DeveryRegistry, Utils, EveToken } from '@devery/devery'
+
+const deveryRegistry = new DeveryRegistry({
+    walletPrivateKey: process.env.APPOWNER_WALLET_PRIVATE_KEY,
+    networkId: 3,
+})
+
+const app = await deveryRegistry.getApp(appAddress)
+if (!app.active) {
+    const tx = await deveryRegistry.addApp(
+        'My App', 
+        '0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 
+        0,
+    )
+    const { provider } = deveryRegistry.getProvider()
+    await provider.waitForTransaction(tx.hash)
+    console.log('the app was successfully registered on blockchain')
+}</code></pre><p><strong>Important!</strong></p>
+<ul>
+<li>each account could have only one application registered on blockchain</li>
+<li>method addApp() (as most other blockchain calls in Devery.js) returns a Promise that resolves to the <a href="https://docs.ethers.io/ethers.js/html/api-providers.html?#transaction-response">Transaction Response</a> for the sent on the blockchain network transaction. I.e. in order to get the result of this transaction you need to wait for its completion using <a href="https://docs.ethers.io/ethers.js/html/api-providers.html?#waiting-for-transactions">waitForTransaction()</a> call</li>
+<li>there is a known issue for the Ropsten network related to the fee param - you could not specify a value other than 0. </li>
+</ul>
+<h3>Adding Brand</h3><p>According to the Devery data model Brand could be registered on blockchain from the Application account (i.e. using DeveryRegistry instance initialized with the Application credentials) using method <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#addBrand">addBrand()</a>.</p>
+<pre class="prettyprint source lang-javascript"><code>import { DeveryRegistry } from '@devery/devery'
+
+const deveryRegistry = new DeveryRegistry({
+ walletPrivateKey: process.env.APP_WALLET_PRIVATE_KEY,
+ networkId: 3,
+})
+
+const tx = await deveryRegistry.addBrand(
+   '0x627306090abaB3A6e1400e9345bC60c78a8BEf58',
+   'My Brand',
+)
+
+const { provider } = deveryRegistry.getProvider()
+await provider.waitForTransaction(tx.hash)
+console.log('the brand was successfully registered on blockchain')</code></pre><p>Please note that one Application could have many associated brands.</p>
+<h3>Adding and marking Product</h3><p>Registering Product on blockchain happens in a very similar fashion using <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#addProduct">addProduct()</a> method.</p>
+<pre class="prettyprint source lang-javascript"><code>import { DeveryRegistry } from '@devery/devery'
+
+const deveryRegistry = new DeveryRegistry({
+ walletPrivateKey: process.env.BRAND_WALLET_PRIVATE_KEY,
+ networkId: 3,
+})
+
+const tx = await deveryRegistryClient.addProduct(
+   '0x627306090abaB3A6e1400e9345bC60c78a8BEf59',
+   'My product',
+   'Some details',
+   2020,
+   'Australia',
+)
+
+const { provider } = deveryRegistry.getProvider()
+await provider.waitForTransaction(tx.hash)
+console.log('the product was successfully registered on blockchain')</code></pre><p>Please note that each Brand account could have associated an unlimited number of products.</p>
+<p>In order to allow consumers/clients to claim product ownership on blockchain this Product record needs to be verified and marked by an account having appropriate rights that are set by the <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#permissionMarker">permissionMarker()</a> call. After that this account would be allowed to make markings of the Product records using <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#mark">mark()</a> or <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#hashAndMark">hashAndMark()</a> calls.</p>
+<pre class="prettyprint source lang-javascript"><code>const permissionTx = await deveryRegistry.permissionMarker(
+    process.env.BRAND_ADDRESS, 
+    true,
+)
+await provider.waitForTransaction(permissionTx.hash)
+console.log('Mark permission set')
+
+const markTx = await deveryRegistry.hashAndMark(
+    '0x627306090abaB3A6e1400e9345bC60c78a8BEf59'
+)
+await provider.waitForTransaction(markTx.hash)
+console.log('The product was marked')</code></pre><p>Actually in most typical scenarios and cases marking account could be the same as a related Brand account, thus in this case the call <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#AddProductAndMark">AddProductAndMark()</a> could be used to simplify the things.</p>
+<h2>DeveryJS API for user-”consumer”</h2><p>DeveryJS API for user-”consumer” is based on the <a href="http://erc721.org/">ERC-721</a> standard and is accessible via methods of the <a href="https://devery.github.io/deveryjs/DeveryERC721.html">DeveryERC721</a> class.</p>
+<h3>Claiming ownership of Product Items</h3><p>In order to claim some user’s ownership of some amount of product items (for example, boots that user bought in a shop) the following actions need to be taken:</p>
+<ol>
+<li>Init instance of the <a href="https://devery.github.io/deveryjs/DeveryERC721.html">DeveryERC721</a> class with the product’s Brand account</li>
+<li>Call <a href="https://devery.github.io/deveryjs/DeveryERC721.html#claimProduct">DeveryERC721.claimProduct()</a> method (in fact claim the Brand account as a Product Item owner) - for security reasons only a Brand account is allowed to make the <a href="https://devery.github.io/deveryjs/DeveryERC721.html#claimProduct">claimProduct()</a> call.</li>
+<li>Transfer ownership to the account of the real owner, i.e user-”consumer” who owns this Product Item.</li>
+</ol>
+<p>The code sample could looks like the following:</p>
+<pre class="prettyprint source lang-javascript"><code>const networkId = 3 // ropsten
+const productAddr = '0x627306090abaB3A6e1400e9345bC60c78a8BEf60' // product to claim
+const userAddr = '0x627306090abaB3A6e1400e9345bC60c78a8BEf60' // address of the user (product owner) account
+
+const deveryRegistry = new DeveryRegistry({
+    walletPrivateKey: process.env.BRAND_PRIVATE_KEY,
+    networkId,
+})
+const { provider } = deveryRegistry.getProvider()
+const deveryERC721 = new DeveryERC721({
+    web3Instance: provider,
+    networkId,
+})
+
+const claimTx = await deveryERC721Client.claimProduct(productAddr)
+await provider.waitForTransaction(claimTx.hash)
+
+const tokenId = await getTokenIdByAddress(
+    productAddr,
+    process.env.BRAND_ADDRESS,
+    deveryERC721Client,
+)
+
+const transferTx = await deveryERC721.safeTransferFrom(process.env.BRAND_ADDRESS, userAddr, tokenId)
+await provider.waitForTransaction(transferTx.hash)
+console.log('The product claimed')
+
+const getTokenIdByAddress = async (address, wallet, client) => {
+    const balance = await client.balanceOf(wallet)
+    address = address.toLocaleLowerCase()
+    for (let i = 0; i &lt; balance; i++) {
+        const tokenId = await client.tokenOfOwnerByIndex(wallet, i)
+        const prodAddress = await client.tokenIdToProduct(tokenId)
+        if (prodAddress.toLocaleLowerCase() === address) {
+            return tokenId
+        }
+    }
+    throw new Error('token id for the address is not found')
+}</code></pre><h3>Transferring Product Item ownership</h3><p>In case if a Product Item changes its owner and should be transferred from one user account to another then it could be implemented in a very similar way as it was done during the claiming process.</p>
+<pre class="prettyprint source lang-javascript"><code>const deveryERC721Client4Sender = new DeveryERC721({
+    walletPrivateKey: sender.privateKey,
+    networkId: 3,
+})
+
+const tokenId = await getTokenIdByAddress(
+    productAddr,
+    sender.accountAddress,
+    deveryERC721Client4Sender,
+)
+
+const tx = await deveryERC721Client4Sender.safeTransferFrom(
+    sender.accountAddress,
+    receiver.accountAddress,
+    tokenId,
+)</code></pre><h2>Some important practical moments</h2><p>During implementation of business applications with usage of the Devery.js module it is recommended to pay attention to the following typical issues and follow these practices:</p>
+<h3>Do not forget to manage allowance</h3><p>Prior to making any Devery calls you need to make sure that operations are allowed and check <a href="https://devery.github.io/deveryjs/EveToken.html#allowance">allowance</a>. In your source code it may looks like:</p>
+<pre class="prettyprint source lang-javascript"><code>import { EveToken } from '@devery/devery'
+// Devery contract addresses
+const erc721ContractAddress = '0x032EF0359EB068d3DddD6E91021c02F397AfcE5a'
+const registryContractAddress = '0x0364a98148b7031451e79b93449b20090d79702a'
+
+const eveTokenClient = new EveToken()
+const {provider} = eveTokenClient.getProvider()
+
+async function checkAllowance() {
+    // allowance seems working on mainnet only
+    if (networkId === 1) {
+        const deveryTokenCount = await eveTokenClient.allowance(
+            process.env.WALLET,
+            registryContractAddress,
+        )
+        if (deveryTokenCount.toString() / 10e17 &lt; 10) {
+            const tx = await eveTokenClient.approve(
+                registryContractAddress, 
+                '50' + '000000000000000000',
+            )
+            await provider.waitForTransaction(tx.hash)
+        }
+
+        const ERC721TokenCount = await eveTokenClient.allowance(
+            process.env.WALLET,
+            erc721ContractAddress,
+        )
+        if (ERC721TokenCount.toString() / 10e17 &lt; 10) {
+            const tx = await eveTokenClient.approve(
+                erc721ContractAddress, 
+                '50' + '000000000000000000',
+            )
+            await provider.waitForTransaction(tx.hash)
+        }
+    }
+}</code></pre><h3>Share the same provider to have nonce consistent</h3><p>It is a good practice to share the same provider instance for all Devery.js objects to have nonce consistent across all your calls. Otherwise you would be forced to manage blockchain transactions’ nonce manually to avoid nonce conflicts. I.e. it is recommended to initialize Devery.js object in the following fashion:</p>
+<pre class="prettyprint source lang-javascript"><code>const deveryRegistry = new DeveryRegistry({
+    walletPrivateKey: process.env.BRAND_PRIVATE_KEY,
+    networkId,
+})
+const { provider } = deveryRegistry.getProvider()
+const deveryERC721 = new DeveryERC721({
+    web3Instance: provider,
+    networkId,
+})</code></pre><h3>Sponsor blockchain operations for different accounts</h3><p>Each blockchain operation needs some gas to be processed on Ethereum. Thus each account that was used to initialize Devery.js object should have some ETHs prior to making any blockchain calls. In most cases business applications as a rule have one central wallet (general static application account) and thus ETHs from it need to be transferred to other accounts (that in most cases are created dynamically) prior to making any blockchain calls. I.e. “to sponsor” such operations. For example, such mechanism could be implemented with usage of ethers.js and ethereumjs-tx modules:</p>
+<pre class="prettyprint source lang-javascript"><code>const sendEthereum = async ({
+    to,
+    from,
+    fromPrivateKey,
+    value,
+    gasPrice = ethers.utils.parseUnits('10', 'gwei').toHexString(),
+    gasLimit = ethers.utils.hexlify(21000),
+}) => {
+    const txCount = await provider.getTransactionCount(from)
+    // build the transaction
+    const tx = new Tx({
+        nonce: ethers.utils.hexlify(txCount),
+        to,
+        value: ethers.utils.parseEther(value).toHexString(),
+        gasLimit,
+        gasPrice,
+    })
+    // sign the transaction
+    tx.sign(Buffer.from(fromPrivateKey, 'hex'))
+    // send the transaction
+    try {
+        const { hash } = await provider.sendTransaction('0x' + tx.serialize().toString('hex'))
+        await provider.waitForTransaction(hash)
+    } catch (e) {
+        console.error('Error while sending ethers', e)
+    }
+}</code></pre>
+  </article>
+</section>
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+  
+</body>
+</html>
