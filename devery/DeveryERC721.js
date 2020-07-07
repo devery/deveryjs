@@ -498,7 +498,7 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
   /**
-   * This method transfers the ownership of a product from one account to another.
+   * This method transfers the ownership of a claimed product item from one account to another.
    * The transfer must be made logged in the account referenced in the 'fromAddress' parameter,
    * otherwise the transfer will be denied.
    *
@@ -523,7 +523,9 @@ class DeveryERC721 extends AbstractSmartContract {
    *
    * @param {string} fromAddress blockchain address which the transfer is coming from
    * @param {string} toAddress blockchain address which the transfer is going to
-   * @param {string} tokenId Token of the product being transferred
+   * @param {string} tokenId Token of the product item being transferred or blockchain address of the product account.
+   * In case if product address was specified then for transfer is taken the first token (product item)
+   * of the specified product owned by the fromAddress account.
    */
   async safeTransferFrom(fromAddress, toAddress, tokenId) {
     if (!/^\d*$/.test(`${tokenId}`)) {
@@ -577,28 +579,28 @@ class DeveryERC721 extends AbstractSmartContract {
   }
 
   /**
-   * This method return you wether a account owns tokens of a determined product or not
-   * the return of this function is a boolean value
+   * This method returns you whether the account owns tokens of the specified product or not.
+   * The return of this function is a boolean value.
    *
    * ***Usage Example***
    * ```
-   * //First you'll need to get a {@link DeveryERC721} instance
+   * // First you'll need to get a {@link DeveryERC721} instance
    *
    * let deveryErc721Client = new DeveryERC721();
    *
-   * //Then you will need to pass an account address and a product address as parameters
-   * deveryErc721Client.hasAccountClaimendProduct(ownerAddres, productAddres)
+   * // Then you will need to pass an account address and a product address as parameters
+   * deveryErc721Client.hasAccountClaimendProduct(ownerAddress, productAddress)
    *  .then(hasProduct => console.log(hasProduct))
    *  .catch(err => {
    *    //treat errors
    *  })
    * ```
    *
-   * @param {string} ownerAddres Blockchain address of the inspect account
-   * @param {string} productAddres Blockchain addres of the checked product
+   * @param {string} ownerAddress Blockchain address of the inspect account
+   * @param {string} productAddress Blockchain address of the checked product
    */
-  async hasAccountClaimendProduct(ownerAddres, productAddress) {
-    const ownedProducts = await this.getProductsByOwner(ownerAddres);
+  async hasAccountClaimendProduct(ownerAddress, productAddress) {
+    const ownedProducts = await this.getProductsByOwner(ownerAddress);
     return ownedProducts.includes(productAddress);
   }
 }
