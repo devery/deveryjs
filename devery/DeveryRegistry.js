@@ -98,7 +98,11 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
   }) {
     super(options);
-    fetch('https://us-central1-devery-mobile.cloudfunctions.net/incrementCount');
+    try {
+      fetch('https://us-central1-devery-mobile.cloudfunctions.net/incrementCount');
+    } catch (e) {
+      console.error('it was not possible to call fetch and increase the counter');
+    }
   }
 
   /** ********************APP RELATED METHOD************************************* */
@@ -224,6 +228,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  async estimateAddApp(appName, feeAccount, fee, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.estimate
+      .addApp(appName, feeAccount, fee, overrideOptions);
+    return result.toNumber();
+  }
+
 
   /**
      *
@@ -286,6 +296,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
   async updateApp(appName, feeAccount, fee, active, overrideOptions = {}) {
     return await this.__deveryRegistryContract
       .updateApp(appName, feeAccount, fee, active, overrideOptions);
+  }
+
+  async estimateUpdateApp(appName, feeAccount, fee, active, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract
+      .estimate.updateApp(appName, feeAccount, fee, active, overrideOptions);
+    return result.toNumber();
   }
 
 
@@ -687,6 +703,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  async estimateAddBrand(brandAccount, brandName, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.estimate
+      .addBrand(brandAccount, brandName, overrideOptions);
+    return result.toNumber();
+  }
+
   /**
      *
      * Updates an existing brand in the blockchain. This is a write method so you will need to
@@ -748,6 +770,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     const result = await this.__deveryRegistryContract
       .updateBrand(brandAccount, brandName, active, overrideOptions);
     return result.valueOf();
+  }
+
+  async estimateUpdateBrand(brandAccount, brandName, active, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.estimate
+      .updateBrand(brandAccount, brandName, active, overrideOptions);
+    return result.toNumber();
   }
 
 
@@ -1148,6 +1176,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  async estimateAddProduct(productAccount, description, details, year, origin, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.estimate
+      .addProduct(productAccount, description, details, year, origin, overrideOptions);
+    return result.toNumber();
+  }
+
 
   /**
      *
@@ -1214,6 +1248,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     const result = await this.__deveryRegistryContract
       .updateProduct(productAccount, description, details, year, origin, active, overrideOptions);
     return result.valueOf();
+  }
+
+  async estimateUpdateProduct(productAccount, description, details, year, origin, active, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.estimate
+      .updateProduct(productAccount, description, details, year, origin, active, overrideOptions);
+    return result.toNumber();
   }
 
   /**
@@ -1597,6 +1637,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  async estimatePermissionMarker(marker, permission, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.estimate
+      .permissionMarker(marker, permission, overrideOptions);
+    return result.toNumber();
+  }
+
 
   /**
      *
@@ -1683,6 +1729,12 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     const result = await this.__deveryRegistryContract
       .mark(productAccount, itemHash, overrideOptions);
     return result.valueOf();
+  }
+
+  async estimateMark(productAccount, itemHash, overrideOptions = {}) {
+    const result = await this.__deveryRegistryContract.estimate
+      .mark(productAccount, itemHash, overrideOptions);
+    return result.toNumber();
   }
 
 

@@ -6,6 +6,7 @@ var libraryName = 'devery';
 module.exports ={
     mode:'development',
     devtool: 'eval-source-map',
+    target: 'node',
     output: {
         path: path.resolve(__dirname,'dist'),
         filename: 'index.js',
@@ -16,13 +17,8 @@ module.exports ={
         rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-
+                loader: 'babel-loader',                
             }]
     },
-    plugins:[new webpack.DefinePlugin({
-        XMLHttpRequest: require('./helpers/node-xhr').XMLHttpRequest,
-
-    })],
-    entry: [path.resolve(__dirname, './index.js')]
+    entry: ["babel-polyfill", path.resolve(__dirname, './index.js')]
 }
