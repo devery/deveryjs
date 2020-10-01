@@ -1,4 +1,6 @@
-import 'babel-polyfill';
+
+
+
 import EveTokenLib from './devery/EveToken';
 import DeveryRegistryLib from './devery/DeveryRegistry';
 import DeveryAdminedLib from './devery/DeveryAdmined';
@@ -15,3 +17,4 @@ export const DeveryOwned = DeveryOwnedLib;
 export const Utils = UtilsLib;
 export const DeveryERC721 = DeveryERC721Lib;
 export const DeveryTrust = DeveryTrustLib;
+

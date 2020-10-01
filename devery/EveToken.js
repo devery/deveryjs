@@ -106,6 +106,11 @@ class EveToken extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  async estimateAllowance(tokenOwner, spender, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.estimate.allowance(tokenOwner, spender, overrideOptions);
+    return result.toNumber();
+  }
+
   /**
    *
    *  Gives the 3rd party the right to facilitate a transaction with the owners token.

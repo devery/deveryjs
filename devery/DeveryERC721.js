@@ -114,6 +114,13 @@ class DeveryERC721 extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  async estimateClaimProduct(productAddress, quantity = 1, overrideOptions = {}) {
+    const result = await this.__deveryERC721Contract.estimate
+      .claimProduct(productAddress, quantity, overrideOptions);
+    return result.toNumber();
+  }
+
+
   // x.__deveryERC721Contract.getApproved
   /**
    * This method returns you the total amount of approved transactions of the inspected product (referenced by it's token).
@@ -536,6 +543,15 @@ class DeveryERC721 extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  async estimateSafeTransferFrom(fromAddress, toAddress, tokenId) {
+    if (!/^\d*$/.test(`${tokenId}`)) {
+      tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
+    }
+    const result = await this
+      .__deveryERC721Contract.estimate['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
+    return result.toNumber();
+  }
+
 
   async getTokenIdByAddress(address, wallet) {
     const balance = await this.balanceOf(wallet);
@@ -550,7 +566,7 @@ class DeveryERC721 extends AbstractSmartContract {
     }
     throw new Error('token id not found');
   }
-
+ 
   /**
    *  This method creates a devery registry address for the desired contract,
    *  so the user is able to properly use the devery ERC721 methods.
