@@ -534,21 +534,21 @@ class DeveryERC721 extends AbstractSmartContract {
    * In case if product address was specified then for transfer is taken the first token (product item)
    * of the specified product owned by the fromAddress account.
    */
-  async safeTransferFrom(fromAddress, toAddress, tokenId) {
+  async safeTransferFrom(fromAddress, toAddress, tokenId, overrideOptions = {}) {
     if (!/^\d*$/.test(`${tokenId}`)) {
       tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
     }
     const result = await this
-      .__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
+      .__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId,overrideOptions);
     return result.valueOf();
   }
 
-  async estimateSafeTransferFrom(fromAddress, toAddress, tokenId) {
+  async estimateSafeTransferFrom(fromAddress, toAddress, tokenId, overrideOptions = {}) {
     if (!/^\d*$/.test(`${tokenId}`)) {
       tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
     }
     const result = await this
-      .__deveryERC721Contract.estimate['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId);
+      .__deveryERC721Contract.estimate['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId,overrideOptions);
     return result.toNumber();
   }
 
