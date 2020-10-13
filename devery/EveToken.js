@@ -128,6 +128,11 @@ class EveToken extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  async estimateApprove(spender, quantity, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.estimate.approve(spender, quantity, overrideOptions);
+    return result.toNumber();
+  }
+
   /**
      *
      * Transfer EVE tokens from the current account to any other account
@@ -140,6 +145,11 @@ class EveToken extends AbstractSmartContract {
   async transfer(toAddress, total, overrideOptions = {}) {
     const result = await this.__eveTokenContract.transfer(toAddress, total, overrideOptions);
     return result.valueOf();
+  }
+
+  async estimateTransfer(toAddress, total, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.estimate.transfer(toAddress, total, overrideOptions);
+    return result.toNumber();
   }
 
   /**
@@ -156,6 +166,11 @@ class EveToken extends AbstractSmartContract {
   async transferFrom(from, to, tokens, overrideOptions = {}) {
     const result = await this.__eveTokenContract.transferFrom(from, to, tokens, overrideOptions);
     return result.valueOf();
+  }
+
+  async estimateTransferFrom(from, to, tokens, overrideOptions = {}) {
+    const result = await this.__eveTokenContract.estimate.transferFrom(from, to, tokens, overrideOptions);
+    return result.toNumber();
   }
 
   /**
