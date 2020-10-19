@@ -106,6 +106,20 @@ class EveToken extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link EveToken#allowance|EveToken.allowance}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#allowance|EveToken.allowance}.
+   * the return of this method will be the total gas used to call {@link EveToken#allowance|EveToken.allowance} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link EveToken#allowance|EveToken.allowance} would be
+   * a valid call
+   *
+     * @param tokenOwner token owner
+     * @param spender ethereum address
+     * @param {TransactionOptions} overrideOptions
+     * @param {TransactionOptions} overrideOptions
+   *
+   * @returns total gas used to call {@link EveToken#allowance|EveToken.allowance} with the given parameters
+   */
   async estimateAllowance(tokenOwner, spender, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.allowance(tokenOwner, spender, overrideOptions);
     return result.toNumber();
@@ -128,6 +142,20 @@ class EveToken extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link EveToken#approve|EveToken.approve}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#approve|EveToken.approve}.
+   * the return of this method will be the total gas used to call {@link EveToken#approve|EveToken.approve} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link EveToken#approve|EveToken.approve} would be
+   * a valid call
+   *
+   * @param spender ethereum address, that has right to spend the approved tokens, this can be a contract address
+   * or any other address
+   * @param quantity that the 3rd party is allowed to spend
+   * @param {TransactionOptions} overrideOptions
+   *
+   * @returns total gas used to call {@link EveToken#approve|EveToken.approve} with the given parameters
+   */
   async estimateApprove(spender, quantity, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.approve(spender, quantity, overrideOptions);
     return result.toNumber();
@@ -147,6 +175,19 @@ class EveToken extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link EveToken#transfer|EveToken.transfer}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#transfer|EveToken.transfer}.
+   * the return of this method will be the total gas used to call {@link EveToken#transfer|EveToken.transfer} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link EveToken#transfer|EveToken.transfer} would be
+   * a valid call
+   *
+    * @param toAddress address, that will receive the tokens
+     * @param total quantity of tokens being sent
+     * @param {TransactionOptions} overrideOptions
+   *
+   * @returns total gas used to call {@link EveToken#transfer|EveToken.transfer} with the given parameters
+   */
   async estimateTransfer(toAddress, total, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.transfer(toAddress, total, overrideOptions);
     return result.toNumber();
@@ -168,6 +209,20 @@ class EveToken extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link EveToken#transferFrom|EveToken.transferFrom}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#transferFrom|EveToken.transferFrom}.
+   * the return of this method will be the total gas used to call {@link EveToken#transferFrom|EveToken.transferFrom} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link EveToken#transferFrom|EveToken.transferFrom} would be
+   * a valid call
+   *
+    * @param from the address, that EVE tokens will be sent from
+     * @param to the address, that will receive the tokens
+     * @param tokens quantity of tokens being sent
+     * @param {TransactionOptions} overrideOptions
+   *
+   * @returns total gas used to call {@link EveToken#transferFrom|EveToken.transferFrom} with the given parameters
+   */
   async estimateTransferFrom(from, to, tokens, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.transferFrom(from, to, tokens, overrideOptions);
     return result.toNumber();
