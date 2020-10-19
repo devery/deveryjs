@@ -228,6 +228,19 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#addApp|DeveryRegistry.addApp}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#addApp|DeveryRegistry.addApp}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#addApp|DeveryRegistry.addApp} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#addApp|DeveryRegistry.addApp} would be
+   * a valid call
+   *   @param {string} appName your app name
+   * @param {string} feeAccount the account that will pay the fees for this app transactions
+   * @param {int} fee the fee amount paid per app transaction
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+   *
+   * @returns total gas used to call {@link DeveryRegistry#addApp|DeveryRegistry.addApp} with the given parameters
+   */
   async estimateAddApp(appName, feeAccount, fee, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract.estimate
       .addApp(appName, feeAccount, fee, overrideOptions);
@@ -298,6 +311,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
       .updateApp(appName, feeAccount, fee, active, overrideOptions);
   }
 
+
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#updateApp|DeveryRegistry.updateApp}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#updateApp|DeveryRegistry.updateApp}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#updateApp|DeveryRegistry.updateApp} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#updateApp|DeveryRegistry.updateApp} would be
+   * a valid call
+   *
+   * @param {string}  appName your app name
+   * @param {string} feeAccount the account that will pay the fees for this app transactions
+   * @param {int} fee the fee amount paid per app transaction
+   * @param {boolean} active
+   * @param {TransactionOptions} overrideOptions gas options to override the default ones
+   *
+   * @returns total gas used to call {@link DeveryRegistry#updateApp|DeveryRegistry.updateApp} with the given parameters
+   */
   async estimateUpdateApp(appName, feeAccount, fee, active, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract
       .estimate.updateApp(appName, feeAccount, fee, active, overrideOptions);
@@ -703,6 +732,19 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#addBrand|DeveryRegistry.addBrand}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#addBrand|DeveryRegistry.addBrand}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#addBrand|DeveryRegistry.addBrand} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#addBrand|DeveryRegistry.addBrand} would be
+   * a valid call
+   *
+   * @param {string} brandAccount brand account address
+   * @param {string} brandName the name of the new brand
+   * @param {TransactionOptions} overrideOptions gas options to override the default ones
+   *
+   * @returns total gas used to call {@link DeveryRegistry#addBrand|DeveryRegistry.addBrand} with the given parameters
+   */
   async estimateAddBrand(brandAccount, brandName, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract.estimate
       .addBrand(brandAccount, brandName, overrideOptions);
@@ -772,6 +814,20 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#updateBrand|DeveryRegistry.updateBrand}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#updateBrand|DeveryRegistry.updateBrand}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#updateBrand|DeveryRegistry.updateBrand} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#updateBrand|DeveryRegistry.updateBrand} would be
+   * a valid call
+   *
+   * @param {string} brandAccount brand account address
+   * @param {string} brandName the name of the new brand
+   * @param {boolean} active
+   * @param {TransactionOptions} overrideOptions gas options to override the default ones
+   *
+   * @returns total gas used to call {@link DeveryRegistry#updateBrand|DeveryRegistry.updateBrand} with the given parameters
+   */
   async estimateUpdateBrand(brandAccount, brandName, active, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract.estimate
       .updateBrand(brandAccount, brandName, active, overrideOptions);
@@ -1176,6 +1232,22 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#addProduct|DeveryRegistry.addProduct}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#addProduct|DeveryRegistry.addProduct}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#addProduct|DeveryRegistry.addProduct} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#addProduct|DeveryRegistry.addProduct} would be
+   * a valid call
+   *
+   * @param {string} productAccount product account address
+   * @param {string} description your product name and description
+   * @param {string} details any extra details about your product
+   * @param {int} year product's year of production
+   * @param {string} origin information about the product origin
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+   *
+   * @returns total gas used to call {@link DeveryRegistry#addProduct|DeveryRegistry.addProduct} with the given parameters
+   */
   async estimateAddProduct(productAccount, description, details, year, origin, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract.estimate
       .addProduct(productAccount, description, details, year, origin, overrideOptions);
@@ -1250,6 +1322,24 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#updateProduct|DeveryRegistry.updateProduct}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#updateProduct|DeveryRegistry.updateProduct}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#updateProduct|DeveryRegistry.updateProduct} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#updateProduct|DeveryRegistry.updateProduct} would be
+   * a valid call
+   *
+   * @param {string} productAccount product account address
+   * @param {string} description your product name and description
+   * @param {string} details any extra details about your product
+   * @param {int} year product's year of production
+   * @param {string} origin information about the product origin
+   * @param {boolean} active enables or disable the product
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+   *
+   * @returns total gas used to call {@link DeveryRegistry#updateProduct|DeveryRegistry.updateProduct} with the given parameters
+   */
   async estimateUpdateProduct(productAccount, description, details, year, origin, active, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract.estimate
       .updateProduct(productAccount, description, details, year, origin, active, overrideOptions);
@@ -1637,6 +1727,19 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#permissionMarker|DeveryRegistry.permissionMarker}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#permissionMarker|DeveryRegistry.permissionMarker}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#permissionMarker|DeveryRegistry.permissionMarker} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#permissionMarker|DeveryRegistry.permissionMarker} would be
+   * a valid call
+   *
+   * @param {string} marker The marker account whose permission will be set
+   * @param {boolean} permission add or remove permission flag
+   * @param {TransactionOptions} [overrideOptions] transaction gas options to override.
+   *
+   * @returns total gas used to call {@link DeveryRegistry#permissionMarker|DeveryRegistry.permissionMarker} with the given parameters
+   */
   async estimatePermissionMarker(marker, permission, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract.estimate
       .permissionMarker(marker, permission, overrideOptions);
@@ -1731,6 +1834,20 @@ class DeveryRegistry extends AbstractDeverySmartContract {
     return result.valueOf();
   }
 
+
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryRegistry#mark|DeveryRegistry.mark}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryRegistry#mark|DeveryRegistry.mark}.
+   * the return of this method will be the total gas used to call {@link DeveryRegistry#mark|DeveryRegistry.mark} with the given parameters.
+   * It's important to note that a call to this method will only be successful if the call to {@link DeveryRegistry#mark|DeveryRegistry.mark} would be
+   * a valid call
+   *
+   * @param {string} productAccount product account address.
+   * @param {string} itemHash item hash
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones
+   *
+   * @returns total gas used to call {@link DeveryRegistry#mark|DeveryRegistry.mark} with the given parameters
+   */
   async estimateMark(productAccount, itemHash, overrideOptions = {}) {
     const result = await this.__deveryRegistryContract.estimate
       .mark(productAccount, itemHash, overrideOptions);

@@ -114,6 +114,17 @@ class DeveryERC721 extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  /**
+   * This method gives an estimation of how much gas will be used for the method {@link DeveryERC721#claimProduct|DeveryERC721.claimProduct}
+   * the params that you pass to this method shall be exactly the same ones that you would pass to {@link DeveryERC721#claimProduct|DeveryERC721.claimProduct}.
+   * the return of this method will be the total gas used to call {@link DeveryERC721#claimProduct|DeveryERC721.claimProduct} with the given parameters
+   *
+   * @param {string} productAddress address of the claimed product
+   * @param {number} quantity quantity of claimed products
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+   *
+   * @returns total gas used to call {@link DeveryERC721#claimProduct|DeveryERC721.claimProduct} with the given parameters
+   */
   async estimateClaimProduct(productAddress, quantity = 1, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.estimate
       .claimProduct(productAddress, quantity, overrideOptions);
@@ -539,7 +550,7 @@ class DeveryERC721 extends AbstractSmartContract {
       tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
     }
     const result = await this
-      .__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId,overrideOptions);
+      .__deveryERC721Contract['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId, overrideOptions);
     return result.valueOf();
   }
 
@@ -548,7 +559,7 @@ class DeveryERC721 extends AbstractSmartContract {
       tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
     }
     const result = await this
-      .__deveryERC721Contract.estimate['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId,overrideOptions);
+      .__deveryERC721Contract.estimate['safeTransferFrom(address,address,uint256)'](fromAddress, toAddress, tokenId, overrideOptions);
     return result.toNumber();
   }
 
@@ -566,7 +577,7 @@ class DeveryERC721 extends AbstractSmartContract {
     }
     throw new Error('token id not found');
   }
- 
+
   /**
    *  This method creates a devery registry address for the desired contract,
    *  so the user is able to properly use the devery ERC721 methods.
