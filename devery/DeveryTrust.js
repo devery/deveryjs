@@ -13,7 +13,23 @@ const ethers = require('ethers');
  * @version 1
  * @extends AbstractSmartContract
  */
-class DeveryTrust extends AbstractSmartContract {
+class DeveryTrust extends AbstractSmartContract {/**
+  *
+  * Creates a new DeveryTrust instance.
+  *
+  * ***Usage example:***
+  *```
+  * // creates a DeveryTrust with the default params
+  * let trustClient = new DeveryTrust();
+  *
+  * // creates a trustClient pointing to a custom address
+  * let trustClient = new DeveryTrust({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+  *
+  * ```
+  *
+  * @param {ClientOptions} options network connection options
+  *
+  */
   constructor(options = {
     web3Instance: undefined,
     acc: undefined,
@@ -66,7 +82,7 @@ class DeveryTrust extends AbstractSmartContract {
      * Approve a brand's veracity. when you approve a brand you are "confirming" its veracity and 
      * indicating that you trust that the brand is trustworthy.
      *
-     * usage: 
+     * ***Usage example:***
      * ```
      *  // import devery and DeveryTrust
      *  import devery from '@devery/devery';
@@ -93,10 +109,10 @@ class DeveryTrust extends AbstractSmartContract {
      * Revoke the approval of a brand. This function is meant to be used when you approve a brand and for some reason
      * regreted that decision. Using it will nullify the previous approved status gaved by your address to a specific brand
      *
-     * usage: 
+     * ***Usage example:***
      * ```
      *  // import devery and DeveryTrust
-     *  import devery from '@devery/devery';
+z     *  import devery from '@devery/devery';
      *
      *  const { DeveryTrust } = devery;
      *  // create new instance of deveryTrust
@@ -114,14 +130,27 @@ class DeveryTrust extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  /**
+   * 
+   * Deprecated method that shall not be called
+   * 
+   */
   async check(approver, brandKey, overrideOptions = {}) {
     throw new Error('Deprecated method');
   }
 
+  /**
+   * Deprecated method that shall not be called
+   * 
+   */
   async checkBrand(brandKey, overrideOptions = {}) {
     throw new Error('Deprecated method');
   }
 
+  /**
+   * Deprecated method that shall not be called
+   * 
+   */
   async isApprover(addr, overrideOptions = {}) {
     throw new Error('Deprecated method');
   }
@@ -130,7 +159,7 @@ class DeveryTrust extends AbstractSmartContract {
      *
      * Returns an array containing all the brand addresses approved by a specific address
      *
-     * usage: 
+     * ***Usage example:***
      * ```
      *  // import devery and DeveryTrust
      *  import devery from '@devery/devery';
@@ -157,7 +186,7 @@ class DeveryTrust extends AbstractSmartContract {
      *
      * Returns an array containing all the addresses that supported a specific brand
      *
-     * usage: 
+     * ***Usage example:***
      * ```
      *  // import devery and DeveryTrust
      *  import devery from '@devery/devery';
