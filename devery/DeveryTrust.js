@@ -79,7 +79,7 @@ class DeveryTrust extends AbstractSmartContract {/**
 
   /**
      *
-     * Approve a brand's veracity. when you approve a brand you are "confirming" its veracity and 
+     * Approve a brand's veracity. when you approve a brand you are "confirming" its veracity and
      * indicating that you trust that the brand is trustworthy.
      *
      * ***Usage example:***
@@ -131,9 +131,9 @@ z     *  import devery from '@devery/devery';
   }
 
   /**
-   * 
+   *
    * Deprecated method that shall not be called
-   * 
+   *
    */
   async check(approver, brandKey, overrideOptions = {}) {
     throw new Error('Deprecated method');
@@ -141,7 +141,7 @@ z     *  import devery from '@devery/devery';
 
   /**
    * Deprecated method that shall not be called
-   * 
+   *
    */
   async checkBrand(brandKey, overrideOptions = {}) {
     throw new Error('Deprecated method');
@@ -149,7 +149,7 @@ z     *  import devery from '@devery/devery';
 
   /**
    * Deprecated method that shall not be called
-   * 
+   *
    */
   async isApprover(addr, overrideOptions = {}) {
     throw new Error('Deprecated method');
