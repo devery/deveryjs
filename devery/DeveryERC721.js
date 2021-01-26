@@ -35,6 +35,7 @@ class DeveryERC721 extends AbstractSmartContract {
     address: undefined,
     walletPrivateKey: undefined,
     networkId: undefined,
+    walletPrivateKey: undefined,
   }) {
     super(...arguments);
 

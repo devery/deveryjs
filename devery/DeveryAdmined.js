@@ -29,7 +29,7 @@ class DeveryAdmined extends AbstractDeverySmartContract {
      *
      */
   constructor(options = {
-    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined, walletPrivateKey: undefined,
   }) {
     super(options);
   }

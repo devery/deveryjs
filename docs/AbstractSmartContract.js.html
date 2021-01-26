@@ -87,7 +87,9 @@
 
 <section>
   <article>
-    <pre class="prettyprint source linenums"><code>const ethers = require('ethers');
+    <pre class="prettyprint source linenums"><code>import { NonceManager } from './NonceManager';
+
+const ethers = require('ethers');
 
 
 /**
@@ -140,7 +142,7 @@ class AbstractSmartContract {
      * @param {ClientOptions} options
      */
   constructor(options = {
-    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined, walletPrivateKey: undefined,
   }) {
     if (this.constructor === AbstractSmartContract) {
       throw new TypeError('Cannot construct AbstractSmartContract instances directly');
@@ -170,6 +172,8 @@ class AbstractSmartContract {
       } else {
         this._ethersProvider = signer;
       }
+    } else if (options.infuraProjectKey) {
+      this._ethersProvider = new ethers.providers.InfuraProvider(options.networkId || 1, options.infuraProjectKey);
     } else {
       this._ethersProvider = ethers.getDefaultProvider(options.networkId || 1);
     }
@@ -177,7 +181,7 @@ class AbstractSmartContract {
     // TODO: refactor and make more readable
     // TODO: write tests
     if (options.walletPrivateKey) {
-      this._wallet = new ethers.Wallet(options.walletPrivateKey, this._ethersProvider);
+      this._wallet = new NonceManager(new ethers.Wallet(options.walletPrivateKey, this._ethersProvider));
       // TODO: commented on new version
       // TODO: write tests for this!!!
       // this._wallet.provider = this._ethersProvider;
