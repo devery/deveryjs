@@ -53,7 +53,7 @@ class AbstractSmartContract {
      * @param {ClientOptions} options
      */
   constructor(options = {
-    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined,
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined, walletPrivateKey: undefined,
   }) {
     if (this.constructor === AbstractSmartContract) {
       throw new TypeError('Cannot construct AbstractSmartContract instances directly');
@@ -83,6 +83,8 @@ class AbstractSmartContract {
       } else {
         this._ethersProvider = signer;
       }
+    } else if (options.infuraProjectKey) {
+      this._ethersProvider = new ethers.providers.InfuraProvider(options.networkId || 1, options.infuraProjectKey);
     } else {
       this._ethersProvider = ethers.getDefaultProvider(options.networkId || 1);
     }
@@ -99,7 +101,7 @@ class AbstractSmartContract {
       this.__signerOrProvider = this._ethersProvider.getSigner ?
         this._ethersProvider.getSigner() : this._ethersProvider;
     }
-    
+
 
     if (acc && this._ethersProvider.getSigner) {
       this.__signerOrProvider =
