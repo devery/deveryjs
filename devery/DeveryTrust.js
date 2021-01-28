@@ -36,7 +36,7 @@ class DeveryTrust extends AbstractSmartContract {/**
     address: undefined,
     walletPrivateKey: undefined,
     networkId: undefined,
-    walletPrivateKey: undefined,
+    infuraProjectKey: undefined,
   }) {
     super(...arguments);
 

@@ -53,7 +53,7 @@ class AbstractSmartContract {
      * @param {ClientOptions} options
      */
   constructor(options = {
-    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined, walletPrivateKey: undefined,
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined, infuraProjectKey: undefined,
   }) {
     if (this.constructor === AbstractSmartContract) {
       throw new TypeError('Cannot construct AbstractSmartContract instances directly');

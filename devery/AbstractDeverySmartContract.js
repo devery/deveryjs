@@ -36,7 +36,7 @@ class AbstractDeverySmartContract extends AbstractSmartContract {
     address: undefined,
     walletPrivateKey: undefined,
     networkId: undefined,
-    walletPrivateKey: undefined,
+    infuraProjectKey: undefined,
   }) {
     super(options);
     if (this.constructor === AbstractDeverySmartContract) {

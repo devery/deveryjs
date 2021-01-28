@@ -29,7 +29,7 @@ class EveToken extends AbstractSmartContract {
      *
      */
   constructor(options = {
-    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined, walletPrivateKey: undefined,
+    web3Instance: undefined, acc: undefined, address: undefined, walletPrivateKey: undefined, networkId: undefined, infuraProjectKey: undefined,
   }) {
     super(...arguments);
 
