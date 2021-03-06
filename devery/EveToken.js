@@ -54,6 +54,17 @@ class EveToken extends AbstractSmartContract {
     }
 
     if (!network) {
+      try {
+        if (!options.web3Instance) {
+          options.web3Instance = web3;
+        }
+        network = options.web3Instance.currentProvider.networkVersion;
+      } catch (e) {
+        // console.log('it was not possible to find global web3');
+      }
+    }
+
+    if (!network) {
       network = 1;
     }
 
