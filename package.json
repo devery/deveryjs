@@ -1,6 +1,6 @@
 {
   "name": "@devery/devery",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Build decentralised apps on the Devery Protocol using Javascript",
   "main": "./dist/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "lint": "eslint devery/**/*.js test/**/*.js",
     "lint:fix": "eslint devery/**/*.js test/**/*.js --fix",
     "lint:watch": "esw devery/**/*.js test/**/*.js --watch",
-    "inch": "inchjs suggest devery/"
+    "inch": "inchjs suggest devery/",
+    "compile": "truffle compile --config truffle.v5.js"
   },
   "author": "Victor Eloy",
   "license": "MIT",
