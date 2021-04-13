@@ -274,7 +274,7 @@ contract MetadataDeveryERC721Wrapper is IERC721, IERC721Metadata, Admined{
         );
     }
 
-    function setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
+    function setTokenURI(uint256 tokenId, string memory _tokenURI) public virtual {
         require(ownerOf(tokenId) == msg.sender, "Only the owner of a token can set its metadata");
         _tokenURIs[tokenId] = _tokenURI;
     }

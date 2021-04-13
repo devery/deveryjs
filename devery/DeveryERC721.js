@@ -702,6 +702,41 @@ class DeveryERC721 extends AbstractSmartContract {
     return ownedProducts.includes(productAddress);
   }
 
+  /**
+   * This methods sets the metadata URI for a given token, this URI can be any valid URI in the internet and is expected to contain a metadata file
+   * with info about the token. this file is expected to be a valid json file. bellow you can see an example of such file
+   *
+   * IMPORTANT: only the address that owns a NFT can set it's metadata URI
+   *
+   * it's important to remember that it's client`s responsability to host and ensure that the URI points to a valid metadata file
+   *
+   * ```
+   * {
+   *   "name": "Imaginary product",
+   *   "description": "This describes our imaginary product and how it behaves",
+   *   "image": "https://markery.io/img/markery-io-logo.svg",
+   *  }```
+   *
+   *  this is not an extensive example and you can add more data to suite your own use cases
+   *
+   *
+   * ***Usage Example***
+   * ```
+   * // First you'll need to get a {@link DeveryERC721} instance
+   *
+   * let deveryErc721Client = new DeveryERC721();
+   *
+   * // then you have to pass the devery contract method passing the contract as a parameter
+   * deveryErc721Client.setTokenURI(tokenId,address).then(transaction => {
+   *    console.log(transaction) }).catch(err => {
+   *        // treat your errors here
+   *    })
+   *  ```
+   * ```
+   *
+   * @param {string} tokenId Token for which the uri will be set
+   * @param {string} tokenUri URI for the token
+   */
   async setTokenURI(tokenId, tokenUri, overrideOptions = {}) {
     const result = await this.__metadataContract.setTokenURI(
       tokenId,
@@ -711,6 +746,26 @@ class DeveryERC721 extends AbstractSmartContract {
     return result.valueOf();
   }
 
+  /**
+   * returns the URI containing metadata for a given token, if there's no such URI for the given token an empty string will be returned
+   *
+   *
+   * ***Usage Example***
+   * ```
+   * // First you'll need to get a {@link DeveryERC721} instance
+   *
+   * let deveryErc721Client = new DeveryERC721();
+   *
+   * // then you have to pass the devery contract method passing the contract as a parameter
+   * deveryErc721Client.tokenURI(tokenId).then(address => {
+   *    console.log(address) }).catch(err => {
+   *        // treat your errors here
+   *    })
+   *  ```
+   * ```
+   *
+   * @param {string} tokenId Token for which the uri will be retrieved
+   */
   async tokenURI(tokenId) {
     const uri = await this.__metadataContract.tokenUri(tokenId);
     return uri;
