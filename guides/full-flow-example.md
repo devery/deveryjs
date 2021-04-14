@@ -138,9 +138,12 @@ function flow(log) {
 
     //get my new token id
     tokenId = await deveryErc721Client.tokenOfOwnerByIndex(address, 0);
-    log("setting token URI)
+    log("setting token URI");
     //set my token URI, the URI is just a dummy one for demo purposes
-    tokenId = await deveryErc721Client.setTokenURI(tokenId, "http://non-existent.com/1/metadata.json");
+    tokenId = await deveryErc721Client.setTokenURI(
+      tokenId,
+      "http://non-existent.com/1/metadata.json"
+    );
     log("Flow successfuly completed");
   };
 }
