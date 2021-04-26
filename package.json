@@ -13,7 +13,7 @@
     "lint:fix": "eslint devery/**/*.js test/**/*.js --fix",
     "lint:watch": "esw devery/**/*.js test/**/*.js --watch",
     "inch": "inchjs suggest devery/",
-    "compile": "truffle compile --config truffle.v5.js"
+    "compile": "truffle compile --config truffle.v5.js && truffle compile --config truffle.v4.js"
   },
   "author": "Victor Eloy",
   "license": "MIT",
