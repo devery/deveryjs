@@ -4,6 +4,6 @@ node_js:
 before_script:
 - npm install -g ganache-cli
 script:
-- ganache-cli -p 7545 > /dev/null &
+- ganache-cli -p 7545 --networkId 5777 > /dev/null &
 - sleep 5
 - npm run coverage
