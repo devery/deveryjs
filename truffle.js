@@ -28,6 +28,6 @@ module.exports = {
     useColors: true,
     exit: true,
     retries: 0,
-    timeout: 1000,
+    timeout: 16000,
   },
 };
