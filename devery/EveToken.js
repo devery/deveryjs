@@ -1,6 +1,7 @@
 import AbstractSmartContract from './AbstractSmartContract';
 
 const eveTokenArtifact = require('../build/contracts/BTTSToken.json');
+const airDropArtifact = require('../build/contracts/SimpleAirdrop.json');
 const ethers = require('ethers');
 
 
@@ -76,6 +77,13 @@ class EveToken extends AbstractSmartContract {
       address, eveTokenArtifact.abi,
       this.__signerOrProvider,
     );
+
+    if (airDropArtifact.networks[network]) {
+      this.__airdropContract = new ethers.Contract(
+        airDropArtifact.networks[network].address, airDropArtifact.abi,
+        this.__signerOrProvider,
+      );
+    }
   }
 
   /**
@@ -212,6 +220,16 @@ class EveToken extends AbstractSmartContract {
   async estimateTransfer(toAddress, total, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.transfer(toAddress, total, overrideOptions);
     return result.toNumber();
+  }
+
+
+  /***
+   * If you are using testnet and need some EVE for testing you can call this method to get 100 test eve.
+   * IMPORTANT: this method only works in test net and is meant to be used for testing purposes only, you cannot call it in prod
+   */
+  async getAirdrop(overrideOptions = {}){
+    const result = await this.__airdropContract.getAirdrop(overrideOptions)
+    return result.valueOf();
   }
 
   /**
@@ -360,6 +378,10 @@ class EveToken extends AbstractSmartContract {
       this.__eveTokenContract.on(eventName, callback);
     }
   }
+
+
+  
+
 }
 
 export default EveToken;

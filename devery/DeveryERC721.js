@@ -1,8 +1,8 @@
-import AbstractSmartContract from "./AbstractSmartContract";
+import AbstractSmartContract from './AbstractSmartContract';
 
-const deveryERC721Artifact = require("../build/contracts/DeveryERC721Token.json");
-const metadataDeveryERC721WrapperArtifact = require("../build/contracts/MetadataDeveryERC721Wrapper.json");
-const ethers = require("ethers");
+const deveryERC721Artifact = require('../build/contracts/DeveryERC721Token.json');
+const metadataDeveryERC721WrapperArtifact = require('../build/contracts/MetadataDeveryERC721Wrapper.json');
+const ethers = require('ethers');
 
 /**
  *
@@ -29,16 +29,14 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {ClientOptions} options network connection options
    *
    */
-  constructor(
-    options = {
-      web3Instance: undefined,
-      acc: undefined,
-      address: undefined,
-      walletPrivateKey: undefined,
-      networkId: undefined,
-      infuraProjectKey: undefined,
-    }
-  ) {
+  constructor(options = {
+    web3Instance: undefined,
+    acc: undefined,
+    address: undefined,
+    walletPrivateKey: undefined,
+    networkId: undefined,
+    infuraProjectKey: undefined,
+  }) {
     super(...arguments);
 
     options = Object.assign(
@@ -49,7 +47,7 @@ class DeveryERC721 extends AbstractSmartContract {
         walletPrivateKey: undefined,
         networkId: undefined,
       },
-      options
+      options,
     );
 
     let address = options.address;
@@ -87,17 +85,17 @@ class DeveryERC721 extends AbstractSmartContract {
     this.__deveryERC721Contract = new ethers.Contract(
       address,
       deveryERC721Artifact.abi,
-      this.__signerOrProvider
+      this.__signerOrProvider,
     );
 
     try {
       this.__metadataContract = new ethers.Contract(
         metadataDeveryERC721WrapperArtifact.networks[network].address,
         metadataDeveryERC721WrapperArtifact.abi,
-        this.__signerOrProvider
+        this.__signerOrProvider,
       );
     } catch (e) {
-      console.warn("metadata contract not deployed on this network");
+      console.warn('metadata contract not deployed on this network');
     }
 
     this.address = address;
@@ -137,7 +135,7 @@ class DeveryERC721 extends AbstractSmartContract {
     const result = await this.__deveryERC721Contract.claimProduct(
       productAddress,
       quantity,
-      overrideOptions
+      overrideOptions,
     );
     return result.valueOf();
   }
@@ -156,12 +154,12 @@ class DeveryERC721 extends AbstractSmartContract {
   async estimateClaimProduct(
     productAddress,
     quantity = 1,
-    overrideOptions = {}
+    overrideOptions = {},
   ) {
     const result = await this.__deveryERC721Contract.estimate.claimProduct(
       productAddress,
       quantity,
-      overrideOptions
+      overrideOptions,
     );
     return result.toNumber();
   }
@@ -194,7 +192,7 @@ class DeveryERC721 extends AbstractSmartContract {
   async getApproved(address, overrideOptions = {}) {
     return await this.__deveryERC721Contract.getApproved(
       address,
-      overrideOptions
+      overrideOptions,
     );
   }
 
@@ -225,7 +223,7 @@ class DeveryERC721 extends AbstractSmartContract {
   async getProductsByOwner(addressOwner, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.getProductsByOwner(
       addressOwner,
-      overrideOptions
+      overrideOptions,
     );
     return result.valueOf();
   }
@@ -271,7 +269,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setApprovalEventListener(callback) {
-    const eventName = "ApprovalForAll"; // @todo: check - may be it should be 'Approval'??
+    const eventName = 'ApprovalForAll'; // @todo: check - may be it should be 'Approval'??
     this.__deveryERC721Contract.removeAllListeners(eventName);
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
@@ -333,7 +331,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setApprovalForAllEventListener(callback) {
-    const eventName = "Approval"; // @todo: check - may be it should be 'ApprovalAll'??
+    const eventName = 'Approval'; // @todo: check - may be it should be 'ApprovalAll'??
     this.__deveryERC721Contract.removeAllListeners(eventName);
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
@@ -381,7 +379,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * triggered
    */
   setTransferEventListener(callback) {
-    const eventName = "Transfer";
+    const eventName = 'Transfer';
     this.__deveryERC721Contract.removeAllListeners(eventName);
     if (callback) {
       this.__deveryERC721Contract.on(eventName, callback);
@@ -400,12 +398,12 @@ class DeveryERC721 extends AbstractSmartContract {
   async setMaximumMintableQuantity(
     productAddress,
     quantity,
-    overrideOptions = {}
+    overrideOptions = {},
   ) {
     const result = await this.__deveryERC721Contract.setMaximumMintableQuantity(
       productAddress,
       quantity,
-      overrideOptions
+      overrideOptions,
     );
     return result.valueOf();
   }
@@ -468,7 +466,7 @@ class DeveryERC721 extends AbstractSmartContract {
   async balanceOf(ownerAddress, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.balanceOf(
       ownerAddress,
-      overrideOptions
+      overrideOptions,
     );
     return result.toNumber();
   }
@@ -502,7 +500,7 @@ class DeveryERC721 extends AbstractSmartContract {
     const result = await this.__deveryERC721Contract.tokenOfOwnerByIndex(
       ownerAddress,
       index,
-      overrideOptions
+      overrideOptions,
     );
     return result.toNumber();
   }
@@ -533,9 +531,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * @return {Promise.<Number>} a promise that if resolved returns number of tokens or raise an error in case of rejection.
    */
   async totalAllowedProducts(productAddress) {
-    const result = await this.__deveryERC721Contract.totalAllowedProducts(
-      productAddress
-    );
+    const result = await this.__deveryERC721Contract.totalAllowedProducts(productAddress);
     return result.toNumber();
   }
 
@@ -564,9 +560,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * @return {Promise.<Number>} a promise that if resolved returns number of minted products or raise an error in case of rejection.
    */
   async totalMintedProducts(productAddress) {
-    const result = await this.__deveryERC721Contract.totalMintedProducts(
-      productAddress
-    );
+    const result = await this.__deveryERC721Contract.totalMintedProducts(productAddress);
     return result.toNumber();
   }
 
@@ -604,13 +598,13 @@ class DeveryERC721 extends AbstractSmartContract {
     fromAddress,
     toAddress,
     tokenId,
-    overrideOptions = {}
+    overrideOptions = {},
   ) {
     if (!/^\d*$/.test(`${tokenId}`)) {
       tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
     }
     const result = await this.__deveryERC721Contract[
-      "safeTransferFrom(address,address,uint256)"
+      'safeTransferFrom(address,address,uint256)'
     ](fromAddress, toAddress, tokenId, overrideOptions);
     return result.valueOf();
   }
@@ -619,13 +613,13 @@ class DeveryERC721 extends AbstractSmartContract {
     fromAddress,
     toAddress,
     tokenId,
-    overrideOptions = {}
+    overrideOptions = {},
   ) {
     if (!/^\d*$/.test(`${tokenId}`)) {
       tokenId = await this.getTokenIdByAddress(tokenId, fromAddress);
     }
     const result = await this.__deveryERC721Contract.estimate[
-      "safeTransferFrom(address,address,uint256)"
+      'safeTransferFrom(address,address,uint256)'
     ](fromAddress, toAddress, tokenId, overrideOptions);
     return result.toNumber();
   }
@@ -641,7 +635,7 @@ class DeveryERC721 extends AbstractSmartContract {
         return tokenId;
       }
     }
-    throw new Error("token id not found");
+    throw new Error('token id not found');
   }
 
   /**
@@ -667,11 +661,11 @@ class DeveryERC721 extends AbstractSmartContract {
    */
   async setDeveryRegistryAddress(
     deveryRegistryContractAddress,
-    overrideOptions = {}
+    overrideOptions = {},
   ) {
     const result = await this.__deveryERC721Contract.setDeveryRegistryAddress(
       deveryRegistryContractAddress,
-      overrideOptions
+      overrideOptions,
     );
     return result.valueOf();
   }
@@ -741,7 +735,7 @@ class DeveryERC721 extends AbstractSmartContract {
     const result = await this.__metadataContract.setTokenURI(
       tokenId,
       tokenUri,
-      overrideOptions
+      overrideOptions,
     );
     return result.valueOf();
   }

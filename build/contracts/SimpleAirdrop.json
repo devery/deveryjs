@@ -46,24 +46,15 @@
   "ast": {
     "absolutePath": "/Users/victor/Documents/projects/js/deveryjs/contracts/v4/Airdrop.sol",
     "exportedSymbols": {
-      "ERC20": [
-        29
-      ],
-      "SimpleAirdrop": [
-        56
-      ]
+      "ERC20": [29],
+      "SimpleAirdrop": [56]
     },
     "id": 57,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 1,
-        "literals": [
-          "solidity",
-          "^",
-          "0.4",
-          ".18"
-        ],
+        "literals": ["solidity", "^", "0.4", ".18"],
         "nodeType": "PragmaDirective",
         "src": "67:24:0"
       },
@@ -74,9 +65,7 @@
         "documentation": null,
         "fullyImplemented": false,
         "id": 29,
-        "linearizedBaseContracts": [
-          29
-        ],
+        "linearizedBaseContracts": [29],
         "name": "ERC20",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -418,9 +407,7 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 56,
-        "linearizedBaseContracts": [
-          56
-        ],
+        "linearizedBaseContracts": [56],
         "name": "SimpleAirdrop",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -750,23 +737,14 @@
     "attributes": {
       "absolutePath": "/Users/victor/Documents/projects/js/deveryjs/contracts/v4/Airdrop.sol",
       "exportedSymbols": {
-        "ERC20": [
-          29
-        ],
-        "SimpleAirdrop": [
-          56
-        ]
+        "ERC20": [29],
+        "SimpleAirdrop": [56]
       }
     },
     "children": [
       {
         "attributes": {
-          "literals": [
-            "solidity",
-            "^",
-            "0.4",
-            ".18"
-          ]
+          "literals": ["solidity", "^", "0.4", ".18"]
         },
         "id": 1,
         "name": "PragmaDirective",
@@ -774,18 +752,12 @@
       },
       {
         "attributes": {
-          "baseContracts": [
-            null
-          ],
-          "contractDependencies": [
-            null
-          ],
+          "baseContracts": [null],
+          "contractDependencies": [null],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": false,
-          "linearizedBaseContracts": [
-            29
-          ],
+          "linearizedBaseContracts": [29],
           "name": "ERC20",
           "scope": 57
         },
@@ -797,9 +769,7 @@
               "documentation": null,
               "implemented": false,
               "isConstructor": false,
-              "modifiers": [
-                null
-              ],
+              "modifiers": [null],
               "name": "transfer",
               "payable": false,
               "scope": 29,
@@ -912,9 +882,7 @@
               "documentation": null,
               "implemented": false,
               "isConstructor": false,
-              "modifiers": [
-                null
-              ],
+              "modifiers": [null],
               "name": "balanceOf",
               "payable": false,
               "scope": 29,
@@ -1001,9 +969,7 @@
               "documentation": null,
               "implemented": false,
               "isConstructor": false,
-              "modifiers": [
-                null
-              ],
+              "modifiers": [null],
               "name": "transferFrom",
               "payable": false,
               "scope": 29,
@@ -1142,18 +1108,12 @@
       },
       {
         "attributes": {
-          "baseContracts": [
-            null
-          ],
-          "contractDependencies": [
-            null
-          ],
+          "baseContracts": [null],
+          "contractDependencies": [null],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": true,
-          "linearizedBaseContracts": [
-            56
-          ],
+          "linearizedBaseContracts": [56],
           "name": "SimpleAirdrop",
           "scope": 57
         },
@@ -1192,9 +1152,7 @@
               "documentation": null,
               "implemented": true,
               "isConstructor": true,
-              "modifiers": [
-                null
-              ],
+              "modifiers": [null],
               "name": "SimpleAirdrop",
               "payable": false,
               "scope": 56,
@@ -1238,9 +1196,7 @@
               },
               {
                 "attributes": {
-                  "parameters": [
-                    null
-                  ]
+                  "parameters": [null]
                 },
                 "children": [],
                 "id": 35,
@@ -1265,9 +1221,7 @@
                           {
                             "attributes": {
                               "argumentTypes": null,
-                              "overloadedDeclarations": [
-                                null
-                              ],
+                              "overloadedDeclarations": [null],
                               "referencedDeclaration": 31,
                               "type": "contract ERC20",
                               "value": "token"
@@ -1284,9 +1238,7 @@
                               "isPure": false,
                               "isStructConstructorCall": false,
                               "lValueRequested": false,
-                              "names": [
-                                null
-                              ],
+                              "names": [null],
                               "type": "contract ERC20",
                               "type_conversion": true
                             },
@@ -1299,9 +1251,7 @@
                                       "typeString": "address"
                                     }
                                   ],
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
+                                  "overloadedDeclarations": [null],
                                   "referencedDeclaration": 29,
                                   "type": "type(contract ERC20)",
                                   "value": "ERC20"
@@ -1313,9 +1263,7 @@
                               {
                                 "attributes": {
                                   "argumentTypes": null,
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
+                                  "overloadedDeclarations": [null],
                                   "referencedDeclaration": 33,
                                   "type": "address",
                                   "value": "_tokenAddr"
@@ -1355,9 +1303,7 @@
               "documentation": null,
               "implemented": true,
               "isConstructor": false,
-              "modifiers": [
-                null
-              ],
+              "modifiers": [null],
               "name": "getAirdrop",
               "payable": false,
               "scope": 56,
@@ -1368,9 +1314,7 @@
             "children": [
               {
                 "attributes": {
-                  "parameters": [
-                    null
-                  ]
+                  "parameters": [null]
                 },
                 "children": [],
                 "id": 44,
@@ -1379,9 +1323,7 @@
               },
               {
                 "attributes": {
-                  "parameters": [
-                    null
-                  ]
+                  "parameters": [null]
                 },
                 "children": [],
                 "id": 45,
@@ -1400,9 +1342,7 @@
                           "isPure": false,
                           "isStructConstructorCall": false,
                           "lValueRequested": false,
-                          "names": [
-                            null
-                          ],
+                          "names": [null],
                           "type": "bool",
                           "type_conversion": false
                         },
@@ -1431,9 +1371,7 @@
                               {
                                 "attributes": {
                                   "argumentTypes": null,
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
+                                  "overloadedDeclarations": [null],
                                   "referencedDeclaration": 31,
                                   "type": "contract ERC20",
                                   "value": "token"
@@ -1462,9 +1400,7 @@
                               {
                                 "attributes": {
                                   "argumentTypes": null,
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
+                                  "overloadedDeclarations": [null],
                                   "referencedDeclaration": 2931,
                                   "type": "msg",
                                   "value": "msg"
@@ -1529,7 +1465,14 @@
     "name": "solc",
     "version": "0.4.26+commit.4563c3fc.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0xc59c7ed1cf318c5c441fb95a28a66b7e9db09cbc",
+      "transactionHash": "0xf84154e09d4ad41ad362162ac4b701d0a7e4ad925537421961bcceba4b141f3b"
+    }
+  },
   "schemaVersion": "3.4.0",
   "updatedAt": "2021-05-02T23:00:33.280Z",
   "devdoc": {
