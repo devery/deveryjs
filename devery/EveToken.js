@@ -223,7 +223,7 @@ class EveToken extends AbstractSmartContract {
   }
 
 
-  /***
+  /**
    * If you are using testnet and need some EVE for testing you can call this method to get 100 test eve.
    * IMPORTANT: this method only works in test net and is meant to be used for testing purposes only, you cannot call it in prod
    * 
