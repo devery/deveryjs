@@ -1,4 +1,3 @@
-const CryptoJS = require('crypto-js');
 const sha3 = require('crypto-js/sha3');
 const ethers = require('ethers');
 
@@ -38,7 +37,8 @@ class Utils {
   static isChecksumAddress(address) {
     // Check each case
     address = address.replace('0x', '');
-    const addressHash = Utils.sha3(address.toLowerCase());
+    const addressHash = sha3(address.toLowerCase(), { outputLength: 256 }).toString();
+
     for (let i = 0; i < 40; i += 1) {
       // the nth letter should be uppercase if the nth digit of casemap is 1
       if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i])
@@ -56,27 +56,6 @@ class Utils {
      */
   static getRandomAddress() {
     return ethers.Wallet.createRandom().address;
-  }
-
-  /**
-     *
-     * Calculates the sha3 of a given value.
-     *
-     * @param value value to have it's sha3 calculated.
-     * @param options calculation options.
-     * @return {String} sha3 of the given value.
-     */
-  static sha3(value, options) {
-    if (options && options.encoding === 'hex') {
-      if (value.length > 2 && value.substr(0, 2) === '0x') {
-        value = value.substr(2);
-      }
-      value = CryptoJS.enc.Hex.parse(value);
-    }
-
-    return sha3(value, {
-      outputLength: 256,
-    }).toString();
   }
 }
 
