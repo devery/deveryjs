@@ -36,6 +36,9 @@
       "html"
     ]
   },
+  "engines": {
+    "node": "=10"
+  },
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
