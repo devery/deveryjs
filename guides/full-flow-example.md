@@ -40,13 +40,13 @@ function flow(log) {
   return async () => {
     log("starting");
 
-    const walletPrivateKey = "ENTER YOUR KEY HERE";
-    const myAddress = "ENTER YOUR ADDRESS HERE";
-    networkId = 3;
-    const provider = new ethers.getDefaultProvider("ropsten");
+    const walletPrivateKey = "ENTER YOUR PRIVATE KEY HERE";
+    const myAddress = "ENTER YOUR WALLET ADDRESS HERE";
+    networkId = 4;
+    const provider = new ethers.getDefaultProvider("rinkeby");
 
     const wallet = new ethers.Wallet(walletPrivateKey, provider);
-    log(wallet);
+    log('wallet created with success');
 
     //here we are getting the address of the current account
 
@@ -69,22 +69,34 @@ function flow(log) {
     log("creating your APP.");
     //here we create an app, you need apps to be able to create brands and products
     //this step will fail if an app has already been created for the give address
-    let txn = await deveryRegistryClient.addApp(
-      "Logistics co. app",
-      myAddress,
-      "1000000000000000000"
-    );
-
-    //once we started the transaction we need to listen the network and wait for its completion
-    await provider.waitForTransaction(txn.hash);
+    try{
+      let txn = await deveryRegistryClient.addApp(
+        "Logistics co. app",
+        myAddress,
+        "1000000000000000000"
+      );
+  
+      //once we started the transaction we need to listen the network and wait for its completion
+      await provider.waitForTransaction(txn.hash);
+    }
+    catch(e){
+      log("probably the APP before has already been created");
+    }
     log("App created, creating your brand");
-
-    //now we need to create a brand in order to add products
-    //this step will fail if a brand has already been created for the give address
-    txn = await deveryRegistryClient.addBrand(myAddress, "my brand");
-    await provider.waitForTransaction(txn.hash);
+   
+    try{
+      //now we need to create a brand in order to add products
+      //this step will fail if a brand has already been created for the give address
+      txn = await deveryRegistryClient.addBrand(myAddress, "my brand");
+      await provider.waitForTransaction(txn.hash);
+    }
+    catch(e){
+      log("probably the BRAND before has already been created");
+    }
+    
     log("Brand created, permissioning your address to mark products");
 
+    log("provisioning allowances")
     // checks and approves the allowance for the deveryRegistry contract
     await checkAndUpdateAllowance(
       eveTokenClient,
@@ -129,15 +141,17 @@ function flow(log) {
     txn = await deveryRegistryClient.mark(productAddress, hash);
     //this ensures we will await this transaction to finish before moving to the next step
     await provider.waitForTransaction(txn.hash);
-    log("product marked claiming 5 units");
+    log("product marked claiming 1 units");
     //this step will fail if the product address does not exist
     //this step will fail if the caller is not the brand that created the product
-    txn = await deveryErc721Client.claimProduct(productAddress, 5);
+    txn = await deveryErc721Client.claimProduct(productAddress, 1);
     //this ensures we will await this transaction to finish before moving to the next step
     await provider.waitForTransaction(txn.hash);
-
+    log("geting last token address");
+    const addressOfLastToken = await deveryErc721Client.balanceOf(myAddress)
+    console.log(addressOfLastToken)
     //get my new token id
-    tokenId = await deveryErc721Client.tokenOfOwnerByIndex(address, 0);
+    tokenId = await deveryErc721Client.tokenOfOwnerByIndex(myAddress, addressOfLastToken - 1);
     log("setting token URI");
     //set my token URI, the URI is just a dummy one for demo purposes
     tokenId = await deveryErc721Client.setTokenURI(
@@ -145,6 +159,7 @@ function flow(log) {
       "http://non-existent.com/1/metadata.json"
     );
     log("Flow successfuly completed");
+
   };
 }
 

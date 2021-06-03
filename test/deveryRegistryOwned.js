@@ -48,7 +48,7 @@ contract('DeveryRegistry - Owned - basic tests', (accounts) => {
     this.timeout(5000);
     return new Promise((async (resolve, reject) => {
       const devery = createDeveryOwned(web3, undefined, newOwnerAccount, contractAddress);
-      devery.setOwnershipTransferredListener((fromAcc, toAcc) => {
+      devery.setOwnershipTransferredListener(( toAcc, fromAcc) => {
         assert.equal(fromAcc.toLowerCase(), newOwnerAccount.toLowerCase());
         assert.equal(toAcc.toLowerCase(), ownerAccount.toLowerCase());
         // we need to remove the listener otherwise mocha will never exit
