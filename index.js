@@ -7,6 +7,7 @@ import DeveryAdminedLib from './devery/DeveryAdmined';
 import DeveryOwnedLib from './devery/DeveryOwned';
 import UtilsLib from './devery/Utils';
 import DeveryERC721Lib from './devery/DeveryERC721';
+import DeprecatedDeveryERC721Lib from './devery/DeprecatedDeveryERC721';
 import DeveryTrustLib from './devery/DeveryTrust';
 
 
@@ -17,4 +18,5 @@ export const DeveryOwned = DeveryOwnedLib;
 export const Utils = UtilsLib;
 export const DeveryERC721 = DeveryERC721Lib;
 export const DeveryTrust = DeveryTrustLib;
+export const DeprecatedDeveryERC721 = DeprecatedDeveryERC721Lib;
 

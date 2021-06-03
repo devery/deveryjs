@@ -1,6 +1,6 @@
 import AbstractSmartContract from './AbstractSmartContract';
 
-const deveryERC721Artifact = require('../build/contracts/DeveryERC721Token.json');
+const deveryERC721Artifact = require('../build/contracts/DeveryERC721MetadataToken.json');
 const metadataDeveryERC721WrapperArtifact = require('../build/contracts/MetadataDeveryERC721Wrapper.json');
 const ethers = require('ethers');
 
@@ -87,16 +87,6 @@ class DeveryERC721 extends AbstractSmartContract {
       deveryERC721Artifact.abi,
       this.__signerOrProvider,
     );
-
-    try {
-      this.__metadataContract = new ethers.Contract(
-        metadataDeveryERC721WrapperArtifact.networks[network].address,
-        metadataDeveryERC721WrapperArtifact.abi,
-        this.__signerOrProvider,
-      );
-    } catch (e) {
-      console.warn('metadata contract not deployed on this network');
-    }
 
     this.address = address;
     this.abi = deveryERC721Artifact.abi;
@@ -732,7 +722,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} tokenUri URI for the token
    */
   async setTokenURI(tokenId, tokenUri, overrideOptions = {}) {
-    const result = await this.__metadataContract.setTokenURI(
+    const result = await this.__deveryERC721Contract.setTokenUri(
       tokenId,
       tokenUri,
       overrideOptions,
@@ -761,7 +751,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} tokenId Token for which the uri will be retrieved
    */
   async tokenURI(tokenId) {
-    const uri = await this.__metadataContract.tokenUri(tokenId);
+    const uri = await this.__deveryERC721Contract.tokenUri(tokenId);
     return uri;
   }
 }

@@ -1,0 +1,4094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      DeprecatedDeveryERC721 - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Devery.js docs
+    </h3>
+
+    <h3>Guides</h3><ul><li id="devery-trust-nav"><a href="tutorial-devery-trust.html">devery-trust</a></li><li id="full-flow-example-nav"><a href="tutorial-full-flow-example.html">full-flow-example</a></li><li id="getting-started-nav"><a href="tutorial-getting-started.html">getting-started</a></li></ul><h3>Classes</h3><ul><li id="DeprecatedDeveryERC721-nav"><a href="DeprecatedDeveryERC721.html">DeprecatedDeveryERC721</a><ul class='methods'><li data-type="method" id="DeprecatedDeveryERC721-getApproved-nav"><a href="DeprecatedDeveryERC721.html#getApproved">getApproved</a></li><li data-type="method" id="DeprecatedDeveryERC721-getProductsByOwner-nav"><a href="DeprecatedDeveryERC721.html#getProductsByOwner">getProductsByOwner</a></li><li data-type="method" id="DeprecatedDeveryERC721-setApprovalEventListener-nav"><a href="DeprecatedDeveryERC721.html#setApprovalEventListener">setApprovalEventListener</a></li><li data-type="method" id="DeprecatedDeveryERC721-setApprovalForAllEventListener-nav"><a href="DeprecatedDeveryERC721.html#setApprovalForAllEventListener">setApprovalForAllEventListener</a></li><li data-type="method" id="DeprecatedDeveryERC721-setTransferEventListener-nav"><a href="DeprecatedDeveryERC721.html#setTransferEventListener">setTransferEventListener</a></li><li data-type="method" id="DeprecatedDeveryERC721-setMaximumMintableQuantity-nav"><a href="DeprecatedDeveryERC721.html#setMaximumMintableQuantity">setMaximumMintableQuantity</a></li><li data-type="method" id="DeprecatedDeveryERC721-tokenIdToProduct-nav"><a href="DeprecatedDeveryERC721.html#tokenIdToProduct">tokenIdToProduct</a></li><li data-type="method" id="DeprecatedDeveryERC721-balanceOf-nav"><a href="DeprecatedDeveryERC721.html#balanceOf">balanceOf</a></li><li data-type="method" id="DeprecatedDeveryERC721-tokenOfOwnerByIndex-nav"><a href="DeprecatedDeveryERC721.html#tokenOfOwnerByIndex">tokenOfOwnerByIndex</a></li><li data-type="method" id="DeprecatedDeveryERC721-totalAllowedProducts-nav"><a href="DeprecatedDeveryERC721.html#totalAllowedProducts">totalAllowedProducts</a></li><li data-type="method" id="DeprecatedDeveryERC721-totalMintedProducts-nav"><a href="DeprecatedDeveryERC721.html#totalMintedProducts">totalMintedProducts</a></li><li data-type="method" id="DeprecatedDeveryERC721-safeTransferFrom-nav"><a href="DeprecatedDeveryERC721.html#safeTransferFrom">safeTransferFrom</a></li><li data-type="method" id="DeprecatedDeveryERC721-setDeveryRegistryAddress-nav"><a href="DeprecatedDeveryERC721.html#setDeveryRegistryAddress">setDeveryRegistryAddress</a></li><li data-type="method" id="DeprecatedDeveryERC721-hasAccountClaimendProduct-nav"><a href="DeprecatedDeveryERC721.html#hasAccountClaimendProduct">hasAccountClaimendProduct</a></li><li data-type="method" id="DeprecatedDeveryERC721-setTokenURI-nav"><a href="DeprecatedDeveryERC721.html#setTokenURI">setTokenURI</a></li><li data-type="method" id="DeprecatedDeveryERC721-tokenURI-nav"><a href="DeprecatedDeveryERC721.html#tokenURI">tokenURI</a></li><li data-type="method" id="DeprecatedDeveryERC721-claimProduct-nav"><a href="DeprecatedDeveryERC721.html#claimProduct">claimProduct</a></li><li data-type="method" id="DeprecatedDeveryERC721-estimateClaimProduct-nav"><a href="DeprecatedDeveryERC721.html#estimateClaimProduct">estimateClaimProduct</a></li><li data-type="method" id="DeprecatedDeveryERC721-getSignerAddress-nav"><a href="DeprecatedDeveryERC721.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeprecatedDeveryERC721-getProvider-nav"><a href="DeprecatedDeveryERC721.html#getProvider">getProvider</a></li></ul></li><li id="DeveryERC721-nav"><a href="DeveryERC721.html">DeveryERC721</a><ul class='methods'><li data-type="method" id="DeveryERC721-claimProduct-nav"><a href="DeveryERC721.html#claimProduct">claimProduct</a></li><li data-type="method" id="DeveryERC721-estimateClaimProduct-nav"><a href="DeveryERC721.html#estimateClaimProduct">estimateClaimProduct</a></li><li data-type="method" id="DeveryERC721-getApproved-nav"><a href="DeveryERC721.html#getApproved">getApproved</a></li><li data-type="method" id="DeveryERC721-getProductsByOwner-nav"><a href="DeveryERC721.html#getProductsByOwner">getProductsByOwner</a></li><li data-type="method" id="DeveryERC721-setApprovalEventListener-nav"><a href="DeveryERC721.html#setApprovalEventListener">setApprovalEventListener</a></li><li data-type="method" id="DeveryERC721-setApprovalForAllEventListener-nav"><a href="DeveryERC721.html#setApprovalForAllEventListener">setApprovalForAllEventListener</a></li><li data-type="method" id="DeveryERC721-setTransferEventListener-nav"><a href="DeveryERC721.html#setTransferEventListener">setTransferEventListener</a></li><li data-type="method" id="DeveryERC721-setMaximumMintableQuantity-nav"><a href="DeveryERC721.html#setMaximumMintableQuantity">setMaximumMintableQuantity</a></li><li data-type="method" id="DeveryERC721-tokenIdToProduct-nav"><a href="DeveryERC721.html#tokenIdToProduct">tokenIdToProduct</a></li><li data-type="method" id="DeveryERC721-balanceOf-nav"><a href="DeveryERC721.html#balanceOf">balanceOf</a></li><li data-type="method" id="DeveryERC721-tokenOfOwnerByIndex-nav"><a href="DeveryERC721.html#tokenOfOwnerByIndex">tokenOfOwnerByIndex</a></li><li data-type="method" id="DeveryERC721-totalAllowedProducts-nav"><a href="DeveryERC721.html#totalAllowedProducts">totalAllowedProducts</a></li><li data-type="method" id="DeveryERC721-totalMintedProducts-nav"><a href="DeveryERC721.html#totalMintedProducts">totalMintedProducts</a></li><li data-type="method" id="DeveryERC721-safeTransferFrom-nav"><a href="DeveryERC721.html#safeTransferFrom">safeTransferFrom</a></li><li data-type="method" id="DeveryERC721-setDeveryRegistryAddress-nav"><a href="DeveryERC721.html#setDeveryRegistryAddress">setDeveryRegistryAddress</a></li><li data-type="method" id="DeveryERC721-hasAccountClaimendProduct-nav"><a href="DeveryERC721.html#hasAccountClaimendProduct">hasAccountClaimendProduct</a></li><li data-type="method" id="DeveryERC721-setTokenURI-nav"><a href="DeveryERC721.html#setTokenURI">setTokenURI</a></li><li data-type="method" id="DeveryERC721-tokenURI-nav"><a href="DeveryERC721.html#tokenURI">tokenURI</a></li><li data-type="method" id="DeveryERC721-getSignerAddress-nav"><a href="DeveryERC721.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryERC721-getProvider-nav"><a href="DeveryERC721.html#getProvider">getProvider</a></li></ul></li><li id="DeveryRegistry-nav"><a href="DeveryRegistry.html">DeveryRegistry</a><ul class='methods'><li data-type="method" id="DeveryRegistry-updateBrand-nav"><a href="DeveryRegistry.html#updateBrand">updateBrand</a></li><li data-type="method" id="DeveryRegistry-addApp-nav"><a href="DeveryRegistry.html#addApp">addApp</a></li><li data-type="method" id="DeveryRegistry-estimateAddApp-nav"><a href="DeveryRegistry.html#estimateAddApp">estimateAddApp</a></li><li data-type="method" id="DeveryRegistry-updateApp-nav"><a href="DeveryRegistry.html#updateApp">updateApp</a></li><li data-type="method" id="DeveryRegistry-estimateUpdateApp-nav"><a href="DeveryRegistry.html#estimateUpdateApp">estimateUpdateApp</a></li><li data-type="method" id="DeveryRegistry-getApp-nav"><a href="DeveryRegistry.html#getApp">getApp</a></li><li data-type="method" id="DeveryRegistry-getAppData-nav"><a href="DeveryRegistry.html#getAppData">getAppData</a></li><li data-type="method" id="DeveryRegistry-appAccountsPaginated-nav"><a href="DeveryRegistry.html#appAccountsPaginated">appAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-appAccountsArray-nav"><a href="DeveryRegistry.html#appAccountsArray">appAccountsArray</a></li><li data-type="method" id="DeveryRegistry-appAccountsLength-nav"><a href="DeveryRegistry.html#appAccountsLength">appAccountsLength</a></li><li data-type="method" id="DeveryRegistry-setAppAddedEventListener-nav"><a href="DeveryRegistry.html#setAppAddedEventListener">setAppAddedEventListener</a></li><li data-type="method" id="DeveryRegistry-setAppUpdatedEventListener-nav"><a href="DeveryRegistry.html#setAppUpdatedEventListener">setAppUpdatedEventListener</a></li><li data-type="method" id="DeveryRegistry-addBrand-nav"><a href="DeveryRegistry.html#addBrand">addBrand</a></li><li data-type="method" id="DeveryRegistry-estimateAddBrand-nav"><a href="DeveryRegistry.html#estimateAddBrand">estimateAddBrand</a></li><li data-type="method" id="DeveryRegistry-estimateUpdateBrand-nav"><a href="DeveryRegistry.html#estimateUpdateBrand">estimateUpdateBrand</a></li><li data-type="method" id="DeveryRegistry-getBrand-nav"><a href="DeveryRegistry.html#getBrand">getBrand</a></li><li data-type="method" id="DeveryRegistry-getBrandData-nav"><a href="DeveryRegistry.html#getBrandData">getBrandData</a></li><li data-type="method" id="DeveryRegistry-brandAccountsPaginated-nav"><a href="DeveryRegistry.html#brandAccountsPaginated">brandAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-brandAccountsArray-nav"><a href="DeveryRegistry.html#brandAccountsArray">brandAccountsArray</a></li><li data-type="method" id="DeveryRegistry-brandAccountsLength-nav"><a href="DeveryRegistry.html#brandAccountsLength">brandAccountsLength</a></li><li data-type="method" id="DeveryRegistry-setBrandAddedEventListener-nav"><a href="DeveryRegistry.html#setBrandAddedEventListener">setBrandAddedEventListener</a></li><li data-type="method" id="DeveryRegistry-setBrandUpdatedEventListener-nav"><a href="DeveryRegistry.html#setBrandUpdatedEventListener">setBrandUpdatedEventListener</a></li><li data-type="method" id="DeveryRegistry-addProduct-nav"><a href="DeveryRegistry.html#addProduct">addProduct</a></li><li data-type="method" id="DeveryRegistry-estimateAddProduct-nav"><a href="DeveryRegistry.html#estimateAddProduct">estimateAddProduct</a></li><li data-type="method" id="DeveryRegistry-updateProduct-nav"><a href="DeveryRegistry.html#updateProduct">updateProduct</a></li><li data-type="method" id="DeveryRegistry-estimateUpdateProduct-nav"><a href="DeveryRegistry.html#estimateUpdateProduct">estimateUpdateProduct</a></li><li data-type="method" id="DeveryRegistry-getProduct-nav"><a href="DeveryRegistry.html#getProduct">getProduct</a></li><li data-type="method" id="DeveryRegistry-getProductData-nav"><a href="DeveryRegistry.html#getProductData">getProductData</a></li><li data-type="method" id="DeveryRegistry-productAccountsPaginated-nav"><a href="DeveryRegistry.html#productAccountsPaginated">productAccountsPaginated</a></li><li data-type="method" id="DeveryRegistry-productAccountsArray-nav"><a href="DeveryRegistry.html#productAccountsArray">productAccountsArray</a></li><li data-type="method" id="DeveryRegistry-productAccountsLength-nav"><a href="DeveryRegistry.html#productAccountsLength">productAccountsLength</a></li><li data-type="method" id="DeveryRegistry-setProductAddedEventListener-nav"><a href="DeveryRegistry.html#setProductAddedEventListener">setProductAddedEventListener</a></li><li data-type="method" id="DeveryRegistry-setProductUpdatedEventListener-nav"><a href="DeveryRegistry.html#setProductUpdatedEventListener">setProductUpdatedEventListener</a></li><li data-type="method" id="DeveryRegistry-permissionMarker-nav"><a href="DeveryRegistry.html#permissionMarker">permissionMarker</a></li><li data-type="method" id="DeveryRegistry-estimatePermissionMarker-nav"><a href="DeveryRegistry.html#estimatePermissionMarker">estimatePermissionMarker</a></li><li data-type="method" id="DeveryRegistry-addressHash-nav"><a href="DeveryRegistry.html#addressHash">addressHash</a></li><li data-type="method" id="DeveryRegistry-mark-nav"><a href="DeveryRegistry.html#mark">mark</a></li><li data-type="method" id="DeveryRegistry-estimateMark-nav"><a href="DeveryRegistry.html#estimateMark">estimateMark</a></li><li data-type="method" id="DeveryRegistry-AddProductAndMark-nav"><a href="DeveryRegistry.html#AddProductAndMark">AddProductAndMark</a></li><li data-type="method" id="DeveryRegistry-hashAndMark-nav"><a href="DeveryRegistry.html#hashAndMark">hashAndMark</a></li><li data-type="method" id="DeveryRegistry-check-nav"><a href="DeveryRegistry.html#check">check</a></li><li data-type="method" id="DeveryRegistry-setPermissionedEventListener-nav"><a href="DeveryRegistry.html#setPermissionedEventListener">setPermissionedEventListener</a></li><li data-type="method" id="DeveryRegistry-setMarkedEventListener-nav"><a href="DeveryRegistry.html#setMarkedEventListener">setMarkedEventListener</a></li><li data-type="method" id="DeveryRegistry-getSignerAddress-nav"><a href="DeveryRegistry.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryRegistry-getProvider-nav"><a href="DeveryRegistry.html#getProvider">getProvider</a></li></ul></li><li id="DeveryTrust-nav"><a href="DeveryTrust.html">DeveryTrust</a><ul class='methods'><li data-type="method" id="DeveryTrust-approve-nav"><a href="DeveryTrust.html#approve">approve</a></li><li data-type="method" id="DeveryTrust-revoke-nav"><a href="DeveryTrust.html#revoke">revoke</a></li><li data-type="method" id="DeveryTrust-check-nav"><a href="DeveryTrust.html#check">check</a></li><li data-type="method" id="DeveryTrust-checkBrand-nav"><a href="DeveryTrust.html#checkBrand">checkBrand</a></li><li data-type="method" id="DeveryTrust-isApprover-nav"><a href="DeveryTrust.html#isApprover">isApprover</a></li><li data-type="method" id="DeveryTrust-getAddressApprovals-nav"><a href="DeveryTrust.html#getAddressApprovals">getAddressApprovals</a></li><li data-type="method" id="DeveryTrust-getBrandApprovals-nav"><a href="DeveryTrust.html#getBrandApprovals">getBrandApprovals</a></li><li data-type="method" id="DeveryTrust-getSignerAddress-nav"><a href="DeveryTrust.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryTrust-getProvider-nav"><a href="DeveryTrust.html#getProvider">getProvider</a></li></ul></li><li id="Utils-nav"><a href="Utils.html">Utils</a><ul class='methods'><li data-type="method" id="Utils-isAddress-nav"><a href="Utils.html#.isAddress">isAddress</a></li><li data-type="method" id="Utils-isChecksumAddress-nav"><a href="Utils.html#.isChecksumAddress">isChecksumAddress</a></li><li data-type="method" id="Utils-getRandomAddress-nav"><a href="Utils.html#.getRandomAddress">getRandomAddress</a></li><li data-type="method" id="Utils-sha3-nav"><a href="Utils.html#.sha3">sha3</a></li></ul></li><li id="DeveryAdmined-nav"><a href="DeveryAdmined.html">DeveryAdmined</a><ul class='methods'><li data-type="method" id="DeveryAdmined-isAdmin-nav"><a href="DeveryAdmined.html#isAdmin">isAdmin</a></li><li data-type="method" id="DeveryAdmined-addAdmin-nav"><a href="DeveryAdmined.html#addAdmin">addAdmin</a></li><li data-type="method" id="DeveryAdmined-removeAdmin-nav"><a href="DeveryAdmined.html#removeAdmin">removeAdmin</a></li><li data-type="method" id="DeveryAdmined-setAdminAddedEventListener-nav"><a href="DeveryAdmined.html#setAdminAddedEventListener">setAdminAddedEventListener</a></li><li data-type="method" id="DeveryAdmined-setAdminRemovedEventListener-nav"><a href="DeveryAdmined.html#setAdminRemovedEventListener">setAdminRemovedEventListener</a></li><li data-type="method" id="DeveryAdmined-getSignerAddress-nav"><a href="DeveryAdmined.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryAdmined-getProvider-nav"><a href="DeveryAdmined.html#getProvider">getProvider</a></li></ul></li><li id="DeveryOwned-nav"><a href="DeveryOwned.html">DeveryOwned</a><ul class='methods'><li data-type="method" id="DeveryOwned-acceptOwnership-nav"><a href="DeveryOwned.html#acceptOwnership">acceptOwnership</a></li><li data-type="method" id="DeveryOwned-transferOwnership-nav"><a href="DeveryOwned.html#transferOwnership">transferOwnership</a></li><li data-type="method" id="DeveryOwned-setOwnershipTransferredListener-nav"><a href="DeveryOwned.html#setOwnershipTransferredListener">setOwnershipTransferredListener</a></li><li data-type="method" id="DeveryOwned-getOwner-nav"><a href="DeveryOwned.html#getOwner">getOwner</a></li><li data-type="method" id="DeveryOwned-getNewOwner-nav"><a href="DeveryOwned.html#getNewOwner">getNewOwner</a></li><li data-type="method" id="DeveryOwned-getSignerAddress-nav"><a href="DeveryOwned.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="DeveryOwned-getProvider-nav"><a href="DeveryOwned.html#getProvider">getProvider</a></li></ul></li><li id="EveToken-nav"><a href="EveToken.html">EveToken</a><ul class='methods'><li data-type="method" id="EveToken-totalSupply-nav"><a href="EveToken.html#totalSupply">totalSupply</a></li><li data-type="method" id="EveToken-balanceOf-nav"><a href="EveToken.html#balanceOf">balanceOf</a></li><li data-type="method" id="EveToken-allowance-nav"><a href="EveToken.html#allowance">allowance</a></li><li data-type="method" id="EveToken-estimateAllowance-nav"><a href="EveToken.html#estimateAllowance">estimateAllowance</a></li><li data-type="method" id="EveToken-approve-nav"><a href="EveToken.html#approve">approve</a></li><li data-type="method" id="EveToken-estimateApprove-nav"><a href="EveToken.html#estimateApprove">estimateApprove</a></li><li data-type="method" id="EveToken-transfer-nav"><a href="EveToken.html#transfer">transfer</a></li><li data-type="method" id="EveToken-estimateTransfer-nav"><a href="EveToken.html#estimateTransfer">estimateTransfer</a></li><li data-type="method" id="EveToken-getAirdrop-nav"><a href="EveToken.html#getAirdrop">getAirdrop</a></li><li data-type="method" id="EveToken-transferFrom-nav"><a href="EveToken.html#transferFrom">transferFrom</a></li><li data-type="method" id="EveToken-estimateTransferFrom-nav"><a href="EveToken.html#estimateTransferFrom">estimateTransferFrom</a></li><li data-type="method" id="EveToken-setApprovalListener-nav"><a href="EveToken.html#setApprovalListener">setApprovalListener</a></li><li data-type="method" id="EveToken-setTransferListener-nav"><a href="EveToken.html#setTransferListener">setTransferListener</a></li><li data-type="method" id="EveToken-getSignerAddress-nav"><a href="EveToken.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="EveToken-getProvider-nav"><a href="EveToken.html#getProvider">getProvider</a></li></ul></li><li id="AbstractSmartContract-nav"><a href="AbstractSmartContract.html">AbstractSmartContract</a><ul class='methods'><li data-type="method" id="AbstractSmartContract-getSignerAddress-nav"><a href="AbstractSmartContract.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="AbstractSmartContract-getProvider-nav"><a href="AbstractSmartContract.html#getProvider">getProvider</a></li></ul></li><li id="AbstractDeverySmartContract-nav"><a href="AbstractDeverySmartContract.html">AbstractDeverySmartContract</a><ul class='methods'><li data-type="method" id="AbstractDeverySmartContract-getSignerAddress-nav"><a href="AbstractDeverySmartContract.html#getSignerAddress">getSignerAddress</a></li><li data-type="method" id="AbstractDeverySmartContract-getProvider-nav"><a href="AbstractDeverySmartContract.html#getProvider">getProvider</a></li></ul></li></ul><h3 id="global-nav"><a href="global.html">Global</a></h3>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        DeprecatedDeveryERC721
+      </h1>
+    
+
+    
+
+<section>
+  <header>
+    
+      <h2>
+        
+        DeprecatedDeveryERC721
+        
+      </h2>
+
+      
+        <div class="class-description">
+          <p>Main class to deal with the owned smart contract interface and related operations,
+you can use it to check the current contract owner and listen to ownership change related
+events</p>
+        </div>
+      
+    
+  </header>
+
+  <article>
+    <div class="container-overview">
+      
+        
+
+
+  
+    <h2>Constructor</h2>
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#DeprecatedDeveryERC721">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="DeprecatedDeveryERC721">
+      <span class="type-signature"></span>new DeprecatedDeveryERC721<span class="signature">(options)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Creates a new instansce of DeveryERC721.</p>
+<pre class="prettyprint source"><code>// creates a DeveryERC721Client with the default params
+let deveryERC721Client = new DeveryERC721();
+
+//creates a deveryRegistryClient pointing to a custom address
+let deveryERC721Client = new DeveryERC721({address:'0xf17f52151EbEF6C7334FAD080c5704DAAA16b732'});
+</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>options</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#ClientOptions">ClientOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>network connection options</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version">
+      <ul class="dummy">
+        <li>
+          1
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line16">line 16</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+      <h3 class="subsection-title">Extends</h3>
+
+      
+
+
+  <ul>
+    <li><a href="AbstractSmartContract.html">AbstractSmartContract</a></li>
+  </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+      <h3 class="subsection-title">Methods</h3>
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#getApproved">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="getApproved">
+      <span class="type-signature">(async) </span>getApproved<span class="signature">(address, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method returns you the total amount of approved transactions of the inspected product (referenced by it's token).</p>
+<p><strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+// now you can use it
+
+// Let's log the simplest case of use in the console
+
+deveryErc721Client.getApproved(address).then(response => console.log(`Number of approved transactions ${response}`))
+
+//response is going to be an hexadecimal number representing the amount of approved transactions made with it
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>address</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>token address to be inspected.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line192">line 192</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#getProductsByOwner">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="getProductsByOwner">
+      <span class="type-signature">(async) </span>getProductsByOwner<span class="signature">(addressOwner, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Each brand has a blockchain address.
+This function returns an array with all the product addresses owned by the address passed as a parameter.</p>
+<p><strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code> // first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+ let deveryErc721Client = new DeveryERC721();
+ // now you can use it
+
+ // Let's log the simplest case of use in the console.
+
+ deveryErc721Client.getProductsByOwner(addressOwner).then(response => console.log('these are the products owned by this address', response))
+
+ // Since this is a promise function you will need a .then statement to display the result
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>addressOwner</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>the blockchain address of whom we want to know the owned tokens</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line223">line 223</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#setApprovalEventListener">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="setApprovalEventListener">
+      <span class="type-signature"></span>setApprovalEventListener<span class="signature">(callback)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Listener for transfer approval events, this event triggers whenever a devery item is transferred in the blockchain.
+Please note that ApprovalEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove an ApprovalEventListener, just call this function passing undefined
+as param.</p>
+<p><strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+// now you can use it
+
+
+
+deveryErc721Client.setApprovalEventListener((brandAccount,appAccount,active) => {
+     // whenever an app created we will log it to the console
+     console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+})
+
+// if you want to remove the listener you can simply pass undefined as parameter
+
+deveryErc721Client.setApprovalEventListener(undefined)
+
+// or that is equivalent to the above call
+
+
+
+deveryErc721Client.setApprovalEventListener()
+
+
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>callback</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#ApprovalEventCallback">ApprovalEventCallback</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>the callback that will be executed whenever an ApprovalForAll event is
+triggered</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line271">line 271</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#setApprovalForAllEventListener">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="setApprovalForAllEventListener">
+      <span class="type-signature"></span>setApprovalForAllEventListener<span class="signature">(callback)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Listener for transfer approval for all events, this event triggers whenever a devery item is transferred in the blockchain.
+Please note that ApprovalForAllEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove an ApprovalForAllEventListener, just call this function passing undefined
+as param.</p>
+<p><strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+// now you can use it
+
+
+
+deveryErc721Client.setApprovalForAllEventListener((brandAccount,appAccount,active) => {
+     // whenever an app created we will log it to the console
+     console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+})
+
+// if you want to remove the listener you can simply pass undefined as parameter
+
+deveryRegistryClient.setApprovalForAllEventListener(undefined)
+
+// or that is equivalent to the above call
+
+
+
+deveryRegistryClient.setApprovalForAllEventListener()
+
+
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>callback</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#ApprovalEventCallback">ApprovalEventCallback</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>the callback that will be executed whenever a Approval event is
+triggered</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line333">line 333</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#setTransferEventListener">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="setTransferEventListener">
+      <span class="type-signature"></span>setTransferEventListener<span class="signature">(callback)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Listener for transfer events, this event triggers whenever a devery item is transferred in the blockchain.
+Please note that TransferEventListeners do not stack, this means that whenever you set one you are
+removing the last one. If you want to remove a TransferEventListener, just call this function passing undefined
+as param.</p>
+<p><strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+// now you can use it
+
+
+
+deveryErc721Client.setTransferEventListener((brandAccount,appAccount,active) => {
+     // whenever an app created we will log it to the console
+     console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+})
+
+// if you want to remove the listener you can simply pass undefined as parameter
+
+deveryErc721Client.setTransferEventListener(undefined)
+
+// or that is equivalent to the above call
+
+
+
+deveryErc721Client.setTransferEventListener()
+
+
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>callback</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#ApprovalEventCallback">ApprovalEventCallback</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>the callback that will be executed whenever a Transfer event is
+triggered</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line381">line 381</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#setMaximumMintableQuantity">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="setMaximumMintableQuantity">
+      <span class="type-signature">(async) </span>setMaximumMintableQuantity<span class="signature">(productAddress, quantity, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Transaction>}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Sets the maximum mintable quantity of a given token. <strong>* If you don't set the maximum mintable quantity it will be infinite by default</strong></p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>productAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>The address of the product which the mintable quantity will be set.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>quantity</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>the allowed quantity of mintable products.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line398">line 398</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#tokenIdToProduct">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="tokenIdToProduct">
+      <span class="type-signature">(async) </span>tokenIdToProduct<span class="signature">(tokenId)</span><span class="type-signature"> &rarr; {Promise.&lt;String>}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method returns the blockchain address of a product, using its token as a parameter.</p>
+<p><strong><em>Usage Example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+
+let deveryErc721Client = new DeveryERC721();
+
+// now you can use it
+
+// to use this function you need to have a token, which can be get through a function like tokenOfOwnerByIndex
+// The token is a hexadecimal number
+
+deveryErc721Client.tokenIdToProduct(tokenId).then(response => console.log('this is your product address', response))
+
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>tokenId</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>The token of the product you wish to get the address of.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line438">line 438</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#balanceOf">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="balanceOf">
+      <span class="type-signature">(async) </span>balanceOf<span class="signature">(ownerAddress, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method returns the (hexadecimal) number of products owned by the account address passed as parameter to the function.</p>
+<p><strong><em>Usage Example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+
+let deveryErc721Client = new DeveryERC721();
+
+// now you can use it
+
+// this method requires an owner address, which can be obtained on the metamask extension by clicking on your account name
+
+
+deveryErc721Client.__deveryERC721Contract.balanceOf(ownerAddress).then(response => console.log('this account owns number of products: ', response))
+</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>ownerAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>Blockchain address of the inspected account.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line466">line 466</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#tokenOfOwnerByIndex">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="tokenOfOwnerByIndex">
+      <span class="type-signature">(async) </span>tokenOfOwnerByIndex<span class="signature">(ownerAddress, index, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method returns the token of a product by its index (it's a position in an array containing all the products owned by the owner address).</p>
+<p><strong><em>Usage Example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+
+let deveryErc721Client = new DeveryERC721();
+
+// now you can use it
+
+deveryErc721Client.__deveryERC721Contract.tokenOfOwnerByIndex(ownerAddress, index).then(response => ( console.log('product token', response)))
+
+// the product order is the same as the array returned by getProductByOwner() . Wherefore the index 0 it's the first address returned by the getProductByOwner method,
+// the index 1 is the second address and so on.
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>ownerAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>blockchain address of that we want to know the owned tokens.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>index</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      number
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>position of the product in the array of all products owned by the account corresponding to the address.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line499">line 499</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#totalAllowedProducts">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="totalAllowedProducts">
+      <span class="type-signature">(async) </span>totalAllowedProducts<span class="signature">(productAddress)</span><span class="type-signature"> &rarr; {Promise.&lt;Number>}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method allows you to query the number of tokens linked to the product address,
+representing the amount of that product generated.
+The response is returned as a hexadecimal number.</p>
+<p><strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+// now you can use it
+
+deveryErc721Client.totalAllowedProducts(productAddress).then(response => {
+    console.log(`this is the total amount of products Allowed ${response}`)
+}).catch(err => {
+ // handle exceptions here
+})
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>productAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Blockchain address of the product.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line533">line 533</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#totalMintedProducts">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="totalMintedProducts">
+      <span class="type-signature">(async) </span>totalMintedProducts<span class="signature">(productAddress)</span><span class="type-signature"> &rarr; {Promise.&lt;Number>}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>You can generate a limited amount of products for each product address.
+If you try to generated more products than you are allowed, this product
+is going to be minted.
+This method returns you the number of minted products for a specific product address.</p>
+<p><strong><em>Usage Example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+// now you can use it
+
+deveryErc721Client.totalMintedProducts(productAddress).then(response =>
+ (console.log('you have the following number of minted products for this address ', response)))
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>productAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>inspected product address.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line562">line 562</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#safeTransferFrom">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="safeTransferFrom">
+      <span class="type-signature">(async) </span>safeTransferFrom<span class="signature">(fromAddress, toAddress, tokenId)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method transfers the ownership of a claimed product item from one account to another.
+The transfer must be made logged in the account referenced in the 'fromAddress' parameter,
+otherwise the transfer will be denied.</p>
+<p><strong><em> Usage Example: </em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+// now you can use it
+
+deveryErc721Client.safeTransferFrom(fromAddress, toAddress, tokenId).then(transaction => {
+   console.log('your transaction was successful');
+   // other stuff
+}).catch(err => {
+ if(err.message.indexOf('gas required exceeds allowance or always failing transaction') {
+   console.log('You do not own the product you are trying to transfer')}
+})
+</code></pre><p>for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>fromAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>blockchain address which the transfer is coming from</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>toAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>blockchain address which the transfer is going to</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>tokenId</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Token of the product item being transferred or blockchain address of the product account.
+In case if product address was specified then for transfer is taken the first token (product item)
+of the specified product owned by the fromAddress account.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line597">line 597</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#setDeveryRegistryAddress">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="setDeveryRegistryAddress">
+      <span class="type-signature">(async) </span>setDeveryRegistryAddress<span class="signature">(deveryRegistryContractAddress, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method creates a devery registry address for the desired contract,
+ so the user is able to properly use the devery ERC721 methods.</p>
+<p> <strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code>// first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+let deveryErc721Client = new DeveryERC721();
+//n ow you can use it
+
+// then you have to pass the devery contract method passing the contract as a parameter
+deveryErc721Client.setDeveryRegistryAddress(address).then(transaction => {
+   console.log(transaction) }).catch(err => {
+       // treat your errors here
+   })</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>deveryRegistryContractAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>address of the deployed contract.</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line662">line 662</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#hasAccountClaimendProduct">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="hasAccountClaimendProduct">
+      <span class="type-signature">(async) </span>hasAccountClaimendProduct<span class="signature">(ownerAddress, productAddress)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method returns you whether the account owns tokens of the specified product or not.
+The return of this function is a boolean value.</p>
+<p><strong><em>Usage Example</em></strong></p>
+<pre class="prettyprint source"><code>// First you'll need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+
+let deveryErc721Client = new DeveryERC721();
+
+// Then you will need to pass an account address and a product address as parameters
+deveryErc721Client.hasAccountClaimendProduct(ownerAddress, productAddress)
+ .then(hasProduct => console.log(hasProduct))
+ .catch(err => {
+   //treat errors
+ })</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>ownerAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Blockchain address of the inspect account</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>productAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Blockchain address of the checked product</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line694">line 694</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#setTokenURI">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="setTokenURI">
+      <span class="type-signature">(async) </span>setTokenURI<span class="signature">(tokenId, tokenUri)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This methods sets the metadata URI for a given token, this URI can be any valid URI in the internet and is expected to contain a metadata file
+with info about the token. this file is expected to be a valid json file. bellow you can see an example of such file</p>
+<p>IMPORTANT: only the address that owns a NFT can set it's metadata URI</p>
+<p>it's important to remember that it's client`s responsability to host and ensure that the URI points to a valid metadata file</p>
+<pre class="prettyprint source"><code>{
+  &quot;name&quot;: &quot;Imaginary product&quot;,
+  &quot;description&quot;: &quot;This describes our imaginary product and how it behaves&quot;,
+  &quot;image&quot;: &quot;https://markery.io/img/markery-io-logo.svg&quot;,
+ }</code></pre><p> this is not an extensive example and you can add more data to suite your own use cases</p>
+<p><strong><em>Usage Example</em></strong></p>
+<pre class="prettyprint source"><code>// First you'll need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+
+let deveryErc721Client = new DeveryERC721();
+
+// then you have to pass the devery contract method passing the contract as a parameter
+deveryErc721Client.setTokenURI(tokenId,address).then(transaction => {
+   console.log(transaction) }).catch(err => {
+       // treat your errors here
+   })</code></pre><p><code>`</code></p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>tokenId</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Token for which the uri will be set</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>tokenUri</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>URI for the token</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line734">line 734</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#tokenURI">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="tokenURI">
+      <span class="type-signature">(async) </span>tokenURI<span class="signature">(tokenId)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>returns the URI containing metadata for a given token, if there's no such URI for the given token an empty string will be returned</p>
+<p><strong><em>Usage Example</em></strong></p>
+<pre class="prettyprint source"><code>// First you'll need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+
+let deveryErc721Client = new DeveryERC721();
+
+// then you have to pass the devery contract method passing the contract as a parameter
+deveryErc721Client.tokenURI(tokenId).then(address => {
+   console.log(address) }).catch(err => {
+       // treat your errors here
+   })</code></pre><p><code>`</code></p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>tokenId</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Token for which the uri will be retrieved</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line763">line 763</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#claimProduct">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="claimProduct">
+      <span class="type-signature">(async) </span>claimProduct<span class="signature">(productAddress, quantity, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method is used for claiming a product. The method returns you the transaction address of the claim.
+  If the product have a maximum mintable quantity set and you try to claim a number of product bigger than the mintable products number set
+  the method will not work</p>
+<p>  <strong><em>Usage example:</em></strong></p>
+<pre class="prettyprint source"><code> // first you need to get a <a href="DeveryERC721.html">DeveryERC721</a> instance
+ let deveryErc721Client = new DeveryERC721();
+ // now you can use it
+
+// Let's log the simplest case of use in the console
+
+deveryErc721Client.claimProduct('0x627306090abaB3A6e1400e9345bC60c78a8BEf57', 1).then(response =>
+   console.log('response').catch(err => {
+ // treat you error
+ })
+)
+</code></pre><p> for more info about how to get a <a href="DeveryERC721.html">DeveryERC721 instance click here</a>.</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+        <th>Default</th>
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>productAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+          <td class="default">
+            
+          </td>
+        
+
+        <td class="description last">
+          <p>address of the claimed product</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>quantity</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      number
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+          <td class="default">
+            
+              1
+            
+          </td>
+        
+
+        <td class="description last">
+          <p>quantity of claimed products</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+          <td class="default">
+            
+          </td>
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line134">line 134</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#estimateClaimProduct">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="estimateClaimProduct">
+      <span class="type-signature">(async) </span>estimateClaimProduct<span class="signature">(productAddress, quantity, overrideOptions<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>This method gives an estimation of how much gas will be used for the method <a href="DeveryERC721.html#claimProduct">DeveryERC721.claimProduct</a>
+the params that you pass to this method shall be exactly the same ones that you would pass to <a href="DeveryERC721.html#claimProduct">DeveryERC721.claimProduct</a>.
+the return of this method will be the total gas used to call <a href="DeveryERC721.html#claimProduct">DeveryERC721.claimProduct</a> with the given parameters</p>
+  </div>
+
+
+
+
+
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+        <th>Attributes</th>
+      
+
+      
+        <th>Default</th>
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>productAddress</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+          <td class="default">
+            
+          </td>
+        
+
+        <td class="description last">
+          <p>address of the claimed product</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>quantity</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      number
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+
+            
+
+            
+          </td>
+        
+
+        
+          <td class="default">
+            
+              1
+            
+          </td>
+        
+
+        <td class="description last">
+          <p>quantity of claimed products</p>
+          
+        </td>
+      </tr>
+
+    
+      <tr>
+        
+          <td class="name"><code>overrideOptions</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      <a href="global.html#TransactionOptions">TransactionOptions</a>
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+          <td class="attributes">
+            
+              &lt;optional><br>
+            
+
+            
+
+            
+          </td>
+        
+
+        
+          <td class="default">
+            
+          </td>
+        
+
+        <td class="description last">
+          <p>gas options to override the default ones.</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="DeprecatedDeveryERC721.js.html">DeprecatedDeveryERC721.js</a>, <a href="DeprecatedDeveryERC721.js.html#line154">line 154</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#getSignerAddress">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="getSignerAddress">
+      <span class="type-signature"></span>getSignerAddress<span class="signature">()</span><span class="type-signature"> &rarr; {*}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>You can use this method to check the current signer wallet address.</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from">
+      <ul class="dummy">
+        <li>
+          <a href="AbstractSmartContract.html#getSignerAddress">AbstractSmartContract#getSignerAddress</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line118">line 118</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+        
+
+
+  
+
+  <span class='name-container'>
+    <a class="link-icon" href="#getProvider">
+      <svg height="20" width="20" style="fill: black;">
+        <use xlink:href="#linkIcon"></use>
+      </svg>
+    </a>
+    <h4 class="name" id="getProvider">
+      <span class="type-signature"></span>getProvider<span class="signature">()</span><span class="type-signature"> &rarr; {*}</span>
+    </h4>
+  </span>
+
+  
+
+
+
+  <div class="description">
+    <p>Returns the internal signer or provider, this method needs to be used with caution
+as it exposes internals. So unless you know what you are doing it's better to avoid using it.</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+  
+
+  
+
+  
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from">
+      <ul class="dummy">
+        <li>
+          <a href="AbstractSmartContract.html#getProvider">AbstractSmartContract#getProvider</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>
+          <a href="AbstractSmartContract.js.html">AbstractSmartContract.js</a>, <a href="AbstractSmartContract.js.html#line128">line 128</a>
+        </li>
+      </ul>
+    </dd>
+  
+
+  
+
+  
+
+  
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    
+
+    
+
+    
+  </article>
+</section>
+
+
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+  
+</body>
+</html>
