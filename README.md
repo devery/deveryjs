@@ -1,7 +1,7 @@
 # Devery.js
 [![npm version](https://badge.fury.io/js/%40devery%2Fdevery.svg)](https://badge.fury.io/js/%40devery%2Fdevery)
 [![Coverage Status](https://coveralls.io/repos/github/devery/deveryjs/badge.svg)](https://coveralls.io/github/devery/deveryjs)
-[![Build Status](https://travis-ci.org/devery/deveryjs.svg?branch=master)](https://travis-ci.org/devery/deveryjs)
+[![Build Status](https://www.travis-ci.com/victorrseloy/deveryjs.svg?branch=master)](https://travis-ci.org/devery/deveryjs)
 
 
 Javascript library for the Devery protocol.
