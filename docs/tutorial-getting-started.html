@@ -198,6 +198,11 @@ const deveryRegistry = new DeveryRegistry()
 </li>
 </ol>
 <p>Please reference <a href="https://devery.github.io/deveryjs/DeveryRegistry.html#DeveryRegistry">the documentation</a> on more details.</p>
+<h3>Getting EVE on testnet</h3>
+<p>Some operations like marking items might require EVE in the wallet that is performing the operation,
+to get EVE you can use the getAirdrop method from the EveToken Class
+<code>javascript     import {EveToken } from '@devery/devery'     const eveTokenClient = new EveToken()     const tx = await eveTokenClient.getAirdrop()     const { provider } = eveTokenClient.getProvider()     await provider.waitForTransaction(tx.hash)     console.log('You just got 100 EVE to your wallet')     </code>
+Every call to getAirdrop will give you 100 EVE, this method will work only in the testnets. For live net you need to get EVE through the normal ways.</p>
 <h3>Registering Application on blockchain</h3>
 <p>In order to register application on blockchain the following steps need to be done:</p>
 <ol>
