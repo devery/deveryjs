@@ -75,14 +75,17 @@ Please reference [the documentation](https://devery.github.io/deveryjs/DeveryReg
 
 Some operations like marking items might require EVE in the wallet that is performing the operation, 
 to get EVE you can use the getAirdrop method from the EveToken Class
-    ```javascript
-    import {EveToken } from '@devery/devery'
-    const eveTokenClient = new EveToken()
-    const tx = await eveTokenClient.getAirdrop()
-    const { provider } = eveTokenClient.getProvider()
-    await provider.waitForTransaction(tx.hash)
-    console.log('You just got 100 EVE to your wallet')
-    ```
+
+```javascript
+import {EveToken } from '@devery/devery'
+
+const eveTokenClient = new EveToken()
+const tx = await eveTokenClient.getAirdrop()
+const { provider } = eveTokenClient.getProvider()
+
+await provider.waitForTransaction(tx.hash)
+console.log('You just got 100 EVE to your wallet')
+```
 Every call to getAirdrop will give you 100 EVE, this method will work only in the testnets. For live net you need to get EVE through the normal ways.
 
 ### Registering Application on blockchain
