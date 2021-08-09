@@ -115,9 +115,9 @@ class EveToken extends AbstractSmartContract {
      *  Please note that `allowance` will not transfer tokens to the 3rd party, but instead give him
      *  permission to facilitate transactions on your behalf.
      *
-     * @param tokenOwner token owner
-     * @param spender ethereum address
-     * @param {TransactionOptions} overrideOptions
+     * @param tokenOwner token owner.
+     * @param spender ethereum address.
+     * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
      * @returns {Promise.<*>}
      */
   async allowance(tokenOwner, spender, overrideOptions = {}) {
@@ -130,12 +130,11 @@ class EveToken extends AbstractSmartContract {
    * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#allowance|EveToken.allowance}.
    * the return of this method will be the total gas used to call {@link EveToken#allowance|EveToken.allowance} with the given parameters.
    * It's important to note that a call to this method will only be successful if the call to {@link EveToken#allowance|EveToken.allowance} would be
-   * a valid call
+   * a valid call.
    *
-     * @param tokenOwner token owner
-     * @param spender ethereum address
-     * @param {TransactionOptions} overrideOptions
-     * @param {TransactionOptions} overrideOptions
+   * @param tokenOwner token owner.
+   * @param spender ethereum address.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
    *
    * @returns total gas used to call {@link EveToken#allowance|EveToken.allowance} with the given parameters
    */
@@ -145,15 +144,14 @@ class EveToken extends AbstractSmartContract {
   }
 
   /**
-   *
    *  Gives the 3rd party the right to facilitate a transaction with the owners token.
    *  Please note that `approve` will not transfer tokens to the 3rd party, but instead give him
    *  permission to facilitate transactions on your behalf.
    *
    * @param spender ethereum address, that has right to spend the approved tokens, this can be a contract address
-   * or any other address
-   * @param quantity that the 3rd party is allowed to spend
-   * @param {TransactionOptions} overrideOptions
+   * or any other address.
+   * @param quantity that the 3rd party is allowed to spend.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
    * @returns {Promise.<*>}
    */
   async approve(spender, quantity, overrideOptions = {}) {
@@ -161,24 +159,18 @@ class EveToken extends AbstractSmartContract {
     return result.valueOf();
   }
 
-  async estimateApprove(spender, quantity, overrideOptions = {}) {
-    const result = await this.__eveTokenContract.estimate.approve(spender, quantity, overrideOptions);
-    return result.toNumber();
-  }
-
   /**
    * This method gives an estimation of how much gas will be used for the method {@link EveToken#approve|EveToken.approve}
    * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#approve|EveToken.approve}.
    * the return of this method will be the total gas used to call {@link EveToken#approve|EveToken.approve} with the given parameters.
    * It's important to note that a call to this method will only be successful if the call to {@link EveToken#approve|EveToken.approve} would be
-   * a valid call
+   * a valid call.
    *
    * @param spender ethereum address, that has right to spend the approved tokens, this can be a contract address
-   * or any other address
-   * @param quantity that the 3rd party is allowed to spend
-   * @param {TransactionOptions} overrideOptions
-   *
-   * @returns total gas used to call {@link EveToken#approve|EveToken.approve} with the given parameters
+   * or any other address.
+   * @param quantity that the 3rd party is allowed to spend.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+   * @returns total gas used to call {@link EveToken#approve|EveToken.approve} with the given parameters.
    */
   async estimateApprove(spender, quantity, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.approve(spender, quantity, overrideOptions);
@@ -186,22 +178,16 @@ class EveToken extends AbstractSmartContract {
   }
 
   /**
-     *
-     * Transfer EVE tokens from the current account to any other account
-     *
-     * @param toAddress address, that will receive the tokens
-     * @param total quantity of tokens being sent
-     * @param {TransactionOptions} overrideOptions
-     * @returns {Promise.<*>} a promise, that resolves to the transaction receipt
-     */
+   * Transfer EVE tokens from the current account to any other account.
+   *
+   * @param toAddress address, that will receive the tokens.
+   * @param total quantity of tokens being sent.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+   * @returns {Promise.<*>} a promise, that resolves to the transaction receipt.
+   */
   async transfer(toAddress, total, overrideOptions = {}) {
     const result = await this.__eveTokenContract.transfer(toAddress, total, overrideOptions);
     return result.valueOf();
-  }
-
-  async estimateTransfer(toAddress, total, overrideOptions = {}) {
-    const result = await this.__eveTokenContract.estimate.transfer(toAddress, total, overrideOptions);
-    return result.toNumber();
   }
 
   /**
@@ -209,13 +195,12 @@ class EveToken extends AbstractSmartContract {
    * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#transfer|EveToken.transfer}.
    * the return of this method will be the total gas used to call {@link EveToken#transfer|EveToken.transfer} with the given parameters.
    * It's important to note that a call to this method will only be successful if the call to {@link EveToken#transfer|EveToken.transfer} would be
-   * a valid call
+   * a valid call.
    *
-    * @param toAddress address, that will receive the tokens
-     * @param total quantity of tokens being sent
-     * @param {TransactionOptions} overrideOptions
-   *
-   * @returns total gas used to call {@link EveToken#transfer|EveToken.transfer} with the given parameters
+   * @param toAddress address, that will receive the tokens.
+   * @param total quantity of tokens being sent.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+   * @returns total gas used to call {@link EveToken#transfer|EveToken.transfer} with the given parameters.
    */
   async estimateTransfer(toAddress, total, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.transfer(toAddress, total, overrideOptions);
@@ -225,14 +210,13 @@ class EveToken extends AbstractSmartContract {
 
   /**
    * If you are using testnet and need some EVE for testing you can call this method to get 100 test eve.
-   * IMPORTANT: this method only works in test net and is meant to be used for testing purposes only, you cannot call it in prod
-   * 
+   * IMPORTANT: this method only works in test net and is meant to be used for testing purposes only, you cannot call it in prod.
+   *
    * @param {TransactionOptions} overrideOptions - default override options from ethersjs
-   * 
-   * @returns the transaction
+   * @returns the transaction.
    */
-  async getAirdrop(overrideOptions = {}){
-    const result = await this.__airdropContract.getAirdrop(overrideOptions)
+  async getAirdrop(overrideOptions = {}) {
+    const result = await this.__airdropContract.getAirdrop(overrideOptions);
     return result.valueOf();
   }
 
@@ -241,20 +225,15 @@ class EveToken extends AbstractSmartContract {
      * Transfer EVE tokens from a specific account to any other account. You need to have an allowance permission
      * to be able to do this transaction.
      *
-     * @param from the address, that EVE tokens will be sent from
-     * @param to the address, that will receive the tokens
-     * @param tokens quantity of tokens being sent
-     * @param {TransactionOptions} overrideOptions
-     * @returns {Promise.<*>} a promisse that resolves to the transaction receipt
+     * @param from the address, that EVE tokens will be sent from.
+     * @param to the address, that will receive the tokens.
+     * @param tokens quantity of tokens being sent.
+     * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+     * @returns {Promise.<*>} a promisse that resolves to the transaction receipt.
      */
   async transferFrom(from, to, tokens, overrideOptions = {}) {
     const result = await this.__eveTokenContract.transferFrom(from, to, tokens, overrideOptions);
     return result.valueOf();
-  }
-
-  async estimateTransferFrom(from, to, tokens, overrideOptions = {}) {
-    const result = await this.__eveTokenContract.estimate.transferFrom(from, to, tokens, overrideOptions);
-    return result.toNumber();
   }
 
   /**
@@ -262,14 +241,13 @@ class EveToken extends AbstractSmartContract {
    * the params that you pass to this method shall be exactly the same ones that you would pass to {@link EveToken#transferFrom|EveToken.transferFrom}.
    * the return of this method will be the total gas used to call {@link EveToken#transferFrom|EveToken.transferFrom} with the given parameters.
    * It's important to note that a call to this method will only be successful if the call to {@link EveToken#transferFrom|EveToken.transferFrom} would be
-   * a valid call
+   * a valid call.
    *
-    * @param from the address, that EVE tokens will be sent from
-     * @param to the address, that will receive the tokens
-     * @param tokens quantity of tokens being sent
-     * @param {TransactionOptions} overrideOptions
-   *
-   * @returns total gas used to call {@link EveToken#transferFrom|EveToken.transferFrom} with the given parameters
+   * @param from the address, that EVE tokens will be sent from.
+   * @param to the address, that will receive the tokens.
+   * @param tokens quantity of tokens being sent.
+   * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+   * @returns total gas used to call {@link EveToken#transferFrom|EveToken.transferFrom} with the given parameters.
    */
   async estimateTransferFrom(from, to, tokens, overrideOptions = {}) {
     const result = await this.__eveTokenContract.estimate.transferFrom(from, to, tokens, overrideOptions);
@@ -278,17 +256,16 @@ class EveToken extends AbstractSmartContract {
 
   /**
      * This is a callback function that will be invoked in response to the Approval event.
-     *
      * @callback AprovalEventCallback
-     * @param tokenOwner token owner
+     * @param tokenOwner token owner address
      * @param spender ethereum address, that has right to spend the approved tokens, this can be a contract address
      * or any other address
-     * @param tokens quantity of tokens
+     * @param tokens quantity of tokens as a BigNumber
      */
 
   /**
      *
-     * Listener to the Approval events, this event triggers whenever a new devery app is created in the blockchain.
+     * Listener to the Approval events, this event triggers whenever a new approval call is done.
      * Please note, that ApprovalEventListeners do not stack, this means that whenever you set one - you are
      * removing the last one. If you want to remove an ApprovalEventListener, just call this function passing undefined
      * as param.
@@ -297,29 +274,21 @@ class EveToken extends AbstractSmartContract {
      * // first you need to get a {@link EveToken} instance
      * let eveTokenClient = new EveToken();
      * // now you can use it
-     *
-     *
-     *
-     * eveTokenClient.setApprovalListener((appAccount,appName,feeAccount,fee,active) => {
-     *      // whenever an app created we will log it to the console
-     *      console.log(`new app created ${appAccount} - ${appName} ...`);
+     * eveTokenClient.setApprovalListener((tokenOwner, spender, tokens) => {
+     *      // whenever an approval called we will log it to the console
+     *      console.log(`new approval called for ${tokenOwner} - ${spender} - ${tokens.toNumber()}`);
      * })
      *
      * // if you want to remove the listener you can simply pass undefined as parameter
-     *
      * eveTokenClient.setApprovalListener(undefined)
      *
      * // or that is equivalent to the above call
-     *
      * eveTokenClient.setApprovalListener()
-     *
-     *
-     *
      * ```
      *
      * for more info about how to get a {@link EveToken|EveToken instance click here}.
      *
-     * @param {AprovalEventCallback} callback the callback that will be executed whenever the Transfer event is
+     * @param {AprovalEventCallback} callback the callback that will be executed whenever the Approval event is
      * triggered
      */
   setApprovalListener(callback) {
@@ -336,12 +305,12 @@ class EveToken extends AbstractSmartContract {
      * @callback TransferEventCallback
      * @param from the address the transfer goes from
      * @param to the address the transfer goes to
-     * @param tokens amount transferred
+     * @param tokens amount transferred as a BigNumber
      */
 
   /**
      *
-     * Listener to the Transfer events, this event triggers whenever a new devery app is created in the blockchain.
+     * Listener to the Transfer events, this event triggers whenever a new token transfer is done in the blockchain.
      * Please note that TransferEventListeners do not stack, this means that whenever you set one you are
      * removing the last one. If you want to remove a TransferEventListener, just call this function passing undefined
      * as param.
@@ -350,24 +319,16 @@ class EveToken extends AbstractSmartContract {
      * // first you need to get a {@link EveToken} instance
      * let eveTokenClient = new EveToken();
      * // now you can use it
-     *
-     *
-     *
-     * eveTokenClient.setTransferListener((appAccount,appName,feeAccount,fee,active) => {
-     *      // whenever an app created we will log it to the console
-     *      console.log(`new app created ${appAccount} - ${appName} ...`);
+     * eveTokenClient.setTransferListener((from, to, total) => {
+     *      // whenever a transfer is initiated we will log it to the console
+     *      console.log(`a new transfer initiated from ${from} to ${to}, amount: ${total.toNumber()}`);
      * })
      *
      * // if you want to remove the listener you can simply pass undefined as parameter
-     *
      * eveTokenClient.setTransferListener(undefined)
      *
      * // or that is equivalent to the above call
-     *
      * eveTokenClient.setTransferListener()
-     *
-     *
-     *
      * ```
      *
      * for more info about how to get a {@link EveToken|EveToken instance click here}.
@@ -382,10 +343,6 @@ class EveToken extends AbstractSmartContract {
       this.__eveTokenContract.on(eventName, callback);
     }
   }
-
-
-  
-
 }
 
 export default EveToken;
