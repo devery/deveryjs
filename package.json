@@ -7,6 +7,7 @@
     "start": "nodemon server.js",
     "debug": "nodemon --inspect server.js",
     "test": "truffle test --compile-none test/*",
+    "test-EveToken": "truffle test ./test/EveToken.js --compile-none",
     "coverage": "cross-env NODE_ENV=test nyc truffle test --compile-none && nyc report --reporter=text-lcov",
     "generate-doc": "jsdoc --configure .jsdoc.json --verbose",
     "lint": "eslint devery/**/*.js test/**/*.js",

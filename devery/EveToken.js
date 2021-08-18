@@ -225,7 +225,7 @@ class EveToken extends AbstractSmartContract {
      * Transfer EVE tokens from a specific account to any other account. You need to have an allowance permission
      * to be able to do this transaction.
      *
-     * @param from the address, that EVE tokens will be sent from.
+     * @param from the address, that EVE tokens will be sent from. This account need to give an allowance to the account that will call the method.
      * @param to the address, that will receive the tokens.
      * @param tokens quantity of tokens being sent.
      * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
