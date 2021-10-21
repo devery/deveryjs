@@ -41,9 +41,36 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
 
     const productsBeforeTransaction = await deveryERC721Instance.getProductsByOwner(myAccount);
-    await deveryERC721Instance.claimProduct(myAccount, 1, overrideOptions);
+    const { hash } = await deveryERC721Instance.claimProduct(myAccount, 2);
+    await deveryERC721Instance.getProvider().provider.waitForTransaction(hash);
     const productsAfterTransaction = await deveryERC721Instance.getProductsByOwner(myAccount);
-    assert.equal(productsBeforeTransaction.length, productsAfterTransaction.length - 1, 'The product was not transferred to the account');
+    assert.equal(productsBeforeTransaction.length, productsAfterTransaction.length - 2, 'The product token was not claimed');
+  });
+
+  it('should be able to estimate gas for a claim operation', async () => {
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const { provider } = deveryERC721Instance.getProvider();
+
+    const [gasLimit, gasPrice] = await Promise.all([
+      deveryERC721Instance.estimateClaimProduct(myAccount, 1),
+      provider.getGasPrice(),
+    ]);
+    const weiEstimated = gasPrice.mul(gasLimit);
+
+    const balanceBeforeClaim = await provider.getBalance(myAccount);
+
+    const { hash } = await deveryERC721Instance.claimProduct(myAccount, 1);
+    await provider.waitForTransaction(hash);
+
+    const balanceAfterClaim = await provider.getBalance(myAccount);
+    const weiConsumed = balanceBeforeClaim.sub(balanceAfterClaim);
+    assert.isTrue(weiConsumed.toNumber() > 0, 'claim operation should consume some gas');
+    assert.approximately(
+      weiConsumed.toNumber(),
+      weiEstimated.toNumber(),
+      weiEstimated.div(3).toNumber(), // within 33% precision
+      'estimate for the claim operation was not precise',
+    );
   });
 
   it('should be able to transfer a token', async () => {
@@ -57,12 +84,12 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const toAccount = accounts[1];
 
     const productsOwnedByFromAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
-    assert.equal(productsOwnedByFromAccount.length, 1, 'The from-account does not have any product');
+    assert.isAtLeast(productsOwnedByFromAccount.length, 1, 'The from-account does not have any product');
 
     const productsOwnedByToAccount = await deveryERC721Instance.getProductsByOwner(toAccount);
     assert.equal(productsOwnedByToAccount.length, 0, 'the to-account has products (expected to have none)');
 
-    // we already know the from account has one product, so we can get its token using
+    // we already know the from account has at least one product, so we can get its token using
     const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0);
     const productAddress = await deveryERC721Instance.tokenIdToProduct(productTokenId);
     assert.equal(productsOwnedByFromAccount[0], productAddress, 'The token does not correspond to the expected product');
@@ -75,8 +102,45 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     assert.equal(productsOwnedByFromAccount[0], productsOwnedByToAccountAfterTransfer[0], 'The product transferred from the original account is not the same product in the destination account');
   });
 
+  it('should be able to estimate gas for a transfer operation', async () => {
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const { provider } = deveryERC721Instance.getProvider();
+
+    const fromAccount = myAccount;
+    const toAccount = accounts[1];
+
+    const productsOwnedByFromAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
+    assert.isAtLeast(productsOwnedByFromAccount.length, 1, 'The from-account does not have any product');
+    const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0);
+    const productsOwnedByToAccount = await deveryERC721Instance.getProductsByOwner(toAccount);
+
+    const [gasLimit, gasPrice] = await Promise.all([
+      deveryERC721Instance.estimateSafeTransferFrom(fromAccount, toAccount, productTokenId),
+      provider.getGasPrice(),
+    ]);
+    const weiEstimated = gasPrice.mul(gasLimit);
+    const balanceBeforeTransfer = await provider.getBalance(myAccount);
+
+    const { hash } = await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
+    await provider.waitForTransaction(hash);
+    // check that the transfer actually occurred
+    const productsOwnedByToAccountAfterTransfer = await deveryERC721Instance.getProductsByOwner(toAccount);
+    assert.equal(productsOwnedByToAccount.length, productsOwnedByToAccountAfterTransfer.length - 1, 'The product was not transferred correctly');
+
+    const balanceAfterTransfer = await provider.getBalance(myAccount);
+    const weiConsumed = balanceBeforeTransfer.sub(balanceAfterTransfer);
+    assert.isTrue(weiConsumed.toNumber() > 0, 'transfer operation should consume some gas');
+    assert.approximately(
+      weiConsumed.toNumber(),
+      weiEstimated.toNumber(),
+      weiEstimated.div(3).toNumber(), // within 33% precision
+      'estimate for the transfer was not precise',
+    );
+  });
+
   it('should test if the method balanceOf returns the number of tokens correctly', async () => {
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const { provider } = deveryERC721Instance.getProvider();
 
     const accountWithProducts = myAccount;
     const originalOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
@@ -87,8 +151,9 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     // creating a new product to be claimed by the account so we can verify how the methods react to this
     const productAddress = accounts[2];
     const { hash } = await deveryRegistry.addProduct(productAddress, 'productName', 'productDetails', 2019, 'brazil');
-    deveryRegistry.getProvider().provider.waitForTransaction(hash);
-    await deveryERC721Instance.claimProduct(productAddress, 1);
+    await deveryRegistry.getProvider().provider.waitForTransaction(hash);
+    const { hash: hash2 } = await deveryERC721Instance.claimProduct(productAddress, 1);
+    await provider.waitForTransaction(hash2);
 
     const afterAddOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
     const afterAddOwnedProductsQuantity = await deveryERC721Instance.balanceOf(accountWithProducts);
@@ -99,8 +164,8 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     // transferring the product so the length of the account goes back to zero
     const accountToTransfer = accounts[2];
     const productToken = await deveryERC721Instance.tokenOfOwnerByIndex(accountWithProducts, 0);
-    const { hash: hash2 } = await deveryERC721Instance.safeTransferFrom(accountWithProducts, accountToTransfer, productToken);
-    await deveryERC721Instance.getProvider().provider.waitForTransaction(hash2);
+    const { hash: hash3 } = await deveryERC721Instance.safeTransferFrom(accountWithProducts, accountToTransfer, productToken);
+    await provider.waitForTransaction(hash3);
 
     const afterTransferOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
     const afterTransferOwnedProductsQuantity = await deveryERC721Instance.balanceOf(accountWithProducts);
@@ -109,8 +174,9 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     assert.equal(afterTransferOwnedProductsQuantity, afterAddOwnedProductsQuantity - 1, 'The value returned by balanceOf is not changing after the use of safeTransferFrom');
   });
 
-  it('should correctly transfer a token if we pass a product address as argument', async () => {
+  it('should correctly transfer a token if we pass a product address as an argument', async () => {
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const { provider } = deveryERC721Instance.getProvider();
 
     const accountWithProducts = myAccount;
     const originalOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
@@ -123,7 +189,7 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const { hash } = await deveryRegistry.addProduct(productAddress, 'productName', 'productDetails', 2019, 'brazil');
     await deveryRegistry.getProvider().provider.waitForTransaction(hash);
     const { hash: hash2 } = await deveryERC721Instance.claimProduct(productAddress, 1);
-    await deveryERC721Instance.getProvider().provider.waitForTransaction(hash2);
+    await provider.waitForTransaction(hash2);
 
     const afterAddOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
     const afterAddOwnedProductsQuantity = await deveryERC721Instance.balanceOf(accountWithProducts);
@@ -134,7 +200,7 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     // transferring the product so the length of the account goes back
     const accountToTransfer = accounts[2];
     const { hash: hash3 } = await deveryERC721Instance.safeTransferFrom(accountWithProducts, accountToTransfer, productAddress);
-    await deveryERC721Instance.getProvider().provider.waitForTransaction(hash3);
+    await provider.waitForTransaction(hash3);
 
     const afterTransferOwnedProductsArray = await deveryERC721Instance.getProductsByOwner(accountWithProducts);
     const afterTransferOwnedProductsQuantity = await deveryERC721Instance.balanceOf(accountWithProducts);
@@ -162,6 +228,7 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
   it('should correctly return the minted products', async () => {
     const productAddress = accounts[3];
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const { provider } = deveryERC721Instance.getProvider();
 
     const { hash } = await deveryRegistry.addProduct(productAddress, 'newProduct', 'productDetails', 2019, 'brazil');
     await deveryRegistry.getProvider().provider.waitForTransaction(hash);
@@ -169,14 +236,14 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
 
     const claimedProductsQuantity = 1;
     const { hash: hash2 } = await deveryERC721Instance.claimProduct(productAddress, claimedProductsQuantity);
-    await deveryERC721Instance.getProvider().provider.waitForTransaction(hash2);
+    await provider.waitForTransaction(hash2);
 
     const afterAddMintedProducts = await deveryERC721Instance.totalMintedProducts(productAddress);
     assert.equal(afterAddMintedProducts, originalMintedProducts + claimedProductsQuantity, 'The number of minted products is not updating after a product being claimed');
 
     const secondClaimProductsQuantity = 10;
     const { hash: hash3 } = await deveryERC721Instance.claimProduct(productAddress, secondClaimProductsQuantity);
-    await deveryERC721Instance.getProvider().provider.waitForTransaction(hash3);
+    await provider.waitForTransaction(hash3);
 
     const afterSecondMintProducts = await deveryERC721Instance.totalMintedProducts(productAddress);
     assert.equal(afterSecondMintProducts, afterAddMintedProducts + secondClaimProductsQuantity, 'The number of minted products is not updating after the second product claim');
