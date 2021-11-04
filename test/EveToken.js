@@ -3,7 +3,6 @@ import { createEveToken } from './helpers/staticData';
 
 const EveTokenContract = artifacts.require('./TestEVEToken.sol');
 
-
 const overrideOptions = {
   gasLimit: 250000,
   gasPrice: 9000000000,
@@ -97,15 +96,49 @@ contract('EveToken', (accounts) => {
           assert.equal(from.toLowerCase(), fromAcc.toLowerCase());
           assert.equal(to.toLowerCase(), toAcc.toLowerCase());
           assert.equal(total.toNumber(), transfer);
-          // we need to remove the listener otherwise mocha will never exit
-          eveTokenAcc.setTransferListener(null);
           resolve();
         } catch (e) {
-
+          assert.fail();
+        } finally {
+          // we need to remove the listener otherwise mocha will never exit
+          eveTokenAcc.setTransferListener(null);
         }
       });
       eveTokenAcc.transfer(toAcc, transfer, overrideOptions);
     }));
+  });
+
+  it('should receive an expected callback when a transfer is done', async () => {
+    const transfer1 = 4;
+    const transfer2 = 11;
+    const transfer3 = 6;
+    const fromAcc = accounts[1];
+    const toAcc = accounts[2];
+    const eveTokenOwner = createEveToken(web3, null, fromAcc, contractAddress);
+    const { provider } = eveTokenOwner.getProvider();
+
+    // this transfer should NOT be caught by TransferListener
+    const { hash } = await eveTokenOwner.transfer(toAcc, transfer1, overrideOptions);
+    await provider.waitForTransaction(hash);
+    // we want to listen for the next transfer event with transfer2 amount
+    eveTokenOwner.setTransferListener((from, to, total) => {
+      try {
+        assert.equal(from.toLowerCase(), fromAcc.toLowerCase());
+        assert.equal(to.toLowerCase(), toAcc.toLowerCase());
+        assert.equal(total.toNumber(), transfer2);
+      } catch (e) {
+        assert.fail();
+      } finally {
+        // we need to remove the listener otherwise mocha will never exit
+        eveTokenOwner.setTransferListener();
+      }
+    });
+    // this transfer should be caught by TransferListener
+    const { hash: hash2 } = await eveTokenOwner.transfer(toAcc, transfer2, overrideOptions);
+    await provider.waitForTransaction(hash2);
+    // this transfer should NOT be caught by TransferListener
+    const { hash: hash3 } = await eveTokenOwner.transfer(toAcc, transfer3, overrideOptions);
+    await provider.waitForTransaction(hash3);
   });
 
   it('should be able to transfer tokens with transferFrom', async () => {
@@ -200,6 +233,8 @@ contract('EveToken', (accounts) => {
         assert.equal(from.toLowerCase(), fromAcc.toLowerCase());
         assert.equal(to.toLowerCase(), toAcc.toLowerCase());
         assert.equal(total.toNumber(), transfer2);
+      } catch (e) {
+        assert.fail();
       } finally {
         // we need to remove the listener otherwise mocha will never exit
         eveTokenOwner.setTransferListener();
@@ -257,11 +292,6 @@ contract('EveToken', (accounts) => {
     }
   });
 
-  //@todo: resolve issue with the following test scenario:
-  // - do approve() call
-  // - set listener
-  // - do another approve() call
-  // check that listener receives the second event only (for now the first one is returned for some reason)
   it('should receive a callback when approval is done - with Promise', function () {
     this.timeout(5000);
     return new Promise((async (resolve, reject) => {
@@ -273,13 +303,43 @@ contract('EveToken', (accounts) => {
           assert.equal(tokenOwner, account);
           assert.equal(spender, contractAddress);
           assert.equal(tokens.toNumber(), approval);
-          // we need to remove the listener otherwise mocha will never exit
-          eveTokenAcc.setTransferListener(null);
           resolve();
         } catch (e) {
+          assert.fail();
+        } finally {
+          // we need to remove the listener otherwise mocha will never exit
+          eveTokenAcc.setApprovalListener(null);
         }
       });
       eveTokenAcc.approve(contractAddress, approval);
     }));
+  });
+
+  it('should receive only expected approval callbacks', async () => {
+    const allowance2set = [76, 89, 92];
+    const eveTokenOwner = createEveToken(web3, null, accounts[0], contractAddress);
+    const { provider } = eveTokenOwner.getProvider();
+    // the callback should NOT be called here
+    const { hash } = await eveTokenOwner.approve(contractAddress, allowance2set[0]);
+    await provider.waitForTransaction(hash);
+
+    const allowance2 = await eveTokenOwner.allowance(accounts[0], contractAddress);
+    assert(allowance2.toNumber() === allowance2set[0]);
+    // we should receive only callback for the second 'approve' event
+    //@todo: we have to create a new EveToken instance here because of thr issue in the ethers.js
+    // the event listener triggering for past events here
+    // https://github.com/ethers-io/ethers.js/blob/master/packages/providers/src.ts/base-provider.ts#L757
+    createEveToken(web3, null, accounts[0], contractAddress).setApprovalListener((tokenOwner, spender, tokens) => {
+      assert.equal(tokenOwner, accounts[0]);
+      assert.equal(spender, contractAddress);
+      assert.equal(tokens.toNumber(), allowance2set[1]);
+      eveTokenOwner.setApprovalListener(); // we need to remove the listener otherwise mocha will never exit
+    });
+    // the callback should be called here
+    const tx2 = await eveTokenOwner.approve(contractAddress, allowance2set[1]);
+    await provider.waitForTransaction(tx2.hash);
+    // the callback should NOT be called here
+    const tx3 = await eveTokenOwner.approve(contractAddress, allowance2set[2]);
+    await provider.waitForTransaction(tx3.hash);
   });
 });
