@@ -738,7 +738,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} tokenId Token for which the uri will be retrieved.
    */
   async tokenURI(tokenId) {
-    const uri = await this.__deveryERC721Contract.tokenUri(tokenId);
+    const uri = await this.__deveryERC721Contract.tokenURI(tokenId);
     return uri;
   }
 }
