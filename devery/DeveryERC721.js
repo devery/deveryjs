@@ -316,9 +316,16 @@ class DeveryERC721 extends AbstractSmartContract {
       this.__deveryERC721Contract.on(eventName, callback);
     }
   }
-  // @todo: re-check callback description
+
   /**
-   *
+   * This is a callback function that will be invoked in response to TransferEvents.
+   * @callback TransferEventCallback
+   * @param {string} to account address the transfer was performed to.
+   * @param {string} from account address the transfer was performed from.
+   * @param {BigNumber} tokenId id of the transferred token.
+   */
+
+  /**
    * Listener for transfer events, this event triggers whenever a devery item is transferred in the blockchain.
    * Please note that TransferEventListeners do not stack, this means that whenever you set one you are
    * removing the last one. If you want to remove a TransferEventListener, just call this function passing undefined
@@ -332,10 +339,9 @@ class DeveryERC721 extends AbstractSmartContract {
    * // now you can use it
    *
    *
-   *
-   * deveryErc721Client.setTransferEventListener((brandAccount,appAccount,active) => {
-   *      // whenever an app created we will log it to the console
-   *      console.log(`a brand has been updated ${brandAccount} - ${appAccount} ...`);
+   * deveryErc721Client.setTransferEventListener((from,to,tokenId) => {
+   *      // whenever a token transferred we will log it to the console
+   *      console.log(`a token with id ${tokenId.toString()} has been transferred from address ${from} to ${to} `);
    * });
    *
    * // if you want to remove the listener you can simply pass undefined as parameter
@@ -344,12 +350,11 @@ class DeveryERC721 extends AbstractSmartContract {
    * // or that is equivalent to the above call
    * deveryErc721Client.setTransferEventListener();
    *
-   *
    * ```
    *
    * for more info about how to get a {@link DeveryERC721|DeveryERC721 instance click here}.
    *
-   * @param {ApprovalEventCallback} callback the callback that will be executed whenever a Transfer event is
+   * @param {TransferEventCallback} callback the callback that will be executed whenever a Transfer event is
    * triggered
    */
   setTransferEventListener(callback) {

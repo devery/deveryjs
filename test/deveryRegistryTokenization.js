@@ -41,10 +41,10 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
 
     const productsBeforeTransaction = await deveryERC721Instance.getProductsByOwner(myAccount);
-    const { hash } = await deveryERC721Instance.claimProduct(myAccount, 2);
+    const { hash } = await deveryERC721Instance.claimProduct(myAccount, 6);
     await deveryERC721Instance.getProvider().provider.waitForTransaction(hash);
     const productsAfterTransaction = await deveryERC721Instance.getProductsByOwner(myAccount);
-    assert.equal(productsBeforeTransaction.length, productsAfterTransaction.length - 2, 'The product token was not claimed');
+    assert.equal(productsBeforeTransaction.length, productsAfterTransaction.length - 6, 'The product token was not claimed');
   });
 
   it('should be able to estimate gas for a claim operation', async () => {
@@ -100,6 +100,77 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
     const productsOwnedByToAccountAfterTransfer = await deveryERC721Instance.getProductsByOwner(toAccount);
     assert.equal(productsOwnedByToAccount.length, productsOwnedByToAccountAfterTransfer.length - 1, 'The product was not transferred correctly');
     assert.equal(productsOwnedByFromAccount[0], productsOwnedByToAccountAfterTransfer[0], 'The product transferred from the original account is not the same product in the destination account');
+  });
+
+  it('should be able to listen to the transfer events', function () {
+    this.timeout(5000);
+    return new Promise((async (resolve, reject) => {
+      const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+
+      const fromAccount = myAccount;
+      const toAccount = accounts[1];
+
+      const productsOwnedByFromAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
+      assert.isAtLeast(productsOwnedByFromAccount.length, 1, 'The from-account does not have any product');
+      // we already know the from account has at least one product, so we can get its token using
+      const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0);
+
+      //@todo: we have to create a new devery ERC721 instance here because of the event listener issue
+      // when triggering for past events here
+      // https://github.com/ethers-io/ethers.js/blob/master/packages/providers/src.ts/base-provider.ts#L757
+      const deveryERC721Instance2 = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+      deveryERC721Instance2.setTransferEventListener((from, to, tokenId) => {
+        try {
+          assert.equal(from, fromAccount, 'from-account does not match');
+          assert.equal(to, toAccount, 'to-account does not match');
+          assert.equal(tokenId.toString(), productTokenId, 'tokenId does not match');
+          resolve();
+        } finally {
+          deveryERC721Instance2.setTransferEventListener();
+        }
+      });
+
+      deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, productTokenId);
+    }));
+  });
+
+  it('should receive only expected transfer callbacks', async () => {
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const { provider } = deveryERC721Instance.getProvider();
+
+    const fromAccount = myAccount;
+    const toAccount = accounts[1];
+
+    const productsOwnedByFromAccount = await deveryERC721Instance.getProductsByOwner(fromAccount);
+    assert.isAtLeast(productsOwnedByFromAccount.length, 1, 'The from-account does not have enough tokens');
+    // we already know the from account has enough tokens, so we can get a token using
+    const tokenId1 = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 0);
+    const tokenId2 = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 1);
+    const tokenId3 = await deveryERC721Instance.tokenOfOwnerByIndex(fromAccount, 2);
+    // the callback should not be called here
+    const tx1 = await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, tokenId1);
+    await provider.waitForTransaction(tx1.hash);
+
+    //@todo: we have to create a new devery ERC721 instance here because of the event listener issue
+    // when triggering for past events here
+    // https://github.com/ethers-io/ethers.js/blob/master/packages/providers/src.ts/base-provider.ts#L757
+    const deveryERC721Instance2 = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    deveryERC721Instance2.setTransferEventListener((from, to, tokenId) => {
+      try {
+        assert.equal(from, fromAccount, 'from-account does not match');
+        assert.equal(to, toAccount, 'to-account does not match');
+        assert.equal(tokenId.toString(), tokenId2, 'tokenId does not match');
+      } finally {
+        deveryERC721Instance2.setTransferEventListener();
+      }
+    });
+
+    // the callback should be called here
+    const tx2 = await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, tokenId2);
+    await provider.waitForTransaction(tx2.hash);
+    // the callback should not be called here
+    const tx3 = await deveryERC721Instance.safeTransferFrom(fromAccount, toAccount, tokenId3);
+    await provider.waitForTransaction(tx3.hash);
   });
 
   it('should be able to estimate gas for a transfer operation', async () => {
