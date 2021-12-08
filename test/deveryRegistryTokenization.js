@@ -2,7 +2,7 @@ import { createDeveryERC721, createDeveryRegistry } from './helpers/staticData';
 import Utils from '../devery/Utils';
 
 const DeveryRegistryContract = artifacts.require('./DeveryRegistry.sol');
-const DeveryERC721Contract = artifacts.require('./DeveryERC721Token.sol');
+const DeveryERC721Contract = artifacts.require('./DeveryERC721MetadataToken.sol');
 
 const overrideOptions = {
   gasLimit: 250000,
@@ -389,5 +389,22 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
 
     const accountOwnProduct = await deveryERC721Instance.hasAccountClaimedProduct(withoutProductsAccount, transferredProductAddress);
     assert.isTrue(accountOwnProduct, 'The account should have the tested product, hence it was recently transferred');
+  });
+
+  it('should be able to set and retrieve metadata URI for a token', async () => {
+    const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
+    const productsOwned = await deveryERC721Instance.getProductsByOwner(myAccount);
+    assert.isAtLeast(productsOwned.length, 1, 'The account does not have any tokens');
+  
+    const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(myAccount, 0);
+    try {
+      await deveryERC721Instance.setTokenURI(productTokenId, 'http://my-json-server.typicode.com/abcoathup/samplenft/tokens/0');
+    }
+    catch (e) {
+      console.log('error!');
+      console.log(e);
+    }
+    const uri = await deveryERC721Instance.tokenURI(productTokenId);
+    assert.equal(uri, 'http://my-json-server.typicode.com/abcoathup/samplenft/tokens/0');
   });
 });

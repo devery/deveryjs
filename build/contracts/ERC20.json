@@ -77,9 +77,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "/**\n *Submitted for verification at Etherscan.io on 2021-03-02\n*/\n\npragma solidity ^0.4.18;\n\n//Made to Stackexchange question\n\ncontract ERC20 {\n    function transfer(address _to, uint256 _value)public returns(bool);\n    function balanceOf(address tokenOwner)public view returns(uint balance);\n    function transferFrom(address from, address to, uint tokens)public returns(bool success);\n\n}\n\ncontract SimpleAirdrop {\n\n      ERC20 public token;\n\n    function SimpleAirdrop(address _tokenAddr) public {\n        token = ERC20(_tokenAddr);\n    }\n\n  function getAirdrop() public {\n    token.transfer(msg.sender, 100000000000000000000); //18 decimals token\n  }\n}",
-  "sourcePath": "/Users/victor/Documents/projects/js/deveryjs/contracts/v4/Airdrop.sol",
+  "sourcePath": "/Users/victoreloy/Projects/blockchain/deveryjs/contracts/v4/Airdrop.sol",
   "ast": {
-    "absolutePath": "/Users/victor/Documents/projects/js/deveryjs/contracts/v4/Airdrop.sol",
+    "absolutePath": "project:/contracts/v4/Airdrop.sol",
     "exportedSymbols": {
       "ERC20": [
         29
@@ -649,7 +649,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2931,
+                          "referencedDeclaration": 7622,
                           "src": "594:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -783,7 +783,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/Users/victor/Documents/projects/js/deveryjs/contracts/v4/Airdrop.sol",
+      "absolutePath": "project:/contracts/v4/Airdrop.sol",
       "exportedSymbols": {
         "ERC20": [
           29
@@ -1500,7 +1500,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 2931,
+                                  "referencedDeclaration": 7622,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -1565,8 +1565,8 @@
     "version": "0.4.26+commit.4563c3fc.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.0",
-  "updatedAt": "2021-05-02T23:00:33.278Z",
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-12-08T16:39:17.729Z",
   "devdoc": {
     "methods": {}
   },
