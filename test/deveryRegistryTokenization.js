@@ -392,19 +392,19 @@ contract('DeveryRegistry - ERC721 - tokenization tests', (accounts) => {
   });
 
   it('should be able to set and retrieve metadata URI for a token', async () => {
+    const TEST_URI = 'http://my-json-server.typicode.com/abcoathup/samplenft/tokens/0';
     const deveryERC721Instance = createDeveryERC721(web3, undefined, myAccount, deveryERC721Contract.address);
     const productsOwned = await deveryERC721Instance.getProductsByOwner(myAccount);
     assert.isAtLeast(productsOwned.length, 1, 'The account does not have any tokens');
-  
     const productTokenId = await deveryERC721Instance.tokenOfOwnerByIndex(myAccount, 0);
-    try {
-      await deveryERC721Instance.setTokenURI(productTokenId, 'http://my-json-server.typicode.com/abcoathup/samplenft/tokens/0');
-    }
-    catch (e) {
-      console.log('error!');
-      console.log(e);
-    }
-    const uri = await deveryERC721Instance.tokenURI(productTokenId);
-    assert.equal(uri, 'http://my-json-server.typicode.com/abcoathup/samplenft/tokens/0');
+
+    const tokenURI = await deveryERC721Instance.tokenURI(productTokenId);
+    assert.equal(tokenURI, '', 'An empty string should be returned if the token URI is not set');
+
+    const { hash } = await deveryERC721Instance.setTokenURI(productTokenId, TEST_URI);
+    deveryERC721Instance.getProvider().provider.waitForTransaction(hash);
+
+    const tokenURI2 = await deveryERC721Instance.tokenURI(productTokenId);
+    assert.equal(tokenURI2, TEST_URI);
   });
 });

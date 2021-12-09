@@ -712,6 +712,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * @param {string} tokenId Token for which the uri will be set.
    * @param {string} tokenUri URI for the token.
    * @param {TransactionOptions} [overrideOptions] gas options to override the default ones.
+   * @returns {Promise.<Transaction>} a promise that if resolved returns a transaction or raise an error in case of rejection.
    */
   async setTokenURI(tokenId, tokenUri, overrideOptions = {}) {
     const result = await this.__deveryERC721Contract.setTokenUri(
@@ -724,7 +725,6 @@ class DeveryERC721 extends AbstractSmartContract {
 
   /**
    * Returns the URI containing metadata for a given token, if there's no such URI for the given token an empty string will be returned.
-   *
    *
    * ***Usage Example***
    * ```
@@ -741,6 +741,7 @@ class DeveryERC721 extends AbstractSmartContract {
    * ```
    *
    * @param {string} tokenId Token for which the uri will be retrieved.
+   * @return {string} uri of the token if it was set, or an empty string otherwise.
    */
   async tokenURI(tokenId) {
     const uri = await this.__deveryERC721Contract.tokenURI(tokenId);
