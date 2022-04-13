@@ -1,6 +1,6 @@
 {
   "name": "@devery/devery",
-  "version": "0.3.6",
+  "version": "0.3.9",
   "description": "Build decentralised apps on the Devery Protocol using Javascript.",
   "main": "./dist/index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "compile": "truffle compile --config truffle.v5.js && truffle compile --config truffle.v4.js",
     "compile:force": "mkdir tmp && mv ./contracts/V6 ./tmp/V6 && truffle compile --config truffle.v4.js && mv ./contracts/V4 ./tmp/V4 && mv ./tmp/V6 ./contracts/V6 && truffle compile --config truffle.v5.js && mv ./tmp/V4 ./contracts/V4 && rm  -rf tmp && truffle migrate --compile-none",
     "compile:v5": "truffle compile --config truffle.v5.js",
-    "compile:v4": "truffle compile --config truffle.v4.js"
+    "compile:v4": "truffle compile --config truffle.v4.js",
+    "build": "webpack"
   },
   "author": "Victor Eloy",
   "license": "MIT",
