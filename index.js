@@ -11,6 +11,7 @@ import DeprecatedDeveryERC721Lib from './devery/DeprecatedDeveryERC721';
 import DeveryTrustLib from './devery/DeveryTrust';
 import ERC721Lib from './devery/ERC721';
 import DeveryNFTTrackerLib from './devery/DeveryNFTTracker';
+import DeveryProductToNFTAssociationLib from './devery/DeveryProductToNFTAssociation';
 
 
 export const EveToken = EveTokenLib;
@@ -23,4 +24,5 @@ export const DeveryTrust = DeveryTrustLib;
 export const DeprecatedDeveryERC721 = DeprecatedDeveryERC721Lib;
 export const ERC721 = ERC721Lib;
 export const DeveryNFTTracker = DeveryNFTTrackerLib;
+export const DeveryProductToNFTAssociation = DeveryProductToNFTAssociationLib;
 
