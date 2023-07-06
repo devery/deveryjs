@@ -141,4 +141,69 @@ contract('DeveryRegistry - Brand - basic tests', (accounts) => {
       devery.updateBrand(brand.brandAccount, updatedName, active, overrideOptions);
     }));
   });
+
+  //new 
+  it('should throw an error when brand account is not provided during brand creation', async () => {
+    const accData = data[0];
+    const brandName = 'Test Brand';
+
+    const devery = createDeveryRegistry(web3, undefined, accData.appAccount, contractAddress);
+    try {
+      await devery.addBrand('', brandName, overrideOptions);
+    } catch (e) {
+      assert(e.message.includes('Invalid brand account'), `wrong exception raised --> ${e.message}`);
+    }
+  });
+
+  it('should throw an error when brand name is not provided during brand creation', async () => {
+    const accData = data[0];
+    const brandAccount = accData.brands[0].brandAccount;
+
+    const devery = createDeveryRegistry(web3, undefined, accData.appAccount, contractAddress);
+    try {
+      await devery.addBrand(brandAccount, '', overrideOptions);
+    } catch (e) {
+      assert(e.message.includes('Invalid brand name'), `wrong exception raised --> ${e.message}`);
+    }
+  });
+
+  it('should throw an error when non-owner tries to update a brand', async () => {
+    const accData = data[0];
+    const brand = accData.brands[0];
+    const updatedName = 'updated Brand name';
+
+    const devery = createDeveryRegistry(web3, undefined, data[1].appAccount, contractAddress); // Using different account
+    try {
+      await devery.updateBrand(brand.brandAccount, updatedName, brand.active, overrideOptions);
+    } catch (e) {
+      assert(e.message.includes('Not the owner'), `wrong exception raised --> ${e.message}`);
+    }
+  });
+
+  it('should throw an error when trying to update a non-existent brand', async () => {
+    const accData = data[0];
+    const brandAccount = '0x1234'; // Non-existent brand account
+    const updatedName = 'updated Brand name';
+
+    const devery = createDeveryRegistry(web3, undefined, accData.appAccount, contractAddress);
+    try {
+      await devery.updateBrand(brandAccount, updatedName, brand.active, overrideOptions);
+    } catch (e) {
+      assert(e.message.includes('Brand not found'), `wrong exception raised --> ${e.message}`);
+    }
+  });
+
+  it('should throw an error when trying to read a non-existent brand', async () => {
+    const accData = data[0];
+    const brandAccount = '0x1234'; // Non-existent brand account
+
+    const devery = createDeveryRegistry(web3, undefined, accData.appAccount, contractAddress);
+    try {
+      const brand = await devery.getBrand(brandAccount);
+    } catch (e) {
+      assert(e.message.includes('Brand not found'), `wrong exception raised --> ${e.message}`);
+    }
+  });
+
+
 });

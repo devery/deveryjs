@@ -210,5 +210,65 @@ contract('DeveryRegistry - Mark - basic tests', (accounts) => {
       assert.notEqual('0x0000000000000000000000000000000000000000', markedResult.appAccount);
     });
   });
+
+  //new
+
+  it('should be possible to remove a product', async () => {
+    const account = data[0];
+    const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+    const productAccount = account.brands[0].products[0].productAccount;
+    await deveryClient.removeProduct(productAccount);
+    const markedResult = await deveryClient.check(productAccount);
+    assert.equal('0x0000000000000000000000000000000000000000', markedResult.appAccount);
+  });
+
+  it('should be possible to update a product details', async () => {
+    const account = data[0];
+    const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+    const productAccount = account.brands[0].products[0].productAccount;
+    const updatedDescription = 'Updated product';
+    const updatedDetails = 'Updated product 1 details';
+    await deveryClient.updateProductDetails(productAccount, updatedDescription, updatedDetails);
+    const markedResult = await deveryClient.check(productAccount);
+    assert.equal(updatedDescription, markedResult.description);
+    assert.equal(updatedDetails, markedResult.details);
+  });
+
+  it('should be possible to revoke permissions from marker accounts', async () => {
+    const account = data[0];
+    const markerAcc = accounts[3];
+    const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+    await deveryClient.permissionMarker(markerAcc, false);
+    const isPermissioned = await deveryClient.isPermissionedMarker(markerAcc);
+    assert.equal(isPermissioned, false);
+  });
+
+  it('should receive callback when a product is updated', async function () {
+    this.timeout(5000);
+    return new Promise(async (resolve, reject) => {
+      const account = data[1];
+      const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+
+      deveryClient.setProductUpdatedEventListener((productAccount, brandAccount, description, details, year, origin, active) => {
+        deveryClient.setProductUpdatedEventListener(null);
+        resolve('true');
+      });
+
+      const product = account.brands[0].products[0];
+      await deveryClient.updateProductDetails(product.productAccount, product.description, product.details);
+    });
+  });
+
+  it('should return all brands from the contract', async () => {
+    const account = data[0];
+    const deveryClient = createDeveryRegistry(web3, undefined, account.appAccount, contractAddress);
+    const brands = await deveryClient.getBrands();
+    assert.equal(brands.length, totalBrands);
+    for (let i = 0; i < brands.length; i++) {
+      assert.equal(brands[i].brandAccount, brandsArr[i].brandAccount);
+      assert.equal(brands[i].brandName, brandsArr[i].brandName);
+    }
+  });
+
 });
 

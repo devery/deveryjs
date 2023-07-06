@@ -3,6 +3,7 @@ import DeveryRegistry from './../../devery/DeveryRegistry';
 import EveToken from './../../devery/EveToken';
 import DeveryOwned from './../../devery/DeveryOwned';
 import DeveryERC721 from '../../devery/DeveryERC721';
+import DeveryNFTTracker from '../../devery/DeveryNFTTracker';
 import Utils from '../../devery/Utils';
 
 export function getData(accounts) {
@@ -259,3 +260,8 @@ export function createDeveryERC721(web3, provider, account, contractAddress) {
   });
 }
 
+export function createDeveryNFTTracker(web3, provider, account, contractAddress) {
+  return new DeveryNFTTracker({
+    web3Instance: web3, provider, acc: account, address: contractAddress,
+  });
+}

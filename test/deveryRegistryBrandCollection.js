@@ -93,4 +93,47 @@ contract('DeveryRegistry - Brand - collection tests', (accounts) => {
       );
     }
   });
+
+  //new   it('should not allow a non-existent brand account to be accessed', async () => {
+  const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
+  try {
+    await deveryInstance.getBrand(accounts.length + 1);
+  } catch (err) {
+    assert(err.toString().includes('revert'), "Expected 'revert' but got '" + err + "' instead");
+  }
+});
+
+it('should return correct brand for a given brand account', async () => {
+  const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
+  const brand = await deveryInstance.getBrand(brandsArr[0].brandAccount);
+  assert.equal(brand.brandName, brandsArr[0].brandName, 'brand name does not match');
+});
+
+it('should allow brand account update', async () => {
+  const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
+  const updatedBrandName = 'Updated Brand';
+  await deveryInstance.updateBrand(brandsArr[0].brandAccount, updatedBrandName, overrideOptions);
+  const brand = await deveryInstance.getBrand(brandsArr[0].brandAccount);
+  assert.equal(brand.brandName, updatedBrandName, 'brand name was not updated');
+});
+
+it('should not allow unauthorized account to update brand', async () => {
+  const deveryInstance = createDeveryRegistry(web3, undefined, accounts[1], contractAddress);
+  const updatedBrandName = 'Updated Brand';
+  try {
+    await deveryInstance.updateBrand(brandsArr[0].brandAccount, updatedBrandName, overrideOptions);
+  } catch (err) {
+    assert(err.toString().includes('revert'), "Expected 'revert' but got '" + err + "' instead");
+  }
+});
+
+it('should not allow deleting non-existent brand', async () => {
+  const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
+  try {
+    await deveryInstance.removeBrand(accounts.length + 1, overrideOptions);
+  } catch (err) {
+    assert(err.toString().includes('revert'), "Expected 'revert' but got '" + err + "' instead");
+  }
+});
+
 });

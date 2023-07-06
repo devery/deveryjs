@@ -155,4 +155,45 @@ contract('DeveryRegistry - App - basic tests', (accounts) => {
 
     deveryTrigger.updateApp(appName, feeAccount, fee, active, overrideOptions);
   });
+
+  //new test
+
+  it('should be able to delete an account', async () => {
+    const myAcc = accounts[1];
+    const devery = createDeveryRegistry(web3, undefined, myAcc, contractAddress);
+
+    await devery.deleteApp(myAcc, overrideOptions);
+    const appsLength = await devery.appAccountsLength();
+    assert.equal(0, appsLength, 'account was not deleted');
+  });
+
+  it('should be able to deactivate an account', async () => {
+    const appName = 'My nice account';
+    const myAcc = accounts[1];
+    const feeAcc = accounts[2];
+    const fee = 5;
+    const active = false;
+
+    const devery = createDeveryRegistry(web3, undefined, myAcc, contractAddress);
+    await devery.updateApp(appName, feeAcc, fee, active, overrideOptions);
+
+    const app = await devery.getApp(myAcc);
+    assert.equal(active, app.active, 'active status does not match');
+  });
+
+  it('should be able to reactivate an account after deactivation', async () => {
+    const appName = 'My nice account';
+    const myAcc = accounts[1];
+    const feeAcc = accounts[2];
+    const fee = 5;
+    const active = true;
+
+    const devery = createDeveryRegistry(web3, undefined, myAcc, contractAddress);
+    await devery.updateApp(appName, feeAcc, fee, active, overrideOptions);
+
+    const app = await devery.getApp(myAcc);
+    assert.equal(active, app.active, 'active status does not match');
+  });
+
+
 });

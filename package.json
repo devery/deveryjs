@@ -7,6 +7,7 @@
     "start": "nodemon server.js",
     "debug": "nodemon --inspect server.js",
     "test": "truffle test --compile-none",
+    "test2": "truffle test --compile-none test/deveryNFTTracker.js",
     "coverage": "cross-env NODE_ENV=test nyc truffle test --compile-none && nyc report --reporter=text-lcov",
     "generate-doc": "jsdoc --configure .jsdoc.json --verbose",
     "lint": "eslint devery/**/*.js test/**/*.js",
@@ -17,7 +18,8 @@
     "compile:force": "mkdir tmp && mv ./contracts/V6 ./tmp/V6 && truffle compile --config truffle.v4.js && mv ./contracts/V4 ./tmp/V4 && mv ./tmp/V6 ./contracts/V6 && truffle compile --config truffle.v5.js && mv ./tmp/V4 ./contracts/V4 && rm  -rf tmp && truffle migrate --compile-none",
     "compile:v5": "truffle compile --config truffle.v5.js",
     "compile:v4": "truffle compile --config truffle.v4.js",
-    "build": "webpack"
+    "build": "webpack",
+    "migrate": "truffle migrate --compile-none"
   },
   "author": "Victor Eloy",
   "license": "MIT",

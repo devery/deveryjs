@@ -95,4 +95,30 @@ contract('DeveryRegistry - App - collection tests', (accounts) => {
       );
     }
   });
+
+  //new tests
+  it('should return the correct app name for a given index', async () => {
+    const randomIndex = Math.floor(Math.random() * data.length);
+    const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
+    const appData = await deveryInstance.getAppByIndex(randomIndex);
+    assert.equal(appData.appName, data[randomIndex].appName, 'app name does not match with expected app name');
+  });
+
+  it('should return the correct fee account for a given index', async () => {
+    const randomIndex = Math.floor(Math.random() * data.length);
+    const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
+    const appData = await deveryInstance.getAppByIndex(randomIndex);
+    assert.equal(appData.feeAccount, data[randomIndex].feeAccount, 'fee account does not match with expected fee account');
+  });
+
+  it('should return the correct fee for a given index', async () => {
+    const randomIndex = Math.floor(Math.random() * data.length);
+    const deveryInstance = createDeveryRegistry(web3, undefined, accounts[0], contractAddress);
+    const appData = await deveryInstance.getAppByIndex(randomIndex);
+    assert.equal(appData.fee, data[randomIndex].fee, 'fee does not match with expected fee');
+  });
+
+
+
+
 });
